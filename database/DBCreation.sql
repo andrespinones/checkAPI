@@ -24,11 +24,23 @@
 --     status BIT NOT NULL
 -- );
 
-CREATE TABLE ResponseCode (
-  responseCodeID INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-  responseDescription VARCHAR(50),
-  number INT NOT NULL   
-);
+-- CREATE TABLE ResponseCode (
+--   respCodeID INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+--   respDescription VARCHAR(50),
+--   number INT NOT NULL   
+-- );
+
+-- CREATE TABLE Parameter (
+--   paramID INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+--   dataType VARCHAR(32) NOT NULL,
+--   paramName VARCHAR(32) NOT NULL,
+--   isRequired BIT NOT NULL,
+--   paramDescription VARCHAR(32) NOT NULL 
+-- );
+
+-- CREATE TABLE Users (
+--   userID INT NOT NULL PRIMARY KEY IDENTITY(1,1)
+-- );
 
 --AGREGAR VALORES ANTES DE FKs
 -- ALTER TABLE dbo.Endpoint
@@ -40,6 +52,10 @@ CREATE TABLE ResponseCode (
 -- DROP TABLE API;
 -- DROP TABLE Tag;
 -- DROP TABLE Endpoint;
+-- DROP TABLE ResponseCode;
+-- DROP TABLE Parameter;
+-- DROP TABLE Users;
+
 
 
 -- SELECT * FROM dbo.API
