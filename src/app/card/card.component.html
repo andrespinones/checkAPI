@@ -1,0 +1,27 @@
+<div class="rounded-xl shadow-md">
+    <img class="w-full rounded-t-xl h-36 object-cover" src="{{data.mainImageUrl}}">
+    <div class="flex flex-col p-7">
+      <div class="flex flex-row">
+        <div class="uppercase text-xs text-yellow-600 bg-yellow-200 px-2 py-1 rounded-xl">
+          {{data.tag}}
+        </div>
+      </div>
+      <h2 class="text-2xl mt-2 font-bold">
+        {{data.title}}
+      </h2>
+      <p class="mt-2 text-gray-600 text-justify">
+       {{data.description}}
+      </p>
+      <div class="flex flex-row ">
+        <div class=" mt-2 text-gray-600"> Status:  </div>
+          <div *ngIf="data.status == true" class=" bg-green-600 ml-1 mt-2 text-xs text-white px-2 py-1 rounded-xl"> online</div>
+          <div *ngIf="data.status == false" class="bg-red-600 ml-1 mt-2 text-xs text-white px-2 py-1 rounded-xl">offline</div>
+      </div>
+      <div class="flex flex-row mt-7">
+        <img class="h-10 w-10 object-cover " src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIq_iCQ55ZcXrTMTwqCgLjQhrAu3GbeiSx4A&usqp=CAU">
+        <div class="ml-1 mt-1 text-center text-green-600">{{data.serviceLevel}}</div>
+        <img class="h-10 w-10 object-cover ml-10" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSsyjn6ymgtM6JqdQHt3OAiaWB29sioLoDow&usqp=CAU" alt="">
+        <div class="ml-1 mt-1 text-center text-green-600">{{data.responseTime}}</div>
+      </div>
+    </div>
+</div>
