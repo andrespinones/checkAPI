@@ -1,4 +1,6 @@
--- CREATE TABLE APICategory (
+-- CREATE DATABASE checkAPI
+
+--CREATE TABLE APICategory (
 --   apiCategoryID INT NOT NULL PRIMARY KEY IDENTITY,
 --   name VARCHAR(64) NOT NULL
 -- );
@@ -50,6 +52,8 @@
 -- CREATE TABLE Users (
 --   userID INT NOT NULL PRIMARY KEY IDENTITY,
 --   email VARCHAR(64) NOT NULL,
+--   firstName VARCHAR(64),
+--   lastNme VARCHAR (64),
 --   role VARCHAR(32)
 -- );
 
