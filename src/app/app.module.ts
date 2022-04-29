@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListViewComponent } from './components/list-view/list-view.component';
 //import { ApiService } from './services/api.service';
-
+import { MatTableModule } from "@angular/material/table"
 @NgModule({
   declarations: [
     AppComponent,
@@ -15,7 +15,8 @@ import { ListViewComponent } from './components/list-view/list-view.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]

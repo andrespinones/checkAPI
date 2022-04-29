@@ -12,13 +12,14 @@ export class ListViewComponent implements OnInit {
   constructor(private service:ApiService) { }
 
   ApiList:Api[] = [];
+
+  columnsToDisplay = ['Name', 'Description']
   ngOnInit(): void {
     this.refreshApis();
   }
   refreshApis(){
-    this.service.getAllApis().subscribe(data=>{
-      //console.warn(data);
-      this.ApiList = data;
+    this.service.getAllApis().subscribe(resp=>{
+      this.ApiList = resp;
     });
   } 
 }
