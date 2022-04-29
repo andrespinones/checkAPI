@@ -1,0 +1,30 @@
+mat-toolbar {
+    background: #F2EEE9;
+    color: black;
+}
+mat-sidenav {
+    margin: 16px;
+    width: 200px;
+    border-right: none;
+    background: #F2EEE9;
+    color: black;
+    text-align: justify;
+    text-indent: 10%;
+}
+.content {
+    height: calc(100vh - 98px);
+    border-radius: 10px;
+    margin: 16px;
+    margin-left: 32px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2rem;
+    color: lightgray;
+}
+
+mat-sidenav-container {
+    height: calc(100vh - 65px);
+}
