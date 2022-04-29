@@ -1,0 +1,55 @@
+.online{
+    --tw-bg-opacity: 1;
+    background-color: rgb(22 163 74 / var(--tw-bg-opacity));
+    margin-left: 0.25rem/* 4px */;
+    margin-top: 0.5rem/* 8px */;
+    font-size: 0.75rem/* 12px */;
+    line-height: 1rem/* 16px */;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    padding-left: 0.5rem/* 8px */;
+    padding-right: 0.5rem/* 8px */;
+    padding-top: 0.25rem/* 4px */;
+    padding-bottom: 0.25rem/* 4px */;
+    border-radius: 0.75rem/* 12px */;
+}
+
+.offline{
+    --tw-bg-opacity: 1;
+    background-color: rgb(220 38 38 / var(--tw-bg-opacity));
+    margin-left: 0.25rem/* 4px */;
+    margin-top: 0.5rem/* 8px */;
+    font-size: 0.75rem/* 12px */;
+    line-height: 1rem/* 16px */;
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    padding-left: 0.5rem/* 8px */;
+    padding-right: 0.5rem/* 8px */;
+    padding-top: 0.25rem/* 4px */;
+    padding-bottom: 0.25rem/* 4px */;
+    border-radius: 0.75rem/* 12px */;
+}
+
+.dataText{ /* datos de service level*/
+    margin-left: 0.25rem/* 4px */;
+    margin-top: 0.25rem/* 4px */;
+    text-align: center;
+    --tw-text-opacity: 1;
+    color: rgb(22 163 74 / var(--tw-text-opacity));
+}
+
+.tag{
+    text-transform: uppercase;
+    font-size: 0.75rem/* 12px */;
+    line-height: 1rem/* 16px */;
+    --tw-text-opacity: 1;
+    color: rgb(202 138 4 / var(--tw-text-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgb(254 240 138 / var(--tw-bg-opacity));
+    padding-left: 0.5rem/* 8px */;
+    padding-right: 0.5rem/* 8px */;
+    padding-top: 0.25rem/* 4px */;
+    padding-bottom: 0.25rem/* 4px */;
+    border-radius: 0.75rem/* 12px */;
+}
+
