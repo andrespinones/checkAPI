@@ -13,6 +13,7 @@ isUserLoggedIn:Subject<boolean> = new Subject<boolean>();
   constructor(private httpClient:HttpClient) { }
   getUserProfile()
   {
+    console.log("pega")
     return this.httpClient.get<Profile>(GRAPH_ENDPOINT);
   }
   getProfilePic()
