@@ -14,13 +14,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { CategorySidebarComponent } from './components/shared/category-sidebar/category-sidebar.component';
+import { CardComponent } from './card/card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     HomeComponent,
-    CategorySidebarComponent
+    CategorySidebarComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,7 @@ import { CategorySidebarComponent } from './components/shared/category-sidebar/c
     MatIconModule,
     MatDividerModule
   ],
-  providers: [],
+  providers: [CardComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
