@@ -8,7 +8,7 @@ import { PopupUtils } from '@azure/msal-browser';
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService2 {
+export class AuthService {
   private httpclient: HttpClient;
   constructor(private httpBackend: HttpBackend) {
     this.httpclient = new HttpClient(httpBackend);

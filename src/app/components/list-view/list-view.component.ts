@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Api } from 'src/app/models/apis';
-import { ApiService2 } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { environment } from 'src/environments/environment';
+
+export interface AuthResponse {
+  mensaje: string;
+  token:   string;
+}
+
+
 
 @Component({
   selector: 'app-list-view',
@@ -10,9 +18,9 @@ import { ApiService2 } from 'src/app/services/auth.service';
 })
 export class ListViewComponent implements OnInit {
 
-  constructor(private service:ApiService, private aserv:ApiService2) { }
-
-  ApiList:Api[] = [];
+  constructor(private service:ApiService, private aserv:AuthService) { }
+  ApiList: Api[] = [];
+  message?:AuthResponse;
   ngOnInit(): void {
     this.refreshApis();
     this.getToken();
@@ -26,7 +34,8 @@ export class ListViewComponent implements OnInit {
 
   getToken(){
     this.aserv.getToken().subscribe(data=>{
-      console.log(data);
+      this.message = data;
+      console.log(this.message?.token);
     })
   }
 }
