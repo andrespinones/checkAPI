@@ -5,12 +5,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListViewComponent } from './components/list-view/list-view.component';
+import { LoginComponent } from './components/login/login.component';
 //import { ApiService } from './services/api.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListViewComponent
+    ListViewComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
