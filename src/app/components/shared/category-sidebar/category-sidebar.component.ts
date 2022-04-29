@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CardsModule } from 'angular-bootstrap-md';
+import { BlogPostCard } from 'src/app/blog-post-card.module';
+import { CardComponent } from 'src/app/card/card.component';
 
 @Component({
   selector: 'app-category-sidebar',
@@ -7,9 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategorySidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cardComponent: CardComponent) { 
+  }
 
   ngOnInit(): void {
   }
+  posts : BlogPostCard[] = this.cardComponent.posts;
 
 }
