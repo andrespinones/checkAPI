@@ -14,7 +14,8 @@
 --     status BIT NOT NULL, --BOOL = BIT
 --     sla INT, --SERVICE LEVEL 
 --     latency INT,
---     isFavorite BIT NOT NULL
+--     isFavorite BIT NOT NULL,
+--     isEnabled BIT NOT NULL
 -- );
 
 -- CREATE TABLE Endpoint (
