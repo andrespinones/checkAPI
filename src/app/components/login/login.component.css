@@ -1,0 +1,77 @@
+.background {
+  background-color: #f2eee9;
+  position: fixed;
+  padding: 0;
+  margin: 0;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
+.empty-box {
+  background-color: #ff5c00;
+  position: absolute;
+  top: 54%;
+  left: 52%;
+  height: 40%;
+  width: 35%;
+  z-index: 0;
+  transform: translate(-50%, -50%);
+}
+
+.wrapper {
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 40%;
+  width: 35%;
+  z-index: 1;
+  align-items: center;
+  display: grid;
+}
+
+.wrapper > :nth-child(1) {
+  justify-self: center;
+  padding: 10px;
+}
+.wrapper > :nth-child(1) #image{
+  height: 75px;
+  justify-self: center;
+}
+.wrapper > :nth-child(2) {
+  color: #ff5c00;
+  justify-self: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.wrapper > :nth-child(3) {
+  justify-self: center;
+  color: rgb(146, 146, 146);
+  padding-top: 0px;
+}
+.wrapper > :nth-child(4) .mat-raised-button {
+
+  justify-self: center;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.wrapper > :nth-child(4){
+  justify-self: center;
+}
+
+.wrapper > :nth-child(2) h3 {
+  font-size: x-large;
+}
+.wrapper > :nth-child(3) h5 {
+  color: #c0c0c0;
+  font-size: x-large;
+}
+
+.mat-raised-button {
+  border-color: rgb(244, 244, 244);
+  background-color: white;
+}
