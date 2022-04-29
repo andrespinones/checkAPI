@@ -12,14 +12,17 @@ export class HomeComponent implements OnInit {
   constructor(private azureService: AzureAdDemoService) { }
 
   ngOnInit(): void {
-    console.log("hola")
     this.getProfile();
+    this.getToken();
   }
 
   getProfile(){
     this.azureService.getUserProfile().subscribe(profileInfo =>{
       this.profile = profileInfo;
     })
+  }
+
+  getToken(){
   }
 
 }

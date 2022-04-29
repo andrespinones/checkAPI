@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  postLogoutUrl: 'http://localhost:4200'
+  postLogoutUrl: 'http://localhost:4200',
+  token: '',
 };
 
 /*
