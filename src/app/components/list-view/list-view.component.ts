@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
-
+import { Api } from 'src/app/models/apis';
 
 @Component({
   selector: 'app-list-view',
@@ -11,13 +11,13 @@ export class ListViewComponent implements OnInit {
 
   constructor(private service:ApiService) { }
 
+  ApiList:Api[] = [];
   ngOnInit(): void {
     this.refreshApis();
   }
-  ApiList:any =[]
   refreshApis(){
     this.service.getAllApis().subscribe(data=>{
-      console.warn(data);
+      //console.warn(data);
       this.ApiList = data;
     });
   } 
