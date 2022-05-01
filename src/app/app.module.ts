@@ -22,7 +22,7 @@ import { AzureAdDemoService } from './azure-ad-demo.service';
 import { HomeComponent } from './components/home/home.component';
 
 //import { ApiService } from './services/api.service';
-
+import { MatTableModule } from "@angular/material/table"
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +40,7 @@ import { HomeComponent } from './components/home/home.component';
     MatCardModule,
     MatListModule,
     MatDividerModule,
+    MatTableModule,
     MsalModule.forRoot(new PublicClientApplication
       (
         {

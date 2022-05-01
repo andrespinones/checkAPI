@@ -19,16 +19,17 @@ export interface AuthResponse {
 export class ListViewComponent implements OnInit {
 
   constructor(private service:ApiService, private aserv:AuthService) { }
-  ApiList: Api[] = [];
   message?:AuthResponse;
+  ApiList:Api[] = [];
+
+  columnsToDisplay = ['Name', 'Description']
   ngOnInit(): void {
     this.refreshApis();
     this.getToken();
   }
   refreshApis(){
-    this.service.getAllApis().subscribe(data=>{
-      //console.warn(data);
-      this.ApiList = data;
+    this.service.getAllApis().subscribe(resp=>{
+      this.ApiList = resp;
     });
   }
 
