@@ -1,34 +1,43 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './app-routing.module';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//MSAL-services
 import {
   MsalGuard,
   MsalInterceptor,
   MsalModule,
   MsalRedirectComponent,
 } from '@azure/msal-angular';
-import { AppRoutingModule } from './app-routing.module';
+import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
+import { Authority } from '@azure/msal-common';
+//MSAL Services
+import { AzureAdDemoService } from './azure-ad-demo.service';
+//Components Imports
 import { AppComponent } from './app.component';
 import { ListViewComponent } from './components/list-view/list-view.component';
 import { LoginComponent } from './components/login/login.component';
-import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
-import { Authority } from '@azure/msal-common';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
+import { HomeComponent } from './components/home/home.component';
+import { NavbarComponent } from './components/shared/navbar/navbar.component'
+//Material Imports
 import { MatCardModule } from '@angular/material/card';
 import { MatList, MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
-import { AzureAdDemoService } from './azure-ad-demo.service';
-import { HomeComponent } from './components/home/home.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatTableModule } from "@angular/material/table";
 
-//import { ApiService } from './services/api.service';
-import { MatTableModule } from "@angular/material/table"
 @NgModule({
   declarations: [
     AppComponent,
     ListViewComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +47,8 @@ import { MatTableModule } from "@angular/material/table"
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,
+    MatIconModule,
+    MatMenuModule,
     MatListModule,
     MatDividerModule,
     MatTableModule,
