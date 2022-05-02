@@ -30,6 +30,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatTableModule } from "@angular/material/table";
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSidenavContainer } from '@angular/material/sidenav';
+import { CategorySidebarComponent } from './components/shared/category-sidebar/category-sidebar.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,8 @@ import { MatTableModule } from "@angular/material/table";
     ListViewComponent,
     LoginComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    CategorySidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +53,9 @@ import { MatTableModule } from "@angular/material/table";
     MatCardModule,
     MatIconModule,
     MatMenuModule,
+    MatSidenavContainer,
     MatListModule,
+    MatSidenavModule,
     MatDividerModule,
     MatTableModule,
     MsalModule.forRoot(new PublicClientApplication
@@ -57,7 +63,7 @@ import { MatTableModule } from "@angular/material/table";
         {
           auth:{
             clientId:'6756abad-ec34-4f13-8292-bb2ccda843b4',
-            redirectUri:'http://localhost:4200/home',
+            redirectUri:'http://localhost:4200',
             authority:'https://login.microsoftonline.com/c65a3ea6-0f7c-400b-8934-5a6dc1705645'
           },
           cache:
@@ -82,7 +88,8 @@ import { MatTableModule } from "@angular/material/table";
           ]
         )
       }
-      )
+      ),
+    BrowserAnimationsModule
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS,
