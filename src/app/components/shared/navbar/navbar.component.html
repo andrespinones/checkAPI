@@ -1,53 +1,31 @@
+<mat-toolbar color="" class="mat-elevation-z3">
+  <a mat-button routerLink="home">
+      <img
+        src="./assets/images/logo.png"
+        height="45"
+        class="d-inline-block align-top"
+        alt=""
+      >        
+  </a>
 
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand mb-0 h1" routerLink="home">
-        <img
-          src="./assets/images/logo.png"
-          height="30"
-          class="d-inline-block align-top"
-          alt=""
-        >
-        <!-- CheckApi  -->
-        
-        
-      </a>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search API" aria-label="Search">
-        </form>
-      </div>
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-         
-        <li class="nav-item">
-            <a class="nav-link">
-              <div class="btn-group" mdbDropdown>
-                <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
-                <div class="dropdown-menu dropdown-menu-end ">
-                  <ul>
-                    <li>
-                      <p>Alan Lopez</p>
-                      <!-- <a class="dropdown-item" href="#"></a> -->
-
-                    </li>
-                    <li>
-                      <p>lopezalan@gmail.com</p>
-                      <!-- <a class="dropdown-item">lopezalan@gmail.com</a> -->
-
-                    </li>
-                  </ul>
-                  
-
-                  <div class="divider dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Log Out</a>
-                </div>
-              </div>
-            </a>
-          </li>
-        </ul>
-
-
-
+  <div class="searchBar">
+      <form>
+        <input class="searchInput" type="search" placeholder="Search API" aria-label="Search">
+      </form>
     </div>
-  </nav>
+
+  <div class="spacer"></div>
+
+  <!-- Dropdown de información del usuario -->
+  <mat-menu #appMenu="matMenu"> 
+      <p mat-menu-item disabled class="fontB"  >Alan Lopez</p>
+      <p mat-menu-item disabled class="fontC"  >alan.lpz</p>
+      <p mat-menu-item disabled class="fontC">lopezalan@gmail.com</p>
+      <button mat-menu-item>Log Out</button>
+    </mat-menu>
+    
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+      <mat-icon class="icon-display">account_circle</mat-icon>
+    </button>
+
+</mat-toolbar>
