@@ -15,10 +15,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { CategorySidebarComponent } from './components/shared/category-sidebar/category-sidebar.component';
 import { CardComponent } from './components/card/card.component';
+import { DetailedComponent } from './components/detailed/detailed.component';
 //Navbar
 import { MatMenuModule } from '@angular/material/menu';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
 
 @NgModule({
   declarations: [
@@ -26,7 +26,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     NavbarComponent,
     HomeComponent,
     CategorySidebarComponent,
-    CardComponent
+    CardComponent,
+    DetailedComponent
   ],
   imports: [
     BrowserModule,
