@@ -25,6 +25,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { CardComponent } from './components/card/card.component';
+import { DetailedComponent } from './components/detailed/detailed.component';
+//Navbar
 import { MatMenuModule } from '@angular/material/menu';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatTableModule } from "@angular/material/table";
@@ -35,7 +38,6 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
-import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { CardComponent } from './components/card/card.component';
     HomeComponent,
     CategorySidebarComponent,
     NavbarComponent,
-    CardComponent
+    CardComponent,
+    DetailedComponent
   ],
   imports: [
     BrowserModule,

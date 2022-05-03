@@ -1,0 +1,99 @@
+body{
+  background-color: #F2EEE9;
+}
+
+.nombre{
+  font-weight: 750;
+}
+
+.separador{
+  text-transform: uppercase;
+  text-decoration: underline;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+table.info {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+}
+table.info tr th,
+table.info tr td {
+    padding: 5px;
+}
+
+table.info tr th:first-child,
+table.info tr td:first-child {
+  background-color: #61AFFE;
+  color: white;
+  border-left: 1px solid ;
+  text-transform: uppercase;
+  font-style: italic;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+table.info tr th {
+  background-color: #EBF3FB;
+  text-align: left;
+  font-weight: 370;
+  padding-left: 10px;
+  color: black;
+}
+
+/* top-left border-radius */
+table.info tr:first-child th:first-child {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+/* top-right border-radius */
+table.info tr:first-child th:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+
+}
+
+table.params tr:first-child{
+    border-bottom: 0.5px solid black;
+}
+
+ table.params{
+    /* border-bottom: 1px solid black; */
+    /* border-collapse: separate; */
+    /* border-spacing: 1 15; */
+    width: 100%;
+ } 
+
+ table.params tr th,
+ table.params tr td {
+  text-align: left;
+  font-weight: 370;
+  padding-left: 10px;
+  color: black;
+  min-height: 40px;
+}
+
+table.params {
+  border-bottom: 1px sdolid black;
+}
+
+.searchInput {
+  min-width: 100px;
+  max-width: 500px;
+  height: 30px;
+  border-radius: 5px;
+  border-color: #EEEDED;
+  border-width: 0.5px;
+  background-color: #EEEDED;
+  padding-left: 15px;
+}
+.searchBar{
+    padding-left: 15px;
+}
+
+.searchInput::placeholder {
+    font-family: 'myFont', Arial, Helvetica, sans-serif;  
+    font-size:medium;
+ }
+

@@ -1,0 +1,61 @@
+
+<h1 class="nombre">{{nombreApi}}</h1>
+<p>Base URL: {{baseURL}}</p>
+
+<!-- <p><a href="{{baseURL}}">Base URL: {{baseURL}}</a></p> -->
+
+<h2 class="nombre">{{tagName}}</h2>
+
+<table class="info">
+    <tr>
+        <th>{{mType}}</th>
+        <th>{{path}}</th>
+        <th> Last response: {{lastResp}}</th>
+        <th> 2 days ago</th>
+      </tr>
+</table>
+<br>
+<p>{{epDesc}}</p>
+
+<p class="separador">PARAMETERS</p>
+
+<table class="params">
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th> Description</th>
+    <th></th>
+  </tr>
+  <br>
+  <tr>
+    <td>{{paramName}}</td>
+    <td>{{paramType}}</td>
+    <td> {{paramDescription}}</td>
+    <td>
+      <form>
+        <input class="searchInput" type="search" placeholder={{paramName}} aria-label="Search">
+      </form>
+    </td>
+  </tr>
+
+</table>
+<br>
+<p class="separador">Responses</p>
+
+<table class="params">
+  <tr>
+    <th>Code</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <br>
+  <tr>
+    <td>{{respCode1}}</td>
+    <td>{{respDesc1}}</td>
+    <td></td>
+    <td></td>
+  </tr>
+
+</table>
+

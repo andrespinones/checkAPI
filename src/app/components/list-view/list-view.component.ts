@@ -40,7 +40,7 @@ export class ListViewComponent implements OnInit {
   }
 
   apiDetailRedirect(api: Api){
-    let route = '/components/detail';
+    let route = '/api/detail';
     this.router.navigate([route], { queryParams: { id: api.apiID } });
     console.log(api.apiID)
   }
