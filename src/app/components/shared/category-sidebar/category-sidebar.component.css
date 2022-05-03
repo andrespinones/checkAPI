@@ -31,6 +31,9 @@ mat-sidenav-content{
 
     border-radius: 10px;
 }
+.sideNav-title{
+    text-align: center;
+}
 
 mat-sidenav-container {
     height: calc(100vh - 65px);
