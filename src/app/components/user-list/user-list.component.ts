@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
@@ -11,8 +11,9 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class UserListComponent implements AfterViewInit  {
 
+  userArray: User[] = [];
   columnsToDisplay = ['Name', 'Email', "Role"];
-  dataSource = new MatTableDataSource<User>(userArray);
+  
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -21,26 +22,36 @@ export class UserListComponent implements AfterViewInit  {
     this.dataSource.paginator = this.paginator;
   }
 
+  dataSource = new MatTableDataSource<User>(userArray);
+ 
+
+  toggleRole(user:User){
+     user.role = !user.role
+  }
+
 }
 
 export interface User{
   email: string;
-  role: string;
+  role: boolean;
   name: string;
 }
 
-const userArray: User[] = [
-  {name: "Pablo", email: "example@gmail.com", role: "admin"},
-  {name: "Daniela", email: "example@gmail.com", role: "admin"},
-  {name: "Andres", email: "example@gmail.com", role: "admin"},
-  {name: "Jorge", email: "example@gmail.com", role: "admin"},
-  {name: "Pablo", email: "example@gmail.com", role: "admin"},
-  {name: "Daniela", email: "example@gmail.com", role: "user"},
-  {name: "Andres", email: "example@gmail.com", role: "user"},
-  {name: "Andres", email: "example@gmail.com", role: "user"},
-  {name: "Jorge", email: "example@gmail.com", role: "admin"},
-  {name: "Pablo", email: "example@gmail.com", role: "admin"},
-  {name: "Daniela", email: "example@gmail.com", role: "admin"},
-  {name: "Andres", email: "example@gmail.com", role: "user"},
+var userArray = [
+  {name: "Pablo", email: "example@gmail.com", role: true},
+  {name: "Daniela", email: "example@gmail.com", role: false},
+  {name: "Andres", email: "example@gmail.com", role: true},
+  {name: "Jorge", email: "example@gmail.com", role: true},
+  {name: "Pablo", email: "example@gmail.com", role: false},
+  {name: "Daniela", email: "example@gmail.com", role: false},
+  {name: "Andres", email: "example@gmail.com", role: true},
+  {name: "Andres", email: "example@gmail.com", role: false},
+  {name: "Jorge", email: "example@gmail.com", role: true},
+  {name: "Pablo", email: "example@gmail.com", role: false},
+  {name: "Daniela", email: "example@gmail.com", role: true},
+  {name: "Andres", email: "example@gmail.com", role: false},
 ];
+
+
+
 
