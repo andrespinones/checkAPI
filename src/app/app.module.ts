@@ -18,11 +18,9 @@ import { AzureAdDemoService } from './azure-ad-demo.service';
 import { AppComponent } from './app.component';
 import { ListViewComponent } from './components/list-view/list-view.component';
 import { LoginComponent } from './components/login/login.component';
-import { HomeComponent } from './components/home/home.component';
-import { NavbarComponent } from './components/shared/navbar/navbar.component'
 //Material Imports
 import { MatCardModule } from '@angular/material/card';
-import { MatList, MatListModule } from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,8 +29,13 @@ import { MatMenuModule } from '@angular/material/menu';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatTableModule } from "@angular/material/table";
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatSidenavContainer } from '@angular/material/sidenav';
+// import { MatSidenavContainer } from '@angular/material/sidenav';
 import { CategorySidebarComponent } from './components/shared/category-sidebar/category-sidebar.component';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { HomeComponent } from './components/home/home.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
@@ -40,8 +43,9 @@ import { CategorySidebarComponent } from './components/shared/category-sidebar/c
     ListViewComponent,
     LoginComponent,
     HomeComponent,
-    NavbarComponent,
     CategorySidebarComponent,
+    NavbarComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
@@ -53,11 +57,14 @@ import { CategorySidebarComponent } from './components/shared/category-sidebar/c
     MatCardModule,
     MatIconModule,
     MatMenuModule,
-    MatSidenavContainer,
+    // MatSidenavContainer,
     MatListModule,
     MatSidenavModule,
     MatDividerModule,
     MatTableModule,
+    MDBBootstrapModule.forRoot(),
+    BrowserAnimationsModule,
+    MatFormFieldModule,
     MsalModule.forRoot(new PublicClientApplication
       (
         {
@@ -91,7 +98,7 @@ import { CategorySidebarComponent } from './components/shared/category-sidebar/c
       ),
     BrowserAnimationsModule
   ],
-  providers: [{
+  providers: [CardComponent,{
     provide:HTTP_INTERCEPTORS,
     useClass:MsalInterceptor,
     multi:true

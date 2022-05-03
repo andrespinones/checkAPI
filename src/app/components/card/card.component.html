@@ -1,0 +1,30 @@
+<div class="roundShadow">
+  <img class="bigImg" src="{{data.mainImageUrl}}">
+  <div class="flex1">
+    <div class="flexRow">
+      <div class="tag">
+        {{data.tag}}
+      </div>
+    </div>
+    <div class="flexCenter">
+    <h2 class="titleText">
+      {{data.title}}
+    </h2>
+    </div>
+    <p class="descriptionText">
+     {{data.description}}
+    </p>
+    <div class="flexRow">
+      <div class="statusText"> Status:  </div>
+        <div *ngIf="data.status == true" class=" online"> online</div>
+        <div *ngIf="data.status == false" class="offline">offline</div>
+    </div>
+    <div class="rowForIcons">
+      <img class="serLev" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIq_iCQ55ZcXrTMTwqCgLjQhrAu3GbeiSx4A&usqp=CAU">
+      <div class="dataText">{{data.serviceLevel}}%</div>
+      <img class="respTime" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSsyjn6ymgtM6JqdQHt3OAiaWB29sioLoDow&usqp=CAU" alt="">
+      <div class="dataText">{{data.responseTime}}mls</div>
+  
+    </div>
+  </div>
+</div>
