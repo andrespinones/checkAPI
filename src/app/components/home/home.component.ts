@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { Profile } from 'src/app/models/profile';
 import { AzureAdDemoService } from 'src/app/azure-ad-demo.service';
 
@@ -9,7 +9,9 @@ import { AzureAdDemoService } from 'src/app/azure-ad-demo.service';
 })
 export class HomeComponent implements OnInit {
   profile?:Profile
-  constructor(private azureService: AzureAdDemoService) { }
+  constructor(private azureService: AzureAdDemoService) { 
+
+  }
 
   ngOnInit(): void {
     // this.getProfile();
