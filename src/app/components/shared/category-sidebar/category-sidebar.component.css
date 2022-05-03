@@ -12,6 +12,9 @@ mat-sidenav {
     text-indent: 10%;
     border-radius: 10px;
 }
+mat-sidenav-content{
+  left: 5%;
+}
 .content {
     height: calc(100vh - 98px);
     border-radius: 10px;

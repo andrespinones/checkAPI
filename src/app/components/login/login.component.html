@@ -1,4 +1,4 @@
-<mat-toolbar class="mat-elevation-z4" color="primary">
+<!-- <mat-toolbar class="mat-elevation-z4" color="primary">
   <a href="/" class="title">AzureTeach.Net</a>
 <div class="toolbar-spacer"></div>
   <a mat-button [routerLink]="['profile']">Profile</a>
@@ -6,13 +6,14 @@
   <button mat-raised-button *ngIf="!isUserLoggedIn" (click)="login()">Login</button>
   <button mat-raised-button *ngIf="isUserLoggedIn" (click)="logout()">Logout</button>
 </mat-toolbar>
-<div style="margin:5px;"></div>
+<div style="margin:5px;"></div> -->
 
 <!--Boton para hacer Sign-In a Microsoft-->
 <html>
   <body>
     <div class="background">
       <div class="wrapper">
+        <a mat-button [routerLink]="['home']">Home</a>
         <div class="row">
           <img id="image"src="../assets/images/logo-no-text.png" alt="logo de checkAPI" />
         </div>

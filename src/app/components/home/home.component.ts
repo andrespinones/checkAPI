@@ -12,8 +12,8 @@ export class HomeComponent implements OnInit {
   constructor(private azureService: AzureAdDemoService) { }
 
   ngOnInit(): void {
-    this.getProfile();
-    this.getToken();
+    // this.getProfile();
+    // this.getToken();
   }
 
   getProfile(){
