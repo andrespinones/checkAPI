@@ -14,6 +14,15 @@ export class CategorySidebarComponent implements OnInit {
 
   constructor(private service:ApiService) {}
   CategoryList: Category[] =[];
+  fixedCategories: Category[] = [
+    {
+        id: -1,
+        name: 'All',
+    },
+    {
+        id: -2,
+        name: 'Other',
+    }];
 
   ngOnInit(): void {
     this.refreshCategories();

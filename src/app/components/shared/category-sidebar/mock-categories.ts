@@ -1,19 +1,11 @@
-import { category } from "src/app/models/category"
-export const categories: category[] = [
+import { Category } from "src/app/models/category"
+export const categories: Category[] = [
     {
-        id: 1,
+        id: -1,
         name: 'All',
     },
     {
-        id: 2,
-        name: 'Data',
-    },
-    {
-        id: 3,
-        name: 'Entertainment'
-    },
-    {
-        id: 4,
-        name: 'Other'
+        id: -2,
+        name: 'Other',
     }
 ]
