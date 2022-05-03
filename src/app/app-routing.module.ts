@@ -13,11 +13,11 @@ const routes: Routes = [
   },{
     path: 'api/detail',
     component: DetailedComponent
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
   }
-  // {
-  //   path: 'home',
-  //   component: HomeComponent,
-  // }
 ];
 
 @NgModule({

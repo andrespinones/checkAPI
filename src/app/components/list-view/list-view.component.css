@@ -16,7 +16,8 @@ td.mat-cell {
   border-top: 0px solid #ffffff;
 }
 .mat-row:hover .mat-cell {
-    background-color: rgb(179, 177, 173);    
+    background-color: rgb(179, 177, 173); 
+    cursor: pointer;   
 }
 td.mat-cell:first-child {
   background-color: #ffffff;
