@@ -97,3 +97,12 @@ table.params {
     font-size:medium;
  }
 
+ pre {
+  background: #333333;
+  width: 100%; 
+  outline: 1px solid #ccc; 
+  padding: 5px; 
+  margin: 5px; 
+  margin-top: 15px; 
+  color: white;
+}
