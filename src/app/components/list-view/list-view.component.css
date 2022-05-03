@@ -2,24 +2,30 @@ table {
   background-color: #F2EEE9;
   width: 90%;
   border-spacing: 0 8px !important;
+  border-collapse: separate;
+
+}
+
+.mat-header-cell{
+  border-bottom: 0px;
 }
 
 td.mat-cell {
   background-color: #ffffff;
-  border-bottom: 2px solid #ffffff;
-  border-top: 2px solid #ffffff;
+  border-bottom: 0px solid #ffffff;
+  border-top: 0px solid #ffffff;
 }
 
 td.mat-cell:first-child {
   background-color: #ffffff;
-  border-left: 2px solid #ffffff;
+  /* border-left: 2px solid #ffffff; */
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
 }
 
 td.mat-cell:last-child {
   background-color: #ffffff;
-  border-right: 2px solid #ffffff;
+  /* border-right: 2px solid #ffffff; */
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
 }

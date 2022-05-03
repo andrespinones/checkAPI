@@ -9,8 +9,6 @@ export interface AuthResponse {
   token:   string;
 }
 
-
-
 @Component({
   selector: 'app-list-view',
   templateUrl: './list-view.component.html',
@@ -25,7 +23,7 @@ export class ListViewComponent implements OnInit {
   columnsToDisplay = ['Name', 'Description']
   ngOnInit(): void {
     this.refreshApis();
-    this.getToken();
+    // this.getToken();
   }
   refreshApis(){
     this.service.getAllApis().subscribe(resp=>{
