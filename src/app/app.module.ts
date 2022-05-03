@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -15,6 +16,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { CategorySidebarComponent } from './components/shared/category-sidebar/category-sidebar.component';
 import { CardComponent } from './components/card/card.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -23,7 +26,8 @@ import { CardComponent } from './components/card/card.component';
     NavbarComponent,
     HomeComponent,
     CategorySidebarComponent,
-    CardComponent
+    CardComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,9 @@ import { CardComponent } from './components/card/card.component';
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [CardComponent],
   bootstrap: [AppComponent]

@@ -1,0 +1,6 @@
+<table mat-table [dataSource] = "userArray"></table>
+
+<ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let user"> {{user.name}} </td>
+  </ng-container>
