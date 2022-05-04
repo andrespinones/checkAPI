@@ -32,7 +32,12 @@ mat-sidenav-content{
     border-radius: 10px;
 }
 .sideNav-title{
-    text-align: center;
+    text-align: left;
+    margin: 10px;
+    margin-left: 19px;
+    font-weight: 550;
+    font-size: 1rem;
+    color: #4C4A48;
 }
 
 mat-sidenav-container {
