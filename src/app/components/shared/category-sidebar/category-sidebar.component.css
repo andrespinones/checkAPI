@@ -36,6 +36,7 @@ mat-sidenav-content{
 }
 
 mat-sidenav-container {
+    width: 100%;
     height: calc(100vh - 65px);
     background: #F2EEE9;
 }

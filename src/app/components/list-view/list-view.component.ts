@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { Api } from 'src/app/models/apis';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 export interface AuthResponse {
   mensaje: string;
@@ -16,7 +17,7 @@ export interface AuthResponse {
 })
 export class ListViewComponent implements OnInit {
 
-  constructor(private service:ApiService, private aserv:AuthService) { }
+  constructor(private service:ApiService, private aserv:AuthService, private router: Router) { }
   message?:AuthResponse;
   ApiList:Api[] = [];
 
@@ -36,5 +37,11 @@ export class ListViewComponent implements OnInit {
       this.message = data;
       console.log(this.message?.token);
     })
+  }
+
+  apiDetailRedirect(api: Api){
+    let route = '/api/detail';
+    this.router.navigate([route], { queryParams: { id: api.apiID } });
+    console.log(api.apiID)
   }
 }

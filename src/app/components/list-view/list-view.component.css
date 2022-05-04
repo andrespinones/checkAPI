@@ -15,7 +15,10 @@ td.mat-cell {
   border-bottom: 0px solid #ffffff;
   border-top: 0px solid #ffffff;
 }
-
+.mat-row:hover .mat-cell {
+    background-color: rgb(179, 177, 173); 
+    cursor: pointer;   
+}
 td.mat-cell:first-child {
   background-color: #ffffff;
   /* border-left: 2px solid #ffffff; */
@@ -24,7 +27,7 @@ td.mat-cell:first-child {
 }
 
 td.mat-cell:last-child {
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   /* border-right: 2px solid #ffffff; */
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
