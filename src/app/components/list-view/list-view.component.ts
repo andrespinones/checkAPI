@@ -29,6 +29,7 @@ export class ListViewComponent implements OnInit {
   refreshApis(){
     this.service.getAllApis().subscribe(resp=>{
       this.ApiList = resp;
+      console.log(this.ApiList)
     });
   }
 
