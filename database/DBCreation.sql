@@ -113,6 +113,12 @@
 --     'The API service is for those of you interested in using our movie, TV show or actor images and/or data in your application. Our API is a system we provide for you and your team to programmatically fetch and use our data and/or images.', 
 --     1, 1, 1);
 
+-- INSERT INTO CategoryAPI (apiID, categoryID)
+--   VALUES
+--   (3, 1),
+--   (5, 2),
+--   (3, 3)
+
 -- -- FIRST ENDPOINT 
 -- INSERT INTO Parameter (dataType, paramName, isRequired, paramDescription)
 --     VALUES
