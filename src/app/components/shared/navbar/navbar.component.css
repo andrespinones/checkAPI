@@ -46,4 +46,11 @@
 .searchInput::placeholder {
     font-family: 'myFont', Arial, Helvetica, sans-serif;
     font-size:medium;
- }
+}
+
+.app-toolbar{
+    position: sticky;
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+    top: 0; /* Sets the sticky toolbar to be on top */
+    z-index: 1000; /* chooses a layer to not be overlaped */
+}
