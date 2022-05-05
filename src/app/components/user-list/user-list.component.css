@@ -1,7 +1,19 @@
 table {
     width: 100%;
-    height:fit-content;
 }
+.container {
+    padding: 50px 20px;
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.searchBar {
+    background-color: white;
+    border-radius: 5px;
+    padding: 5px;
+}
+
 
 .user{
     display: flex;

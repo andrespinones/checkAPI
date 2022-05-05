@@ -19,6 +19,11 @@ import { CardComponent } from './components/card/card.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 
+//search bar functionality in user list table
+import { FormsModule } from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +45,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatIconModule,
     MatDividerModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [CardComponent],
   bootstrap: [AppComponent]

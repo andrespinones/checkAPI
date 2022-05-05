@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { User } from './user.module';
@@ -14,8 +14,8 @@ export class UserListComponent implements AfterViewInit  {
 
   userArray: User[] = [];
   columnsToDisplay = ['Name', 'Email', "Role"];
-  
 
+  
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   
@@ -28,6 +28,14 @@ export class UserListComponent implements AfterViewInit  {
 
   toggleRole(user:User){
      user.role = !user.role
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
 }
@@ -45,7 +53,7 @@ var userArray = [
   {name: "Jorge", email: "example@gmail.com", role: true},
   {name: "Pablo", email: "example@gmail.com", role: false},
   {name: "Daniela", email: "example@gmail.com", role: true},
-  {name: "Andres", email: "example@gmail.com", role: false},
+  {name: "Andres", email: "example@hotmail.com", role: false},
 ];
 
 
