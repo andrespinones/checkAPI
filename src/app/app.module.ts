@@ -41,7 +41,7 @@ import { HomeComponent } from './components/home/home.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { EndpointSidebarComponent } from './components/endpoint-sidebar/endpoint-sidebar.component';
 //primeng imports ()
-import {AccordionModule} from 'primeng/accordion';
+
 
 
 @NgModule({
@@ -71,7 +71,6 @@ import {AccordionModule} from 'primeng/accordion';
     MatDividerModule,
     MatTableModule,
     MatExpansionModule,
-    AccordionModule,
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     MatFormFieldModule,

@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { ActivatedRoute } from '@angular/router';
-export interface endpointsSidebar {
-  groupID:             number;
-  name:                string;
-  methodType:          string;
-  endpointDescription: string;
-}
+import { endpointSidebar } from 'src/app/models/endpointSidebar';
+
 @Component({
   selector: 'app-endpoint-sidebar',
   templateUrl: './endpoint-sidebar.component.html',
@@ -16,7 +12,7 @@ export class EndpointSidebarComponent implements OnInit {
 
   constructor(private service:ApiService, private route: ActivatedRoute) { }
   testList:any[]=[];
-  grouped: { [key: string]: endpointsSidebar[] } = {};
+  grouped: { [key: string]: endpointSidebar[] } = {};
   apiID: any;
   ngOnInit(): void {
     const id = this.route.snapshot.queryParamMap.get('id');
