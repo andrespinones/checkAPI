@@ -10,6 +10,7 @@ body{
 .detailContent{
   margin-left:20%;
   padding-top: 5%;
+  width: 75%;
 }
 .nombre{
   font-weight: 750;

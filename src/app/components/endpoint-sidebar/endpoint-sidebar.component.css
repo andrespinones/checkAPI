@@ -1,3 +1,7 @@
 mat-expansion-panel{
     background-color: #F2EEE9;
 }
+
+mat-panel-title{
+    font-size: large;
+}
