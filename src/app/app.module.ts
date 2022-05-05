@@ -27,6 +27,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import {MatPaginatorModule} from '@angular/material/paginator';
 //Navbar
 import { MatMenuModule } from '@angular/material/menu';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -37,10 +38,9 @@ import { CategorySidebarComponent } from './components/shared/category-sidebar/c
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+// userList imports
 import { UserListComponent } from './components/user-list/user-list.component';
 
-
-import {MatPaginatorModule} from '@angular/material/paginator';
 
 //search bar functionality in user list table
 import { FormsModule } from '@angular/forms';
