@@ -18,6 +18,8 @@ import { AzureAdDemoService } from './azure-ad-demo.service';
 import { AppComponent } from './app.component';
 import { ListViewComponent } from './components/list-view/list-view.component';
 import { LoginComponent } from './components/login/login.component';
+import { CardComponent } from './components/card/card.component';
+import { DetailedComponent } from './components/detailed/detailed.component';
 //Material Imports
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
@@ -25,8 +27,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { CardComponent } from './components/card/card.component';
-import { DetailedComponent } from './components/detailed/detailed.component';
 //Navbar
 import { MatMenuModule } from '@angular/material/menu';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -37,6 +37,8 @@ import { CategorySidebarComponent } from './components/shared/category-sidebar/c
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+//primeng imports ()
+
 
 
 @NgModule({
@@ -60,7 +62,6 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     MatCardModule,
     MatIconModule,
     MatMenuModule,
-    // MatSidenavContainer,
     MatListModule,
     MatSidenavModule,
     MatDividerModule,

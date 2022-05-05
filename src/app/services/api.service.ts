@@ -33,4 +33,11 @@ export class ApiService {
       );
   }
 
+  getGroupsbyID(apiID:any){
+    return this.httpclient.get<any>(this.APIURL+'/groups/'+ apiID,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+      )}
+      );
+  }
+
 }
