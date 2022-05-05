@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { User } from './user.module';
 
 
 
@@ -31,11 +32,6 @@ export class UserListComponent implements AfterViewInit  {
 
 }
 
-export interface User{
-  email: string;
-  role: boolean;
-  name: string;
-}
 
 var userArray = [
   {name: "Pablo", email: "example@gmail.com", role: true},
