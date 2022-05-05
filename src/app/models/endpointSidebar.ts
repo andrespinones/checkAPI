@@ -3,4 +3,5 @@ export interface endpointSidebar {
     name:                string;
     methodType:          string;
     endpointDescription: string;
+    endpointID:          number;
 }
