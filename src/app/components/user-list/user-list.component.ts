@@ -37,7 +37,6 @@ export class UserListComponent implements AfterViewInit  {
       this.dataSource.paginator.firstPage();
     }
   }
-
 }
 
 
