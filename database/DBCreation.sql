@@ -140,17 +140,17 @@
 --     ('Invalid API key: You must be granted a valid key.', 401),
 --     ('The resource you requested could not be found.', 404);
  
--- DE AQUÍ PARA ABAJO NO JALA
-
 -- INSERT INTO Endpoint(respCodeID, apiID, groupID, methodType, path, endpointDescription, status)
 --     VALUES
---     (1, 3, 1 'GET', '/movie/{movie_id}', 'Get the primary information about a movie.', 1);
+--     (1, 3, 1, 'GET', '/movie/{movie_id}', 'Get the primary information about a movie.', 1);
 -- INSERT INTO Endpoint(respCodeID, apiID, groupID, methodType, path, endpointDescription, status)
 --     VALUES (1, 3, 1, 'GET', '/movie/top_rated', 'Get the top rated movies on TMDB.', 1);
+
 -- INSERT INTO Endpoint (respCodeID, apiID, groupID, methodType, path, endpointDescription, status)
---     VALUES (1, 3, 1, 'GET', '/movie/popular’, 'Get a list of the current popular movies on TMDB.', 1),
--- 		(1, 3, 1, 'GET', '/movie/{movie_id}/similar', 'Get a list of similar movies.', 1),
--- 		(1, 3, 1, POST, '/movie/{movie_id}/rating', 'Rate a movie.', 1),
+--     VALUES 
+--         (1, 3, 1, 'GET', '/movie/{popular}', 'Get a list of the current popular movies on TMDB.', 1),
+--         (1, 3, 1, 'GET', '/movie/{movie_id}/similar', 'Get a list of similar movies.', 1),
+-- 		(1, 3, 1, 'POST', '/movie/{movie_id}/rating', 'Rate a movie.', 1),
 -- 		(1, 3, 1, 'GET', '/movie/latest', 'Get the most newly created movie.', 1),
 -- 		(1, 3, 1, 'GET', '/movie/{movie_id}/release_dates', 'Get the release date along with the certification for a movie.', 1),
 -- 		(1, 3, 2, 'GET', '/genre/movie/list', 'Get the list of official genres for movies.', 1);
