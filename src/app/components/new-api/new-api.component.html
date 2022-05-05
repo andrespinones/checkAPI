@@ -1,0 +1,52 @@
+<body>
+    <h1 class="nombre">Add API</h1>
+
+    <div class="example-container" >
+
+        <form >
+            <input class="searchInput"  placeholder="API's Name" aria-label="Search">
+            <input class="searchInput input2"  placeholder="Describe your API" aria-label="Search">
+            
+        </form>
+
+        <br>
+
+        <form>
+            <mat-form-field appearance="outline" >
+                <mat-label>Select category</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let category of DROPDOWN_LIST" [value]="category.name">
+                        {{category.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+    
+              <input class="searchInput input2"  placeholder="Base URL" aria-label="Search">
+    
+
+        </form>
+
+        <p>The creator of this API will be - <span class="highlight">{{user}}</span></p>
+
+        <br>
+
+        <p>Specify using:</p>
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+            <mat-button-toggle value="ui">UI</mat-button-toggle>
+            <mat-button-toggle value="postman">Postman Collection</mat-button-toggle>
+        </mat-button-toggle-group>
+
+
+
+        <div class="buttons">
+            <button class="button button1">Cancel</button>
+            <button class="button button2">Add Api</button>
+
+        </div>
+
+    </div>
+      
+
+
+      
+</body>

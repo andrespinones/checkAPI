@@ -27,15 +27,21 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CardComponent } from './components/card/card.component';
 import { DetailedComponent } from './components/detailed/detailed.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+
 //Navbar
 import { MatMenuModule } from '@angular/material/menu';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatTableModule } from "@angular/material/table";
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatSelectModule} from '@angular/material/select';
+
 // import { MatSidenavContainer } from '@angular/material/sidenav';
 import { CategorySidebarComponent } from './components/shared/category-sidebar/category-sidebar.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
+import { NewApiComponent } from './components/new-api/new-api.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 
@@ -48,7 +54,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     CategorySidebarComponent,
     NavbarComponent,
     CardComponent,
-    DetailedComponent
+    DetailedComponent,
+    NewApiComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +67,10 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     MatCardModule,
     MatIconModule,
     MatMenuModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatButtonToggleModule,
     // MatSidenavContainer,
     MatListModule,
     MatSidenavModule,
@@ -68,6 +79,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     MatFormFieldModule,
+  
     MsalModule.forRoot(new PublicClientApplication
       (
         {
@@ -101,11 +113,16 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
       ),
     BrowserAnimationsModule
   ],
-  providers: [CardComponent,{
+  providers: [
+
+    CardComponent,{
     provide:HTTP_INTERCEPTORS,
     useClass:MsalInterceptor,
     multi:true
+    
   },MsalGuard,AzureAdDemoService],
   bootstrap: [AppComponent,MsalRedirectComponent]
 })
 export class AppModule { }
+
+
