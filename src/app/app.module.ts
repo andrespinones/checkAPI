@@ -27,6 +27,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 //Navbar
 import { MatMenuModule } from '@angular/material/menu';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -37,8 +39,9 @@ import { CategorySidebarComponent } from './components/shared/category-sidebar/c
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { EndpointSidebarComponent } from './components/endpoint-sidebar/endpoint-sidebar.component';
 //primeng imports ()
-
+import {AccordionModule} from 'primeng/accordion';
 
 
 @NgModule({
@@ -50,7 +53,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     CategorySidebarComponent,
     NavbarComponent,
     CardComponent,
-    DetailedComponent
+    DetailedComponent,
+    EndpointSidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +70,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     MatSidenavModule,
     MatDividerModule,
     MatTableModule,
+    MatExpansionModule,
+    AccordionModule,
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     MatFormFieldModule,
