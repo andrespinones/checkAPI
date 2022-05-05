@@ -5,6 +5,7 @@ import { MsalGuard } from '@azure/msal-angular';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { CategorySidebarComponent } from './components/shared/category-sidebar/category-sidebar.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 const routes: Routes = [
   {
