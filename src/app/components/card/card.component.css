@@ -120,3 +120,11 @@
     object-fit: cover;
     margin-left: 2.5rem/* 40px */;
 }
+
+.gridCardView{
+    display: grid;
+    padding: 2rem/* 32px */;
+    gap: 2rem/* 32px */;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+
+}

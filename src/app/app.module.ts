@@ -37,8 +37,14 @@ import { CategorySidebarComponent } from './components/shared/category-sidebar/c
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-//primeng imports ()
+import { UserListComponent } from './components/user-list/user-list.component';
 
+
+import {MatPaginatorModule} from '@angular/material/paginator';
+
+//search bar functionality in user list table
+import { FormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
 
 
 @NgModule({
@@ -50,7 +56,9 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     CategorySidebarComponent,
     NavbarComponent,
     CardComponent,
-    DetailedComponent
+    DetailedComponent,
+    CardComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
@@ -100,7 +108,9 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
         )
       }
       ),
-    BrowserAnimationsModule
+    MatPaginatorModule,
+    FormsModule,
+    MatInputModule
   ],
   providers: [CardComponent,{
     provide:HTTP_INTERCEPTORS,
