@@ -4,6 +4,7 @@ import { Observable } from 'rxjs'
 import { Api } from '../models/apis';
 import { Category } from '../models/category';
 import { PopupUtils } from '@azure/msal-browser';
+import { Endpoint } from '../models/endpoint';
 
 
 @Injectable({
@@ -46,7 +47,7 @@ export class ApiService {
       );
   }
   getEndpointbyID(endpointID:any){
-    return this.httpclient.get<any>(this.APIURL+'/endpoint/'+ endpointID,{headers: new HttpHeaders({
+    return this.httpclient.get<Endpoint>(this.APIURL+'/endpoint/'+ endpointID,{headers: new HttpHeaders({
       'Content-Type': 'application/json', 'access-token':this.token}
       )}
       );

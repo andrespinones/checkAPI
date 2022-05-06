@@ -10,7 +10,7 @@ import { Endpoint } from 'src/app/models/endpoint';
   styleUrls: ['./endpoint-sidebar.component.css']
 })
 export class EndpointSidebarComponent implements OnInit {
-
+  @Output() outputToParent = new EventEmitter<Endpoint>();
   constructor(private service:ApiService, private route: ActivatedRoute) { }
   endpoint:Endpoint = {} as Endpoint;
   testList:any[]=[];
@@ -34,19 +34,15 @@ export class EndpointSidebarComponent implements OnInit {
         group[groupingKey].push(current);
         return group;
         }, {} ) 
-        console.log(this.grouped)
     })
   }
 
   getEndpointDetail(endpointId:number){
     this.service.getEndpointbyID(endpointId).subscribe(resp=>{
       this.endpoint = resp;
+      this.outputToParent.emit(this.endpoint)
     })
 }
-  
+}
 
-}
-function newEventEmitter<T>() {
-  throw new Error('Function not implemented.');
-}
 

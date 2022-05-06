@@ -1,25 +1,26 @@
 <body>
   <app-navbar ></app-navbar>
-
-<div class="sidebar"><app-endpoint-sidebar></app-endpoint-sidebar></div>
+  <!-- (outputToParent)="getOutputEndpoint($event)" -->
+<div class="sidebar"><app-endpoint-sidebar (outputToParent)="getOutputEndpoint($event)"></app-endpoint-sidebar></div>
+<span *ngFor="let item of receivedEndpoint">
 <div class="detailContent">
-<h1 class="nombre">{{nombreApi}}</h1>
-<p>Base URL: {{baseURL}}</p>
-
+<span  *ngFor="let data of apiData">
+<h1 class="nombre">{{data.name}}</h1>
+<p>Base URL: {{data.baseUrl}}</p>
+</span>
 <!-- <p><a href="{{baseURL}}">Base URL: {{baseURL}}</a></p> -->
-
-<h2 class="nombre">{{tagName}}</h2>
+<h2 class="nombre">{{item.name}}</h2>
 
 <table class="info">
     <tr>
-        <th>{{mType}}</th>
-        <th>{{path}}</th>
+        <th>{{item.methodType}}</th>
+        <th>{{item.path}}</th>
         <th> Last response: <span>{{lastResp}}</span></th>
         <th> 2 days ago</th>
       </tr>
 </table>
 <br>
-<p>{{epDesc}}</p>
+<p>{{item.endpointDescription}}</p>
 
 <p class="separador">PARAMETERS</p>
 
@@ -32,12 +33,12 @@
   </tr>
   <br>
   <tr>
-    <td>{{paramName}}</td>
-    <td>{{paramType}}</td>
-    <td> {{paramDescription}}</td>
+    <td>{{item.paramName}}</td>
+    <td>{{item.dataType}}</td>
+    <td> {{item.paramDescription}}</td>
     <td>
       <form>
-        <input class="searchInput" type="search" placeholder={{paramName}} aria-label="Search">
+        <input class="searchInput" type="search" placeholder={{item.paramName}} aria-label="Search">
       </form>
     </td>
   </tr>
@@ -55,14 +56,16 @@
   </tr>
   <br>
   <tr>
-    <td>{{respCode.num}}</td>
-    <td>{{respCode.description}}</td>
+    <td>{{item.number}}</td>
+    <td>{{item.respDescription}}</td>
     <td></td>
     <td></td>
   </tr>
 </table>
 <pre><p>{{pet | json}}</p></pre>
 </div>
+</span>
+
 </body>
 
 
