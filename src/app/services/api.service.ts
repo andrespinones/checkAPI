@@ -53,4 +53,11 @@ export class ApiService {
       );
   }
 
+  getAPIsByCategory(categoryID: number): Observable<Api[]>{
+    return this.httpclient.get<Api[]>(this.APIURL+'/categories/'+ categoryID,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+      )}
+      );
+  }
+
 }
