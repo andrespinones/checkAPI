@@ -1,7 +1,17 @@
 body{
   background-color: #F2EEE9;
 }
-
+.sidebar{
+  width:15%;
+  float:left;
+  margin-left: 2%;
+  margin-top: 5%;
+}
+.detailContent{
+  margin-left:20%;
+  padding-top: 5%;
+  width: 75%;
+}
 .nombre{
   font-weight: 750;
 }
@@ -101,8 +111,7 @@ table.params {
   background: #333333;
   width: 100%; 
   outline: 1px solid #ccc; 
-  padding: 5px; 
-  margin: 5px; 
+  padding: 5px;  
   margin-top: 15px; 
   color: white;
 }

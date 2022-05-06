@@ -28,6 +28,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 //Navbar
 import { MatMenuModule } from '@angular/material/menu';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -40,6 +42,8 @@ import { HomeComponent } from './components/home/home.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 // userList imports
 import { UserListComponent } from './components/user-list/user-list.component';
+import { EndpointSidebarComponent } from './components/endpoint-sidebar/endpoint-sidebar.component';
+//primeng imports ()
 
 
 //search bar functionality in user list table
@@ -58,7 +62,8 @@ import {MatInputModule} from '@angular/material/input';
     CardComponent,
     DetailedComponent,
     CardComponent,
-    UserListComponent
+    UserListComponent,
+    EndpointSidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +79,7 @@ import {MatInputModule} from '@angular/material/input';
     MatSidenavModule,
     MatDividerModule,
     MatTableModule,
+    MatExpansionModule,
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     MatFormFieldModule,

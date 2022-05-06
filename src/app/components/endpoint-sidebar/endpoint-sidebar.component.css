@@ -1,0 +1,31 @@
+mat-expansion-panel{
+    background-color: #F2EEE9;
+}
+
+mat-panel-title{
+    font-size: large;
+}
+
+.get{
+    color: #61AFFE;
+    font-weight: bold;
+}
+
+.post{
+    color: #49CC90;
+    font-weight: bold;
+}
+
+.delete{
+    color: #DC4349;
+    font-weight: bold;
+}
+.put{
+    color: #FCA130;
+    font-weight: bold;
+}
+
+.description{
+    color: black;
+    font-weight:lighter
+}
