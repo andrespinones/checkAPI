@@ -88,7 +88,7 @@ import {MatInputModule} from '@angular/material/input';
         {
           auth:{
             clientId:'6756abad-ec34-4f13-8292-bb2ccda843b4',
-            redirectUri:'http://localhost:4200/home',
+            redirectUri:'http://localhost:4200',
             authority:'https://login.microsoftonline.com/c65a3ea6-0f7c-400b-8934-5a6dc1705645'
           },
           cache:

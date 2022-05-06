@@ -4,6 +4,7 @@ import { InteractionStatus, RedirectRequest } from '@azure/msal-browser';
 import { filter, Subject, takeUntil } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AzureAdDemoService } from 'src/app/azure-ad-demo.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   constructor(@Inject(MSAL_GUARD_CONFIG) private msalGuardConfig:MsalGuardConfiguration,
   private msalBroadCastService:MsalBroadcastService,
-  private authService:MsalService,private azureAdDemoSerice:AzureAdDemoService) { }
+  private authService:MsalService,private azureAdDemoSerice:AzureAdDemoService,private router:Router) { }
 
   ngOnInit(): void {
     this.msalBroadCastService.inProgress$.pipe
@@ -27,6 +28,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       {
         this.isUserLoggedIn=this.authService.instance.getAllAccounts().length>0
         this.azureAdDemoSerice.isUserLoggedIn.next(this.isUserLoggedIn);
+        if(this.isUserLoggedIn){
+          this.router.navigateByUrl('home')
+        }
       })
   }
 
@@ -39,11 +43,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   {
     if(this.msalGuardConfig.authRequest)
     {
-      this.authService.loginRedirect({...this.msalGuardConfig.authRequest} as RedirectRequest)
+      this.authService.loginPopup({...this.msalGuardConfig.authRequest} as RedirectRequest)
     }
     else
     {
-      this.authService.loginRedirect();
+      this.authService.loginPopup();
     }
   }
 

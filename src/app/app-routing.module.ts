@@ -10,7 +10,7 @@ import { UserListComponent } from './components/user-list/user-list.component';
 const routes: Routes = [
   {
     path:'',
-    component:HomeComponent,
+    component:LoginComponent,
   },{
     path: 'api/detail',
     component: DetailedComponent
