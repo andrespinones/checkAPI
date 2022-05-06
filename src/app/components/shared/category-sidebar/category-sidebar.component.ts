@@ -56,7 +56,15 @@ export class CategorySidebarComponent implements OnInit, AfterViewInit {
     })
   }
 
+  refreshApis(){
+    this.service.getAllApis().subscribe(resp=>{
+      this.apiList = resp;
+      console.log(this.apiList)
+    });
+  }
+
   refreshCategoriesFiltered(categoryID: number){
+    console.log(categoryID);
     this.service.getAPIsByCategory(categoryID).subscribe(data=>{
       this.apiList = data;
       console.log(this.apiList);
