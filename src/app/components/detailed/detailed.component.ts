@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit} from '@angular/core';
+import { Endpoint } from 'src/app/models/endpoint';
+
 
 
 @Component({

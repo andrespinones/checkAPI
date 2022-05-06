@@ -39,5 +39,17 @@ export class ApiService {
       )}
       );
   }
+  getApibyID(apiID:any){
+    return this.httpclient.get<any>(this.APIURL+'/api/'+ apiID,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+      )}
+      );
+  }
+  getEndpointbyID(endpointID:any){
+    return this.httpclient.get<any>(this.APIURL+'/endpoint/'+ endpointID,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+      )}
+      );
+  }
 
 }

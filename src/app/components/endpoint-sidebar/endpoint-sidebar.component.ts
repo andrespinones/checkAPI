@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { endpointSidebar } from 'src/app/models/endpointSidebar';
+import { Endpoint } from 'src/app/models/endpoint';
 
 @Component({
   selector: 'app-endpoint-sidebar',
@@ -11,6 +12,7 @@ import { endpointSidebar } from 'src/app/models/endpointSidebar';
 export class EndpointSidebarComponent implements OnInit {
 
   constructor(private service:ApiService, private route: ActivatedRoute) { }
+  endpoint:Endpoint = {} as Endpoint;
   testList:any[]=[];
   grouped: { [key: string]: endpointSidebar[] } = {};
   apiID: any;
@@ -36,4 +38,15 @@ export class EndpointSidebarComponent implements OnInit {
     })
   }
 
+  getEndpointDetail(endpointId:number){
+    this.service.getEndpointbyID(endpointId).subscribe(resp=>{
+      this.endpoint = resp;
+    })
 }
+  
+
+}
+function newEventEmitter<T>() {
+  throw new Error('Function not implemented.');
+}
+

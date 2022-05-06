@@ -29,3 +29,9 @@ mat-panel-title{
     color: black;
     font-weight:lighter
 }
+
+p:hover{
+    text-decoration:underline;
+    text-decoration-color: black;
+    cursor: pointer;   
+}
