@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Output, EventEmitter } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Api } from 'src/app/models/apis';
 import { AuthService } from 'src/app/services/auth.service';
@@ -29,10 +30,18 @@ export class ListViewComponent implements OnInit {
     // this.getToken();
   }
   refreshApis(){
-    this.service.getAllApis().subscribe(resp=>{
-      this.ApiList = resp;
+    // this.service.getAllApis().subscribe(resp=>{
+    //   this.ApiList = resp;
+      console.log("child apiList: ");
+      console.log(this.ApiList);
       this.dataSource = new MatTableDataSource<Api>(this.ApiList);
-    });
+    // });
+  }
+
+  ngOnChanges(){
+    console.log("onChanges apiList: ");
+    console.log(this.ApiList);
+    this.dataSource = new MatTableDataSource<Api>(this.ApiList);
   }
 
   getToken(){
@@ -56,5 +65,6 @@ export class ListViewComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+    console.log(this.dataSource);
   }
 }
