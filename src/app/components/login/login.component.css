@@ -74,4 +74,32 @@
 .mat-raised-button {
   border-color: rgb(244, 244, 244);
   background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.align{
+  align-items: center;
+  justify-content: center; 
+  margin: 0 auto 10px auto;
+}
+
+h2{
+  font-family: 'Montserrat';
+font-style: normal;
+font-weight: 700;
+font-size: 40px;
+line-height: 61px;
+
+color: #FF7E36;
+}
+
+h4{
+  font-family: 'Montserrat';
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 29px;
+color: #B6B6B6;
 }

@@ -1,5 +1,6 @@
 <body>
-<app-navbar ></app-navbar>
+  <app-navbar ></app-navbar>
+
 <div class="sidebar"><app-endpoint-sidebar></app-endpoint-sidebar></div>
 <div class="detailContent">
 <h1 class="nombre">{{nombreApi}}</h1>
@@ -13,7 +14,7 @@
     <tr>
         <th>{{mType}}</th>
         <th>{{path}}</th>
-        <th> Last response: {{lastResp}}</th>
+        <th> Last response: <span>{{lastResp}}</span></th>
         <th> 2 days ago</th>
       </tr>
 </table>
