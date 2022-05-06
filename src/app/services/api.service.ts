@@ -40,7 +40,7 @@ export class ApiService {
       );
   }
 
-  getAPIsByCategory(categoryID:any){
+  getAPIsByCategory(categoryID: number){
     return this.httpclient.get<any>(this.APIURL+'/categories/'+ categoryID,{headers: new HttpHeaders({
       'Content-Type': 'application/json', 'access-token':this.token}
       )}

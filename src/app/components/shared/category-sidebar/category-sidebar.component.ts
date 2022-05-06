@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
+import { Api } from 'src/app/models/apis';
 import { Category } from 'src/app/models/category';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
@@ -16,14 +17,16 @@ export class CategorySidebarComponent implements OnInit, AfterViewInit {
   sidenav!: MatSidenav;
   constructor(private service:ApiService, private observer: BreakpointObserver) {}
 
+  apiList:Api[] = [];
+  //categoryID: number;
   CategoryList: Category[] =[];
   fixedCategories: Category[] = [
     {
-        id: -1,
+        categoryID: -1,
         name: 'All',
     },
     {
-        id: -2,
+        categoryID: -2,
         name: 'Other',
     }];
 
@@ -46,11 +49,18 @@ export class CategorySidebarComponent implements OnInit, AfterViewInit {
       });
   }
 
-  // posts : BlogPostCard[] = this.cardComponent.posts;
   refreshCategories(){
     this.service.getAllCategories().subscribe(data=>{
       this.CategoryList = data;
       console.log(this.CategoryList);
     })
   }
+
+  refreshCategoriesFiltered(categoryID: number){
+    this.service.getAPIsByCategory(categoryID).subscribe(data=>{
+      this.apiList = data;
+      console.log(this.apiList);
+    })
+  }
+
 }

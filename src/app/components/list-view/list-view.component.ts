@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Api } from 'src/app/models/apis';
 import { AuthService } from 'src/app/services/auth.service';
@@ -19,7 +19,7 @@ export class ListViewComponent implements OnInit {
 
   constructor(private service:ApiService, private aserv:AuthService, private router: Router) { }
   message?:AuthResponse;
-  ApiList:Api[] = [];
+  @Input() ApiList:Api[] = [];
 
   columnsToDisplay = ['Name', 'Description']
   ngOnInit(): void {

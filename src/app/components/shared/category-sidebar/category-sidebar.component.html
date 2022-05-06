@@ -21,6 +21,7 @@
         <a md-button routerLink="">
           <li
             *ngFor = "let category of CategoryList"
+            (click)="refreshCategoriesFiltered(category.categoryID)"
             class = "list-group-item list-group-item-action" 
           >
             {{category.name}}
@@ -36,7 +37,7 @@
     </mat-sidenav>
     <mat-sidenav-content>
       <div>
-        <app-list-view></app-list-view>
+        <app-list-view [ApiList]="apiList"></app-list-view>
       </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
