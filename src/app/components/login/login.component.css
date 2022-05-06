@@ -86,20 +86,20 @@
 }
 
 h2{
-  font-family: 'Montserrat';
+  /* font-family: 'Montserrat'; */
 font-style: normal;
 font-weight: 700;
-font-size: 40px;
-line-height: 61px;
+font-size: 35px;
+line-height: 50px;
 
 color: #FF7E36;
 }
 
-h4{
-  font-family: 'Montserrat';
+h3{
+  /* font-family: 'Montserrat'; */
 font-style: normal;
 font-weight: 500;
-font-size: 18px;
-line-height: 29px;
+font-size: 15px;
+line-height: 20px;
 color: #B6B6B6;
 }
