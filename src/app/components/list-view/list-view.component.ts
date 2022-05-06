@@ -4,6 +4,7 @@ import { Api } from 'src/app/models/apis';
 import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
 
 export interface AuthResponse {
   mensaje: string;
@@ -20,6 +21,7 @@ export class ListViewComponent implements OnInit {
   constructor(private service:ApiService, private aserv:AuthService, private router: Router) { }
   message?:AuthResponse;
   ApiList:Api[] = [];
+  dataSource = new MatTableDataSource<Api>(this.ApiList);
 
   columnsToDisplay = ['Name', 'Description']
   ngOnInit(): void {
@@ -44,5 +46,13 @@ export class ListViewComponent implements OnInit {
     let route = '/api/detail';
     this.router.navigate([route], { queryParams: { id: api.apiID } });
     console.log(api.apiID)
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

@@ -1,4 +1,8 @@
-
+<div class="">
+    <mat-form-field appearance="standard">
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input class="searchBar">
+    </mat-form-field>
+  </div>
 <table mat-table [dataSource]="ApiList">
     <ng-container matColumnDef="Name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
