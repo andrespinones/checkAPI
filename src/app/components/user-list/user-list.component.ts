@@ -41,18 +41,11 @@ export class UserListComponent implements AfterViewInit  {
 
 
 var userArray = [
-  {name: "Pablo", email: "example@gmail.com", role: true},
-  {name: "Daniela", email: "example@gmail.com", role: false},
-  {name: "Andres", email: "example@gmail.com", role: true},
-  {name: "Jorge", email: "example@gmail.com", role: true},
-  {name: "Pablo", email: "example@gmail.com", role: false},
-  {name: "Daniela", email: "example@gmail.com", role: false},
-  {name: "Andres", email: "example@gmail.com", role: true},
-  {name: "Andres", email: "example@gmail.com", role: false},
-  {name: "Jorge", email: "example@gmail.com", role: true},
-  {name: "Pablo", email: "example@gmail.com", role: false},
-  {name: "Daniela", email: "example@gmail.com", role: true},
-  {name: "Andres", email: "example@hotmail.com", role: false},
+  {name: "Andrés Piñones Besnier", email: "A01570150@tec.mx", role: true},
+  {name: "José Pablo Cruz Ramos", email: "A01138740@tec.mx", role: false},
+  {name: "Daniela Tamez Lucio", email: "A01197468@tec.mx", role: true},
+  {name: "Jorge Luis Ayala Hernández", email: "A00828633@tec.mx", role: true},
+  {name: "Lucas Eduardo Idígoras", email: "A00827751@tec.mx", role: false},
 ];
 
 
