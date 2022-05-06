@@ -21,7 +21,7 @@ export class ListViewComponent implements OnInit {
   constructor(private service:ApiService, private aserv:AuthService, private router: Router) { }
   message?:AuthResponse;
   ApiList:Api[] = [];
-  dataSource = new MatTableDataSource<Api>(this.ApiList);
+  dataSource!: MatTableDataSource<any>;
 
   columnsToDisplay = ['Name', 'Description']
   ngOnInit(): void {
@@ -31,7 +31,7 @@ export class ListViewComponent implements OnInit {
   refreshApis(){
     this.service.getAllApis().subscribe(resp=>{
       this.ApiList = resp;
-      console.log(this.ApiList)
+      this.dataSource = new MatTableDataSource<Api>(this.ApiList);
     });
   }
 
@@ -47,6 +47,8 @@ export class ListViewComponent implements OnInit {
     this.router.navigate([route], { queryParams: { id: api.apiID } });
     console.log(api.apiID)
   }
+
+  
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
