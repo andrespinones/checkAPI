@@ -40,4 +40,11 @@ export class ApiService {
       );
   }
 
+  getAPIsByCategory(categoryID:any){
+    return this.httpclient.get<any>(this.APIURL+'/categories/'+ categoryID,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+      )}
+      );
+  }
+
 }

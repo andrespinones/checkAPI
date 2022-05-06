@@ -52,4 +52,5 @@ mat-sidenav-container {
 }
 .list-group-item:not([disabled]):hover {
     background-color: rgba(158, 158, 158, 0.2);
+    color: #de4e37;
 }
