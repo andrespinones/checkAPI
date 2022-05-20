@@ -7,10 +7,14 @@ import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 
-export interface AuthResponse {
-  mensaje: string;
-  token:   string;
+
+export interface AuthResponseData{
+  email: string;
+  token: string;
+  role: string;
+  apiKey: string;
 }
+
 
 @Component({
   selector: 'app-list-view',
@@ -20,14 +24,14 @@ export interface AuthResponse {
 export class ListViewComponent implements OnInit {
 
   constructor(private service:ApiService, private aserv:AuthService, private router: Router) { }
-  message?:AuthResponse;
+  message?:AuthResponseData;
   dataSource!: MatTableDataSource<any>;
   @Input() ApiList:Api[] = [];
 
   columnsToDisplay = ['Name', 'Description']
   ngOnInit(): void {
     this.refreshApis();
-    // this.getToken();
+    //this.getToken();
   }
   refreshApis(){
     // this.service.getAllApis().subscribe(resp=>{
@@ -42,13 +46,6 @@ export class ListViewComponent implements OnInit {
     console.log("onChanges apiList: ");
     console.log(this.ApiList);
     this.dataSource = new MatTableDataSource<Api>(this.ApiList);
-  }
-
-  getToken(){
-    this.aserv.getToken().subscribe(data=>{
-      this.message = data;
-      console.log(this.message?.token);
-    })
   }
 
   apiDetailRedirect(api: Api){

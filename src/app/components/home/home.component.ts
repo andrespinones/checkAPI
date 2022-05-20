@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { Profile } from 'src/app/models/profile';
-import { AzureAdDemoService } from 'src/app/azure-ad-demo.service';
+import { AzureAdDemoService } from 'src/app/services/azure-ad-demo.service';
 
 @Component({
   selector: 'app-home',
@@ -15,16 +15,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     // this.getProfile();
-    // this.getToken();
   }
 
   getProfile(){
     this.azureService.getUserProfile().subscribe(profileInfo =>{
       this.profile = profileInfo;
     })
-  }
-
-  getToken(){
   }
 
 }
