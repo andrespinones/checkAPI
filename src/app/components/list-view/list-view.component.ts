@@ -6,6 +6,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+
 
 
 export interface AuthResponseData{
@@ -28,7 +31,7 @@ export class ListViewComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   @Input() ApiList:Api[] = [];
 
-  columnsToDisplay = ['Name', 'Description']
+  columnsToDisplay = ['isFavorite','Name', 'Description']
   ngOnInit(): void {
     this.refreshApis();
     //this.getToken();
