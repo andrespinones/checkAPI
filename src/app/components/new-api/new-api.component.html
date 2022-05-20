@@ -4,8 +4,26 @@
     <div class="example-container" >
 
         <form >
-            <input class="searchInput"  placeholder="API's Name" aria-label="Search">
-            <input class="searchInput input2"  placeholder="Describe your API" aria-label="Search">
+
+            <mat-form-field class="searchInput" appearance="outline">
+                <mat-label>API's Name</mat-label>
+                <input type="text" matInput [formControl]="nombreFormControl" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="nombreFormControl.hasError('required')">
+                  Name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Description</mat-label>
+                <input type="text" matInput [formControl]="descFormControl" [errorStateMatcher]="matcher" placeholder="Describe your API">
+                <mat-error *ngIf="descFormControl.hasError('required')">
+                  Description is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+
+
+            <!-- <input class="searchInput"  placeholder="API's Name" aria-label="Search"> -->
+            <!-- <input class="searchInput input2"  placeholder="Describe your API" aria-label="Search"> -->
             
         </form>
 
@@ -21,9 +39,22 @@
                 </mat-select>
               </mat-form-field>
     
-              <input class="searchInput input2"  placeholder="Base URL" aria-label="Search">
-    
-
+              <!-- <form class="example-form"> -->
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Base URL</mat-label>
+                  <input type="url" matInput [formControl]="urlFormControl" [errorStateMatcher]="matcher">
+                  
+                  <!--
+                      Lo que este error hace es marcar cunado se ingresa algo que no es un email 
+                      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                    Please enter a valid URL
+                  </mat-error> -->
+                  <!-- sale este error cuando no se pone nada en el input -->
+                  <mat-error *ngIf="urlFormControl.hasError('required')">
+                    Base URL is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              <!-- </form> -->    
         </form>
 
         <p>The creator of this API will be - <span class="highlight">{{user}}</span></p>
@@ -39,14 +70,14 @@
 
 
         <div class="buttons">
+            <a mat-button class="button button1" routerLink="addEndpoint">
+                Add API
+            </a>
             <button class="button button1">Cancel</button>
-            <button class="button button2">Add Api</button>
+            <button class="button button2" >Add Api</button>
 
         </div>
 
     </div>
-      
 
-
-      
 </body>

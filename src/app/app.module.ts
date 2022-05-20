@@ -28,6 +28,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CardComponent } from './components/card/card.component';
 import { DetailedComponent } from './components/detailed/detailed.component';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatInputModule} from '@angular/material/input';
 
 //Navbar
 import { MatMenuModule } from '@angular/material/menu';
@@ -43,6 +44,8 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { NewApiComponent } from './components/new-api/new-api.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { GroupsComponent } from './components/groups/groups.component';
+import { NewEndpointComponent } from './components/new-endpoint/new-endpoint.component';
 
 
 @NgModule({
@@ -55,7 +58,9 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     NavbarComponent,
     CardComponent,
     DetailedComponent,
-    NewApiComponent
+    NewApiComponent,
+    GroupsComponent,
+    NewEndpointComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +76,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     ReactiveFormsModule,
     MatSelectModule,
     MatButtonToggleModule,
+    MatInputModule,
     // MatSidenavContainer,
     MatListModule,
     MatSidenavModule,

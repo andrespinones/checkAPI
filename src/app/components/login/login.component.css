@@ -75,3 +75,26 @@
   border-color: rgb(244, 244, 244);
   background-color: white;
 }
+
+h2{
+  /* font-family: 'Montserrat'; */
+font-style: normal;
+font-weight: 700;
+font-size: 35px;
+line-height: 50px;
+
+color: #FF7E36;
+}
+
+h3{
+  /* font-family: 'Montserrat'; */
+font-style: normal;
+font-weight: 500;
+font-size: 15px;
+line-height: 20px;
+color: #B6B6B6;
+}
+
+.success{
+  color: #49CC90;
+}

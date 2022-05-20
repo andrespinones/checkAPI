@@ -97,3 +97,17 @@ body{
     .example-full-width {
       width: 60%;
     }
+
+    .separador{
+        text-transform: uppercase;
+        text-decoration: underline;
+        letter-spacing: 2px;
+        font-weight: 500;
+      }
+
+    .smallDropdown{
+        width: 22%;
+    }
+    .smallDesc{
+        width: 42%;
+    }
