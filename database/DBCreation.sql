@@ -181,8 +181,17 @@ INSERT INTO Endpoint (respCodeID, apiID, groupID, methodType, path, endpointDesc
 		(1, 3, 1, 'GET', '/movie/{movie_id}/release_dates', 'Get the release date along with the certification for a movie.', 1,1),
 		(1, 3, 2, 'GET', '/genre/movie/list', 'Get the list of official genres for movies.', 1,1),
 		(1, 7, 3, 'GET', '/berry/{id or name}/', 'Berries are small fruits that can provide HP and status condition', 1,2),
-		(1, 7, 4, 'GET', '/contest-type/{id or name}/', 'Contest types are categories judges used to weigh a Pokémon condition in Pokémon contests. ', 1,2)
+		(1, 7, 4, 'GET', '/contest-type/{id or name}/', 'Contest types are categories judges used to weigh a Pokémon condition in Pokémon contests. ', 1,2);
 
+
+-- Inserar usuarios 
+INSERT INTO [checkAPI].[dbo].[Users] (email, firstName, lastNme, role)
+    VALUES
+        ('A01570150@tec.mx', 'Andres', 'Piñones', 'Admin'),
+        ('A01138740@tec.mx', 'Jose', 'Pablo', 'Admin'),
+        ('A01197468@tec.mx', 'Daniela', 'Tamez', 'User'),
+        ('A00828633@tec.mx', 'Jorge', 'Ayala', 'Admin'),
+        ('A00827751@tec.mx', 'Lucas', 'Idigoras', 'User');  
 
 -- -- DROP TABLE Users;
 -- -- DROP TABLE Category;

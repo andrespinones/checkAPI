@@ -5,7 +5,7 @@ import { Api } from '../models/apis';
 import { Category } from '../models/category';
 import { PopupUtils } from '@azure/msal-browser';
 import { Endpoint } from '../models/endpoint';
-
+import { User } from '../components/user-list/user.module';
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +55,13 @@ export class ApiService {
 
   getAPIsByCategory(categoryID: number): Observable<Api[]>{
     return this.httpclient.get<Api[]>(this.APIURL+'/categories/'+ categoryID,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+      )}
+      );
+  }
+
+  getAllUsers(){
+    return this.httpclient.get<User[]>(this.APIURL+'/users',{headers: new HttpHeaders({
       'Content-Type': 'application/json', 'access-token':this.token}
       )}
       );

@@ -1,6 +1,8 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { OnBehalfOfClient } from '@azure/msal-common';
+import { ApiService } from 'src/app/services/api.service';
 import { User } from './user.module';
 
 
@@ -10,25 +12,43 @@ import { User } from './user.module';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
-export class UserListComponent implements AfterViewInit  {
-
+export class UserListComponent implements OnInit{
   userArray: User[] = [];
-  columnsToDisplay = ['Name', 'Email', "Role"];
+  columnsToDisplay = ['Name','Email', "Role"];
+  dataSource!: MatTableDataSource<User>;
 
-  
+  constructor(private service:ApiService){}
+
+
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
-  
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-  }
 
-  dataSource = new MatTableDataSource<User>(userArray);
- 
+  ngOnInit():void{
+    this.getUsers();
+  }
+  
+  ngOnChanges(): void {
+    this.getUsers();
+  }
 
   toggleRole(user:User){
-     user.role = !user.role
+     if(user.role == "Admin"){
+       user.role = "User";
+     }
+     else{
+       user.role = "Admin"
+     }
   }
+
+  checkRole(user:User) : boolean{
+    if(user.role == "User"){;
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -37,16 +57,19 @@ export class UserListComponent implements AfterViewInit  {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  getUsers(){
+    this.service.getAllUsers().subscribe(data=>{
+      this.userArray = data;
+      this.dataSource = new MatTableDataSource<User>(this.userArray);
+      console.log(this.userArray);
+    })
+  }
 }
 
 
-var userArray = [
-  {name: "Andrés Piñones Besnier", email: "A01570150@tec.mx", role: true},
-  {name: "José Pablo Cruz Ramos", email: "A01138740@tec.mx", role: false},
-  {name: "Daniela Tamez Lucio", email: "A01197468@tec.mx", role: true},
-  {name: "Jorge Luis Ayala Hernández", email: "A00828633@tec.mx", role: true},
-  {name: "Lucas Eduardo Idígoras", email: "A00827751@tec.mx", role: false},
-];
+
+
 
 
 
