@@ -7,6 +7,7 @@ import { AzureAdDemoService } from 'src/app/services/azure-ad-demo.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { Profile } from 'src/app/models/profile';
+import { AuthResponseData } from 'src/app/auth-response-data';
 
 
 @Component({
@@ -16,7 +17,8 @@ import { Profile } from 'src/app/models/profile';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   isUserLoggedIn: boolean = false;
-  profile?:Profile
+  response?: AuthResponseData;
+  profile?:Profile;
   private readonly _destroy=new Subject<void>();
 
   constructor(@Inject(MSAL_GUARD_CONFIG) private msalGuardConfig:MsalGuardConfiguration,
@@ -37,8 +39,9 @@ export class LoginComponent implements OnInit, OnDestroy {
           //que el usuario de azure active directory exista en la base de datos, si SI, mandar el token y redireccionar
             this.azureAdDemoSerice.getUserProfile().subscribe(profileInfo =>{
             this.profile = profileInfo;
-            this.aService.silentLogin(this.profile.mail);
+            this.silentLogin(this.profile.mail)
             })
+            //checar donde se debe hacer el redirect
           this.router.navigateByUrl('home')
         }
       })
@@ -60,9 +63,19 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.authService.loginPopup();
     }
   }
-
+  
   logout()
   {
     this.authService.logoutRedirect({postLogoutRedirectUri:environment.postLogoutUrl});
+    localStorage.clear();
   }
+
+  silentLogin(email:string){
+    this.aService.silentLogin(email).subscribe(resp => {
+      this.response = resp;
+      this.aService.handleUser(this.response)
+    })
+  }
+
 }
+

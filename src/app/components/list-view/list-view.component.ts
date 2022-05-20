@@ -8,12 +8,7 @@ import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 
 
-export interface AuthResponseData{
-  email: string;
-  token: string;
-  role: string;
-  apiKey: string;
-}
+
 
 
 @Component({
@@ -24,7 +19,6 @@ export interface AuthResponseData{
 export class ListViewComponent implements OnInit {
 
   constructor(private service:ApiService, private aserv:AuthService, private router: Router) { }
-  message?:AuthResponseData;
   dataSource!: MatTableDataSource<any>;
   @Input() ApiList:Api[] = [];
 

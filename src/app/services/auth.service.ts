@@ -1,18 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders, HttpBackend} from '@angular/common/http'
-import { Observable } from 'rxjs'
+import { BehaviorSubject, Observable } from 'rxjs'
 import { Api } from '../models/apis';
 import { PopupUtils } from '@azure/msal-browser';
+import { AnyForUntypedForms } from '@angular/forms';
+import { User } from '../models/user';
+import { AuthResponseData } from '../auth-response-data';
 
-export interface AuthResponseData{
-  email: string;
-  token: string;
-  role: string;
-  apiKey: string;
-}
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' 
 })
 export class AuthService {
   private httpclient: HttpClient;
@@ -25,13 +22,22 @@ export class AuthService {
   //valores hardcodeados del endpoint y el token solo para pruebas^^
 
   silentLogin(email:string){
-    console.log('flag');
-    console.log(email);
     return this.httpclient.post<AuthResponseData>(this.APIUrl+'/auth',{ email:email});
   }
 
-  handleUser(){
-    
+  handleUser(response:AuthResponseData){
+    console.log(response.email)
+    //meter el objeto dentro de un key 
+    const user = new User(
+      response.email,
+      response.token,
+      response.role,
+      //en caso de que usemos un token que expira 
+      response.expirationDate,
+      //para cuando agreguemos las apiKeys de cada API o algo por el estilo
+      response.apiKey
+    );
+    localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
 }
