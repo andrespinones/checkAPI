@@ -191,7 +191,7 @@ INSERT INTO [checkAPI].[dbo].[Users] (email, firstName, lastNme, role)
         ('A01138740@tec.mx', 'Jose', 'Pablo', 'Admin'),
         ('A01197468@tec.mx', 'Daniela', 'Tamez', 'User'),
         ('A00828633@tec.mx', 'Jorge', 'Ayala', 'Admin'),
-        ('A00827751@tec.mx', 'Lucas', 'Idigoras', 'User');
+        ('A00827751@tec.mx', 'Lucas', 'Idigoras', 'User');  
 
 -- -- DROP TABLE Users;
 -- -- DROP TABLE Category;
