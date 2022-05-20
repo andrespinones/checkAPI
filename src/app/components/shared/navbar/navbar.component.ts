@@ -3,7 +3,7 @@ import { MsalBroadcastService, MsalGuardConfiguration, MsalService, MSAL_GUARD_C
 import { InteractionStatus, RedirectRequest } from '@azure/msal-browser';
 import { filter, Subject, takeUntil } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { AzureAdDemoService } from 'src/app/azure-ad-demo.service';
+import { AzureAdDemoService } from 'src/app/services/azure-ad-demo.service';
 import { Profile } from 'src/app/models/profile';
 import { ApiService } from 'src/app/services/api.service';
 import { Api } from 'src/app/models/apis';

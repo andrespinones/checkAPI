@@ -13,7 +13,7 @@ import {
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 import { Authority } from '@azure/msal-common';
 //MSAL Services
-import { AzureAdDemoService } from './azure-ad-demo.service';
+import { AzureAdDemoService } from './services/azure-ad-demo.service';
 //Components Imports
 import { AppComponent } from './app.component';
 import { ListViewComponent } from './components/list-view/list-view.component';
