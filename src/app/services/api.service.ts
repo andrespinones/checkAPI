@@ -5,7 +5,7 @@ import { Api } from '../models/apis';
 import { Category } from '../models/category';
 import { PopupUtils } from '@azure/msal-browser';
 import { Endpoint } from '../models/endpoint';
-import { User } from '../components/user-list/user.module';
+import { Client } from '../components/user-list/client.module';
 
 @Injectable({
   providedIn: 'root'
@@ -61,10 +61,16 @@ export class ApiService {
   }
 
   getAllUsers(){
-    return this.httpclient.get<User[]>(this.APIURL+'/users',{headers: new HttpHeaders({
+    return this.httpclient.get<Client[]>(this.APIURL+'/users',{headers: new HttpHeaders({
       'Content-Type': 'application/json', 'access-token':this.token}
       )}
       );
   }
 
+  updateUserRole(userID: number){
+    return this.httpclient.get<Client[]>(this.APIURL+'/users/' + userID,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+      )}
+      );
+  }
 }

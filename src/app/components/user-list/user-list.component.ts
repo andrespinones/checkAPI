@@ -3,8 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { OnBehalfOfClient } from '@azure/msal-common';
 import { ApiService } from 'src/app/services/api.service';
-import { User } from './user.module';
-
+import {Client} from 'src/app/components/user-list/client.module'
 
 
 @Component({
@@ -13,9 +12,9 @@ import { User } from './user.module';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit{
-  userArray: User[] = [];
+  userArray: Client[] = [];
   columnsToDisplay = ['Name','Email', "Role"];
-  dataSource!: MatTableDataSource<User>;
+  dataSource!: MatTableDataSource<Client>;
 
   constructor(private service:ApiService){}
 
@@ -31,7 +30,7 @@ export class UserListComponent implements OnInit{
     this.getUsers();
   }
 
-  toggleRole(user:User){
+  toggleRole(user:Client){
      if(user.role == "Admin"){
        user.role = "User";
      }
@@ -40,7 +39,7 @@ export class UserListComponent implements OnInit{
      }
   }
 
-  checkRole(user:User) : boolean{
+  checkRole(user:Client) : boolean{
     if(user.role == "User"){;
       return true;
     }
@@ -61,7 +60,7 @@ export class UserListComponent implements OnInit{
   getUsers(){
     this.service.getAllUsers().subscribe(data=>{
       this.userArray = data;
-      this.dataSource = new MatTableDataSource<User>(this.userArray);
+      this.dataSource = new MatTableDataSource<Client>(this.userArray);
       console.log(this.userArray);
     })
   }
