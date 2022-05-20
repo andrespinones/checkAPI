@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders, HttpBackend} from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { Api } from '../models/apis';
-import { PopupUtils } from '@azure/msal-browser';
 
 export interface AuthResponseData{
   email: string;
