@@ -38,3 +38,23 @@ td.mat-cell:last-child {
   text-overflow: ellipsis;
   padding-right: 25px;
 }
+.mat-column-isFavorite{
+  overflow: hidden;
+  white-space: nowrap; 
+  text-overflow: ellipsis;
+  padding-right: 25px;
+}
+.mat-column-Name{
+  overflow: hidden;
+  white-space: nowrap; 
+  text-overflow: ellipsis;
+  padding-right: 25px;
+}
+
+.true{
+  color: #FF5C00;
+}
+
+.false{
+  color: #D7D7D7;
+}

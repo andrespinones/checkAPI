@@ -3,7 +3,8 @@ export class User {
         public email: string,
         public _token: string, 
         private role: number,
-        private expirationDate: Date
+        private expirationDate: Date,
+        private apiKey:string
     ){}
 
     get token()

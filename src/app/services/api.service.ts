@@ -20,8 +20,8 @@ export class ApiService {
   //valores hardcodeados del endpoint y el token solo para pruebas
   readonly token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGVjayI6dHJ1ZSwiaWF0IjoxNjUxMjA2NjQ0fQ.TJgprpw4KKdJ6wVku9uecwfMhQFNaucvF2uBgr6Lr6I'
   //valores hardcodeados del endpoint y el token solo para pruebas^^
-  getAllApis(): Observable<Api[]>{
-    return this.httpclient.get<Api[]>(this.APIURL+'/apis',{headers: new HttpHeaders({
+  getAllApis(): Observable<Api[]>{ //must have userID: any as parameter
+    return this.httpclient.get<Api[]>(this.APIURL+'/apis/' + 2,{headers: new HttpHeaders({ //hardcodeado
       'Content-Type': 'application/json', 'access-token':this.token}
       )}
     );

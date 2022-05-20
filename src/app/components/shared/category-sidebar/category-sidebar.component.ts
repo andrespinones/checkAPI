@@ -19,15 +19,17 @@ export class CategorySidebarComponent implements OnInit, AfterViewInit {
 
   apiList:Api[] = [];
   //categoryID: number;
-  CategoryList: Category[] =[];
+  CategoryList: Category[] = [];
   fixedCategories: Category[] = [
     {
         categoryID: -1,
         name: 'All',
+        APIcount: 0,
     },
     {
         categoryID: -2,
         name: 'Other',
+        APIcount: 0,
     }];
 
   ngOnInit(): void {
