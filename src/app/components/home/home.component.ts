@@ -14,7 +14,9 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getProfile();
+    //prueba de que si se puede mandar a llamar al localstorage desde cualquier componente con su key
+    const a = localStorage.getItem('currentUser');
+    console.log(a);
   }
 
   getProfile(){
