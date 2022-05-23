@@ -3,7 +3,6 @@ import { HttpClient,HttpHeaders, HttpBackend} from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { Api } from '../models/apis';
 import { Category } from '../models/category';
-import { PopupUtils } from '@azure/msal-browser';
 import { Endpoint } from '../models/endpoint';
 
 
