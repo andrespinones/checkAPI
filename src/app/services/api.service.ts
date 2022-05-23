@@ -68,13 +68,13 @@ export class ApiService {
       );
   }
 
-  updateUserRole(userID: number){
-    return this.httpclient.get<Client[]>(this.APIURL+'/users/' + userID,{headers: new HttpHeaders({
+  updateUserRole(val: any){
+    return this.httpclient.put<Client[]>(this.APIURL+'/userUpdate' , val,{headers: new HttpHeaders({
       'Content-Type': 'application/json', 'access-token':this.token}
       )}
       );
   }
-  
+
   addFavorite(favorite:Favorite):Observable<Favorite>{
     return this.httpclient.post<Favorite>(this.APIURL+'/favorite', favorite,{headers: new HttpHeaders({
       'Content-Type': 'application/json', 'access-token':this.token}

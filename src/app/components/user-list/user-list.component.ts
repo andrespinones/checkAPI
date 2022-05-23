@@ -18,6 +18,14 @@ export class UserListComponent implements OnInit{
 
   constructor(private service:ApiService){}
 
+  cliente: Client = {
+    userID: 0,
+    email:  "",
+    firstName: "",
+    lastNme: "",
+    role: ""
+  }
+
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -33,9 +41,15 @@ export class UserListComponent implements OnInit{
   toggleRole(user:Client){
      if(user.role == "Admin"){
        user.role = "User";
+       this.cliente.role = "User";
+       this.cliente.email = user.email
+       this.updateUserRole()
      }
      else{
-       user.role = "Admin"
+       user.role = "Admin";
+       this.cliente.role = "Admin"
+       this.cliente.email = user.email
+       this.updateUserRole()
      }
   }
 
@@ -63,6 +77,20 @@ export class UserListComponent implements OnInit{
       this.dataSource = new MatTableDataSource<Client>(this.userArray);
       console.log(this.userArray);
     })
+  }
+
+  updateUserRole(){
+    var datosCliente = {
+    userID: this.cliente.userID,
+    email:  this.cliente.email,
+    firstName: this.cliente.firstName,
+    lastNme: this.cliente.lastNme,
+    role: this.cliente.role
+    }
+    this.service.updateUserRole(datosCliente).subscribe(data=>{
+
+    })
+
   }
 }
 
