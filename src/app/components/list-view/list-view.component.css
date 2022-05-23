@@ -32,12 +32,6 @@ td.mat-cell:last-child {
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
 }
-.mat-column-name{
-  overflow: hidden;
-  white-space: nowrap; /* Don't forget this one */
-  text-overflow: ellipsis;
-  padding-right: 25px;
-}
 .mat-column-isFavorite{
   overflow: hidden;
   white-space: nowrap; 
@@ -49,6 +43,13 @@ td.mat-cell:last-child {
   white-space: nowrap; 
   text-overflow: ellipsis;
   padding-right: 25px;
+}
+.mat-column-Description{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
 .true{

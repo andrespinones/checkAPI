@@ -27,7 +27,7 @@
 --     endpointID INT NOT NULL PRIMARY KEY IDENTITY(1,1),
 --     respCodeID INT,
 --     apiID INT,
---     paramID INT NOT NULL DEFAULT 1,
+--     -- -- paramID INT NOT NULL DEFAULT 1,
 --     groupID INT,
 --     methodType VARCHAR(6) NOT NULL,
 --     path VARCHAR(64) NOT NULL,
@@ -38,7 +38,8 @@
 
 -- CREATE TABLE Groups (
 --     groupID INT NOT NULL PRIMARY KEY IDENTITY(1,1),
---     name VARCHAR(30) NOT NULL
+--     name VARCHAR(30) NOT NULL,
+--     apiID INT
 -- );
 
 -- CREATE TABLE ResponseCode (
@@ -69,6 +70,11 @@
 --     userID INT
 -- );
 
+-- CREATE TABLE ParametersEndpoints (
+--     paramsEndsID INT NOT NULL PRIMARY KEY IDENTITY,
+--     paramID INT,
+--     endpointID INT
+-- );
 
 -- -- FOREIGN KEYS ADDITION
 -- ALTER TABLE dbo.CategoryAPI
@@ -84,18 +90,16 @@
 --     ADD CONSTRAINT FK_api_endpoint FOREIGN KEY (apiID)
 --         REFERENCES dbo.API (apiID)
 -- ;
--- ALTER TABLE dbo.Endpoint
---     ADD CONSTRAINT FK_parameter_endpoint FOREIGN KEY (paramID)
---         REFERENCES dbo.Parameter (paramID)
--- ;
 
 -- ALTER TABLE dbo.Endpoint
 --     ADD CONSTRAINT FK_group_endpoint FOREIGN KEY (groupID)
 --         REFERENCES dbo.Groups (groupID)
 -- ;
---  ALTER TABLE Groups
---  	ADD apiID INT
---  	REFERENCES API(apiID);
+
+-- ALTER TABLE dbo.Groups
+--     ADD CONSTRAINT FK_api_groups FOREIGN KEY (apiID)
+--         REFERENCES dbo.API (apiID)
+-- ;
 
 -- ALTER TABLE dbo.Favorites
 --     ADD CONSTRAINT FK_api_Favorites FOREIGN KEY (apiID)
@@ -104,6 +108,16 @@
 --     ADD CONSTRAINT FK_user_Favorites FOREIGN KEY (userID)
 --         REFERENCES dbo.Users (userID)
 
+
+-- ALTER TABLE dbo.ParametersEndpoints
+--     ADD CONSTRAINT FK_parameter_paramsEnds FOREIGN KEY (paramID)
+--         REFERENCES dbo.Parameter (paramID)
+-- ;
+
+-- ALTER TABLE dbo.ParametersEndpoints
+--     ADD CONSTRAINT FK_endpoint_paramsEnds FOREIGN KEY (endpointID)
+--         REFERENCES dbo.Endpoint (endpointID)
+-- ;
 
 -- INSERT INTO Category (name)
 --   VALUES
@@ -160,16 +174,14 @@
 -- 		('encounters', 7)
 
 
-
-
 -- -- FIRST ENDPOINT
 -- INSERT INTO Parameter (dataType, paramName, isRequired, paramDescription)
 --     VALUES
 --     ('integer', 'movie_id', 1, 'Pass an identifier for the movie'),
---      ('integer', 'id', 1, 'Identifier for this resource'),
---      ('integer', 'appeal', 1, 'The base number of hearts'),
---      ('integer', 'jam', 1, 'The base number of oponents'),
---      ('integer', 'order', 1, 'A good value for sorting');
+--     ('integer', 'id', 1, 'Identifier for this resource'),
+--     ('integer', 'appeal', 1, 'The base number of hearts'),
+--     ('integer', 'jam', 1, 'The base number of oponents'),
+--     ('integer', 'order', 1, 'A good value for sorting');
 
 
 -- INSERT INTO ResponseCode(respDescription, number)
@@ -178,26 +190,38 @@
 --     ('Invalid API key: You must be granted a valid key.', 401),
 --     ('The resource you requested could not be found.', 404);
 
--- INSERT INTO Endpoint(respCodeID, apiID, groupID, methodType, path, endpointDescription, status, paramID)
+-- INSERT INTO Endpoint(respCodeID, apiID, groupID, methodType, path, endpointDescription, status)
 --     VALUES
---     (1, 3, 1, 'GET', '/movie/{movie_id}', 'Get the primary information about a movie.', 1,1);
--- INSERT INTO Endpoint(respCodeID, apiID, groupID, methodType, path, endpointDescription, status,paramID)
---     VALUES (1, 3, 1, 'GET', '/movie/top_rated', 'Get the top rated movies on TMDB.', 1,1);
+--     (1, 3, 1, 'GET', '/movie/{movie_id}', 'Get the primary information about a movie.', 1);
+-- INSERT INTO Endpoint(respCodeID, apiID, groupID, methodType, path, endpointDescription, status)
+--     VALUES (1, 3, 1, 'GET', '/movie/top_rated', 'Get the top rated movies on TMDB.', 1);
 
--- INSERT INTO Endpoint (respCodeID, apiID, groupID, methodType, path, endpointDescription, status,paramID)
+-- INSERT INTO Endpoint (respCodeID, apiID, groupID, methodType, path, endpointDescription, status)
 --     VALUES
---         (1, 3, 1, 'GET', '/movie/{popular}', 'Get a list of the current popular movies on TMDB.', 1,1),
---         (1, 3, 1, 'GET', '/movie/{movie_id}/similar', 'Get a list of similar movies.', 1,1),
--- 		(1, 3, 1, 'POST', '/movie/{movie_id}/rating', 'Rate a movie.', 1,1),
--- 		(1, 3, 1, 'GET', '/movie/latest', 'Get the most newly created movie.', 1,1),
--- 		(1, 3, 1, 'GET', '/movie/{movie_id}/release_dates', 'Get the release date along with the certification for a movie.', 1,1),
--- 		(1, 3, 2, 'GET', '/genre/movie/list', 'Get the list of official genres for movies.', 1,1),
--- 		(1, 7, 3, 'GET', '/berry/{id or name}/', 'Berries are small fruits that can provide HP and status condition', 1,2),
--- 		(1, 7, 4, 'GET', '/contest-type/{id or name}/', 'Contest types are categories judges used to weigh a Pokémon condition in Pokémon contests. ', 1,2);
+--         (1, 3, 1, 'GET', '/movie/{popular}', 'Get a list of the current popular movies on TMDB.', 1),
+--         (1, 3, 1, 'GET', '/movie/{movie_id}/similar', 'Get a list of similar movies.', 1),
+-- 		(1, 3, 1, 'POST', '/movie/{movie_id}/rating', 'Rate a movie.', 1),
+-- 		(1, 3, 1, 'GET', '/movie/latest', 'Get the most newly created movie.', 1),
+-- 		(1, 3, 1, 'GET', '/movie/{movie_id}/release_dates', 'Get the release date along with the certification for a movie.', 1),
+-- 		(1, 3, 2, 'GET', '/genre/movie/list', 'Get the list of official genres for movies.', 1),
+-- 		(1, 7, 3, 'GET', '/berry/{id or name}/', 'Berries are small fruits that can provide HP and status condition', 1),
+-- 		(1, 7, 4, 'GET', '/contest-type/{id or name}/', 'Contest types are categories judges used to weigh a Pokémon condition in Pokémon contests. ', 1);
 
+-- INSERT INTO ParametersEndpoints (endpointID, paramID)
+--     VALUES
+--     (1, 1),
+--     (2, 1),
+--     (3, 1),
+--     (4, 1),
+--     (5, 1),
+--     (6, 1),
+--     (7, 1),
+--     (8, 1),
+--     (9, 2),
+--     (10, 2);
 
 -- -- Insertar usuarios 
--- INSERT INTO [dbo].[Users] (email, firstName, lastNme, role)
+-- INSERT INTO [dbo].[Users] (email, firstName, lastName, role)
 --     VALUES
 --         ('A01570150@tec.mx', 'Andres', 'Piñones', 'Admin'),
 --         ('A01138740@tec.mx', 'Pablo', 'Cruz', 'Admin'),

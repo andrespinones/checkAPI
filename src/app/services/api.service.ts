@@ -3,8 +3,10 @@ import { HttpClient,HttpHeaders, HttpBackend} from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { Api } from '../models/apis';
 import { Category } from '../models/category';
+/* import { PopupUtils } from '@azure/msal-browser'; */
 import { Endpoint } from '../models/endpoint';
 import { Client } from '../models/client';
+import { Favorite } from '../models/favorite';
 
 @Injectable({
   providedIn: 'root'
@@ -71,5 +73,19 @@ export class ApiService {
       'Content-Type': 'application/json', 'access-token':this.token}
       )}
       );
+  }
+
+  addFavorite(favorite:Favorite):Observable<Favorite>{
+    return this.httpclient.post<Favorite>(this.APIURL+'/favorite', favorite,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+    )}
+    );
+  }
+  //servicio delete revisar formato body 
+  deleteFavorite(favorite:Favorite){
+    return this.httpclient.delete(this.APIURL+'/favorite', {"body": favorite, headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+    )}
+    );
   }
 }
