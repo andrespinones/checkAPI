@@ -4,7 +4,7 @@ import { Observable } from 'rxjs'
 import { Api } from '../models/apis';
 import { Category } from '../models/category';
 import { Endpoint } from '../models/endpoint';
-import { Client } from '../components/user-list/client.module';
+import { Client } from '../models/client';
 
 @Injectable({
   providedIn: 'root'

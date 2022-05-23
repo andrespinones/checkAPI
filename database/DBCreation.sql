@@ -200,7 +200,7 @@
 -- INSERT INTO [dbo].[Users] (email, firstName, lastNme, role)
 --     VALUES
 --         ('A01570150@tec.mx', 'Andres', 'Piñones', 'Admin'),
---         ('A01138740@tec.mx', 'Jose', 'Pablo', 'Admin'),
+--         ('A01138740@tec.mx', 'Pablo', 'Cruz', 'Admin'),
 --         ('A01197468@tec.mx', 'Daniela', 'Tamez', 'User'),
 --         ('A00828633@tec.mx', 'Jorge', 'Ayala', 'Admin'),
 --         ('A00827751@tec.mx', 'Lucas', 'Idigoras', 'User');
