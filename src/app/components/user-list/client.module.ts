@@ -1,6 +1,7 @@
-export interface Client{
-    email: string;
-    firstName: string;
-    lastNme: string;
-    role: string;
+export class Client{
+    userID?: number;
+    email?: string;
+    firstName?: string;
+    lastNme?: string;
+    role?: string;
   }

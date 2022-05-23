@@ -3,7 +3,6 @@ import { HttpClient,HttpHeaders, HttpBackend} from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { Api } from '../models/apis';
 import { Category } from '../models/category';
-import { PopupUtils } from '@azure/msal-browser';
 import { Endpoint } from '../models/endpoint';
 import { Client } from '../components/user-list/client.module';
 
@@ -67,8 +66,8 @@ export class ApiService {
       );
   }
 
-  updateUserRole(userID: number){
-    return this.httpclient.get<Client[]>(this.APIURL+'/users/' + userID,{headers: new HttpHeaders({
+  updateUserRole(val: any){
+    return this.httpclient.put<Client[]>(this.APIURL+'/userUpdate' , val,{headers: new HttpHeaders({
       'Content-Type': 'application/json', 'access-token':this.token}
       )}
       );
