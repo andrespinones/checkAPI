@@ -54,3 +54,6 @@ mat-sidenav-container {
     background-color: rgba(158, 158, 158, 0.2);
     color: #de4e37;
 }
+.APIcount{
+    color: gray;
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Profile } from 'src/app/models/profile';
 import { AzureAdDemoService } from 'src/app/services/azure-ad-demo.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-home',
@@ -9,14 +10,15 @@ import { AzureAdDemoService } from 'src/app/services/azure-ad-demo.service';
 })
 export class HomeComponent implements OnInit {
   profile?:Profile
+  user = localStorage.getItem('currentUser');
+  currentUser?: User;
   constructor(private azureService: AzureAdDemoService) { 
-
   }
 
   ngOnInit(): void {
     //prueba de que si se puede mandar a llamar al localstorage desde cualquier componente con su key
-    const a = localStorage.getItem('currentUser');
-    console.log(a);
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+
   }
 
   getProfile(){
@@ -26,3 +28,4 @@ export class HomeComponent implements OnInit {
   }
 
 }
+

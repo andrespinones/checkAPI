@@ -32,9 +32,30 @@ td.mat-cell:last-child {
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
 }
-.mat-column-name{
+.mat-column-isFavorite{
   overflow: hidden;
-  white-space: nowrap; /* Don't forget this one */
+  white-space: nowrap; 
   text-overflow: ellipsis;
   padding-right: 25px;
+}
+.mat-column-Name{
+  overflow: hidden;
+  white-space: nowrap; 
+  text-overflow: ellipsis;
+  padding-right: 25px;
+}
+.mat-column-Description{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.true{
+  color: #FF5C00;
+}
+
+.false{
+  color: #D7D7D7;
 }

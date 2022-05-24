@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { User } from './user.module';
-
+import { OnBehalfOfClient } from '@azure/msal-common';
+import { ApiService } from 'src/app/services/api.service';
+import {Client} from 'src/app/components/user-list/client.module'
 
 
 @Component({
@@ -10,25 +11,57 @@ import { User } from './user.module';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
-export class UserListComponent implements AfterViewInit  {
+export class UserListComponent implements OnInit{
+  userArray: Client[] = [];
+  columnsToDisplay = ['Name','Email', "Role"];
+  dataSource!: MatTableDataSource<Client>;
 
-  userArray: User[] = [];
-  columnsToDisplay = ['Name', 'Email', "Role"];
+  constructor(private service:ApiService){}
 
-  
+  cliente: Client = {
+    userID: 0,
+    email:  "",
+    firstName: "",
+    lastNme: "",
+    role: ""
+  }
+
+
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
+
+  ngOnInit():void{
+    this.getUsers();
+  }
   
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
+  ngOnChanges(): void {
+    this.getUsers();
   }
 
-  dataSource = new MatTableDataSource<User>(userArray);
- 
-
-  toggleRole(user:User){
-     user.role = !user.role
+  toggleRole(user:Client){
+     if(user.role == "Admin"){
+       user.role = "User";
+       this.cliente.role = "User";
+       this.cliente.email = user.email
+       this.updateUserRole()
+     }
+     else{
+       user.role = "Admin";
+       this.cliente.role = "Admin"
+       this.cliente.email = user.email
+       this.updateUserRole()
+     }
   }
+
+  checkRole(user:Client) : boolean{
+    if(user.role == "User"){;
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -37,16 +70,33 @@ export class UserListComponent implements AfterViewInit  {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  getUsers(){
+    this.service.getAllUsers().subscribe(data=>{
+      this.userArray = data;
+      this.dataSource = new MatTableDataSource<Client>(this.userArray);
+      console.log(this.userArray);
+    })
+  }
+
+  updateUserRole(){
+    var datosCliente = {
+    userID: this.cliente.userID,
+    email:  this.cliente.email,
+    firstName: this.cliente.firstName,
+    lastNme: this.cliente.lastNme,
+    role: this.cliente.role
+    }
+    this.service.updateUserRole(datosCliente).subscribe(data=>{
+
+    })
+
+  }
 }
 
 
-var userArray = [
-  {name: "Andrés Piñones Besnier", email: "A01570150@tec.mx", role: true},
-  {name: "José Pablo Cruz Ramos", email: "A01138740@tec.mx", role: false},
-  {name: "Daniela Tamez Lucio", email: "A01197468@tec.mx", role: true},
-  {name: "Jorge Luis Ayala Hernández", email: "A00828633@tec.mx", role: true},
-  {name: "Lucas Eduardo Idígoras", email: "A00827751@tec.mx", role: false},
-];
+
+
 
 
 

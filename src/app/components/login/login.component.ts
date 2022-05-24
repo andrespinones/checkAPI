@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.silentLogin(this.profile.mail)
             })
             //checar donde se debe hacer el redirect
-          this.router.navigateByUrl('home')
         }
       })
   }

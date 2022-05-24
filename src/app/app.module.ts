@@ -29,16 +29,22 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatInputModule} from '@angular/material/input';
 
 //Navbar
 import { MatMenuModule } from '@angular/material/menu';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatTableModule } from "@angular/material/table";
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatSelectModule} from '@angular/material/select';
+
 // import { MatSidenavContainer } from '@angular/material/sidenav';
 import { CategorySidebarComponent } from './components/shared/category-sidebar/category-sidebar.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
+import { NewApiComponent } from './components/new-api/new-api.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 // userList imports
 import { UserListComponent } from './components/user-list/user-list.component';
@@ -47,8 +53,8 @@ import { EndpointSidebarComponent } from './components/endpoint-sidebar/endpoint
 
 
 //search bar functionality in user list table
-import { FormsModule } from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
+import { GroupsComponent } from './components/groups/groups.component';
+import { NewEndpointComponent } from './components/new-endpoint/new-endpoint.component';
 
 
 @NgModule({
@@ -63,7 +69,10 @@ import {MatInputModule} from '@angular/material/input';
     DetailedComponent,
     CardComponent,
     UserListComponent,
-    EndpointSidebarComponent
+    EndpointSidebarComponent,
+    NewApiComponent,
+    GroupsComponent,
+    NewEndpointComponent
   ],
   imports: [
     BrowserModule,
@@ -75,6 +84,12 @@ import {MatInputModule} from '@angular/material/input';
     MatCardModule,
     MatIconModule,
     MatMenuModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    MatButtonToggleModule,
+    MatInputModule,
+    // MatSidenavContainer,
     MatListModule,
     MatSidenavModule,
     MatDividerModule,
@@ -83,6 +98,7 @@ import {MatInputModule} from '@angular/material/input';
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     MatFormFieldModule,
+  
     MsalModule.forRoot(new PublicClientApplication
       (
         {
@@ -118,11 +134,16 @@ import {MatInputModule} from '@angular/material/input';
     FormsModule,
     MatInputModule
   ],
-  providers: [CardComponent,{
+  providers: [
+
+    CardComponent,{
     provide:HTTP_INTERCEPTORS,
     useClass:MsalInterceptor,
     multi:true
+    
   },MsalGuard,AzureAdDemoService],
   bootstrap: [AppComponent,MsalRedirectComponent]
 })
 export class AppModule { }
+
+

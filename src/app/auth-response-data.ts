@@ -4,4 +4,5 @@ export interface AuthResponseData {
     role:string;
     expirationDate:Date;
     apiKey: string;
+    userID:number;
 }
