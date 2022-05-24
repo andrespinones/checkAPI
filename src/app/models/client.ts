@@ -4,4 +4,4 @@ export class Client{
     firstName?: string;
     lastNme?: string;
     role?: string;
-  }
+}

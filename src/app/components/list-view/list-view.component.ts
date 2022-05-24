@@ -11,16 +11,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { Favorite } from 'src/app/models/favorite';
 import { NgClass } from '@angular/common';
 import { style } from '@angular/animations';
-
-
-
-export interface AuthResponseData{
-  email: string;
-  token: string;
-  role: string;
-  apiKey: string;
-}
-
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-list-view',
@@ -28,13 +19,11 @@ export interface AuthResponseData{
   styleUrls: ['./list-view.component.css']
 })
 export class ListViewComponent implements OnInit {
-
+  currentUser?:User;
   constructor(private service:ApiService, private aserv:AuthService, private router: Router) { }
-  message?:AuthResponseData;
   dataSource!: MatTableDataSource<any>;
   @Input() ApiList:Api[] = [];
   favorite?:Favorite;
-
   api:Api = {
     apiID:         0,
     name:          "",
@@ -44,6 +33,7 @@ export class ListViewComponent implements OnInit {
   }
   columnsToDisplay = ['isFavorite','Name', 'Description']
   ngOnInit(): void {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     this.refreshApis();
     //this.getToken();
   }
@@ -80,9 +70,10 @@ export class ListViewComponent implements OnInit {
   }
 
   modifyFav(api:Api){ 
+    let id = this.currentUser!.userID;
     this.favorite = {
       apiID : api.apiID,
-      userID : 2 //hardcoded por ahora (userID debe ser del usuario)
+      userID : id  //hardcoded por ahora (userID debe ser del usuario)
     }
     if(api.isFavorite == false){
       this.service.addFavorite(this.favorite).subscribe(data=>{});
