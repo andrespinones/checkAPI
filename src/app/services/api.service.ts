@@ -4,7 +4,7 @@ import { Observable } from 'rxjs'
 import { Api } from '../models/apis';
 import { Category } from '../models/category';
 import { Endpoint } from '../models/endpoint';
-import { Client } from '../components/user-list/client.module';
+import { Client } from '../models/client';
 import { Favorite } from '../models/favorite';
 import { User } from '../models/user.model';
 
@@ -56,8 +56,8 @@ export class ApiService {
       );
   }
 
-  getAPIsByCategory(categoryID: number): Observable<Api[]>{
-    return this.httpclient.get<Api[]>(this.APIURL+'/categories/'+ categoryID,{headers: new HttpHeaders({
+  getAPIsByCategory(categoryID: number): Observable<Api[]>{ //must have userID: any as a parameter
+    return this.httpclient.get<Api[]>(this.APIURL+'/categories/'+ categoryID + '/user/' + 2,{headers: new HttpHeaders({ //el usuario está harcodeado
       'Content-Type': 'application/json', 'access-token':this.token}
       )}
       );

@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { OnBehalfOfClient } from '@azure/msal-common';
 import { ApiService } from 'src/app/services/api.service';
-import {Client} from 'src/app/components/user-list/client.module'
+import { Client } from 'src/app/models/client';
 
 
 @Component({
