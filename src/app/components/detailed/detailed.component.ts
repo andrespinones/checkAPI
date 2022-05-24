@@ -18,25 +18,6 @@ export class DetailedComponent  implements OnInit{
   getOutputEndpoint(selected:Endpoint[]){
       this.receivedEndpoint = selected;
   }
-  // tagName = "pet";
-  // mType = "get";
-  // path = "/pet/{petID}"
-  // epDesc ="Returns a single pet";
-  lastResp = 200;
-
-  // /* Parametros del endPoint */
-  // paramType = "integer($int64)";
-  // paramName = "petID";
-  // isRequired = true;
-  // paramDescription = "Id of pet to return";
-  
-  
-  // //Response Codes
-
-  // respCode: RespCode;
-  // respCodes: RespCode[];
-
-  // //json de respuesta 
   pet: Pet;
 
   pets: Pet[];
@@ -53,17 +34,6 @@ export class DetailedComponent  implements OnInit{
       }
     ];
 
-    // this.respCode = { num: 200, description: "Successful Operation" };
-    // this.respCodes = [
-    //   {
-    //     num: 400,
-    //     description: "Successful Operation" 
-    //   },
-    //   {
-    //   num: 500,
-    //     description: "Successful Operation" 
-    //   }
-    // ];
   }
   ngOnInit(): void {
     const id = this.route.snapshot.queryParamMap.get('id');
