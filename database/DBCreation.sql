@@ -1,5 +1,5 @@
 
--- CREATE DATABASE checkAPI;
+-- -- CREATE DATABASE checkAPI;
 
 -- CREATE TABLE Category (
 --   categoryID INT NOT NULL PRIMARY KEY IDENTITY(1,1),
@@ -26,7 +26,7 @@
 -- CREATE TABLE Endpoint (
 --     endpointID INT NOT NULL PRIMARY KEY IDENTITY(1,1),
 --     respCodeID INT,
---     apiID INT,
+--     -- apiID INT,
 --     -- -- paramID INT NOT NULL DEFAULT 1,
 --     groupID INT,
 --     methodType VARCHAR(6) NOT NULL,
@@ -86,10 +86,10 @@
 --         REFERENCES dbo.API (apiID)
 -- ;
 
--- ALTER TABLE dbo.Endpoint
---     ADD CONSTRAINT FK_api_endpoint FOREIGN KEY (apiID)
---         REFERENCES dbo.API (apiID)
--- ;
+-- -- ALTER TABLE dbo.Endpoint
+-- --     ADD CONSTRAINT FK_api_endpoint FOREIGN KEY (apiID)
+-- --         REFERENCES dbo.API (apiID)
+-- -- ;
 
 -- ALTER TABLE dbo.Endpoint
 --     ADD CONSTRAINT FK_group_endpoint FOREIGN KEY (groupID)
@@ -190,22 +190,22 @@
 --     ('Invalid API key: You must be granted a valid key.', 401),
 --     ('The resource you requested could not be found.', 404);
 
--- INSERT INTO Endpoint(respCodeID, apiID, groupID, methodType, path, endpointDescription, status)
+-- INSERT INTO Endpoint(respCodeID, groupID, methodType, path, endpointDescription, status)
 --     VALUES
---     (1, 3, 1, 'GET', '/movie/{movie_id}', 'Get the primary information about a movie.', 1);
--- INSERT INTO Endpoint(respCodeID, apiID, groupID, methodType, path, endpointDescription, status)
---     VALUES (1, 3, 1, 'GET', '/movie/top_rated', 'Get the top rated movies on TMDB.', 1);
+--     (1, 1, 'GET', '/movie/{movie_id}', 'Get the primary information about a movie.', 1);
+-- INSERT INTO Endpoint(respCodeID, groupID, methodType, path, endpointDescription, status)
+--     VALUES (1, 1, 'GET', '/movie/top_rated', 'Get the top rated movies on TMDB.', 1);
 
--- INSERT INTO Endpoint (respCodeID, apiID, groupID, methodType, path, endpointDescription, status)
+-- INSERT INTO Endpoint (respCodeID, groupID, methodType, path, endpointDescription, status)
 --     VALUES
---         (1, 3, 1, 'GET', '/movie/{popular}', 'Get a list of the current popular movies on TMDB.', 1),
---         (1, 3, 1, 'GET', '/movie/{movie_id}/similar', 'Get a list of similar movies.', 1),
--- 		(1, 3, 1, 'POST', '/movie/{movie_id}/rating', 'Rate a movie.', 1),
--- 		(1, 3, 1, 'GET', '/movie/latest', 'Get the most newly created movie.', 1),
--- 		(1, 3, 1, 'GET', '/movie/{movie_id}/release_dates', 'Get the release date along with the certification for a movie.', 1),
--- 		(1, 3, 2, 'GET', '/genre/movie/list', 'Get the list of official genres for movies.', 1),
--- 		(1, 7, 3, 'GET', '/berry/{id or name}/', 'Berries are small fruits that can provide HP and status condition', 1),
--- 		(1, 7, 4, 'GET', '/contest-type/{id or name}/', 'Contest types are categories judges used to weigh a Pokémon condition in Pokémon contests. ', 1);
+--         (1, 1, 'GET', '/movie/{popular}', 'Get a list of the current popular movies on TMDB.', 1),
+--         (1, 1, 'GET', '/movie/{movie_id}/similar', 'Get a list of similar movies.', 1),
+-- 		(1, 1, 'POST', '/movie/{movie_id}/rating', 'Rate a movie.', 1),
+-- 		(1, 1, 'GET', '/movie/latest', 'Get the most newly created movie.', 1),
+-- 		(1, 1, 'GET', '/movie/{movie_id}/release_dates', 'Get the release date along with the certification for a movie.', 1),
+-- 		(1, 2, 'GET', '/genre/movie/list', 'Get the list of official genres for movies.', 1),
+-- 		(1, 3, 'GET', '/berry/{id or name}/', 'Berries are small fruits that can provide HP and status condition', 1),
+-- 		(1, 4, 'GET', '/contest-type/{id or name}/', 'Contest types are categories judges used to weigh a Pokémon condition in Pokémon contests. ', 1);
 
 -- INSERT INTO ParametersEndpoints (endpointID, paramID)
 --     VALUES
