@@ -43,14 +43,14 @@ export class ApiService {
       )}
       );
   }
-  getApibyID(apiID:any){
-    return this.httpclient.get<any>(this.APIURL+'/api/'+ apiID,{headers: new HttpHeaders({
+  getApibyID(apiID:number){
+    return this.httpclient.get<Api[]>(this.APIURL+'/api/'+ apiID,{headers: new HttpHeaders({
       'Content-Type': 'application/json', 'access-token':this.token}
       )}
       );
   }
-  getEndpointbyID(endpointID:any){
-    return this.httpclient.get<Endpoint>(this.APIURL+'/endpoint/'+ endpointID,{headers: new HttpHeaders({
+  getEndpointbyID(endpointID:number){
+    return this.httpclient.get<Endpoint[]>(this.APIURL+'/endpoint/'+ endpointID,{headers: new HttpHeaders({
       'Content-Type': 'application/json', 'access-token':this.token}
       )}
       );

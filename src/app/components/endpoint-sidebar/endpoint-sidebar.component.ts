@@ -10,9 +10,9 @@ import { Endpoint } from 'src/app/models/endpoint';
   styleUrls: ['./endpoint-sidebar.component.css']
 })
 export class EndpointSidebarComponent implements OnInit {
-  @Output() outputToParent = new EventEmitter<Endpoint>();
+  @Output() outputToParent = new EventEmitter<Endpoint[]>();
   constructor(private service:ApiService, private route: ActivatedRoute) { }
-  endpoint:Endpoint = {} as Endpoint;
+  endpoint!:Endpoint[];
   testList:any[]=[];
   grouped: { [key: string]: endpointSidebar[] } = {};
   apiID: any;

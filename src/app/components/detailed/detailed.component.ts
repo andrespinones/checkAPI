@@ -12,15 +12,12 @@ import { Api } from 'src/app/models/apis';
 })
 
 export class DetailedComponent  implements OnInit{
-  receivedEndpoint: any = {} as Endpoint;
-  apiData:any
-  apiID:any
-  getOutputEndpoint(selected:Endpoint){
+  receivedEndpoint!:Endpoint[];
+  apiData!:Api[];
+  apiID:any;
+  getOutputEndpoint(selected:Endpoint[]){
       this.receivedEndpoint = selected;
   }
-
-  nombreApi = "Petstore";
-  baseURL = "https://petstore.checapi.io/v2";
   // tagName = "pet";
   // mType = "get";
   // path = "/pet/{petID}"
