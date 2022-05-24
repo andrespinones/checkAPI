@@ -2,12 +2,10 @@
     <a md-button >
         <!-- pasa por todos los grupos de una api y los despliega como lista en la sidebar -->
         <li
-            *ngFor = "let group of Groups"
-            (click)="refreshCategoriesFiltered(group.groupID)"
+            *ngFor="let group of grouped | keyvalue"
             class = "list-group-item list-group-item-action"
           >
-          <!-- falta el GROUPS en el serivcio (ts) -o sea el back- -->
-            {{group.name}}
+            {{group.key}}
           </li>
     </a>
 </ul>

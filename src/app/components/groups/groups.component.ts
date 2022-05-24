@@ -12,7 +12,7 @@ import { endpointSidebar } from 'src/app/models/endpointSidebar';
   styleUrls: ['./groups.component.css']
 })
 
-export class GroupsComponent  {
+export class GroupsComponent  implements OnInit{
   @Output() outputToParent = new EventEmitter<Endpoint>();
   constructor(private service:ApiService, private route: ActivatedRoute) { }
   endpoint:Endpoint = {} as Endpoint;
