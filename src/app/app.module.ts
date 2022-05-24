@@ -46,6 +46,7 @@ import { NewApiComponent } from './components/new-api/new-api.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { GroupsComponent } from './components/groups/groups.component';
 import { NewEndpointComponent } from './components/new-endpoint/new-endpoint.component';
+import { EndpointListComponent } from './components/endpoint-list/endpoint-list.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { NewEndpointComponent } from './components/new-endpoint/new-endpoint.com
     DetailedComponent,
     NewApiComponent,
     GroupsComponent,
-    NewEndpointComponent
+    NewEndpointComponent,
+    EndpointListComponent
   ],
   imports: [
     BrowserModule,

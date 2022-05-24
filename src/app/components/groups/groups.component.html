@@ -1,3 +1,20 @@
+<ul class = "list-group">
+    <a md-button >
+        <!-- pasa por todos los grupos de una api y los despliega como lista en la sidebar -->
+        <li
+            *ngFor = "let group of Groups"
+            (click)="refreshCategoriesFiltered(group.groupID)"
+            class = "list-group-item list-group-item-action"
+          >
+          <!-- falta el GROUPS en el serivcio (ts) -o sea el back- -->
+            {{group.name}}
+          </li>
+    </a>
+</ul>
+
+
+
+
 <!-- <mat-accordion>
     <mat-expansion-panel class="mat-elevation-z0"  *ngFor="let group of grouped | keyvalue">
         <mat-expansion-panel-header>
