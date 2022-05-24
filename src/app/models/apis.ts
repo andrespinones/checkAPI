@@ -3,4 +3,5 @@ export interface Api {
     name:          string;
     baseUrl:       string;
     description:    string;
+    isFavorite:    boolean; //BY USER
 }

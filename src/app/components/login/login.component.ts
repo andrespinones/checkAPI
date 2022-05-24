@@ -3,7 +3,11 @@ import { MsalBroadcastService, MsalGuardConfiguration, MsalService, MSAL_GUARD_C
 import { InteractionStatus, RedirectRequest } from '@azure/msal-browser';
 import { filter, Subject, takeUntil } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { AzureAdDemoService } from 'src/app/azure-ad-demo.service';
+import { AzureAdDemoService } from 'src/app/services/azure-ad-demo.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { Profile } from 'src/app/models/profile';
+
 
 @Component({
   selector: 'app-login',
@@ -12,11 +16,12 @@ import { AzureAdDemoService } from 'src/app/azure-ad-demo.service';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   isUserLoggedIn: boolean = false;
+  profile?:Profile
   private readonly _destroy=new Subject<void>();
 
   constructor(@Inject(MSAL_GUARD_CONFIG) private msalGuardConfig:MsalGuardConfiguration,
   private msalBroadCastService:MsalBroadcastService,
-  private authService:MsalService,private azureAdDemoSerice:AzureAdDemoService) { }
+  private authService:MsalService, private azureAdDemoSerice:AzureAdDemoService,private router:Router, private aService:AuthService) { }
 
   ngOnInit(): void {
     this.msalBroadCastService.inProgress$.pipe
@@ -27,6 +32,15 @@ export class LoginComponent implements OnInit, OnDestroy {
       {
         this.isUserLoggedIn=this.authService.instance.getAllAccounts().length>0
         this.azureAdDemoSerice.isUserLoggedIn.next(this.isUserLoggedIn);
+        if(this.isUserLoggedIn){
+          //comparar servicio de auth con servicio de azure auth 
+          //que el usuario de azure active directory exista en la base de datos, si SI, mandar el token y redireccionar
+            this.azureAdDemoSerice.getUserProfile().subscribe(profileInfo =>{
+            this.profile = profileInfo;
+            this.aService.silentLogin(this.profile.mail);
+            })
+          this.router.navigateByUrl('home')
+        }
       })
   }
 
@@ -39,11 +53,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   {
     if(this.msalGuardConfig.authRequest)
     {
-      this.authService.loginRedirect({...this.msalGuardConfig.authRequest} as RedirectRequest)
+      this.authService.loginPopup({...this.msalGuardConfig.authRequest} as RedirectRequest)
     }
     else
     {
-      this.authService.loginRedirect();
+      this.authService.loginPopup();
     }
   }
 

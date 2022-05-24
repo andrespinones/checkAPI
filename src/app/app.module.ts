@@ -13,11 +13,13 @@ import {
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 import { Authority } from '@azure/msal-common';
 //MSAL Services
-import { AzureAdDemoService } from './azure-ad-demo.service';
+import { AzureAdDemoService } from './services/azure-ad-demo.service';
 //Components Imports
 import { AppComponent } from './app.component';
 import { ListViewComponent } from './components/list-view/list-view.component';
 import { LoginComponent } from './components/login/login.component';
+import { CardComponent } from './components/card/card.component';
+import { DetailedComponent } from './components/detailed/detailed.component';
 //Material Imports
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
@@ -25,8 +27,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { CardComponent } from './components/card/card.component';
-import { DetailedComponent } from './components/detailed/detailed.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatExpansionModule} from '@angular/material/expansion';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatInputModule} from '@angular/material/input';
 
@@ -44,6 +46,13 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { NewApiComponent } from './components/new-api/new-api.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+// userList imports
+import { UserListComponent } from './components/user-list/user-list.component';
+import { EndpointSidebarComponent } from './components/endpoint-sidebar/endpoint-sidebar.component';
+//primeng imports ()
+
+
+//search bar functionality in user list table
 import { GroupsComponent } from './components/groups/groups.component';
 import { NewEndpointComponent } from './components/new-endpoint/new-endpoint.component';
 import { EndpointListComponent } from './components/endpoint-list/endpoint-list.component';
@@ -59,6 +68,9 @@ import { EndpointListComponent } from './components/endpoint-list/endpoint-list.
     NavbarComponent,
     CardComponent,
     DetailedComponent,
+    CardComponent,
+    UserListComponent,
+    EndpointSidebarComponent,
     NewApiComponent,
     GroupsComponent,
     NewEndpointComponent,
@@ -84,6 +96,7 @@ import { EndpointListComponent } from './components/endpoint-list/endpoint-list.
     MatSidenavModule,
     MatDividerModule,
     MatTableModule,
+    MatExpansionModule,
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     MatFormFieldModule,
@@ -93,7 +106,7 @@ import { EndpointListComponent } from './components/endpoint-list/endpoint-list.
         {
           auth:{
             clientId:'6756abad-ec34-4f13-8292-bb2ccda843b4',
-            redirectUri:'http://localhost:4200/home',
+            redirectUri:'http://localhost:4200',
             authority:'https://login.microsoftonline.com/c65a3ea6-0f7c-400b-8934-5a6dc1705645'
           },
           cache:
@@ -119,7 +132,9 @@ import { EndpointListComponent } from './components/endpoint-list/endpoint-list.
         )
       }
       ),
-    BrowserAnimationsModule
+    MatPaginatorModule,
+    FormsModule,
+    MatInputModule
   ],
   providers: [
 

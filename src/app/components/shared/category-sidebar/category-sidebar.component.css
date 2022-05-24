@@ -45,3 +45,15 @@ mat-sidenav-container {
     height: calc(100vh - 65px);
     background: #F2EEE9;
 }
+
+.list-group-item{
+    background-color: transparent;
+    border: none;
+}
+.list-group-item:not([disabled]):hover {
+    background-color: rgba(158, 158, 158, 0.2);
+    color: #de4e37;
+}
+.APIcount{
+    color: gray;
+}

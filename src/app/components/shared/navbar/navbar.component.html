@@ -1,6 +1,6 @@
 <div class="app-toolbar">
 <mat-toolbar color="" class="mat-elevation-z3">
-  <a mat-button routerLink="home">
+  <a mat-button [routerLink]="['/home']">
       <img
         src="./assets/images/logo.png"
         height="45"
@@ -23,10 +23,9 @@
 
   <!-- Dropdown de información del usuario -->
   <mat-menu #appMenu="matMenu">
-      <p mat-menu-item disabled class="fontB"  >Alan Lopez</p>
-      <p mat-menu-item disabled class="fontC"  >alan.lpz</p>
-      <p mat-menu-item disabled class="fontC">lopezalan@gmail.com</p>
-      <button mat-menu-item>Log Out</button>
+      <p mat-menu-item disabled class="fontB">{{profile.displayName}}</p>
+      <p mat-menu-item disabled class="fontC">{{profile.mail}}</p>
+      <button mat-menu-item (click)="logout()" >Log Out</button>
     </mat-menu>
     <button mat-icon-button [matMenuTriggerFor]="appMenu">
       <mat-icon class="icon-display">account_circle</mat-icon>
