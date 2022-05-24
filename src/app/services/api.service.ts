@@ -5,7 +5,7 @@ import { Api } from '../models/apis';
 import { Category } from '../models/category';
 /* import { PopupUtils } from '@azure/msal-browser'; */
 import { Endpoint } from '../models/endpoint';
-import { Client } from '../components/user-list/client.module';
+import { Client } from '../models/client';
 import { Favorite } from '../models/favorite';
 
 @Injectable({
