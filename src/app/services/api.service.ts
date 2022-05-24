@@ -56,8 +56,8 @@ export class ApiService {
       );
   }
 
-  getAPIsByCategory(categoryID: number): Observable<Api[]>{ //must have userID: any as a parameter
-    return this.httpclient.get<Api[]>(this.APIURL+'/categories/'+ categoryID + '/user/' + 2,{headers: new HttpHeaders({ //el usuario está harcodeado
+  getAPIsByCategory(categoryID: number, userID:number): Observable<Api[]>{ //must have userID: any as a parameter
+    return this.httpclient.get<Api[]>(this.APIURL+'/categories/'+ categoryID + '/user/' + userID,{headers: new HttpHeaders({ //el usuario está harcodeado
       'Content-Type': 'application/json', 'access-token':this.token}
       )}
       );

@@ -5,6 +5,7 @@ import { Category } from 'src/app/models/category';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { delay } from 'rxjs/operators';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-category-sidebar',
@@ -18,6 +19,7 @@ export class CategorySidebarComponent implements OnInit, AfterViewInit {
   constructor(private service:ApiService, private observer: BreakpointObserver) {}
 
   apiList:Api[] = [];
+  currentUser!: User;
   //categoryID: number;
   CategoryList: Category[] = [];
   fixedCategories: Category[] = [
@@ -33,6 +35,7 @@ export class CategorySidebarComponent implements OnInit, AfterViewInit {
     }];
 
   ngOnInit(): void {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     this.refreshCategories();
     this.refreshApis();
   }
@@ -67,8 +70,8 @@ export class CategorySidebarComponent implements OnInit, AfterViewInit {
   }
 
   refreshCategoriesFiltered(categoryID: number){
-    console.log(categoryID);
-    this.service.getAPIsByCategory(categoryID).subscribe(data=>{
+    console.log(categoryID); 
+    this.service.getAPIsByCategory(categoryID,this.currentUser.userID).subscribe(data=>{
       this.apiList = data;
       console.log(this.apiList);
     })
