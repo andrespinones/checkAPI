@@ -18,12 +18,7 @@ export class DetailedComponent  implements OnInit{
   endpointID!:number;
   apiData!:Api[];
   apiID:any;
-  getOutputEndpointID(received:any){
-      this.endpointID=received;
-      this.getEndpointDetail(this.endpointID)
-  }
   pet: Pet;
-
   pets: Pet[];
 
   constructor(private service:ApiService, private route: ActivatedRoute) {
@@ -58,6 +53,10 @@ export class DetailedComponent  implements OnInit{
         this.service.getParamsbyEndpointID(endpointId).subscribe(resp=>{
           this.receivedParams = resp;
         })
+  }
+  getOutputEndpointID(received:any){
+    this.endpointID=received;
+    this.getEndpointDetail(this.endpointID)
   }
 }
 
