@@ -92,6 +92,22 @@ mat-sidenav-container {
     background-color: rgba(158, 158, 158, 0.2);
     color: #de4e37;
 }
-.APIcount{
-    color: gray;
+
+
+.button{
+    border: none;
+    color: white;
+    /* padding: 5px ; */
+    font-weight: 500;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 8px;
+    width: 150px;
+    height: 40px;
+    padding-top: 2px;
+    
 }
+
+.button1 {background-color: #B3B3B3;}
+.button2 {background-color: #FF7E36;}

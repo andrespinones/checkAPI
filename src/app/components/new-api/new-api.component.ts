@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { ApiService } from 'src/app/services/api.service';
+import { Api } from 'src/app/models/apis';
+import { Category } from 'src/app/models/category';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { MatSidenav } from '@angular/material/sidenav';
+import { delay } from 'rxjs/operators';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -16,8 +22,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./new-api.component.css']
 })
 
-export class NewApiComponent  {
-
+export class NewApiComponent implements OnInit {
 
   // required = no se puede ingresar un valor vacio, email - revisa que sea un email
   //se tiene que hacer un validator que revise qeu si exita la API 
@@ -27,28 +32,20 @@ export class NewApiComponent  {
 
   matcher = new MyErrorStateMatcher();
 
+  constructor(private service:ApiService, private observer: BreakpointObserver) {}
 
-  user = "Alan Lopez";
-  DROPDOWN_LIST: Category[];
+  CategoryList: Category[] = [];
 
-  constructor() {
-    this.DROPDOWN_LIST = [
-      {
-        name: "Economics"
-      },
-      {
-        name: "Sports"
-      },
-      {
-        name: "Entertainment"
-      }
-
-    ]
+  ngOnInit(): void {
+    this.refreshCategories();
   }
-   
-}
 
-export class Category{
-    name: string | undefined; 
-}
+  refreshCategories(){
+    this.service.getAllCategories().subscribe(data=>{
+      this.CategoryList = data;
+      console.log(this.CategoryList);
+    })
+  }
+  user = "Alan Lopez";
 
+}

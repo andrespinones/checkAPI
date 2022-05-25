@@ -33,7 +33,7 @@
             <mat-form-field appearance="outline" >
                 <mat-label>Select category</mat-label>
                 <mat-select>
-                    <mat-option *ngFor="let category of DROPDOWN_LIST" [value]="category.name">
+                    <mat-option *ngFor="let category of CategoryList" [value]="category.name">
                         {{category.name}}
                   </mat-option>
                 </mat-select>
@@ -70,7 +70,7 @@
 
 
         <div class="buttons">
-            <a mat-button class="button button1" routerLink="addEndpoint">
+            <a mat-button class="button button2" routerLink="/endpoints">
                 Add API
             </a>
             <button class="button button1">Cancel</button>

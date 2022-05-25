@@ -13,37 +13,52 @@ import { endpointSidebar } from 'src/app/models/endpointSidebar';
 })
 
 export class GroupsComponent  implements OnInit{
-  @Output() outputToParent = new EventEmitter<Endpoint>();
-  constructor(private service:ApiService, private route: ActivatedRoute) { }
-  endpoint:Endpoint = {} as Endpoint;
-  testList:any[]=[];
-  grouped: { [key: string]: endpointSidebar[] } = {};
-  apiID: any;
-  ngOnInit(): void {
-    const id = this.route.snapshot.queryParamMap.get('id');
-    this.apiID=id;
-    this.getGroups();
+
+
+  //lista sin info de la base de datos
+  DROPDOWN_LIST: string[];
+
+  constructor() {
+    this.DROPDOWN_LIST = [
+      "Pet", "Srtore", "User"
+    ]
   }
-  getGroups(){
-    this.service.getGroupsbyID(this.apiID).subscribe(resp=>{
-      this.testList = resp;
-      console.log(this.testList)
-      this.grouped = this.testList.reduce((group, current)=> {
-        //create your grouping key, by which you want to group the items
-        const groupingKey = `${current.name}`;
-        //if the group does not yet have an entry for this key, init it to empty array
-        group[groupingKey] = group[groupingKey] || [];
-        //add the current item to the group
-        group[groupingKey].push(current);
-        return group;
-        }, {} ) 
-    })
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
   }
 
-  getEndpointDetail(endpointId:number){
-    this.service.getEndpointbyID(endpointId).subscribe(resp=>{
-      this.endpoint = resp;
-      this.outputToParent.emit(this.endpoint)
-    })
-}
+
+  // @Output() outputToParent = new EventEmitter<Endpoint>();
+  // constructor(private service:ApiService, private route: ActivatedRoute) { }
+  // endpoint:Endpoint = {} as Endpoint;
+  // testList:any[]=[];
+  // grouped: { [key: string]: endpointSidebar[] } = {};
+  // apiID: any;
+  // ngOnInit(): void {
+  //   const id = this.route.snapshot.queryParamMap.get('id');
+  //   this.apiID=id;
+  //   this.getGroups();
+  // }
+  // getGroups(){
+  //   this.service.getGroupsbyID(this.apiID).subscribe(resp=>{
+  //     this.testList = resp;
+  //     console.log(this.testList)
+  //     this.grouped = this.testList.reduce((group, current)=> {
+  //       //create your grouping key, by which you want to group the items
+  //       const groupingKey = `${current.name}`;
+  //       //if the group does not yet have an entry for this key, init it to empty array
+  //       group[groupingKey] = group[groupingKey] || [];
+  //       //add the current item to the group
+  //       group[groupingKey].push(current);
+  //       return group;
+  //       }, {} ) 
+  //   })
+  // }
+
+  // getEndpointDetail(endpointId:number){
+  //   this.service.getEndpointbyID(endpointId).subscribe(resp=>{
+  //     this.endpoint = resp;
+  //     this.outputToParent.emit(this.endpoint)
+  //   })
+  // }
 }

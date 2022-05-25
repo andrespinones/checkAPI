@@ -9,12 +9,12 @@
 <p>Base URL: {{data.baseUrl}}</p>
 </span>
 <!-- <p><a href="{{baseURL}}">Base URL: {{baseURL}}</a></p> -->
-<h2 class="nombre">{{item.name}}</h2>
+<h2 class="nombre">{{item.name}}</h2>          
 
 <table class="info">
     <tr>
-        <th>{{item.methodType}}</th>
-        <th>{{item.path}}</th>
+        <th [ngClass]="{get: item.type == 'GET', post: item.type == 'POST', put: item.type == 'PUT', delete: item.type == 'DELETE'}">{{item.methodType}}</th>
+        <th [ngClass]="{get2: item.type == 'GET', post2: item.type == 'POST', put2: item.type == 'PUT', delete2: item.type == 'DELETE'}">{{item.path}}</th>
         <th> Last response: <span>{{lastResp}}</span></th>
         <th> 2 days ago</th>
       </tr>

@@ -1,3 +1,4 @@
+import { GroupsComponent } from './components/groups/groups.component';
 import { EndpointListComponent } from './components/endpoint-list/endpoint-list.component';
 import { NewEndpointComponent } from './components/new-endpoint/new-endpoint.component'
 import { NewApiComponent } from './components/new-api/new-api.component';
@@ -38,6 +39,10 @@ const routes: Routes = [
   {
     path: 'addEndpoint',
     component: NewEndpointComponent
+  },
+  {
+    path: 'groups',
+    component: GroupsComponent
   },
   {
     path: 'home',

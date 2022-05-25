@@ -1,14 +1,23 @@
-<ul class = "list-group">
-    <a md-button >
+<h4 class="sideNav-title">Groups</h4>
+
+<ul class="list-group">
+    <a md-button>
         <!-- pasa por todos los grupos de una api y los despliega como lista en la sidebar -->
-        <li
-            *ngFor="let group of grouped | keyvalue"
-            class = "list-group-item list-group-item-action"
-          >
-            {{group.key}}
-          </li>
+        <li *ngFor="let group of DROPDOWN_LIST" class="list-group-item list-group-item-action">
+            {{group}}
+        </li>
     </a>
 </ul>
+
+<a mat-button class="button button2" routerLink="/">
+    Create Group
+</a>
+
+
+
+
+
+
 
 
 
