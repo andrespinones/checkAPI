@@ -1,26 +1,26 @@
 <body>
   <app-navbar ></app-navbar>
   <!-- (outputToParent)="getOutputEndpoint($event)" -->
-<div class="sidebar"><app-endpoint-sidebar (outputToParent)="getOutputEndpoint($event)"></app-endpoint-sidebar></div>
-<span *ngFor="let item of receivedEndpoint">
-<div class="detailContent">
-<span  *ngFor="let data of apiData">
-<h1 class="nombre">{{data.name}}</h1>
-<p>Base URL: {{data.baseUrl}}</p>
+<div class="sidebar"><app-endpoint-sidebar (outputToParent)="getOutputEndpointID($event)"></app-endpoint-sidebar></div>
+<span  *ngFor="let api of apiData">
+  <h1 class="nombre">{{api.name}}</h1>
+  <p>Base URL: {{api.baseUrl}}</p>
 </span>
+<span *ngFor="let endpoint of receivedEndpoint">
+<div class="detailContent">
 <!-- <p><a href="{{baseURL}}">Base URL: {{baseURL}}</a></p> -->
-<h2 class="nombre">{{item.name}}</h2>
+<h2 class="nombre">{{endpoint.name}}</h2>
 
 <table class="info">
     <tr>
-        <th>{{item.methodType}}</th>
-        <th>{{item.path}}</th>
-        <th> Last response: <span>{{item.lastResp}}</span></th>
+        <th>{{endpoint.methodType}}</th>
+        <th>{{endpoint.path}}</th>
+        <th> Last response: <span>{{endpoint.lastResp}}</span></th>
         <th> 2 days ago</th>
       </tr>
 </table>
 <br>
-<p>{{item.endpointDescription}}</p>
+<p>{{endpoint.endpointDescription}}</p>
 
 <p class="separador">PARAMETERS</p>
 
@@ -32,13 +32,13 @@
     <th></th>
   </tr>
   <br>
-  <tr>
-    <td>{{item.paramName}}</td>
-    <td>{{item.dataType}}</td>
-    <td> {{item.paramDescription}}</td>
+  <tr *ngFor="let param of receivedParams" >
+    <td>{{param.paramName}}</td>
+    <td>{{param.dataType}}</td>
+    <td> {{param.paramDescription}}</td>
     <td>
       <form>
-        <input class="searchInput" type="search" placeholder={{item.paramName}} aria-label="Search">
+        <input class="searchInput" type="search" placeholder={{param.paramName}} aria-label="Search">
       </form>
     </td>
   </tr>
@@ -56,8 +56,8 @@
   </tr>
   <br>
   <tr>
-    <td>{{item.number}}</td>
-    <td>{{item.respDescription}}</td>
+    <td>{{endpoint.number}}</td>
+    <td>{{endpoint.respDescription}}</td>
     <td></td>
     <td></td>
   </tr>

@@ -7,6 +7,8 @@ import { Endpoint } from '../models/endpoint';
 import { Client } from '../models/client';
 import { Favorite } from '../models/favorite';
 import { User } from '../models/user.model';
+import { Params } from '@angular/router';
+import { Parameter } from '../models/parameter';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +53,12 @@ export class ApiService {
   }
   getEndpointbyID(endpointID:number){
     return this.httpclient.get<Endpoint[]>(this.APIURL+'/endpoint/'+ endpointID,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+      )}
+      );
+  }
+  getParamsbyEndpointID(endpointID:number){
+    return this.httpclient.get<Parameter[]>(this.APIURL+'/endpoint/params/'+ endpointID,{headers: new HttpHeaders({
       'Content-Type': 'application/json', 'access-token':this.token}
       )}
       );

@@ -1,3 +1,5 @@
+import { Parameter } from "./parameter";
+
 export interface Endpoint {
     name:                string;
     path:                string;
@@ -5,10 +7,7 @@ export interface Endpoint {
     methodType:          string;
     lastResp:            null;
     status:              boolean;
-    dataType:            string;
-    paramName:           string;
-    isRequired:          boolean;
-    paramDescription:    string;
+    //parameters:         Parameter[];
     number:              number;
     respDescription:     string;
 }
