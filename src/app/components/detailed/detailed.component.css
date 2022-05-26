@@ -42,26 +42,16 @@ table.info tr td {
     padding: 5px;
 }
 
-table.info tr th:first-child,
-table.info tr td:first-child {
-  /* background-color: #61AFFE; */
-  color: white;
-  border-left: 1px solid ;
-  text-transform: uppercase;
-  font-style: italic;
-  letter-spacing: 2px;
-  font-weight: 700;
-}
+
 table.info tr th {
-  background-color: #EBF3FB;
   text-align: left;
-  font-weight: 370;
+  /* font-weight: 370; */
   padding-left: 10px;
-  color: black;
 }
 
 /* top-left border-radius */
 table.info tr:first-child th:first-child {
+
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
 }
@@ -128,77 +118,93 @@ table.params {
 .get {
   color: white;
   background: #61AFFE;
-  border-radius: 5px 0px 0px 5px;
-  font-weight: bold;
-  width: 7%;
+  font-style: italic;
+  /* border-radius: 5px 0px 0px 5px; */
+  width: 10%;
   padding-left: 1%;
+  border-left: 1px solid ;
+  text-transform: uppercase;
+  font-style: italic;
   letter-spacing: 2px;
+  font-weight: 700;
 }
 
 .post {
   color: white;
   background: #49CC90;
+  font-style: italic;
   border-radius: 5px 0px 0px 5px;
-  font-weight: bold;
-  width: 7%;
+  width: 10%;
   padding-left: 1%;
+  border-left: 1px solid ;
+  text-transform: uppercase;
+  font-style: italic;
   letter-spacing: 2px;
+  font-weight: 700;
 }
 
 .delete {
   color: white;
   background: #DC4349;
+  font-style: italic;
   border-radius: 5px 0px 0px 5px;
-  font-weight: bold;
-  width: 7%;
+  width: 10%;
   padding-left: 1%;
+  border-left: 1px solid ;
+  text-transform: uppercase;
+  font-style: italic;
   letter-spacing: 2px;
+  font-weight: 700;
 
 }
 
 .put {
   color: white;
   background: #FCA130;
+  font-style: italic;
   border-radius: 5px 0px 0px 5px;
-  font-weight: bold;
-  width: 7%;
+  width: 10%;
   padding-left: 1%;
+  border-left: 1px solid ;
+  text-transform: uppercase;
+  font-style: italic;
   letter-spacing: 2px;
+  font-weight: 700;
 }
 
 .get2 {
   background: #EBF3FB;
-  border-radius: 0px 5px 5px 0px;
-  font-weight: lighter;
-  width: 7%;
+  max-width: 35%;
   padding-left: 1%;
   letter-spacing: 2px;
+  text-align: left;
+  font-weight: lighter;
 }
 
 .post2 {
   background: #bbdf9f;
-  border-radius: 0px 5px 5px 0px;
-  font-weight: lighter;
-  width: 7%;
+  /* width: 35%; */
   padding-left: 1%;
   letter-spacing: 2px;
+  text-align: left;
+  font-weight: lighter;
 }
 
 .delete2 {
   background: #eda7a4;
-  border-radius: 0px 5px 5px 0px;
-  font-weight: lighter;
-  width: 7%;
+  /* width: 35%; */
   padding-left: 1%;
   letter-spacing: 2px;
+  text-align: left;
+  font-weight: lighter;
 
 }
 
 .put2 {
   background: #f7dc97;
-  border-radius: 0px 5px 5px 0px;
-  font-weight: lighter;
-  width: 7%;
+  /* width: 35%; */
   padding-left: 1%;
   letter-spacing: 2px;
+  text-align: left;
+  font-weight: lighter;
 }

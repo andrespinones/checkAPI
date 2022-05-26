@@ -14,10 +14,10 @@
 
 <table class="info">
     <tr>
-        <th>{{endpoint.methodType}}</th>
-        <th>{{endpoint.path}}</th>
-        <th> Last response: <span>{{endpoint.lastResp}}</span></th>
-        <th> 2 days ago</th>
+        <th [ngClass]="{get: endpoint.methodType == 'GET', post: endpoint.methodType == 'POST', put: endpoint.methodType == 'PUT', delete: endpoint.methodType == 'DELETE'}">{{endpoint.methodType}}</th>
+        <th [ngClass]="{get2: endpoint.methodType == 'GET', post2: endpoint.methodType == 'POST', put2: endpoint.methodType == 'PUT', delete2: endpoint.methodType == 'DELETE'}">{{endpoint.path}}</th>
+        <th [ngClass]="{get2: endpoint.methodType == 'GET', post2: endpoint.methodType == 'POST', put2: endpoint.methodType == 'PUT', delete2: endpoint.methodType == 'DELETE'}"> Last response: <span>{{endpoint.lastResp}}</span></th>
+        <th [ngClass]="{get2: endpoint.methodType == 'GET', post2: endpoint.methodType == 'POST', put2: endpoint.methodType == 'PUT', delete2: endpoint.methodType == 'DELETE'}"> 2 days ago</th>
       </tr>
 </table>
 <br>
