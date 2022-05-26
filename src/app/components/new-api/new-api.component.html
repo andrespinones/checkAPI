@@ -5,19 +5,18 @@
   <div class="example-container">
 
     <form>
-
       <mat-form-field class="searchInput" appearance="outline">
         <mat-label>API's Name</mat-label>
-        <input type="text" matInput [formControl]="nombreFormControl" [errorStateMatcher]="matcher">
-        <mat-error *ngIf="nombreFormControl.hasError('required')">
+        <input type="text" name="name" matInput [formControl]="nameFormControl" [errorStateMatcher]="matcher" ngModel>
+        <mat-error *ngIf="nameFormControl.hasError('required')">
           Name is <strong>required</strong>
         </mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Description</mat-label>
-        <input type="text" matInput [formControl]="descFormControl" [errorStateMatcher]="matcher"
-          placeholder="Describe your API">
+        <input type="text" name="description" matInput [formControl]="descFormControl" [errorStateMatcher]="matcher"
+          placeholder="Describe your API" ngModel>
         <mat-error *ngIf="descFormControl.hasError('required')">
           Description is <strong>required</strong>
         </mat-error>
@@ -26,12 +25,7 @@
 
       <!-- <input class="searchInput"  placeholder="API's Name" aria-label="Search"> -->
       <!-- <input class="searchInput input2"  placeholder="Describe your API" aria-label="Search"> -->
-
-    </form>
-
     <br>
-
-    <form>
       <mat-form-field appearance="outline">
         <mat-label>Select category</mat-label>
         <mat-select>
@@ -44,7 +38,7 @@
       <!-- <form class="example-form"> -->
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Base URL</mat-label>
-        <input type="url" matInput [formControl]="urlFormControl" [errorStateMatcher]="matcher">
+        <input type="url" name="baseUrl" matInput [formControl]="urlFormControl" [errorStateMatcher]="matcher" ngModel>
 
         <!--
                       Lo que este error hace es marcar cunado se ingresa algo que no es un email 
@@ -58,8 +52,7 @@
       </mat-form-field>
       <!-- </form> -->
     </form>
-
-    <p>The creator of this API will be - <span class="highlight">{{user}}</span></p>
+    <p>The creator of this API will be - <span class="highlight">{{currentUser?.email}}</span></p>
 
     <br>
 
@@ -72,10 +65,8 @@
 
 
     <div class="buttons">
-      <a mat-button class="button button2" routerLink="/endpoints">
-        Add API
-      </a>
-      <button class="button button1">Cancel</button>
+      <a mat-button class="button button2" routerLink="/endpoints" >Add API</a>
+      <a mat-button class="button button1" routerLink="/home">Cancel</a>
       <!-- <button class="button button2" >Add Api</button> -->
 
     </div>

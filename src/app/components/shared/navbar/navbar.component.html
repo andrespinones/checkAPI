@@ -26,7 +26,7 @@
     <a mat-icon-button [routerLink]="['/admin-users']">
       <img class="userSettings-icon" src = "./assets/images/adminSettings.svg"/> 
     </a>
-    <button mat-icon-button [matMenuTriggerFor]="appMenu">
+    <button mat-icon-button [matMenuTriggerFor]="appMenu" *ngIf="isAdmin()">
       <mat-icon class="icon-display">account_circle</mat-icon>
     </button>
 </mat-toolbar>

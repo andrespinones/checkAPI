@@ -7,6 +7,7 @@ import { Category } from 'src/app/models/category';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { delay } from 'rxjs/operators';
+import { User } from 'src/app/models/user.model';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -27,7 +28,7 @@ export class NewApiComponent implements OnInit {
   // required = no se puede ingresar un valor vacio, email - revisa que sea un email
   //se tiene que hacer un validator que revise qeu si exita la API 
   urlFormControl = new FormControl('', [Validators.required]);
-  nombreFormControl = new FormControl('', [Validators.required]);
+  nameFormControl = new FormControl('', [Validators.required]);
   descFormControl = new FormControl('', [Validators.required]);
 
   matcher = new MyErrorStateMatcher();
@@ -35,8 +36,10 @@ export class NewApiComponent implements OnInit {
   constructor(private service:ApiService, private observer: BreakpointObserver) {}
 
   CategoryList: Category[] = [];
-
+  currentUser?:User;
+  api:any;
   ngOnInit(): void {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     this.refreshCategories();
   }
 
@@ -46,6 +49,15 @@ export class NewApiComponent implements OnInit {
       console.log(this.CategoryList);
     })
   }
-  user = "Alan Lopez";
+
+  createApi(apiData:any){
+    this.api = {
+      name : apiData.name,
+      baseUrl : apiData.baseUrl,
+      description: apiData.description 
+    }
+    console.log(this.api)
+    this.service.addApi(this.api).subscribe(data=>{});
+  }
 
 }

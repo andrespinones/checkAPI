@@ -6,7 +6,7 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <p *ngFor="let item of group.value" [ngClass]="{get: item.methodType == 'GET', post: item.methodType == 'POST', put: item.methodType == 'PUT', delete: item.methodType == 'DELETE'}" (click)="getEndpointDetail(item.endpointID)">
-            <span>{{item.methodType}}</span><span class="description"> - {{item.endpointDescription}}</span>
+            <span>{{item.methodType}}</span><span class="description"  *ngIf="item.methodType"> - {{item.endpointDescription}}</span>
         <p>
     </mat-expansion-panel>
 </mat-accordion>

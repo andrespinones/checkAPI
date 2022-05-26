@@ -97,4 +97,11 @@ export class ApiService {
     )}
     );
   }
+
+  addApi(api:Api):Observable<Api>{
+    return this.httpclient.post<Api>(this.APIURL+'/api', api,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+    )}
+    );
+  }
 }
