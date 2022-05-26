@@ -36,7 +36,7 @@ export class NewApiComponent implements OnInit {
   addApiForm = this.formBuilder.group({
     name: this.nameFormControl,
     description: this.descFormControl,
-    url: this.descFormControl
+    url: this.urlFormControl
   });
 
   constructor(private service:ApiService, private observer: BreakpointObserver, private formBuilder: FormBuilder,) {}
@@ -64,8 +64,5 @@ export class NewApiComponent implements OnInit {
     }
     console.log(this.api)
     this.service.addApi(this.api).subscribe(data=>{});
-
-    console.log('ADD API FORM:', this.addApiForm.value)
   }
-
 }
