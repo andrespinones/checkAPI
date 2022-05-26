@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {FormControl, FormGroupDirective, NgForm, Validators, FormBuilder} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Api } from 'src/app/models/apis';
@@ -33,7 +33,13 @@ export class NewApiComponent implements OnInit {
 
   matcher = new MyErrorStateMatcher();
 
-  constructor(private service:ApiService, private observer: BreakpointObserver) {}
+  addApiForm = this.formBuilder.group({
+    name: this.nameFormControl,
+    description: this.descFormControl,
+    url: this.descFormControl
+  });
+
+  constructor(private service:ApiService, private observer: BreakpointObserver, private formBuilder: FormBuilder,) {}
 
   CategoryList: Category[] = [];
   currentUser?:User;
@@ -50,14 +56,16 @@ export class NewApiComponent implements OnInit {
     })
   }
 
-  createApi(apiData:any){
+  createApi(){
     this.api = {
-      name : apiData.name,
-      baseUrl : apiData.baseUrl,
-      description: apiData.description 
+      name : this.addApiForm.value.name,
+      baseUrl : this.addApiForm.value.url,
+      description: this.addApiForm.value.description 
     }
     console.log(this.api)
     this.service.addApi(this.api).subscribe(data=>{});
+
+    console.log('ADD API FORM:', this.addApiForm.value)
   }
 
 }
