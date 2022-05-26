@@ -9,6 +9,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { Api } from 'src/app/models/apis';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +17,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+    currentUser?:User;
     private readonly _destroy=new Subject<void>();
     isUserLoggedIn: boolean = false;
     profile:Profile = {} as Profile;
@@ -23,12 +25,15 @@ export class NavbarComponent implements OnInit {
     api!: Api
     myControl = new FormControl(this.api);
     options: Api[] = [];
+    userImage = './assets/images/logo.png';
+    adminImage = './assets/images/checkapiAdmin.svg';
     constructor(@Inject(MSAL_GUARD_CONFIG) private msalGuardConfig:MsalGuardConfiguration,
     private msalBroadCastService:MsalBroadcastService,
     private authService:MsalService,private azureService:AzureAdDemoService,private apis:ApiService,
     private router:Router) { }
 
     ngOnInit(): void {
+      this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
       this.msalBroadCastService.inProgress$.pipe
       (filter((interactionStatus:InteractionStatus)=>
       interactionStatus==InteractionStatus.None),
@@ -60,6 +65,15 @@ export class NavbarComponent implements OnInit {
         console.log(this.ApiList)
         this.options = this.ApiList;
       });
+    }
+
+    isAdmin(): boolean{
+      if(this.currentUser?.role == "Admin"){
+        return true;
+      }
+      else{
+        return false;
+      }
     }
 
 }

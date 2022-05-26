@@ -54,3 +54,8 @@
     top: 0; /* Sets the sticky toolbar to be on top */
     z-index: 1000; /* chooses a layer to not be overlaped */
 }
+
+.userSettings-icon{
+  height: 26px;
+  width: 30px;
+}
