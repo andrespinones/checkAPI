@@ -64,12 +64,12 @@ export class EndpointListComponent implements OnInit {
   }
 
   // cambiar al servicio que de el id del grupo para desplegar todos los endpoints
-  getEndpointDetail(endpointId:number){
+/*   getEndpointDetail(endpointId:number){
     this.service.getEndpointbyID(endpointId).subscribe(resp=>{
       this.endpoint = resp;
       this.outputToParent.emit(this.endpoint)
     })
-  }
+  } */
 
 }
 

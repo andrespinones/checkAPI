@@ -4,4 +4,5 @@ export interface Api {
     baseUrl:       string;
     description:    string;
     isFavorite:    boolean; //BY USER
+    isEnabled:     boolean;
 }

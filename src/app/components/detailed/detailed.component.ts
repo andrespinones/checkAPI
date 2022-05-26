@@ -3,6 +3,7 @@ import { Endpoint } from 'src/app/models/endpoint';
 import { ApiService } from 'src/app/services/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { Api } from 'src/app/models/apis';
+import { Parameter } from 'src/app/models/parameter';
 
 
 @Component({
@@ -12,36 +13,12 @@ import { Api } from 'src/app/models/apis';
 })
 
 export class DetailedComponent  implements OnInit{
-  receivedEndpoint: any = {} as Endpoint;
-  apiData:any
-  apiID:any
-  getOutputEndpoint(selected:Endpoint){
-      this.receivedEndpoint = selected;
-  }
-
-  nombreApi = "Petstore";
-  baseURL = "https://petstore.checapi.io/v2";
-  // tagName = "pet";
-  // mType = "get";
-  // path = "/pet/{petID}"
-  // epDesc ="Returns a single pet";
-  lastResp = 200;
-
-  // /* Parametros del endPoint */
-  // paramType = "integer($int64)";
-  // paramName = "petID";
-  // isRequired = true;
-  // paramDescription = "Id of pet to return";
-  
-  
-  // //Response Codes
-
-  // respCode: RespCode;
-  // respCodes: RespCode[];
-
-  // //json de respuesta 
+  receivedEndpoint!:Endpoint[];
+  receivedParams!:Parameter[];
+  endpointID!:number;
+  apiData!:Api[];
+  apiID:any;
   pet: Pet;
-
   pets: Pet[];
 
   constructor(private service:ApiService, private route: ActivatedRoute) {
@@ -55,30 +32,30 @@ export class DetailedComponent  implements OnInit{
         photoURLs: "photo1.jpg"
       }
     ];
-
-    // this.respCode = { num: 200, description: "Successful Operation" };
-    // this.respCodes = [
-    //   {
-    //     num: 400,
-    //     description: "Successful Operation" 
-    //   },
-    //   {
-    //   num: 500,
-    //     description: "Successful Operation" 
-    //   }
-    // ];
   }
   ngOnInit(): void {
     const id = this.route.snapshot.queryParamMap.get('id');
     this.apiID=id;
     this.getApi();
-    this.getOutputEndpoint;
+    this.getOutputEndpointID;
   }
   getApi(){
     this.service.getApibyID(this.apiID).subscribe(resp=>{
       this.apiData = resp;
       console.log(this.apiData)
     });
+  }
+  getEndpointDetail(endpointId:number){
+        this.service.getEndpointbyID(endpointId).subscribe(resp=>{
+          this.receivedEndpoint = resp;
+        })
+        this.service.getParamsbyEndpointID(endpointId).subscribe(resp=>{
+          this.receivedParams = resp;
+        })
+  }
+  getOutputEndpointID(received:any){
+    this.endpointID=received;
+    this.getEndpointDetail(this.endpointID)
   }
 }
 
