@@ -1,0 +1,45 @@
+<body>
+    <app-navbar></app-navbar>
+
+    <div class="sidebar">
+        <!-- se tiene que agregar algo así para traer los endpoints de lista -->
+        <!-- (outputToParent)="getOutputEndpoint($event)" -->
+
+        <app-groups></app-groups>
+
+    </div>
+
+
+    <!-- nombre del grupo -->
+    <h1 class="nombre">Store</h1>
+
+    <!-- lista de los endpoints que pertenecen al grupo -->
+    <table class="info">
+        <!-- falta ponerle color a la row dependiendo del tipo de metodo -->
+        <tr *ngFor="let item of DROPDOWN_LIST" >
+            <th [ngClass]="{get: item.type == 'GET', post: item.type == 'POST', put: item.type == 'PUT', delete: item.type == 'DELETE'}">{{item.type}}</th>
+            <th [ngClass]="{get2: item.type == 'GET', post2: item.type == 'POST', put2: item.type == 'PUT', delete2: item.type == 'DELETE'}">{{item.path}}</th>
+          </tr>
+    </table>
+    <div class="spacer"></div>
+    <a mat-button class="button button2" routerLink="/addEndpoint">
+        Add Endpoint
+    </a>
+
+
+
+    <!-- <table mat-table [dataSource]="dataSource">
+      
+        <ng-container matColumnDef="Type">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let ep">{{ep.type}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Path">
+            <th mat-header-cell *matHeaderCellDef>Description</th>
+            <td mat-cell *matCellDef="let ep">{{ep.path}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"(click)="apiDetailRedirect(myRowData)"></tr>
+    </table> -->
+
+</body>

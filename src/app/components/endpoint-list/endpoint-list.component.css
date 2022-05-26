@@ -1,0 +1,195 @@
+body {
+  background-color: #F2EEE9;
+}
+
+.nombre {
+  font-weight: 750;
+  padding-left: 15%;
+  padding-top: 3%;
+}
+
+.sidebar {
+  width: 15%;
+  float: left;
+  margin-left: 2%;
+  margin-top: 5%;
+  height: 100%;
+}
+
+table {
+  background-color: #F2EEE9;
+  width: 70%;
+  border-spacing: 0 20px !important;
+  border-collapse: separate;
+}
+
+tr {
+  height: 35px;
+}
+
+.mat-header-cell {
+  border-bottom: 0px;
+}
+
+td.mat-cell {
+  background-color: #ffffff;
+  border-bottom: 0px solid #ffffff;
+  border-top: 0px solid #ffffff;
+}
+
+.mat-row:hover .mat-cell {
+  background-color: rgb(179, 177, 173);
+  cursor: pointer;
+}
+
+td.mat-cell:first-child {
+  background-color: #ffffff;
+  /* border-left: 2px solid #ffffff; */
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+td.mat-cell:last-child {
+  /* background-color: #ffffff; */
+  /* border-right: 2px solid #ffffff; */
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+th:first-child {
+  width: 0.5%;
+}
+
+.mat-column-name {
+  overflow: hidden;
+  white-space: nowrap;
+  /* Don't forget this one */
+  text-overflow: ellipsis;
+  padding-right: 25px;
+}
+
+.mat-column-isFavorite {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-right: 25px;
+}
+
+.mat-column-Name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding-right: 25px;
+}
+
+.true {
+  color: #FF5C00;
+}
+
+.false {
+  color: #D7D7D7;
+}
+
+.get {
+  color: white;
+  background: #61AFFE;
+  border-radius: 5px 0px 0px 5px;
+  font-weight: bold;
+  width: 7%;
+  padding-left: 1%;
+  letter-spacing: 2px;
+}
+
+.post {
+  color: white;
+  background: #49CC90;
+  border-radius: 5px 0px 0px 5px;
+  font-weight: bold;
+  width: 7%;
+  padding-left: 1%;
+  letter-spacing: 2px;
+}
+
+.delete {
+  color: white;
+  background: #DC4349;
+  border-radius: 5px 0px 0px 5px;
+  font-weight: bold;
+  width: 7%;
+  padding-left: 1%;
+  letter-spacing: 2px;
+
+}
+
+.put {
+  color: white;
+  background: #FCA130;
+  border-radius: 5px 0px 0px 5px;
+  font-weight: bold;
+  width: 7%;
+  padding-left: 1%;
+  letter-spacing: 2px;
+}
+
+.get2 {
+  background: #EBF3FB;
+  border-radius: 0px 5px 5px 0px;
+  font-weight: lighter;
+  width: 7%;
+  padding-left: 1%;
+  letter-spacing: 2px;
+}
+
+.post2 {
+  background: #bbdf9f;
+  border-radius: 0px 5px 5px 0px;
+  font-weight: lighter;
+  width: 7%;
+  padding-left: 1%;
+  letter-spacing: 2px;
+}
+
+.delete2 {
+  background: #eda7a4;
+  border-radius: 0px 5px 5px 0px;
+  font-weight: lighter;
+  width: 7%;
+  padding-left: 1%;
+  letter-spacing: 2px;
+
+}
+
+.put2 {
+  background: #f7dc97;
+  border-radius: 0px 5px 5px 0px;
+  font-weight: lighter;
+  width: 7%;
+  padding-left: 1%;
+  letter-spacing: 2px;
+}
+
+.button {
+  border: none;
+  color: white;
+  font-weight: 500;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 8px;
+  width: 150px;
+  height: 40px;
+  padding-top: 2px;
+
+}
+
+.button1 {
+  background-color: #B3B3B3;
+}
+
+.button2 {
+  background-color: #FF7E36;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}

@@ -1,3 +1,33 @@
+<h4 class="sideNav-title">Groups</h4>
+
+<ul class="list-group">
+    <a md-button>
+        <!-- pasa por todos los grupos de una api y los despliega como lista en la sidebar -->
+        <li *ngFor="let group of DROPDOWN_LIST" class="list-group-item list-group-item-action">
+            {{group}}
+        </li>
+    </a>
+</ul>
+
+<div>
+	<mat-form-field class="example-full-width" *ngIf="isEditEnable">
+        <!-- <mat-icon matPrefix>add</mat-icon> -->
+		<input matInput placeholder="+ Add Category" [(ngModel)]="category" >
+        
+  </mat-form-field>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- <mat-accordion>
     <mat-expansion-panel class="mat-elevation-z0"  *ngFor="let group of grouped | keyvalue">
         <mat-expansion-panel-header>

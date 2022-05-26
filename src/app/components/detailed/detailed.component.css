@@ -44,7 +44,7 @@ table.info tr td {
 
 table.info tr th:first-child,
 table.info tr td:first-child {
-  background-color: #61AFFE;
+  /* background-color: #61AFFE; */
   color: white;
   border-left: 1px solid ;
   text-transform: uppercase;
@@ -123,4 +123,82 @@ table.params {
   padding: 5px;  
   margin-top: 15px; 
   color: white;
+}
+
+.get {
+  color: white;
+  background: #61AFFE;
+  border-radius: 5px 0px 0px 5px;
+  font-weight: bold;
+  width: 7%;
+  padding-left: 1%;
+  letter-spacing: 2px;
+}
+
+.post {
+  color: white;
+  background: #49CC90;
+  border-radius: 5px 0px 0px 5px;
+  font-weight: bold;
+  width: 7%;
+  padding-left: 1%;
+  letter-spacing: 2px;
+}
+
+.delete {
+  color: white;
+  background: #DC4349;
+  border-radius: 5px 0px 0px 5px;
+  font-weight: bold;
+  width: 7%;
+  padding-left: 1%;
+  letter-spacing: 2px;
+
+}
+
+.put {
+  color: white;
+  background: #FCA130;
+  border-radius: 5px 0px 0px 5px;
+  font-weight: bold;
+  width: 7%;
+  padding-left: 1%;
+  letter-spacing: 2px;
+}
+
+.get2 {
+  background: #EBF3FB;
+  border-radius: 0px 5px 5px 0px;
+  font-weight: lighter;
+  width: 7%;
+  padding-left: 1%;
+  letter-spacing: 2px;
+}
+
+.post2 {
+  background: #bbdf9f;
+  border-radius: 0px 5px 5px 0px;
+  font-weight: lighter;
+  width: 7%;
+  padding-left: 1%;
+  letter-spacing: 2px;
+}
+
+.delete2 {
+  background: #eda7a4;
+  border-radius: 0px 5px 5px 0px;
+  font-weight: lighter;
+  width: 7%;
+  padding-left: 1%;
+  letter-spacing: 2px;
+
+}
+
+.put2 {
+  background: #f7dc97;
+  border-radius: 0px 5px 5px 0px;
+  font-weight: lighter;
+  width: 7%;
+  padding-left: 1%;
+  letter-spacing: 2px;
 }

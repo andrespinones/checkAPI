@@ -1,4 +1,6 @@
-import { NewEndpointComponent } from './components/new-endpoint/new-endpoint.component';
+import { GroupsComponent } from './components/groups/groups.component';
+import { EndpointListComponent } from './components/endpoint-list/endpoint-list.component';
+import { NewEndpointComponent } from './components/new-endpoint/new-endpoint.component'
 import { NewApiComponent } from './components/new-api/new-api.component';
 import { DetailedComponent } from './components/detailed/detailed.component';
 import { NgModule } from '@angular/core';
@@ -30,8 +32,25 @@ const routes: Routes = [
     component: NewApiComponent
   },
   {
+    path: 'endpoints', 
+    component: EndpointListComponent
+
+  },
+  {
     path: 'addEndpoint',
     component: NewEndpointComponent
+  },
+  {
+    path: 'groups',
+    component: GroupsComponent
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
+  },
+  {
+    path: 'admin-users',
+    component: UserListComponent,
   }
 ];
 

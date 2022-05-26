@@ -55,6 +55,7 @@ import { EndpointSidebarComponent } from './components/endpoint-sidebar/endpoint
 //search bar functionality in user list table
 import { GroupsComponent } from './components/groups/groups.component';
 import { NewEndpointComponent } from './components/new-endpoint/new-endpoint.component';
+import { EndpointListComponent } from './components/endpoint-list/endpoint-list.component';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { NewEndpointComponent } from './components/new-endpoint/new-endpoint.com
     EndpointSidebarComponent,
     NewApiComponent,
     GroupsComponent,
-    NewEndpointComponent
+    NewEndpointComponent,
+    EndpointListComponent
   ],
   imports: [
     BrowserModule,
