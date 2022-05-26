@@ -1,5 +1,6 @@
 body{
   background-color: #F2EEE9;
+  overflow-y: auto;
 }
 .sidebar{
   width:15%;
@@ -9,11 +10,19 @@ body{
 }
 .detailContent{
   margin-left:20%;
-  padding-top: 5%;
   width: 75%;
 }
 .nombre{
   font-weight: 750;
+}
+.apiData{
+  font-weight:900;
+  padding-top: 5%;
+  margin-left:20%;
+}
+
+#baseURL{
+  font-weight:normal;
 }
 
 .separador{

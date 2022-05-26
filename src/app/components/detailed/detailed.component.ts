@@ -32,7 +32,6 @@ export class DetailedComponent  implements OnInit{
         photoURLs: "photo1.jpg"
       }
     ];
-
   }
   ngOnInit(): void {
     const id = this.route.snapshot.queryParamMap.get('id');

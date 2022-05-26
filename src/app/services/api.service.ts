@@ -7,7 +7,6 @@ import { Endpoint } from '../models/endpoint';
 import { Client } from '../models/client';
 import { Favorite } from '../models/favorite';
 import { User } from '../models/user.model';
-import { Params } from '@angular/router';
 import { Parameter } from '../models/parameter';
 
 @Injectable({

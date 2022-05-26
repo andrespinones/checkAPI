@@ -1,11 +1,12 @@
 <body>
-  <app-navbar ></app-navbar>
-  <!-- (outputToParent)="getOutputEndpoint($event)" -->
+<app-navbar ></app-navbar>
 <div class="sidebar"><app-endpoint-sidebar (outputToParent)="getOutputEndpointID($event)"></app-endpoint-sidebar></div>
-<span  *ngFor="let api of apiData">
-  <h1 class="nombre">{{api.name}}</h1>
-  <p>Base URL: {{api.baseUrl}}</p>
-</span>
+<div class = "apiData">
+  <span *ngFor="let api of apiData">
+    <h1>{{api.name}}</h1>
+    <h3 id = "baseURL">Base URL: {{api.baseUrl}}</h3>
+  </span>
+</div>
 <span *ngFor="let endpoint of receivedEndpoint">
 <div class="detailContent">
 <!-- <p><a href="{{baseURL}}">Base URL: {{baseURL}}</a></p> -->
