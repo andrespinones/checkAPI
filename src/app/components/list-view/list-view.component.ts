@@ -29,9 +29,10 @@ export class ListViewComponent implements OnInit {
     name:          "",
     baseUrl:       "",
     description:    "",
-    isFavorite:    false
+    isFavorite:    false,
+    isEnabled:      true
   }
-  columnsToDisplay = ['isFavorite','Name', 'Description']
+  columnsToDisplay = ['isFavorite','Name', 'Description','Edit']
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     this.refreshApis();
@@ -85,4 +86,14 @@ export class ListViewComponent implements OnInit {
       api.isFavorite = false;
     }
   }
+  isAdmin(): boolean{
+    if(this.currentUser?.role == "Admin"){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+
 }
