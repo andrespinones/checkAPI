@@ -9,9 +9,15 @@
     </a>
 </ul>
 
-<a mat-button class="button button2" routerLink="/">
-    Create Group
-</a>
+<div>
+	<mat-form-field class="example-full-width" *ngIf="isEditEnable">
+        <!-- <mat-icon matPrefix>add</mat-icon> -->
+		<input matInput placeholder="+ Add Category" [(ngModel)]="category" >
+        
+  </mat-form-field>
+</div>
+
+
 
 
 

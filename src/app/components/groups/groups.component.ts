@@ -14,7 +14,6 @@ import { endpointSidebar } from 'src/app/models/endpointSidebar';
 
 export class GroupsComponent  implements OnInit{
 
-
   //lista sin info de la base de datos
   DROPDOWN_LIST: string[];
 
@@ -25,8 +24,15 @@ export class GroupsComponent  implements OnInit{
   }
   ngOnInit(): void {
     throw new Error('Method not implemented.');
+
   }
 
+  isEditEnable : boolean = true;
+    category : any;
+  
+    onEdit(){
+      this.isEditEnable =!this.isEditEnable;
+    }
 
   // @Output() outputToParent = new EventEmitter<Endpoint>();
   // constructor(private service:ApiService, private route: ActivatedRoute) { }

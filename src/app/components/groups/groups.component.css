@@ -111,3 +111,12 @@ mat-sidenav-container {
 
 .button1 {background-color: #B3B3B3;}
 .button2 {background-color: #FF7E36;}
+
+.example-full-width{
+    width: 70%;
+    padding-left: 20px;
+}
+
+.mat-icon{
+    font-size: 20px;
+}
