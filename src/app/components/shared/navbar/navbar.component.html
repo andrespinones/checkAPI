@@ -23,10 +23,10 @@
       <p mat-menu-item disabled class="fontC">{{profile.mail}}</p>
       <button mat-menu-item (click)="logout()" >Log Out</button>
     </mat-menu>
-    <a mat-icon-button [routerLink]="['/admin-users']">
+    <a mat-icon-button [routerLink]="['/admin-users']"  *ngIf="isAdmin()">
       <img class="userSettings-icon" src = "./assets/images/adminSettings.svg"/> 
     </a>
-    <button mat-icon-button [matMenuTriggerFor]="appMenu" *ngIf="isAdmin()">
+    <button mat-icon-button [matMenuTriggerFor]="appMenu">
       <mat-icon class="icon-display">account_circle</mat-icon>
     </button>
 </mat-toolbar>
