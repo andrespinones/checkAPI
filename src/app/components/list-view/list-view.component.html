@@ -2,9 +2,9 @@
       <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input class="searchBar">
     </mat-form-field>
     <div class="spacer"></div>
-    <button mat-icon-button id="addButton" *ngIf="isAdmin()">
+    <a mat-icon-button id="addButton" *ngIf="isAdmin()" [routerLink]="['/addApi']">
       <mat-icon>add_box</mat-icon> 
-    </button>
+    </a>
 <table mat-table [dataSource]="dataSource">
   <ng-container matColumnDef="isFavorite">
     <th mat-header-cell *matHeaderCellDef></th>
