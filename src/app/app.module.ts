@@ -31,6 +31,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatInputModule} from '@angular/material/input';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 //Navbar
 import { MatMenuModule } from '@angular/material/menu';
@@ -75,6 +76,7 @@ import { EndpointListComponent } from './components/endpoint-list/endpoint-list.
     GroupsComponent,
     NewEndpointComponent,
     EndpointListComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -134,7 +136,8 @@ import { EndpointListComponent } from './components/endpoint-list/endpoint-list.
       ),
     MatPaginatorModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    ConfirmationPopoverModule,
   ],
   providers: [
 
