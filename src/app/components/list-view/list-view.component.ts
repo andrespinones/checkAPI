@@ -32,7 +32,7 @@ export class ListViewComponent implements OnInit {
     isFavorite:    false,
     isEnabled:      true
   }
-  columnsToDisplay = ['isFavorite','Name', 'Description','Edit']
+  columnsToDisplay = ['isFavorite','Name', 'Description','Visible']
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     this.refreshApis();
@@ -53,13 +53,10 @@ export class ListViewComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Api>(this.ApiList);
     // });
   }
-  apiDetailRedirect(api: Api){
+  apiDetailRedirect(id: number){
     let route = '/api/detail';
-    this.router.navigate([route], { queryParams: { id: api.apiID } });
-    console.log(api.apiID)
+    this.router.navigate([route], { queryParams: { id: id } });
   }
-
-
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
