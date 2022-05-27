@@ -16,7 +16,7 @@
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Description</mat-label>
         <input type="text" name="description" matInput formControlName="description" [errorStateMatcher]="matcher"
-          placeholder="Describe your API" ngModel>
+          placeholder="Describe your API">
         <mat-error *ngIf="descFormControl.hasError('required')">
           Description is <strong>required</strong>
         </mat-error>

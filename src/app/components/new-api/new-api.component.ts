@@ -62,7 +62,11 @@ export class NewApiComponent implements OnInit {
       baseUrl : this.addApiForm.value.url,
       description: this.addApiForm.value.description 
     }
-    console.log(this.api)
+    if(this.api.name=="" || this.api.baseUrl=="" || this.api.description==""){
+      alert("Fill in all fields to continue")
+    }
+    else{
     this.service.addApi(this.api).subscribe(data=>{});
+    }
   }
 }
