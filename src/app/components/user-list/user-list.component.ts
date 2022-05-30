@@ -15,7 +15,7 @@ import { DialogService } from 'src/app/services/dialog.service';
 })
 export class UserListComponent implements OnInit{
   userArray: Client[] = [];
-  columnsToDisplay = ['Name','Email', "Role"];
+  columnsToDisplay = ['Name','lastName','Email', "Role"];
   dataSource!: MatTableDataSource<Client>;
 
   popUpBoolean:boolean = false; 

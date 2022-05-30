@@ -5,6 +5,7 @@
 .roleBtn:hover{
     transform: scale(1.1);
 }
+
 .primaryTitle{
     font-family: 'Helvetica';
     font-style: normal;
@@ -14,12 +15,14 @@
     color: #000000;
     text-align: center;
 }
+
 body{
     background-color: #F2EEE9;
 }
 table {
     width: 100%;
 }
+
 .container {
     padding: 50px 20px;
     width: 100%;
@@ -32,7 +35,6 @@ table {
     border-radius: 5px;
     padding: 5px;
 }
-
 
 .user{
     width: 4rem;
