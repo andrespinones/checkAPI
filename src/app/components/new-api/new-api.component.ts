@@ -8,6 +8,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { delay } from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
+import { CategoryRel } from 'src/app/models/categoryRel';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -32,11 +33,11 @@ export class NewApiComponent implements OnInit {
   descFormControl = new FormControl('', [Validators.required]);
 
   matcher = new MyErrorStateMatcher();
-
   addApiForm = this.formBuilder.group({
     name: this.nameFormControl,
     description: this.descFormControl,
-    url: this.urlFormControl
+    url: this.urlFormControl,
+    categoryID: ''
   });
 
   constructor(private service:ApiService, private observer: BreakpointObserver, private formBuilder: FormBuilder,) {}
@@ -44,6 +45,8 @@ export class NewApiComponent implements OnInit {
   CategoryList: Category[] = [];
   currentUser?:User;
   api:any;
+  categoryApiRel!:CategoryRel;
+  addApiResp!:number;
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     this.refreshCategories();
@@ -66,7 +69,13 @@ export class NewApiComponent implements OnInit {
       alert("Fill in all fields to continue")
     }
     else{
-    this.service.addApi(this.api).subscribe(data=>{});
+      this.service.addApi(this.api).subscribe(data=>{
+        this.categoryApiRel = {
+          apiID : data.apiID,
+          categoryID : this.addApiForm.value.categoryID
+        }
+        this.service.addApiCategoryRel(this.categoryApiRel).subscribe();
+      });
     }
   }
 }

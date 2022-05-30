@@ -7,7 +7,7 @@
     <form [formGroup]="addApiForm">
       <mat-form-field class="searchInput" appearance="outline">
         <mat-label>API's Name</mat-label>
-        <input type="text" name="name" matInput formControlName="name" [errorStateMatcher]="matcher" ngModel>
+        <input type="text" name="name" matInput formControlName="name" [errorStateMatcher]="matcher">
         <mat-error *ngIf="nameFormControl.hasError('required')">
           Name is <strong>required</strong>
         </mat-error>
@@ -28,8 +28,8 @@
     <br>
       <mat-form-field appearance="outline">
         <mat-label>Select category</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let category of CategoryList" [value]="category.name">
+        <mat-select formControlName="categoryID">
+          <mat-option *ngFor="let category of CategoryList" [value]="category.categoryID">
             {{category.name}}
           </mat-option>
         </mat-select>
@@ -38,7 +38,7 @@
       <!-- <form class="example-form"> -->
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Base URL</mat-label>
-        <input type="url" name="baseUrl" matInput formControlName="url" [errorStateMatcher]="matcher" ngModel>
+        <input type="url" name="baseUrl" matInput formControlName="url" [errorStateMatcher]="matcher">
 
         <!--
                       Lo que este error hace es marcar cunado se ingresa algo que no es un email 
