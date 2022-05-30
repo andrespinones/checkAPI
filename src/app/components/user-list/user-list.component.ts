@@ -1,9 +1,11 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { OnBehalfOfClient } from '@azure/msal-common';
 import { ApiService } from 'src/app/services/api.service';
 import { Client } from 'src/app/models/client';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { DialogService } from 'src/app/services/dialog.service';
 
 
 @Component({
@@ -16,7 +18,10 @@ export class UserListComponent implements OnInit{
   columnsToDisplay = ['Name','Email', "Role"];
   dataSource!: MatTableDataSource<Client>;
 
-  constructor(private service:ApiService){}
+  popUpBoolean:boolean = false; 
+  constructor(private service:ApiService, private dialogService: DialogService){}
+
+  
 
   cliente: Client = {
     userID: 0,
@@ -88,11 +93,19 @@ export class UserListComponent implements OnInit{
     role: this.cliente.role
     }
     this.service.updateUserRole(datosCliente).subscribe(data=>{
-
     })
+  }
 
+  confirmAction(user: Client){
+    this.dialogService.openConfirmaDialog("Are you sure you want to change this role?")
+    .afterClosed().subscribe(res => {
+      if(res){
+        this.toggleRole(user);
+      }
+    })
   }
 }
+
 
 
 

@@ -31,7 +31,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatInputModule} from '@angular/material/input';
-import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 //Navbar
 import { MatMenuModule } from '@angular/material/menu';
@@ -50,6 +51,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 // userList imports
 import { UserListComponent } from './components/user-list/user-list.component';
 import { EndpointSidebarComponent } from './components/endpoint-sidebar/endpoint-sidebar.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 //primeng imports ()
 
 
@@ -75,7 +77,8 @@ import { EndpointListComponent } from './components/endpoint-list/endpoint-list.
     NewApiComponent,
     GroupsComponent,
     NewEndpointComponent,
-    EndpointListComponent
+    EndpointListComponent,
+    ConfirmDialogComponent
     
   ],
   imports: [
@@ -137,7 +140,7 @@ import { EndpointListComponent } from './components/endpoint-list/endpoint-list.
     MatPaginatorModule,
     FormsModule,
     MatInputModule,
-    ConfirmationPopoverModule,
+    MatDialogModule,
   ],
   providers: [
 
@@ -147,7 +150,8 @@ import { EndpointListComponent } from './components/endpoint-list/endpoint-list.
     multi:true
     
   },MsalGuard,AzureAdDemoService],
-  bootstrap: [AppComponent,MsalRedirectComponent]
+  bootstrap: [AppComponent,MsalRedirectComponent],
+  entryComponents:[ConfirmDialogComponent]
 })
 export class AppModule { }
 

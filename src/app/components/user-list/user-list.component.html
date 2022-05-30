@@ -2,7 +2,7 @@
 <body>
 <div class="container">
   <div class="primaryTitle">
-    <p>User Role Manager </p>
+    <p>User Role Manager</p>
   </div>
   <!-- Filter function -->
   <div class="">
@@ -21,7 +21,8 @@
       <ng-container matColumnDef="Role">
         <th mat-header-cell *matHeaderCellDef> Role </th>
         <td mat-cell *matCellDef="let user"> 
-          <a [ngClass] ="checkRole(user) ? 'user' : 'admin'"  (click)="toggleRole(user)">{{user.role}}</a>
+          <button [ngClass] ="checkRole(user) ? 'user' : 'admin'"  (click)="confirmAction(user)" class="roleBtn">{{user.role}}
+          </button>
         </td>
       </ng-container>
 

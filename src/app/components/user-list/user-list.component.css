@@ -1,9 +1,16 @@
+.roleBtn{
+    border-style: none;
+}
+
+.roleBtn:hover{
+    transform: scale(1.1);
+}
 .primaryTitle{
-    font-family: 'Montserrat';
+    font-family: 'Helvetica';
     font-style: normal;
-    font-weight: 625;
-    font-size: 42px;
-    line-height: 51px;
+    font-weight: 700;
+    font-size: 45px;
+    line-height: 61px;
     color: #000000;
     text-align: center;
 }
