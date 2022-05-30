@@ -31,7 +31,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatInputModule} from '@angular/material/input';
-import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+
 
 //Navbar
 import { MatMenuModule } from '@angular/material/menu';
@@ -102,6 +102,9 @@ import { EndpointListComponent } from './components/endpoint-list/endpoint-list.
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     MatFormFieldModule,
+    MatPaginatorModule,
+    FormsModule,
+    MatInputModule,
   
     MsalModule.forRoot(new PublicClientApplication
       (
@@ -134,10 +137,6 @@ import { EndpointListComponent } from './components/endpoint-list/endpoint-list.
         )
       }
       ),
-    MatPaginatorModule,
-    FormsModule,
-    MatInputModule,
-    ConfirmationPopoverModule,
   ],
   providers: [
 
