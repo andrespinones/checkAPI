@@ -71,10 +71,10 @@ export class ListViewComponent implements OnInit {
     let id = this.currentUser!.userID;
     this.favorite = {
       apiID : api.apiID,
-      userID : id  //hardcoded por ahora (userID debe ser del usuario)
+      userID : id  
     }
     if(api.isFavorite == false){
-      this.service.addFavorite(this.favorite).subscribe(data=>{});
+      this.service.addFavorite(this.favorite).subscribe();
       api.isFavorite = true;
     }
     else{

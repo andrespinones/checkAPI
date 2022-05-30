@@ -105,6 +105,10 @@ import { EndpointListComponent } from './components/endpoint-list/endpoint-list.
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     MatFormFieldModule,
+    MatPaginatorModule,
+    FormsModule,
+    MatInputModule,
+    MatDialogModule,
   
     MsalModule.forRoot(new PublicClientApplication
       (
@@ -137,10 +141,6 @@ import { EndpointListComponent } from './components/endpoint-list/endpoint-list.
         )
       }
       ),
-    MatPaginatorModule,
-    FormsModule,
-    MatInputModule,
-    MatDialogModule,
   ],
   providers: [
 

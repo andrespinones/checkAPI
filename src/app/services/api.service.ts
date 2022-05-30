@@ -8,6 +8,7 @@ import { Client } from '../models/client';
 import { Favorite } from '../models/favorite';
 import { User } from '../models/user.model';
 import { Parameter } from '../models/parameter';
+import { CategoryRel} from '../models/categoryRel';
 
 @Injectable({
   providedIn: 'root'
@@ -100,6 +101,13 @@ export class ApiService {
 
   addApi(api:Api):Observable<Api>{
     return this.httpclient.post<Api>(this.APIURL+'/api', api,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+    )}
+    );
+  }
+  //agregar una relacion de api con categoria
+  addApiCategoryRel(categoryRel:CategoryRel):Observable<CategoryRel>{
+    return this.httpclient.post<CategoryRel>(this.APIURL+'/category_api', categoryRel,{headers: new HttpHeaders({
       'Content-Type': 'application/json', 'access-token':this.token}
     )}
     );
