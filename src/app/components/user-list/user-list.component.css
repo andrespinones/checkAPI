@@ -5,29 +5,50 @@
 .roleBtn:hover{
     transform: scale(1.1);
 }
+table {
+    background-color: #F2EEE9;
+    width: 100%;
+    border-spacing: 0 8px !important;
+    border-collapse: separate;
+}
 
-.primaryTitle{
+.mat-header-cell {
+    border-bottom: 0px;
+    font-size: larger;
+}
+
+.mat-row {
+    background-color: #ffffff;
+}
+
+td.mat-cell {
+    border-bottom: 0px solid #ffffff;
+    border-top: 0px solid #ffffff;
+}
+
+td.mat-cell:first-child {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+td.mat-cell:last-child {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.primaryTitle {
+    padding-top: 40px;
     font-family: 'Helvetica';
     font-style: normal;
-    font-weight: 700;
-    font-size: 45px;
+    font-weight: 500;
+    font-size: 35px;
     line-height: 61px;
     color: #000000;
-    text-align: center;
+    text-align: left;
 }
 
 body{
     background-color: #F2EEE9;
-}
-table {
-    width: 100%;
-}
-
-.container {
-    padding: 50px 20px;
-    width: 100%;
-    max-width: 1080px;
-    margin: 0 auto;
 }
 
 .searchBar {

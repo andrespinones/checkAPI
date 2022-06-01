@@ -1,9 +1,8 @@
     <mat-form-field appearance="standard">
       <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input class="searchBar">
     </mat-form-field>
-    <div class="spacer"></div>
-    <a mat-icon-button id="addButton" *ngIf="isAdmin()" [routerLink]="['/addApi']">
-      <mat-icon>add_box</mat-icon> 
+    <a mat-button id="addButton" *ngIf="isAdmin()" [routerLink]="['/addApi']">
+      New <mat-icon>add_box</mat-icon> 
     </a>
 <table mat-table [dataSource]="dataSource">
   <ng-container matColumnDef="isFavorite">

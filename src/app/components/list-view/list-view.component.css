@@ -60,14 +60,30 @@ td.mat-cell:last-child {
   color: #c2bfbf;
 }
 
-#addButton{
-  font-size: larger;
-}
-
 .mat-row {
   background-color: #ffffff;
 }
 
 .disabled{
   background-color: grey;
+}
+
+#addButton{
+  border-radius: 10px;
+  background-color: #ffffff;
+  position: absolute;
+  right: 125px;
+  top: 30px;
+}
+
+#addButton:hover{
+  background-color:rgba(158, 158, 158, 0.2); 
+  color:#FF5C00;
+}
+
+
+.searchBar {
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
 }
