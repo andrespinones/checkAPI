@@ -13,16 +13,15 @@
         <h4 class="sideNav-title">Categories</h4>
       <ul class = "list-group">
         <a md-button >
-          <li  (click)="refreshApis()" class = "list-group-item list-group-item-action" >
-
+          <li  (click)="refreshApis(); setIndex(-1)" [ngClass] = "calculateClasses(selectedIndex === -1)" >
             {{fixedCategories[0].name}}
           </li>
         </a>
         <a md-button>
           <li
-            *ngFor = "let category of CategoryList"
-            (click)="refreshCategoriesFiltered(category.categoryID)"
-            class = "list-group-item list-group-item-action"
+            *ngFor = "let category of CategoryList; let i = index"
+            (click)="refreshCategoriesFiltered(category.categoryID); setIndex(i)"
+            [ngClass] = "calculateClasses(selectedIndex === i)"
           >
             {{category.name}}
             <span class="APIcount"> 
@@ -31,7 +30,7 @@
           </li>
         </a>
         <a>
-          <li class = "list-group-item list-group-item-action" >
+          <li  (click)="refreshApis(); setIndex(-2)" [ngClass] = "calculateClasses(selectedIndex === -2)" >
             <!-- first row: "Other" -->
             {{fixedCategories[1].name}}
           </li>

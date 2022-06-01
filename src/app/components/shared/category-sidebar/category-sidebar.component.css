@@ -54,6 +54,11 @@ mat-sidenav-container {
     background-color: rgba(158, 158, 158, 0.2);
     color: #de4e37;
 }
+.list-group-item-active{ /* used in ngClass to highlight currently active item */
+    border-left: 0.5rem solid #de4e37;
+    color: #de4e37;
+    font-weight: 550;
+}
 .APIcount{
     color: gray;
 }

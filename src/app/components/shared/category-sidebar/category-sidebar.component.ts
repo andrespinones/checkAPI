@@ -33,11 +33,18 @@ export class CategorySidebarComponent implements OnInit, AfterViewInit {
         name: 'Other',
         APIcount: 0,
     }];
+    
+  selectedIndex: number = -3; //used to know which listed item is selected
+  
+  setIndex(index: number) {   //updates the selectedIndex given the index obtained from the (click) event
+    this.selectedIndex = index;
+  }
 
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     this.refreshCategories();
     this.refreshApis();
+    this.selectedIndex = -1;  //starts with 'All' item currently selected
   }
 
   ngAfterViewInit() {
@@ -77,4 +84,10 @@ export class CategorySidebarComponent implements OnInit, AfterViewInit {
     })
   }
 
+  calculateClasses(stateFlag: boolean){ //if the stateFlag is true activates the ~item-active class
+    return {
+      'list-group-item': true,
+      'list-group-item-active': stateFlag
+    };
+  }
 }

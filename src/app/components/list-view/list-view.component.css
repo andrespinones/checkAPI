@@ -72,15 +72,14 @@ td.mat-cell:last-child {
   border-radius: 10px;
   background-color: #ffffff;
   position: absolute;
-  right: 125px;
-  top: 30px;
+  right: 10%;
+  top: 5%;
 }
 
 #addButton:hover{
   background-color:rgba(158, 158, 158, 0.2); 
   color:#FF5C00;
 }
-
 
 .searchBar {
   background-color: white;
