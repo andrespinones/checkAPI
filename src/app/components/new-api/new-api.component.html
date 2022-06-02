@@ -38,6 +38,10 @@
         <mat-error *ngIf="urlFormControl.hasError('required')">
           Base URL is <strong>required</strong>
         </mat-error>
+        <mat-error *ngIf="urlFormControl.hasError">
+          Make sure url has <strong>no spaces </strong> and includes <strong> hypertext protocol</strong>
+        </mat-error>
+
       </mat-form-field>
       <!-- </form> -->
     </form>

@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
   }
 
   getProfile(){
-    this.azureService.getUserProfile().subscribe(profileInfo =>{
+    this.azureService.getUserProfile().subscribe((profileInfo: Profile | undefined) =>{
       this.profile = profileInfo;
     })
   }

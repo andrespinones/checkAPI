@@ -10,6 +10,7 @@ import { delay } from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
 import { CategoryRel } from 'src/app/models/categoryRel';
 import { ValidateUrl } from 'src/app/custom-validators/forbidden.directive';
+import { Router } from '@angular/router';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -42,7 +43,7 @@ export class NewApiComponent implements OnInit {
     categoryID: this.categoryFormControl
   });
 
-  constructor(private service:ApiService, private observer: BreakpointObserver, private formBuilder: FormBuilder,) {}
+  constructor(private service:ApiService, private observer: BreakpointObserver, private formBuilder: FormBuilder, private router:Router) {}
 
   CategoryList: Category[] = [];
   currentUser?:User;
@@ -68,8 +69,8 @@ export class NewApiComponent implements OnInit {
       description: this.addApiForm.value.description,
       category: this.addApiForm.value.categoryID
     }
-    if(this.api.name=="" || this.api.baseUrl=="" || this.api.description==""){
-      alert("Fill in all fields to continue")
+    if(this.addApiForm.status == "INVALID"){
+      alert("Asegurate de que los campos esten llenados correctamente")
     }
     else{
       this.service.addApi(this.api).subscribe(data=>{
@@ -79,6 +80,7 @@ export class NewApiComponent implements OnInit {
         }
         this.service.addApiCategoryRel(this.categoryApiRel).subscribe();
       });
+      this.router.navigateByUrl('endpoints');
     }
-  }
+   }
 }
