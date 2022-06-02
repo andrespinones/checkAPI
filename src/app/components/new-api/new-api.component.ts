@@ -27,17 +27,18 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class NewApiComponent implements OnInit {
 
   // required = no se puede ingresar un valor vacio, email - revisa que sea un email
-  //se tiene que hacer un validator que revise qeu si exita la API 
+  //se tiene que hacer un validator que revise qeu si exita la API
   urlFormControl = new FormControl('', [Validators.required]);
   nameFormControl = new FormControl('', [Validators.required]);
   descFormControl = new FormControl('', [Validators.required]);
+  categoryFormControl = new FormControl('', [Validators.required]);
 
   matcher = new MyErrorStateMatcher();
   addApiForm = this.formBuilder.group({
     name: this.nameFormControl,
     description: this.descFormControl,
     url: this.urlFormControl,
-    categoryID: ''
+    categoryID: this.categoryFormControl
   });
 
   constructor(private service:ApiService, private observer: BreakpointObserver, private formBuilder: FormBuilder,) {}
@@ -63,7 +64,8 @@ export class NewApiComponent implements OnInit {
     this.api = {
       name : this.addApiForm.value.name,
       baseUrl : this.addApiForm.value.url,
-      description: this.addApiForm.value.description 
+      description: this.addApiForm.value.description,
+      category: this.addApiForm.value.categoryID
     }
     if(this.api.name=="" || this.api.baseUrl=="" || this.api.description==""){
       alert("Fill in all fields to continue")

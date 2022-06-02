@@ -41,7 +41,7 @@
         <input type="url" name="baseUrl" matInput formControlName="url" [errorStateMatcher]="matcher">
 
         <!--
-                      Lo que este error hace es marcar cunado se ingresa algo que no es un email 
+                      Lo que este error hace es marcar cunado se ingresa algo que no es un email
                       <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                     Please enter a valid URL
                   </mat-error> -->
@@ -62,13 +62,9 @@
       <mat-button-toggle value="postman">Postman Collection</mat-button-toggle>
     </mat-button-toggle-group>
 
-
-
     <div class="buttons">
-      <a mat-button class="button button2" (click)="createApi()" routerLink="/endpoints" >Add API</a>
+      <a mat-button class="button button2" [disabled]="addApiForm.invalid" (click)="createApi()">Add API</a>
       <a mat-button class="button button1" routerLink="/home">Cancel</a>
-      <!-- <button class="button button2" >Add Api</button> -->
-
     </div>
 
   </div>

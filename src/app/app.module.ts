@@ -59,7 +59,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { GroupsComponent } from './components/groups/groups.component';
 import { NewEndpointComponent } from './components/new-endpoint/new-endpoint.component';
 import { EndpointListComponent } from './components/endpoint-list/endpoint-list.component';
-
+import { ApiFormComponent } from './components/api-form/api-form.component';
 
 @NgModule({
   declarations: [
@@ -78,8 +78,9 @@ import { EndpointListComponent } from './components/endpoint-list/endpoint-list.
     GroupsComponent,
     NewEndpointComponent,
     EndpointListComponent,
-    ConfirmDialogComponent
-    
+    ConfirmDialogComponent,
+    ApiFormComponent
+
   ],
   imports: [
     BrowserModule,
@@ -109,7 +110,7 @@ import { EndpointListComponent } from './components/endpoint-list/endpoint-list.
     FormsModule,
     MatInputModule,
     MatDialogModule,
-  
+
     MsalModule.forRoot(new PublicClientApplication
       (
         {
@@ -148,7 +149,7 @@ import { EndpointListComponent } from './components/endpoint-list/endpoint-list.
     provide:HTTP_INTERCEPTORS,
     useClass:MsalInterceptor,
     multi:true
-    
+
   },MsalGuard,AzureAdDemoService],
   bootstrap: [AppComponent,MsalRedirectComponent],
   entryComponents:[ConfirmDialogComponent]
