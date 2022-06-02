@@ -30,7 +30,7 @@ export class NewApiComponent implements OnInit {
   //se tiene que hacer un validator que revise qeu si exita la API
   urlFormControl = new FormControl('', [Validators.required]);
   nameFormControl = new FormControl('', [Validators.required]);
-  descFormControl = new FormControl('', [Validators.required]);
+  descFormControl = new FormControl('', [Validators.required, Validators.minLength(30)]);
   categoryFormControl = new FormControl('', [Validators.required]);
 
   matcher = new MyErrorStateMatcher();

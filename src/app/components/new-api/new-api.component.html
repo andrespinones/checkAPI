@@ -21,10 +21,6 @@
           Description is <strong>required</strong>
         </mat-error>
       </mat-form-field>
-
-
-      <!-- <input class="searchInput"  placeholder="API's Name" aria-label="Search"> -->
-      <!-- <input class="searchInput input2"  placeholder="Describe your API" aria-label="Search"> -->
     <br>
       <mat-form-field appearance="outline">
         <mat-label>Select category</mat-label>
@@ -35,17 +31,10 @@
         </mat-select>
       </mat-form-field>
 
-      <!-- <form class="example-form"> -->
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Base URL</mat-label>
         <input type="url" name="baseUrl" matInput formControlName="url" [errorStateMatcher]="matcher">
 
-        <!--
-                      Lo que este error hace es marcar cunado se ingresa algo que no es un email
-                      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                    Please enter a valid URL
-                  </mat-error> -->
-        <!-- sale este error cuando no se pone nada en el input -->
         <mat-error *ngIf="urlFormControl.hasError('required')">
           Base URL is <strong>required</strong>
         </mat-error>
