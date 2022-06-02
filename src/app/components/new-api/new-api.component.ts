@@ -9,6 +9,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { delay } from 'rxjs/operators';
 import { User } from 'src/app/models/user.model';
 import { CategoryRel } from 'src/app/models/categoryRel';
+import { ValidateUrl } from 'src/app/custom-validators/forbidden.directive';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -28,9 +29,9 @@ export class NewApiComponent implements OnInit {
 
   // required = no se puede ingresar un valor vacio, email - revisa que sea un email
   //se tiene que hacer un validator que revise qeu si exita la API
-  urlFormControl = new FormControl('', [Validators.required]);
+  urlFormControl = new FormControl('', [Validators.required, ValidateUrl]);
   nameFormControl = new FormControl('', [Validators.required]);
-  descFormControl = new FormControl('', [Validators.required, Validators.minLength(30)]);
+  descFormControl = new FormControl('', [Validators.required, Validators.maxLength(200)]);
   categoryFormControl = new FormControl('', [Validators.required]);
 
   matcher = new MyErrorStateMatcher();
