@@ -123,4 +123,10 @@ export class ListViewComponent implements OnInit {
     }
     this.service.updateApiVisibility(this.apiVisibility).subscribe()
   }
+
+  
+
+  deleteApi(apiID: number){
+    this.service.deleteApi(apiID).subscribe()
+  }
 }
