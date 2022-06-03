@@ -1,11 +1,22 @@
 body {
   background-color: #F2EEE9;
+  overflow-y: auto;
+}
+
+h1{
+  font-weight: 750;
 }
 
 .nombre {
   font-weight: 750;
   padding-left: 15%;
-  padding-top: 3%;
+  padding-top: 1%;
+}
+
+.apiData{
+  font-weight:900;
+  padding-top: 5%;
+  margin-left: 10%;
 }
 
 .sidebar {
@@ -193,3 +204,18 @@ th:first-child {
 .spacer {
   flex: 1 1 auto;
 }
+
+.noData{
+  width: 80%;
+  padding: 1rem;
+  align-items: left;
+  font-size: large;
+  background-color: #F2EEE9;
+  box-sizing: border-box;
+
+}
+ .overlay{
+  width: 50%;
+  padding-left: 10%;
+ }
+

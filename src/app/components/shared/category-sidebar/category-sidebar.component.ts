@@ -62,6 +62,11 @@ export class CategorySidebarComponent implements OnInit, AfterViewInit {
       });
   }
 
+  ngOnChanges(){
+    this.refreshCategories();
+    this.refreshApis();
+  }
+
   refreshCategories(){
     this.service.getAllCategories().subscribe(data=>{
       this.CategoryList = data;

@@ -9,6 +9,7 @@ import { Favorite } from '../models/favorite';
 import { User } from '../models/user.model';
 import { Parameter } from '../models/parameter';
 import { CategoryRel} from '../models/categoryRel';
+import { ApiId } from '@azure/msal-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -119,4 +120,15 @@ export class ApiService {
       )}
       );
   }
+
+  deleteApi(id:any){
+    return this.httpclient.delete(this.APIURL+'/delete_api/' + id, {headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+    )}
+    );
+  }
+
+
 }
+
+

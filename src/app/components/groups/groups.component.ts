@@ -1,8 +1,10 @@
-import { Component, OnInit, Output,EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { Endpoint } from 'src/app/models/endpoint';
 import { endpointSidebar } from 'src/app/models/endpointSidebar';
+import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroupDirective, NgForm, Validators, FormBuilder } from '@angular/forms';
 
 
 
@@ -12,12 +14,20 @@ import { endpointSidebar } from 'src/app/models/endpointSidebar';
   styleUrls: ['./groups.component.css']
 })
 
-export class GroupsComponent  implements OnInit{
+export class GroupsComponent implements OnInit {
 
+
+  showForm: boolean = false;
+  group: any;
   //lista sin info de la base de datos
   DROPDOWN_LIST: string[];
 
-  constructor() {
+  groupForm = this.formBuilder.group({
+    group: ''
+  });
+
+
+  constructor(private formBuilder: FormBuilder) {
     this.DROPDOWN_LIST = [
       "Pet", "Srtore", "User"
     ]
@@ -27,12 +37,21 @@ export class GroupsComponent  implements OnInit{
 
   }
 
-  isEditEnable : boolean = true;
-    category : any;
-  
-    onEdit(){
-      this.isEditEnable =!this.isEditEnable;
-    }
+
+
+  onEdit() {
+    this.showForm = !this.showForm;
+  }
+
+  update() {
+    //recibe el valor del input - group - nombre del grupo
+    console.log("Ya sirve el enter ", this.group)
+    this.groupForm.reset();
+    //falta que mande llamar la funcion que agrega el grupo a la bd 
+    //hacer un refresh de la sidebar para que ya salaga el nuevo grupo 
+  }
+
+
 
   // @Output() outputToParent = new EventEmitter<Endpoint>();
   // constructor(private service:ApiService, private route: ActivatedRoute) { }

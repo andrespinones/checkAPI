@@ -61,6 +61,10 @@ import { NewEndpointComponent } from './components/new-endpoint/new-endpoint.com
 import { EndpointListComponent } from './components/endpoint-list/endpoint-list.component';
 import { ApiFormComponent } from './components/api-form/api-form.component';
 
+//overlay for addapi
+import { OverlayModule } from '@angular/cdk/overlay';
+import { A11yModule } from '@angular/cdk/a11y';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -110,6 +114,8 @@ import { ApiFormComponent } from './components/api-form/api-form.component';
     FormsModule,
     MatInputModule,
     MatDialogModule,
+    OverlayModule,
+    A11yModule,
 
     MsalModule.forRoot(new PublicClientApplication
       (
