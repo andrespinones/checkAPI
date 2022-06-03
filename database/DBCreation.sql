@@ -79,44 +79,39 @@
 -- -- FOREIGN KEYS ADDITION
 -- ALTER TABLE dbo.CategoryAPI
 --     ADD CONSTRAINT FK_cat_CategoryAPI FOREIGN KEY (categoryID)
---         REFERENCES dbo.Category (categoryID)
+--         REFERENCES dbo.Category (categoryID) ON DELETE CASCADE
 -- ;
 -- ALTER TABLE dbo.CategoryAPI
 --     ADD CONSTRAINT FK_api_CategoryAPI FOREIGN KEY (apiID)
---         REFERENCES dbo.API (apiID)
+--         REFERENCES dbo.API (apiID) ON DELETE CASCADE
 -- ;
-
--- -- ALTER TABLE dbo.Endpoint
--- --     ADD CONSTRAINT FK_api_endpoint FOREIGN KEY (apiID)
--- --         REFERENCES dbo.API (apiID)
--- -- ;
 
 -- ALTER TABLE dbo.Endpoint
 --     ADD CONSTRAINT FK_group_endpoint FOREIGN KEY (groupID)
---         REFERENCES dbo.Groups (groupID)
+--         REFERENCES dbo.Groups (groupID) ON DELETE CASCADE
 -- ;
 
 -- ALTER TABLE dbo.Groups
 --     ADD CONSTRAINT FK_api_groups FOREIGN KEY (apiID)
---         REFERENCES dbo.API (apiID)
+--         REFERENCES dbo.API (apiID) ON DELETE CASCADE
 -- ;
 
 -- ALTER TABLE dbo.Favorites
 --     ADD CONSTRAINT FK_api_Favorites FOREIGN KEY (apiID)
---         REFERENCES dbo.API (apiID)
+--         REFERENCES dbo.API (apiID) ON DELETE CASCADE
 -- ALTER TABLE dbo.Favorites
 --     ADD CONSTRAINT FK_user_Favorites FOREIGN KEY (userID)
---         REFERENCES dbo.Users (userID)
+--         REFERENCES dbo.Users (userID) ON DELETE CASCADE
 
 
 -- ALTER TABLE dbo.ParametersEndpoints
 --     ADD CONSTRAINT FK_parameter_paramsEnds FOREIGN KEY (paramID)
---         REFERENCES dbo.Parameter (paramID)
+--         REFERENCES dbo.Parameter (paramID) ON DELETE CASCADE
 -- ;
 
 -- ALTER TABLE dbo.ParametersEndpoints
 --     ADD CONSTRAINT FK_endpoint_paramsEnds FOREIGN KEY (endpointID)
---         REFERENCES dbo.Endpoint (endpointID)
+--         REFERENCES dbo.Endpoint (endpointID) ON DELETE CASCADE
 -- ;
 
 -- INSERT INTO Category (name)
