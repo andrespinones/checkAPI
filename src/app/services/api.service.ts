@@ -112,4 +112,11 @@ export class ApiService {
     )}
     );
   }
+
+  updateApiVisibility(apiBool:any){
+    return this.httpclient.put<any>(this.APIURL+'/api_visibility' , apiBool,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+      )}
+      );
+  }
 }

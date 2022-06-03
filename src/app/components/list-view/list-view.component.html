@@ -1,37 +1,39 @@
-    <mat-form-field appearance="standard">
-      <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input class="searchBar">
-    </mat-form-field>
-    <a mat-button id="addButton" *ngIf="isAdmin()" [routerLink]="['/addApi']">
-      New <mat-icon>add_box</mat-icon> 
-    </a>
+<mat-form-field appearance="standard">
+  <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input class="searchBar">
+</mat-form-field>
+<a mat-button id="addButton" *ngIf="isAdmin()" [routerLink]="['/addApi']">
+  New <mat-icon>add_box</mat-icon>
+</a>
 <table mat-table [dataSource]="dataSource">
   <ng-container matColumnDef="isFavorite">
     <th mat-header-cell *matHeaderCellDef></th>
     <!-- <td mat-cell *matCellDef="let api">{{api.isFavorite}}</td> -->
-    <td mat-cell *matCellDef="let api" >
-      <button mat-icon-button (click)="$event.stopPropagation(); modifyFav(api);"><!-- modifyFav(api.isFavorite,api.apiID) -->
+    <td mat-cell *matCellDef="let api">
+      <button mat-icon-button (click)="$event.stopPropagation(); modifyFav(api);">
+        <!-- modifyFav(api.isFavorite,api.apiID) -->
         <mat-icon [ngClass]="api.isFavorite? 'true' : 'false'">star</mat-icon>
       </button>
     </td>
   </ng-container>
-    <ng-container matColumnDef="Name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
-        <td mat-cell *matCellDef="let api">{{api.name}}</td>
-    </ng-container>
-    <ng-container matColumnDef="Description">
-        <th mat-header-cell *matHeaderCellDef>Description</th>
-        <td mat-cell *matCellDef="let api">{{api.description}}</td>
-    </ng-container>
-    <ng-container matColumnDef="Visible">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let api">
-        <button mat-icon-button (click)="$event.stopPropagation();" *ngIf="isAdmin()">
-          <mat-icon>visibility</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay" (click)="apiDetailRedirect(myRowData.apiID)"></tr>
+  <ng-container matColumnDef="Name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let api">{{api.name}}</td>
+  </ng-container>
+  <ng-container matColumnDef="Description">
+    <th mat-header-cell *matHeaderCellDef>Description</th>
+    <td mat-cell *matCellDef="let api">{{api.description}}</td>
+  </ng-container>
+  <ng-container matColumnDef="Visible">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let api">
+      <button mat-icon-button (click)="$event.stopPropagation(); confirmAction(api);" *ngIf="isAdmin()">
+        <mat-icon *ngIf="api.isEnabled">visibility</mat-icon>
+        <mat-icon *ngIf="!api.isEnabled">visibility_off</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"
+    (click)="myRowData.isEnabled? apiDetailRedirect(myRowData.apiID):''"
+    [ngStyle]="{'background-color':myRowData.isEnabled ? 'white' : 'grey'}"></tr>
 </table>
-
-

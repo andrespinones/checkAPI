@@ -12,6 +12,7 @@ import { Favorite } from 'src/app/models/favorite';
 import { NgClass } from '@angular/common';
 import { style } from '@angular/animations';
 import { User } from 'src/app/models/user.model';
+import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
   selector: 'app-list-view',
@@ -20,10 +21,11 @@ import { User } from 'src/app/models/user.model';
 })
 export class ListViewComponent implements OnInit {
   currentUser?:User;
-  constructor(private service:ApiService, private aserv:AuthService, private router: Router) { }
+  constructor(private service:ApiService, private aserv:AuthService, private router: Router, private popupService:DialogService) { }
   dataSource!: MatTableDataSource<any>;
   @Input() ApiList:Api[] = [];
   favorite?:Favorite;
+  apiVisibility:any;
   api:Api = {
     apiID:         0,
     name:          "",
@@ -91,6 +93,37 @@ export class ListViewComponent implements OnInit {
       return false;
     }
   }
+  
+  confirmAction(api:Api){
+    if(api.isEnabled == false){
+      this.popupService.openConfirmaDialog("Are you sure you want to enable this API?\nUsers will be able to view its detail.")
+      .afterClosed().subscribe(resp =>{
+        if(resp){
+          this.toggleEnabled(api)
+        }
+      })
+    }
+    else{
+      this.popupService.openConfirmaDialog("Are you sure you want to disable this API?\nUsers will not be able to view its detail anymore.")
+      .afterClosed().subscribe(resp =>{
+        if(resp){
+          this.toggleEnabled(api)
+        }
+      })
+    }
+  }
 
-
+  toggleEnabled(api:Api){ 
+    if(api.isEnabled == false){
+      api.isEnabled = true;
+    }
+    else{
+      api.isEnabled = false;
+    }
+    this.apiVisibility = {
+      apiID: api.apiID,
+      isEnabled: api.isEnabled
+    }
+    this.service.updateApiVisibility(this.apiVisibility).subscribe()
+  }
 }
