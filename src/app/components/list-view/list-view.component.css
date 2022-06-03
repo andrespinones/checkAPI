@@ -64,8 +64,9 @@ td.mat-cell:last-child {
   background-color: #ffffff;
 }
 
-button:hover{
-  background-color: #c2bfbf;
+
+#deleteBtn:hover{
+  color: red;
 }
 
 #addButton{

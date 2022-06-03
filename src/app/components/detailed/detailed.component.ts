@@ -18,20 +18,8 @@ export class DetailedComponent  implements OnInit{
   endpointID!:number;
   apiData!:Api[];
   apiID:any;
-  pet: Pet;
-  pets: Pet[];
-
   constructor(private service:ApiService, private route: ActivatedRoute) {
     
-    this.pet = { id: 1, name: "doggie", photoURLs: "photo." };
-    
-    this.pets = [
-      {
-        id: 1,
-        name: "doggie",
-        photoURLs: "photo1.jpg"
-      }
-    ];
   }
   ngOnInit(): void {
     const id = this.route.snapshot.queryParamMap.get('id');
@@ -51,18 +39,13 @@ export class DetailedComponent  implements OnInit{
         })
         this.service.getParamsbyEndpointID(endpointId).subscribe(resp=>{
           this.receivedParams = resp;
+          console.log(this.receivedParams);
         })
   }
   getOutputEndpointID(received:any){
     this.endpointID=received;
     this.getEndpointDetail(this.endpointID)
   }
-}
-
-export class Pet {
-  id: Number | undefined;
-  name!: string;
-  photoURLs!: string;
 }
 
 export class RespCode {
