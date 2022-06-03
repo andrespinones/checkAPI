@@ -3,6 +3,7 @@
 
 body{
     background-color: #F2EEE9;
+    overflow-y: auto;
 }
 
 .nombre{
