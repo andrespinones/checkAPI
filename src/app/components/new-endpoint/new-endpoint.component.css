@@ -112,3 +112,10 @@ body{
     .smallDesc{
         width: 42%;
     }
+    #addButton{
+      border-radius: 10px;
+    }
+    #addButton:hover{
+      background-color:rgba(158, 158, 158, 0.2); 
+      color:#FF5C00;
+    }
