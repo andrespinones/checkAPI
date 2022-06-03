@@ -32,7 +32,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatInputModule} from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
-
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTabsModule} from '@angular/material/tabs';
 
 //Navbar
 import { MatMenuModule } from '@angular/material/menu';
@@ -64,6 +65,7 @@ import { ApiFormComponent } from './components/api-form/api-form.component';
 //overlay for addapi
 import { OverlayModule } from '@angular/cdk/overlay';
 import { A11yModule } from '@angular/cdk/a11y';
+import { ApiParamsComponent } from './components/api-params/api-params.component';
 
 @NgModule({
   declarations: [
@@ -83,8 +85,8 @@ import { A11yModule } from '@angular/cdk/a11y';
     NewEndpointComponent,
     EndpointListComponent,
     ConfirmDialogComponent,
-    ApiFormComponent
-
+    ApiFormComponent,
+    ApiParamsComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,11 +103,12 @@ import { A11yModule } from '@angular/cdk/a11y';
     MatSelectModule,
     MatButtonToggleModule,
     MatInputModule,
-    // MatSidenavContainer,
+    MatProgressSpinnerModule,
     MatListModule,
     MatSidenavModule,
     MatDividerModule,
     MatTableModule,
+    MatTabsModule,
     MatExpansionModule,
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,

@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { CategorySidebarComponent } from './components/shared/category-sidebar/category-sidebar.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { ApiFormComponent } from './components/api-form/api-form.component';
+import { ApiParamsComponent} from './components/api-params/api-params.component'
 
 
 const routes: Routes = [
@@ -53,6 +54,10 @@ const routes: Routes = [
   {
     path: 'admin-users',
     component: UserListComponent,
+  },
+  {
+    path: 'apitester',
+    component: ApiParamsComponent
   }
 ];
 
