@@ -24,6 +24,14 @@ export class NewEndpointComponent {
 
   matcher = new MyErrorStateMatcher();
 
+  params: any[] = [{
+    name: '',
+    type: '',
+    desc: ''
+  }];
+  
+  // values: string[] = [];
+
   DROPDOWN_LIST: Method[];
 
   DROPDOWN_LIST2: string[];
@@ -67,6 +75,14 @@ export class NewEndpointComponent {
   removeContactField(index: number): void {
     if (this.contacts.length > 1) this.contacts.removeAt(index);
     else this.contacts.patchValue([{phoneNo: null, emailAddr: null}]);
+  }
+
+  removevalue(i: number){
+    this.params.splice(i,1);
+  }
+
+  addvalue(){
+    this.params.push({name: ""});
   }
 
    
