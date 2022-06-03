@@ -1,5 +1,9 @@
 <h4 class="sideNav-title">Groups</h4>
 
+<button mat-button id="addButton" (click)="onEdit()" ng-show="!showForm"> 
+    Add Group <mat-icon>add_box</mat-icon></button>
+
+
 <ul class="list-group">
     <a md-button>
         <!-- pasa por todos los grupos de una api y los despliega como lista en la sidebar -->
@@ -9,13 +13,13 @@
     </a>
 </ul>
 
-<div>
-	<mat-form-field class="example-full-width" *ngIf="isEditEnable">
+<form [formGroup]="groupForm">
+	<mat-form-field class="example-full-width" *ngIf="showForm" (keyup.enter)="update()">
         <!-- <mat-icon matPrefix>add</mat-icon> -->
-		<input matInput placeholder="+ Add Category" [(ngModel)]="category" >
+		<input matInput  placeholder="New Group" formControlName="group" [(ngModel)]="group" >
         
   </mat-form-field>
-</div>
+</form>
 
 
 

@@ -4,9 +4,26 @@
     <div class="sidebar">
         <!-- se tiene que agregar algo así para traer los endpoints de lista -->
         <!-- (outputToParent)="getOutputEndpoint($event)" -->
-
         <app-groups></app-groups>
+    </div>
 
+
+    <ng-template class="overlay" cdkConnectedOverlay cdkConnectedOverlayHasBackdrop="true" [cdkConnectedOverlayOrigin]="originOverlay"
+        [cdkConnectedOverlayOpen]="showPanel$" (backdropClick)="toggleDropdown()">
+        <div>
+            <section class="noData mat-elevation-z1">
+                No data to display, please add a group to continue
+            </section>
+        </div>
+    </ng-template>
+
+
+
+    <div class="apiData">
+        <span>
+            <h1>{{apiname}}</h1>
+            <h3 id="baseURL">Base URL: {{apibaseUrl}}</h3>
+        </span>
     </div>
 
 
@@ -14,12 +31,16 @@
     <h1 class="nombre">Store</h1>
 
     <!-- lista de los endpoints que pertenecen al grupo -->
-    <table class="info">
+    <table class="info" cdkOverlayOrigin #originOverlay="cdkOverlayOrigin">
         <!-- falta ponerle color a la row dependiendo del tipo de metodo -->
-        <tr *ngFor="let item of DROPDOWN_LIST" >
-            <th [ngClass]="{get: item.type == 'GET', post: item.type == 'POST', put: item.type == 'PUT', delete: item.type == 'DELETE'}">{{item.type}}</th>
-            <th [ngClass]="{get2: item.type == 'GET', post2: item.type == 'POST', put2: item.type == 'PUT', delete2: item.type == 'DELETE'}">{{item.path}}</th>
-          </tr>
+        <tr *ngFor="let item of DROPDOWN_LIST">
+            <th
+                [ngClass]="{get: item.type == 'GET', post: item.type == 'POST', put: item.type == 'PUT', delete: item.type == 'DELETE'}">
+                {{item.type}}</th>
+            <th
+                [ngClass]="{get2: item.type == 'GET', post2: item.type == 'POST', put2: item.type == 'PUT', delete2: item.type == 'DELETE'}">
+                {{item.path}}</th>
+        </tr>
     </table>
     <div class="spacer"></div>
     <a mat-button class="button button2" routerLink="/addEndpoint">
