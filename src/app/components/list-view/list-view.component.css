@@ -64,8 +64,8 @@ td.mat-cell:last-child {
   background-color: #ffffff;
 }
 
-.disabled{
-  background-color: grey;
+button:hover{
+  background-color: #c2bfbf;
 }
 
 #addButton{

@@ -6,8 +6,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { Favorite } from 'src/app/models/favorite';
 import { NgClass } from '@angular/common';
 import { style } from '@angular/animations';
@@ -20,42 +20,39 @@ import { DialogService } from 'src/app/services/dialog.service';
   styleUrls: ['./list-view.component.css']
 })
 export class ListViewComponent implements OnInit {
-  currentUser?:User;
-  constructor(private service:ApiService, private aserv:AuthService, private router: Router, private popupService:DialogService) { }
+  currentUser?: User;
+  constructor(private service: ApiService, private aserv: AuthService, private router: Router, private popupService: DialogService) { }
   dataSource!: MatTableDataSource<any>;
-  @Input() ApiList:Api[] = [];
-  favorite?:Favorite;
-  apiVisibility:any;
-  api:Api = {
-    apiID:         0,
-    name:          "",
-    baseUrl:       "",
-    description:    "",
-    isFavorite:    false,
-    isEnabled:      true
+  @Input() ApiList: Api[] = [];
+  favorite?: Favorite;
+  apiVisibility: any;
+  api: Api = {
+    apiID: 0,
+    name: "",
+    baseUrl: "",
+    description: "",
+    isFavorite: false,
+    isEnabled: true
   }
-  columnsToDisplay = ['isFavorite','Name', 'Description','Visible']
+  columnsToDisplay = ['isFavorite', 'Name', 'Description', 'Visible', 'Delete']
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     this.refreshApis();
     //this.getToken();
   }
 
-  ngOnChanges(){
+  ngOnChanges() {
     console.log("onChanges apiList: ");
     console.log(this.ApiList);
     this.dataSource = new MatTableDataSource<Api>(this.ApiList);
   }
 
-  refreshApis(){
-    // this.service.getAllApis().subscribe(resp=>{
-    //   this.ApiList = resp;
-      console.log("child apiList: ");
-      console.log(this.ApiList);
-      this.dataSource = new MatTableDataSource<Api>(this.ApiList);
-    // });
+  refreshApis() {
+    console.log("child apiList: ");
+    console.log(this.ApiList);
+    this.dataSource = new MatTableDataSource<Api>(this.ApiList);
   }
-  apiDetailRedirect(id: number){
+  apiDetailRedirect(id: number) {
     let route = '/api/detail';
     this.router.navigate([route], { queryParams: { id: id } });
   }
@@ -69,55 +66,55 @@ export class ListViewComponent implements OnInit {
     console.log(this.dataSource);
   }
 
-  modifyFav(api:Api){ 
+  modifyFav(api: Api) {
     let id = this.currentUser!.userID;
     this.favorite = {
-      apiID : api.apiID,
-      userID : id  
+      apiID: api.apiID,
+      userID: id
     }
-    if(api.isFavorite == false){
+    if (api.isFavorite == false) {
       this.service.addFavorite(this.favorite).subscribe();
       api.isFavorite = true;
     }
-    else{
+    else {
       //servicio de borrar registro de favorito(this.favorite)
       this.service.deleteFavorite(this.favorite).subscribe()
       api.isFavorite = false;
     }
   }
-  isAdmin(): boolean{
-    if(this.currentUser?.role == "Admin"){
+  isAdmin(): boolean {
+    if (this.currentUser?.role == "Admin") {
       return true;
     }
-    else{
+    else {
       return false;
     }
   }
-  
-  confirmAction(api:Api){
-    if(api.isEnabled == false){
+
+  confirmVisibilityAction(api: Api) {
+    if (api.isEnabled == false) {
       this.popupService.openConfirmaDialog("Are you sure you want to enable this API?\nUsers will be able to view its detail.")
-      .afterClosed().subscribe(resp =>{
-        if(resp){
-          this.toggleEnabled(api)
-        }
-      })
+        .afterClosed().subscribe(resp => {
+          if (resp) {
+            this.toggleEnabled(api)
+          }
+        })
     }
-    else{
+    else {
       this.popupService.openConfirmaDialog("Are you sure you want to disable this API?\nUsers will not be able to view its detail anymore.")
-      .afterClosed().subscribe(resp =>{
-        if(resp){
-          this.toggleEnabled(api)
-        }
-      })
+        .afterClosed().subscribe(resp => {
+          if (resp) {
+            this.toggleEnabled(api)
+          }
+        })
     }
   }
 
-  toggleEnabled(api:Api){ 
-    if(api.isEnabled == false){
+  toggleEnabled(api: Api) {
+    if (api.isEnabled == false) {
       api.isEnabled = true;
     }
-    else{
+    else {
       api.isEnabled = false;
     }
     this.apiVisibility = {
