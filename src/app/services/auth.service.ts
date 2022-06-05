@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders, HttpBackend} from '@angular/common/http'
-import { BehaviorSubject, Observable } from 'rxjs'
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { AuthResponseData } from '../auth-response-data';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root' 
+  providedIn: 'root'
 })
 export class AuthService {
   private httpclient: HttpClient;
-  
+
   constructor(private httpBackend: HttpBackend, private router:Router) {
     this.httpclient = new HttpClient(httpBackend);
   }
@@ -22,7 +22,7 @@ export class AuthService {
   }
 
   handleUser(response:AuthResponseData){
-    //meter el objeto dentro de un key 
+    //meter el objeto dentro de un key
     const user = new User(
       response.email,
       response.token,
@@ -35,5 +35,3 @@ export class AuthService {
     this.router.navigateByUrl('home')
   }
 }
-
-
