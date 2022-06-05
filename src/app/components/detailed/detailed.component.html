@@ -1,70 +1,76 @@
 <body>
-<app-navbar ></app-navbar>
-<div class="sidebar"><app-endpoint-sidebar (outputToParent)="getOutputEndpointID($event)"></app-endpoint-sidebar></div>
-<div class = "apiData">
-  <span *ngFor="let api of apiData">
-    <h1>{{api.name}}</h1>
-    <h3 id = "baseURL">Base URL: {{api.baseUrl}}</h3>
+  <app-navbar></app-navbar>
+  <div class="sidebar">
+    <app-endpoint-sidebar (outputToParent)="getOutputEndpointID($event)"></app-endpoint-sidebar>
+  </div>
+  <div class="apiData">
+    <span *ngFor="let api of apiData">
+      <h1>{{api.name}}</h1>
+      <h3 id="baseURL">Base URL: {{api.baseUrl}}</h3>
+    </span>
+  </div>
+  <span *ngFor="let endpoint of receivedEndpoint">
+    <div class="detailContent">
+      <!-- <p><a href="{{baseURL}}">Base URL: {{baseURL}}</a></p> -->
+      <h2 class="nombre">{{endpoint.name}}</h2>
+      <table class="info">
+        <tr>
+          <th
+            [ngClass]="{get: endpoint.methodType == 'GET', post: endpoint.methodType == 'POST', put: endpoint.methodType == 'PUT', delete: endpoint.methodType == 'DELETE'}">
+            {{endpoint.methodType}}</th>
+          <th
+            [ngClass]="{get2: endpoint.methodType == 'GET', post2: endpoint.methodType == 'POST', put2: endpoint.methodType == 'PUT', delete2: endpoint.methodType == 'DELETE'}">
+            {{endpoint.path}}</th>
+          <th
+            [ngClass]="{get2: endpoint.methodType == 'GET', post2: endpoint.methodType == 'POST', put2: endpoint.methodType == 'PUT', delete2: endpoint.methodType == 'DELETE'}">
+            Last response: <span>{{endpoint.lastResp}}</span></th>
+          <th
+            [ngClass]="{get2: endpoint.methodType == 'GET', post2: endpoint.methodType == 'POST', put2: endpoint.methodType == 'PUT', delete2: endpoint.methodType == 'DELETE'}">
+            2 days ago</th>
+        </tr>
+      </table>
+      <br>
+      <p>{{endpoint.endpointDescription}}</p>
+      <div *ngIf="receivedParams.length!=0">
+        <p class="separador">PARAMETERS</p>
+        <table class="params">
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th> Description</th>
+            <th></th>
+          </tr>
+          <br>
+          <tr *ngFor="let param of receivedParams">
+            <td>{{param.paramName}}</td>
+            <td>{{param.dataType}}</td>
+            <td>{{param.paramDescription}}</td>
+            <td>
+              <form>
+                <input class="searchInput" type="search" placeholder={{param.paramName}} aria-label="Search">
+              </form>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <br>
+      <p class="separador">Responses</p>
+      <table class="params">
+        <tr>
+          <th>Code</th>
+          <th>Description</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <br>
+        <tr>
+          <td>{{endpoint.number}}</td>
+          <td>{{endpoint.respDescription}}</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+      <!-- <pre><p>{{pet | json}}</p></pre> -->
+    </div>
   </span>
-</div>
-<span *ngFor="let endpoint of receivedEndpoint">
-<div class="detailContent">
-<!-- <p><a href="{{baseURL}}">Base URL: {{baseURL}}</a></p> -->
-<h2 class="nombre">{{endpoint.name}}</h2>
-
-<table class="info">
-    <tr>
-        <th [ngClass]="{get: endpoint.methodType == 'GET', post: endpoint.methodType == 'POST', put: endpoint.methodType == 'PUT', delete: endpoint.methodType == 'DELETE'}">{{endpoint.methodType}}</th>
-        <th [ngClass]="{get2: endpoint.methodType == 'GET', post2: endpoint.methodType == 'POST', put2: endpoint.methodType == 'PUT', delete2: endpoint.methodType == 'DELETE'}">{{endpoint.path}}</th>
-        <th [ngClass]="{get2: endpoint.methodType == 'GET', post2: endpoint.methodType == 'POST', put2: endpoint.methodType == 'PUT', delete2: endpoint.methodType == 'DELETE'}"> Last response: <span>{{endpoint.lastResp}}</span></th>
-        <th [ngClass]="{get2: endpoint.methodType == 'GET', post2: endpoint.methodType == 'POST', put2: endpoint.methodType == 'PUT', delete2: endpoint.methodType == 'DELETE'}"> 2 days ago</th>
-      </tr>
-</table>
-<br>
-<p>{{endpoint.endpointDescription}}</p>
-
-<p class="separador">PARAMETERS</p>
-
-<table class="params">
-  <tr>
-    <th>Name</th>
-    <th>Type</th>
-    <th> Description</th>
-    <th></th>
-  </tr>
-  <br>
-  <tr *ngFor="let param of receivedParams" >
-    <td>{{param.paramName}}</td>
-    <td>{{param.dataType}}</td>
-    <td> {{param.paramDescription}}</td>
-    <td>
-      <form>
-        <input class="searchInput" type="search" placeholder={{param.paramName}} aria-label="Search">
-      </form>
-    </td>
-  </tr>
-
-</table>
-<br>
-<p class="separador">Responses</p>
-
-<table class="params">
-  <tr>
-    <th>Code</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-  </tr>
-  <br>
-  <tr>
-    <td>{{endpoint.number}}</td>
-    <td>{{endpoint.respDescription}}</td>
-    <td></td>
-    <td></td>
-  </tr>
-</table>
-<pre><p>{{pet | json}}</p></pre>
-</div>
-</span>
-
 </body>
