@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders, HttpBackend} from '@angular/common/http'
-import { Observable } from 'rxjs'
+import { map, Observable } from 'rxjs'
 import { Api } from '../models/apis';
 import { Category } from '../models/category';
 import { Endpoint } from '../models/endpoint';
@@ -57,7 +57,21 @@ export class ApiService {
       'Content-Type': 'application/json', 'access-token':this.token}
       )}
       );
-  }
+    }
+
+/*   getHasUploaded() {
+    return this.http
+    .get<any>(`${this._fullPath}/getHasUploaded`)
+    .pipe(
+      map((resp) => {
+        //console.log(resp[0].has_uploaded , "SQL");
+        if (resp[0] === undefined) {
+          return false;
+        }
+        return resp[0].has_uploaded;
+      })
+    );
+  } */
   getParamsbyEndpointID(endpointID:number){
     return this.httpclient.get<Parameter[]>(this.APIURL+'/endpoint/params/'+ endpointID,{headers: new HttpHeaders({
       'Content-Type': 'application/json', 'access-token':this.token}
