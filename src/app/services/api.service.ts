@@ -25,6 +25,7 @@ export class ApiService {
   //valores hardcodeados del endpoint y el token solo para pruebas
   readonly token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjaGVjayI6dHJ1ZSwiaWF0IjoxNjUxMjA2NjQ0fQ.TJgprpw4KKdJ6wVku9uecwfMhQFNaucvF2uBgr6Lr6I'
   //valores hardcodeados del endpoint y el token solo para pruebas^^
+
   getAllApis(): Observable<Api[]>{ //must have userID: any as parameter
     let id = this.currentUser.userID
     return this.httpclient.get<Api[]>(this.APIURL+'/apis/' + id,{headers: new HttpHeaders({ //hardcodeado
@@ -46,18 +47,21 @@ export class ApiService {
       )}
       );
   }
+
   getApibyID(apiID:number){
     return this.httpclient.get<Api[]>(this.APIURL+'/api/'+ apiID,{headers: new HttpHeaders({
       'Content-Type': 'application/json', 'access-token':this.token}
       )}
       );
   }
+
   getEndpointbyID(endpointID:number){
     return this.httpclient.get<Endpoint[]>(this.APIURL+'/endpoint/'+ endpointID,{headers: new HttpHeaders({
       'Content-Type': 'application/json', 'access-token':this.token}
       )}
       );
   }
+  
   getParamsbyEndpointID(endpointID:number){
     return this.httpclient.get<Parameter[]>(this.APIURL+'/endpoint/params/'+ endpointID,{headers: new HttpHeaders({
       'Content-Type': 'application/json', 'access-token':this.token}
@@ -92,6 +96,7 @@ export class ApiService {
     )}
     );
   }
+
   //servicio delete revisar formato body 
   deleteFavorite(favorite:Favorite){
     return this.httpclient.delete(this.APIURL+'/favorite', {"body": favorite, headers: new HttpHeaders({
@@ -117,8 +122,8 @@ export class ApiService {
   updateApiVisibility(apiBool:any){
     return this.httpclient.put<any>(this.APIURL+'/api_visibility' , apiBool,{headers: new HttpHeaders({
       'Content-Type': 'application/json', 'access-token':this.token}
-      )}
-      );
+    )}
+    );
   }
 
   deleteApi(id:any){
@@ -127,8 +132,6 @@ export class ApiService {
     )}
     );
   }
-
-
 }
 
 

@@ -18,7 +18,6 @@ import { AzureAdDemoService } from './services/azure-ad-demo.service';
 import { AppComponent } from './app.component';
 import { ListViewComponent } from './components/list-view/list-view.component';
 import { LoginComponent } from './components/login/login.component';
-import { CardComponent } from './components/card/card.component';
 import { DetailedComponent } from './components/detailed/detailed.component';
 //Material Imports
 import { MatCardModule } from '@angular/material/card';
@@ -75,9 +74,7 @@ import { ApiParamsComponent } from './components/api-params/api-params.component
     HomeComponent,
     CategorySidebarComponent,
     NavbarComponent,
-    CardComponent,
     DetailedComponent,
-    CardComponent,
     UserListComponent,
     EndpointSidebarComponent,
     NewApiComponent,
@@ -154,7 +151,7 @@ import { ApiParamsComponent } from './components/api-params/api-params.component
   ],
   providers: [
 
-    CardComponent,{
+    {
     provide:HTTP_INTERCEPTORS,
     useClass:MsalInterceptor,
     multi:true

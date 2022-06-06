@@ -23,10 +23,12 @@ export class ListViewComponent implements OnInit {
   currentUser?: User;
   constructor(private service: ApiService, private aserv: AuthService, private router: Router,
              private popupService: DialogService) { }
+
   dataSource!: MatTableDataSource<any>;
   @Input() ApiList: Api[] = [];
   favorite?: Favorite;
   apiVisibility: any;
+
   api: Api = {
     apiID: 0,
     name: "",
@@ -36,6 +38,7 @@ export class ListViewComponent implements OnInit {
     isEnabled: true
   }
   columnsToDisplay = ['isFavorite', 'Name', 'Description', 'Visible', 'Delete']
+
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     this.refreshApis();
@@ -84,6 +87,7 @@ export class ListViewComponent implements OnInit {
       api.isFavorite = false;
     }
   }
+  
   isAdmin(): boolean {
     if (this.currentUser?.role == "Admin") {
       return true;
@@ -125,8 +129,6 @@ export class ListViewComponent implements OnInit {
     }
     this.service.updateApiVisibility(this.apiVisibility).subscribe()
   }
-
-  
 
   deleteApi(apiID: number){
     this.service.deleteApi(apiID).subscribe()
