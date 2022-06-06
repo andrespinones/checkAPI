@@ -129,4 +129,18 @@ export class ListViewComponent implements OnInit {
   deleteApi(apiID: number){
     this.service.deleteApi(apiID).subscribe()
   }
+
+  confirmDeleteApi(apiID: number){
+    this.popupService.openConfirmaDialog("Are you sure you want to delete this API? \n Once deleted you can not undo this action.")
+    .afterClosed().subscribe(resp => {
+      if(resp){
+        this.popupService.openConfirmaDialog("Confirm that you want to delete this API")
+        .afterClosed().subscribe(data=>{
+          if(data){
+            this.deleteApi(apiID);
+          }
+        })
+      }
+    })
+  }
 }

@@ -35,7 +35,7 @@
   <ng-container matColumnDef="Delete">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let api">
-      <button mat-icon-button (click)="$event.stopPropagation();deleteApi(api.apiID)" *ngIf="isAdmin()">
+      <button mat-icon-button (click)="$event.stopPropagation();confirmDeleteApi(api.apiID)" *ngIf="isAdmin()">
         <mat-icon id="deleteBtn">delete</mat-icon>
       </button>
     </td>
