@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { Api } from 'src/app/models/apis';
@@ -21,7 +21,8 @@ import { DialogService } from 'src/app/services/dialog.service';
 })
 export class ListViewComponent implements OnInit {
   currentUser?: User;
-  constructor(private service: ApiService, private aserv: AuthService, private router: Router, private popupService: DialogService) { }
+  constructor(private service: ApiService, private aserv: AuthService, private router: Router,
+             private popupService: DialogService) { }
   dataSource!: MatTableDataSource<any>;
   @Input() ApiList: Api[] = [];
   favorite?: Favorite;
@@ -52,6 +53,7 @@ export class ListViewComponent implements OnInit {
     console.log(this.ApiList);
     this.dataSource = new MatTableDataSource<Api>(this.ApiList);
   }
+
   apiDetailRedirect(id: number) {
     let route = '/api/detail';
     this.router.navigate([route], { queryParams: { id: id } });
@@ -128,6 +130,10 @@ export class ListViewComponent implements OnInit {
 
   deleteApi(apiID: number){
     this.service.deleteApi(apiID).subscribe()
+    // use filter method on data source so it updates on real time
+    this.dataSource.data = this.dataSource.data.filter(
+      (a: Api) => a.apiID !== apiID
+    );
   }
 
   confirmDeleteApi(apiID: number){
