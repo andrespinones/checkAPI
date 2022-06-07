@@ -33,26 +33,33 @@
             <th></th>
           </tr>
           <br>
-          <tr *ngFor="let param of receivedParams">
+          <tr *ngFor="let param of receivedParams; let i = index">
             <td>{{param.paramName}}</td>
             <td>{{param.dataType}}</td>
             <td>{{param.paramDescription}}</td>
             <td>
-              <form>
-                <input class="searchInput" type="search" placeholder={{param.paramName}} aria-label="Search"> <!-- usar valor de aqui para concatenar en request  -->
-              </form>
+                <input class="searchInput" type="text" 
+                placeholder={{param.paramName}}
+                [(ngModel)]="queryParams[i].input"
+                aria-label="Search"> <!-- usar valor de aqui para concatenar en request  -->
             </td>
           </tr>
         </table>
       </div>
       <br>
-      <button
-      mat-flat-button
-      [disabled]="!endpoint"
-      color="primary"
+      <button mat-flat-button color="primary"
+      (click)="printQueryParams()">
+          Params
+      </button>
+      <button mat-flat-button [disabled]="!endpoint" color="primary"
       (click)="sendRequest()">
           Test
       </button>
+      
+      <!-- CONSOLE LOG OUTP -->
+          <!-- <div *ngFor="let queryParam of queryParams">
+              {{ queryParam.input }}
+          </div> -->
       <p class="separador">Responses</p>
       <table class="params">
         <tr>

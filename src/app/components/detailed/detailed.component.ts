@@ -36,6 +36,9 @@ export class DetailedComponent  implements OnInit{
   requestHeaders: any;
   endpointError: string;
   loadingState: boolean;
+
+  queryParams: any = [] //to concatenete with endpoint path
+  // parameterTry = "";
   constructor(private service:ApiService, private route: ActivatedRoute, private _mainService: Apitester) {
     this.endpoint = '';
     this.selectedRequestMethod = '';
@@ -66,19 +69,44 @@ export class DetailedComponent  implements OnInit{
     });
   }
 
+  // addQueryParam(queryParam: string){  //to push the string input
+  //   this.queryParams.push({input: queryParam});
+  // }
+
+  addQueryValue(){  //to push an empty item to be binded later on html input
+    this.queryParams.push({input: ''});
+  }
+
+  printQueryParams(){
+    for(let i = 0; i<this.queryParams.length; i++){
+      console.log(this.queryParams[i]);
+    }
+  }
+
   getEndpointDetail(endpointId:number){
         this.service.getEndpointbyID(endpointId).subscribe(resp=>{
           this.receivedEndpoint = resp[0];
         })
         this.service.getParamsbyEndpointID(endpointId).subscribe(resp=>{
           this.receivedParams = resp;
+          if(this.queryParams.length > 0){  //makes sure the array is not empty for new endpoint
+            this.queryParams = [];
+          }
+          for(let i=0; i<this.receivedParams.length; i++){
+            this.addQueryValue();
+          }
+          // console.log(this.receivedParams);
+          // console.log(this.queryParams);
         })
+        //try
+        
   }
   getOutputEndpointID(received:number){
     this.endpointID=received;
     this.getEndpointDetail(this.endpointID)
   }
 
+  //fromSource
   addItem(ctx: string) {
     let context;
     if (ctx === 'Body') {
@@ -123,21 +151,6 @@ export class DetailedComponent  implements OnInit{
     context.splice(index, 1);
   }
 
-  // saveRequest(requestType: string) {
-  //   const requestObject = {
-  //     endpoint: this.endpoint,
-  //     method: this.selectedRequestMethod,
-  //     headers: this.constructObject('Headers'),
-  //     body: this.requestBody
-  //   };
-  //   if (requestType === 'POST') {
-  //     requestObject['body'] = this.constructObject('Body');
-  //   }
-  //   const transaction = this.indexedDB.transaction('pastRequests', 'readwrite');
-
-  //   const pastRequestsStore = transaction.objectStore('pastRequests');
-  //   pastRequestsStore.add(requestObject);
-  // }
 
   deconstructObject(object: any, type: string) {
     const objectArray: { key: string; value: any; }[] = [];
