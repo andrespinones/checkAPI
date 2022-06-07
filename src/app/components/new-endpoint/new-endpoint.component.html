@@ -47,7 +47,7 @@
         <input type="url" matInput [formControl]="urlFormControl" [errorStateMatcher]="matcher">
 
         <!--
-                      Lo que este error hace es marcar cunado se ingresa algo que no es un email 
+                      Lo que este error hace es marcar cunado se ingresa algo que no es un email
                       <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                   </mat-error> -->
         <!-- sale este error cuando no se pone nada en el input -->
@@ -61,16 +61,16 @@
     <br>
     <p class="separador">PARAMETERS</p>
 
-    <div *ngFor="let param of params; let i = index"> 
+    <div *ngFor="let param of params; let i = index">
       <form>
         <mat-form-field class="smallDropdown" appearance="outline">
           <mat-label>Parameters's Name</mat-label>
-          <input type="text" matInput [(ngModel)]="param.name" name="name{i}}">
+          <input type="text" matInput [(ngModel)]="param.name" name="name{{i}}">
           <mat-error *ngIf="nombreFormControl.hasError('required')">
             Name is <strong>required</strong>
           </mat-error>
         </mat-form-field>
-    
+
         <mat-form-field class="smallDropdown" appearance="outline">
           <mat-label>Type</mat-label>
           <mat-select>
@@ -79,10 +79,10 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-    
+
         <mat-form-field class="smallDesc" appearance="outline">
           <mat-label>Parameter's Description</mat-label>
-          <input type="url" matInput [(ngModel)]="param.desc" name="desc{i}}">
+          <input type="url" matInput [(ngModel)]="param.desc" name="desc{{i}}">
           <mat-error *ngIf="urlFormControl.hasError('required')">
             Description <strong>required</strong>
           </mat-error>
@@ -93,11 +93,12 @@
 
       <!-- <input type="text" [(ngModel)]="param.name" #name="ngModel" name="value{{i}}"> -->
 
-      <button mat-button id="addButton" (click)="removevalue(i)"> 
+      <button mat-button id="addButton" (click)="removevalue(i)">
         Remove</button>
 
       <!-- <button (click)="removevalue(i)">Remove</button> -->
     </div>
+
     <button mat-icon-button (click)="addvalue()">
       <mat-icon>add_box</mat-icon>
     </button>

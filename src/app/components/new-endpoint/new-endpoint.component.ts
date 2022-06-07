@@ -17,7 +17,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class NewEndpointComponent {
 
   // required = no se puede ingresar un valor vacio, email - revisa que sea un email
-  //se tiene que hacer un validator que revise qeu si exita la API 
+  //se tiene que hacer un validator que revise qeu si exita la API
   urlFormControl = new FormControl('', [Validators.required]);
   nombreFormControl = new FormControl('', [Validators.required]);
   descFormControl = new FormControl('', [Validators.required]);
@@ -29,7 +29,7 @@ export class NewEndpointComponent {
     type: '',
     desc: ''
   }];
-  
+
   // values: string[] = [];
 
   DROPDOWN_LIST: Method[];
@@ -51,7 +51,6 @@ export class NewEndpointComponent {
       {
         type: "PUT"
       }
-
     ]
 
     this.DROPDOWN_LIST2 = [
@@ -82,14 +81,12 @@ export class NewEndpointComponent {
   }
 
   addvalue(){
-    this.params.push({name: ""});
+    this.params.push({name: "", type: "", desc: ""});
   }
-
-   
 }
 
 export class Method{
-    type: string | undefined; 
+    type: string | undefined;
 }
 
 

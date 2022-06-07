@@ -46,6 +46,13 @@
         </table>
       </div>
       <br>
+      <button
+      mat-flat-button
+      [disabled]="!endpoint"
+      color="primary"
+      (click)="sendRequest()">
+          Test
+      </button>
       <p class="separador">Responses</p>
       <table class="params">
         <tr>

@@ -23,7 +23,7 @@ export class DetailedComponent  implements OnInit{
   endpointID!:number;
   apiData!:Api[];
   apiID:any;
-  //api testing 
+  //api testing
   endpoint: string;
   selectedRequestMethod: string;
   readonly requestMethods: Array<string>;
@@ -123,30 +123,21 @@ export class DetailedComponent  implements OnInit{
     context.splice(index, 1);
   }
 
-  saveRequest(requestType: string) {
-    const requestObject = {
-      endpoint: this.endpoint,
-      method: this.selectedRequestMethod,
-      headers: this.constructObject('Headers'),
-      body: this.requestBody
-    };
-    if (requestType === 'POST') {
-      requestObject['body'] = this.constructObject('Body');
-    }
-    const transaction = this.indexedDB.transaction('pastRequests', 'readwrite');
+  // saveRequest(requestType: string) {
+  //   const requestObject = {
+  //     endpoint: this.endpoint,
+  //     method: this.selectedRequestMethod,
+  //     headers: this.constructObject('Headers'),
+  //     body: this.requestBody
+  //   };
+  //   if (requestType === 'POST') {
+  //     requestObject['body'] = this.constructObject('Body');
+  //   }
+  //   const transaction = this.indexedDB.transaction('pastRequests', 'readwrite');
 
-    const pastRequestsStore = transaction.objectStore('pastRequests');
-    pastRequestsStore.add(requestObject);
-  }
-
-  loadPastRequest(request: any) {
-    this.selectedRequestMethod = request.method;
-    this.endpoint = request.endpoint;
-    this.requestHeaders = this.deconstructObject(request.headers, 'Headers');
-    if (request.method === 'POST') {
-      this.requestBody = this.deconstructObject(request.body, 'Body');
-    }
-  }
+  //   const pastRequestsStore = transaction.objectStore('pastRequests');
+  //   pastRequestsStore.add(requestObject);
+  // }
 
   deconstructObject(object: any, type: string) {
     const objectArray: { key: string; value: any; }[] = [];
@@ -253,7 +244,7 @@ export class DetailedComponent  implements OnInit{
       }
     }
 
-    this.saveRequest(this.selectedRequestMethod);
+    //this.saveRequest(this.selectedRequestMethod);
     this.newRequest.emit();
 
     this.selectedRequestMethod = 'GET';
