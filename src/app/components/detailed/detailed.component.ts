@@ -37,7 +37,7 @@ export class DetailedComponent  implements OnInit{
   endpointError: string;
   loadingState: boolean;
 
-  queryParams: any = [] //to concatenete with endpoint path
+  queryParams: any = [] //to concatenete with endpoint path when fulfilled
   // parameterTry = "";
   constructor(private service:ApiService, private route: ActivatedRoute, private _mainService: Apitester) {
     this.endpoint = '';
@@ -92,7 +92,7 @@ export class DetailedComponent  implements OnInit{
           if(this.queryParams.length > 0){  //makes sure the array is not empty for new endpoint
             this.queryParams = [];
           }
-          for(let i=0; i<this.receivedParams.length; i++){
+          for(let i=0; i<this.receivedParams.length; i++){  //iterates to add empty inputs items
             this.addQueryValue();
           }
           // console.log(this.receivedParams);
