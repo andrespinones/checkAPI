@@ -15,11 +15,6 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="outline">
-        <!-- <mat-label>Description</mat-label>
-                    <textarea matInput></textarea>
-                    <mat-error *ngIf="descFormControl.hasError('required')">
-                        Description is <strong>required</strong>
-                      </mat-error> -->
         <mat-label>Description</mat-label>
         <input type="text" matInput [formControl]="descFormControl" [errorStateMatcher]="matcher"
           placeholder="Describe your API">
@@ -73,11 +68,16 @@
 
         <mat-form-field class="smallDropdown" appearance="outline">
           <mat-label>Type</mat-label>
-          <mat-select>
+          <mat-select [(ngModel)]="param.type" name="type{{i}}">
             <mat-option *ngFor="let type of DROPDOWN_LIST2" [value]="type">
               {{type}}
             </mat-option>
           </mat-select>
+
+          <!-- <mat-select formControlName="categoryID">
+            <mat-option *ngFor="let category of CategoryList" [value]="category.categoryID">
+              {{category.name}}
+            </mat-option> -->
         </mat-form-field>
 
         <mat-form-field class="smallDesc" appearance="outline">
@@ -105,15 +105,12 @@
     <!-- <button (click)="addvalue()">ADD</button> -->
 
     <h2>Result</h2>
-<div *ngFor="let value of params;">
-  {{ value.name }}
-  {{value.desc}}
-</div>
-
-
-
-
-
+    <!-- Checa si se agrega todo -->
+    <div *ngFor="let value of params;">
+      {{ value.name }}
+      {{ value.type }}
+      {{ value.desc }}
+    </div>
 
     <div class="buttons">
       <a mat-button class="button button1" routerLink="addEndpoint">
