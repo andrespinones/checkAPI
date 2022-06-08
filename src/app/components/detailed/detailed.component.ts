@@ -78,9 +78,10 @@ export class DetailedComponent  implements OnInit{
   }
 
   printQueryParams(){
-    for(let i = 0; i<this.queryParams.length; i++){
-      console.log(this.queryParams[i]);
-    }
+    // for(let i = 0; i<this.queryParams.length; i++){
+    //   console.log(this.queryParams[i]);
+    // }
+    console.log(this.queryParams);
   }
 
   getEndpointDetail(endpointId:number){
@@ -99,7 +100,7 @@ export class DetailedComponent  implements OnInit{
           // console.log(this.queryParams);
         })
         //try
-        
+
   }
   getOutputEndpointID(received:number){
     this.endpointID=received;
