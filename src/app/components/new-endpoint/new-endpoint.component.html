@@ -61,7 +61,7 @@
     <br>
     <p class="separador">PARAMETERS</p>
 
-    <div *ngFor="let param of params; let i = index"> 
+    <div *ngFor="let param of params; let i = index">
       <form>
         <mat-form-field class="smallDropdown" appearance="outline">
           <mat-label>Parameters's Name</mat-label>
@@ -70,7 +70,7 @@
             Name is <strong>required</strong>
           </mat-error>
         </mat-form-field>
-    
+
         <mat-form-field class="smallDropdown" appearance="outline">
           <mat-label>Type</mat-label>
           <mat-select>
@@ -79,7 +79,7 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-    
+
         <mat-form-field class="smallDesc" appearance="outline">
           <mat-label>Parameter's Description</mat-label>
           <input type="url" matInput [(ngModel)]="param.desc" name="desc{i}}">
@@ -87,27 +87,21 @@
             Description <strong>required</strong>
           </mat-error>
         </mat-form-field>
+        <button mat-button id="rmButton" (click)="removevalue(i)">
+          Remove</button>
       </form>
-
-
-
-      <!-- <input type="text" [(ngModel)]="param.name" #name="ngModel" name="value{{i}}"> -->
-
-      <button mat-button id="addButton" (click)="removevalue(i)"> 
-        Remove</button>
-
-      <!-- <button (click)="removevalue(i)">Remove</button> -->
     </div>
-    <button mat-icon-button (click)="addvalue()">
-      <mat-icon>add_box</mat-icon>
-    </button>
-    <!-- <button (click)="addvalue()">ADD</button> -->
 
-    <h2>Result</h2>
-<div *ngFor="let value of params;">
-  {{ value.name }}
-  {{value.desc}}
-</div>
+    <button class="addButton" mat-icon-button (click)="addvalue()">
+      <mat-icon class="addButton">add_circle_outline</mat-icon>
+    </button>
+
+
+    <!-- <h1>Result</h1> -->
+    <div *ngFor="let value of params;">
+      {{ value.name }}
+      {{value.desc}}
+    </div>
 
 
 

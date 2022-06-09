@@ -107,15 +107,22 @@ body{
       }
 
     .smallDropdown{
-        width: 22%;
+        width: 20%;
     }
     .smallDesc{
-        width: 42%;
+        width: 35%;
     }
-    #addButton{
+    #rmButton{
       border-radius: 10px;
+      background-color: white;
+      /* padding-bottom: ; */
     }
-    #addButton:hover{
+    #rmButton:hover{
       background-color:rgba(158, 158, 158, 0.2); 
       color:#FF5C00;
     }
+/* 
+  .addButton{
+    font-size: x-large;
+    size: 50%;
+  } */
