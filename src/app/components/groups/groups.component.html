@@ -4,11 +4,11 @@
     Add Group <mat-icon>add_box</mat-icon></button>
 
 
-<ul class="list-group">
+<ul class="list-group" *ngIf="DROPDOWN_LIST">
     <a md-button>
         <!-- pasa por todos los grupos de una api y los despliega como lista en la sidebar -->
-        <li *ngFor="let group of DROPDOWN_LIST" class="list-group-item list-group-item-action">
-            {{group}}
+        <li *ngFor="let group of DROPDOWN_LIST" class="list-group-item list-group-item-action" (click)="sendGroupID(group)">
+            {{group.name}}
         </li>
     </a>
 </ul>

@@ -16,74 +16,56 @@ import { FormControl, FormGroupDirective, NgForm, Validators, FormBuilder } from
 
 export class GroupsComponent implements OnInit {
 
-
+  @Output() outputToParent = new EventEmitter<number>();
   showForm: boolean = false;
   group: any;
+  apiID:any;
+  apiGroup:any;
   //lista sin info de la base de datos
-  DROPDOWN_LIST: string[];
+  DROPDOWN_LIST: any[];
 
   groupForm = this.formBuilder.group({
     group: ''
   });
 
-
-  constructor(private formBuilder: FormBuilder) {
-    this.DROPDOWN_LIST = [
-      "Pet", "Srtore", "User"
-    ]
+  constructor(private service:ApiService, private formBuilder: FormBuilder, private route: ActivatedRoute) {
+    this.DROPDOWN_LIST = []
   }
   ngOnInit(): void {
+    const id = this.route.snapshot.queryParamMap.get('id');
+    this.apiID=id;
+    this.getGroups();
     throw new Error('Method not implemented.');
-
   }
 
+  getGroups(){
+    this.service.getGroupsByApiID(this.apiID).subscribe(resp=>{
+      this.DROPDOWN_LIST=resp;
+      console.log(this.DROPDOWN_LIST);
+    });
+  }
 
+  createGroup(){
+    this.apiGroup={
+      apiID: this.apiID,
+      name: this.group
+    }
+    console.log(this.apiGroup);
+    this.service.addApiGroup(this.apiGroup).subscribe()
+  }
+  
 
   onEdit() {
     this.showForm = !this.showForm;
   }
 
   update() {
-    //recibe el valor del input - group - nombre del grupo
-    console.log("Ya sirve el enter ", this.group)
+    this.createGroup();
     this.groupForm.reset();
-    //falta que mande llamar la funcion que agrega el grupo a la bd 
-    //hacer un refresh de la sidebar para que ya salaga el nuevo grupo 
+    this.ngOnInit();//refresh de la sidebar para que ya salga el nuevo grupo 
   }
 
-
-
-  // @Output() outputToParent = new EventEmitter<Endpoint>();
-  // constructor(private service:ApiService, private route: ActivatedRoute) { }
-  // endpoint:Endpoint = {} as Endpoint;
-  // testList:any[]=[];
-  // grouped: { [key: string]: endpointSidebar[] } = {};
-  // apiID: any;
-  // ngOnInit(): void {
-  //   const id = this.route.snapshot.queryParamMap.get('id');
-  //   this.apiID=id;
-  //   this.getGroups();
-  // }
-  // getGroups(){
-  //   this.service.getGroupsbyID(this.apiID).subscribe(resp=>{
-  //     this.testList = resp;
-  //     console.log(this.testList)
-  //     this.grouped = this.testList.reduce((group, current)=> {
-  //       //create your grouping key, by which you want to group the items
-  //       const groupingKey = `${current.name}`;
-  //       //if the group does not yet have an entry for this key, init it to empty array
-  //       group[groupingKey] = group[groupingKey] || [];
-  //       //add the current item to the group
-  //       group[groupingKey].push(current);
-  //       return group;
-  //       }, {} ) 
-  //   })
-  // }
-
-  // getEndpointDetail(endpointId:number){
-  //   this.service.getEndpointbyID(endpointId).subscribe(resp=>{
-  //     this.endpoint = resp;
-  //     this.outputToParent.emit(this.endpoint)
-  //   })
-  // }
+  sendGroupID(group:any){
+    this.outputToParent.emit(group);
+  }
 }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import {FormControl, FormGroupDirective, NgForm, Validators, FormBuilder} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { ApiService } from 'src/app/services/api.service';
@@ -42,7 +42,8 @@ export class NewApiComponent implements OnInit {
     url: this.urlFormControl,
     categoryID: this.categoryFormControl
   });
-
+  
+  @Output() outputToParent = new EventEmitter<number>();
   constructor(private service:ApiService, private observer: BreakpointObserver, private formBuilder: FormBuilder, private router:Router) {}
 
   CategoryList: Category[] = [];
@@ -60,6 +61,10 @@ export class NewApiComponent implements OnInit {
       this.CategoryList = data;
       console.log(this.CategoryList);
     })
+  }
+  apiAddEndpointRedirect(id: number) {
+    let route = '/endpoints';
+    this.router.navigate([route], { queryParams: { id: id } });
   }
 
   createApi(){
@@ -79,6 +84,7 @@ export class NewApiComponent implements OnInit {
           categoryID : this.addApiForm.value.categoryID
         }
         this.service.addApiCategoryRel(this.categoryApiRel).subscribe();
+        this.apiAddEndpointRedirect(data.apiID);
       });
       this.router.navigateByUrl('endpoints');
     }
