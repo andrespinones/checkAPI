@@ -46,6 +46,9 @@ export class EndpointListComponent implements OnInit {
   apiID: any;
   apiData:any;
   receivedGroupID!:number;
+  hasGroups: boolean = false;
+  hasEndpoints: boolean = false;
+
 
   toggleDropdown(){
     this.showPanel$ = false;
@@ -70,6 +73,7 @@ export class EndpointListComponent implements OnInit {
     this.receivedGroupID=this.group.groupID;
     console.log(this.receivedGroupID);
     this.getEndpoints(this.receivedGroupID)
+    this.hasGroups = false;
   }
 
   getEndpoints(groupID:any){
@@ -77,6 +81,12 @@ export class EndpointListComponent implements OnInit {
       this.DROPDOWN_LIST = resp;
       console.log(resp);
       console.log(this.DROPDOWN_LIST);
+      if (this.DROPDOWN_LIST.length == 0){
+        this.hasEndpoints = false;
+      }else{
+        this.hasEndpoints = true;
+      }
+
     })
   }
 
