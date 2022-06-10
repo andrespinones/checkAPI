@@ -8,6 +8,7 @@ import { endpointSidebar } from 'src/app/models/endpointSidebar';
   templateUrl: './endpoint-sidebar.component.html',
   styleUrls: ['./endpoint-sidebar.component.css']
 })
+
 export class EndpointSidebarComponent implements OnInit {
   @Output() outputToParent = new EventEmitter<number>();
   constructor(private service:ApiService, private route: ActivatedRoute) { }
@@ -19,6 +20,7 @@ export class EndpointSidebarComponent implements OnInit {
     this.apiID=id;
     this.getGroups();
   }
+
   getGroups(){
     this.service.getGroupsbyID(this.apiID).subscribe(resp=>{
       this.testList = resp;
@@ -31,7 +33,7 @@ export class EndpointSidebarComponent implements OnInit {
         //add the current item to the group
         group[groupingKey].push(current);
         return group;
-        }, {} ) 
+        }, {} )
     })
   }
 
@@ -39,5 +41,3 @@ export class EndpointSidebarComponent implements OnInit {
     this.outputToParent.emit(endpointId);
   }
 }
-
-

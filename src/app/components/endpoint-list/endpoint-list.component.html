@@ -1,66 +1,81 @@
 <body>
     <app-navbar></app-navbar>
-
     <div class="sidebar">
-        <!-- se tiene que agregar algo así para traer los endpoints de lista -->
+        <!-- se tiene que agregar algo así para traer los endpoint de lista -->
         <!-- (outputToParent)="getOutputEndpoint($event)" -->
-        <app-groups></app-groups>
+        <app-groups (outputToParent)="getOutputGroup($event)"></app-groups>
     </div>
 
 
-    <ng-template class="overlay" cdkConnectedOverlay cdkConnectedOverlayHasBackdrop="true" [cdkConnectedOverlayOrigin]="originOverlay"
+    <!-- <ng-template class="overlay" cdkConnectedOverlay cdkConnectedOverlayHasBackdrop="true" [cdkConnectedOverlayOrigin]="originOverlay"
         [cdkConnectedOverlayOpen]="showPanel$" (backdropClick)="toggleDropdown()">
         <div>
             <section class="noData mat-elevation-z1">
-                No data to display, please add a group to continue
+                Please add or select a group to continue
             </section>
         </div>
-    </ng-template>
+    </ng-template> -->
 
-
-
-    <div class="apiData">
+    <div class="apiData" *ngIf="apiData">
         <span>
-            <h1>{{apiname}}</h1>
-            <h3 id="baseURL">Base URL: {{apibaseUrl}}</h3>
+            <h1>{{apiData.name}}</h1>
+            <h3 id="baseURL">Base URL: {{apiData.baseUrl}}</h3>
         </span>
     </div>
 
+    <!-- when the api has groups - select a group to continue -->
+    <ng-container *ngIf="hasGroups;else second">
+        <div class="example-container">
+            <div>
+                <h2>Select a group to continue</h2>
+                <img src="./assets/images/choice.svg" height="280rem" class="directions">
+            </div>
+
+        </div>
+
+    </ng-container>
+    <ng-template #second>
+        <ng-container *ngIf="!hasGroups && !hasEndpoints">
+            <div class="example-container">
+                <div>
+                    <h2>No data to display</h2>
+                    <img src="./assets/images/add.svg" height="220rem" class="directions">
+                    <h4>Add a group to continue</h4>
+                </div>
+            </div>
+        </ng-container>
+    </ng-template>
+    <ng-template #third >
+        <ng-container *ngIf="hasGroups && !hasEndpoints;else third">
+            <div class="example-container">
+                <div>
+                    <h2>Create an endpoint to continue</h2>
+                    <img src="./assets/images/choice.svg" height="280rem" class="directions">
+                </div>
+    
+            </div>
+        </ng-container>
+    </ng-template>
+
 
     <!-- nombre del grupo -->
-    <h1 class="nombre">Store</h1>
+    <h1 class="nombre" *ngIf="group">{{group.name}}</h1>
 
-    <!-- lista de los endpoints que pertenecen al grupo -->
+    <!-- lista de los endpoint que pertenecen al grupo -->
     <table class="info" cdkOverlayOrigin #originOverlay="cdkOverlayOrigin">
         <!-- falta ponerle color a la row dependiendo del tipo de metodo -->
-        <tr *ngFor="let item of DROPDOWN_LIST">
+        <tr *ngFor="let endpoint of DROPDOWN_LIST">
             <th
-                [ngClass]="{get: item.type == 'GET', post: item.type == 'POST', put: item.type == 'PUT', delete: item.type == 'DELETE'}">
-                {{item.type}}</th>
+                [ngClass]="{get: endpoint.methodType == 'GET', post: endpoint.methodType == 'POST', put: endpoint.methodType == 'PUT', delete: endpoint.methodType == 'DELETE'}">
+                {{endpoint.methodType}}</th>
             <th
-                [ngClass]="{get2: item.type == 'GET', post2: item.type == 'POST', put2: item.type == 'PUT', delete2: item.type == 'DELETE'}">
-                {{item.path}}</th>
+                [ngClass]="{get2: endpoint.methodType == 'GET', post2: endpoint.methodType == 'POST', put2: endpoint.methodType == 'PUT', delete2: endpoint.methodType == 'DELETE'}">
+                {{endpoint.path}}</th>
         </tr>
     </table>
     <div class="spacer"></div>
-    <a mat-button class="button button2" routerLink="/addEndpoint">
+    <a mat-button class="button button2" routerLink="/addEndpoint" *ngIf="group">
         Add Endpoint
     </a>
-
-
-
-    <!-- <table mat-table [dataSource]="dataSource">
-      
-        <ng-container matColumnDef="Type">
-            <th mat-header-cell *matHeaderCellDef>Name</th>
-            <td mat-cell *matCellDef="let ep">{{ep.type}}</td>
-        </ng-container>
-        <ng-container matColumnDef="Path">
-            <th mat-header-cell *matHeaderCellDef>Description</th>
-            <td mat-cell *matCellDef="let ep">{{ep.path}}</td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-        <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"(click)="apiDetailRedirect(myRowData)"></tr>
-    </table> -->
 
 </body>

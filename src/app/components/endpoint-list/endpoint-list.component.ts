@@ -17,7 +17,7 @@ import { merge, Observable } from 'rxjs';
 export class EndpointListComponent implements OnInit {
 
   // prueba con lista local de tipo EP
-  DROPDOWN_LIST: EP[];
+  DROPDOWN_LIST: Endpoint[];
 
   apiname = "Petstore";
   apibaseUrl = "pestore.api"
@@ -33,22 +33,22 @@ export class EndpointListComponent implements OnInit {
 
   @Output() outputToParent = new EventEmitter<Endpoint>();
   constructor(private service:ApiService, private route: ActivatedRoute, private focusMonitor: FocusMonitor) { 
-    this.DROPDOWN_LIST = [
-      // {type: "GET", path: "/pet/{petID}"},
-      // {type: "POST", path: "/pet"},
-      // {type: "DELETE", path: "/pet/{petID}"},
-      // {type: "PUT", path: "/pet"}
-    ]
+    this.DROPDOWN_LIST = []
   }
 
 
   //función del overlay 
 
-
+  group: any;
   endpoint:Endpoint = {} as Endpoint;
   testList:any[]=[];
   grouped: { [key: string]: endpointSidebar[] } = {};
   apiID: any;
+  apiData:any;
+  receivedGroupID!:number;
+  hasGroups: boolean = false;
+  hasEndpoints: boolean = false;
+
 
   toggleDropdown(){
     this.showPanel$ = false;
@@ -58,11 +58,36 @@ export class EndpointListComponent implements OnInit {
     const id = this.route.snapshot.queryParamMap.get('id');
     this.apiID=id;
     this.isPanelVisible = true;
-
+    this.getApi();
+    this.getOutputGroup;
   }
-}
 
-export class EP{
-  type: string | undefined; 
-  path: string | undefined;
+  getApi(){
+    this.service.getApibyID(this.apiID).subscribe(resp=>{
+      this.apiData = resp[0];
+    });
+  }
+
+  getOutputGroup(received:any){
+    this.group = received;
+    this.receivedGroupID=this.group.groupID;
+    console.log(this.receivedGroupID);
+    this.getEndpoints(this.receivedGroupID)
+    this.hasGroups = false;
+  }
+
+  getEndpoints(groupID:any){
+    this.service.getEndpointsByGroupID(groupID).subscribe(resp=>{
+      this.DROPDOWN_LIST = resp;
+      console.log(resp);
+      console.log(this.DROPDOWN_LIST);
+      if (this.DROPDOWN_LIST.length == 0){
+        this.hasEndpoints = false;
+      }else{
+        this.hasEndpoints = true;
+      }
+
+    })
+  }
+
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders, HttpBackend} from '@angular/common/http'
-import { Observable } from 'rxjs'
+import { map, Observable } from 'rxjs'
 import { Api } from '../models/apis';
 import { Category } from '../models/category';
 import { Endpoint } from '../models/endpoint';
@@ -60,8 +60,8 @@ export class ApiService {
       'Content-Type': 'application/json', 'access-token':this.token}
       )}
       );
-  }
-  
+    }
+
   getParamsbyEndpointID(endpointID:number){
     return this.httpclient.get<Parameter[]>(this.APIURL+'/endpoint/params/'+ endpointID,{headers: new HttpHeaders({
       'Content-Type': 'application/json', 'access-token':this.token}
@@ -132,6 +132,29 @@ export class ApiService {
     )}
     );
   }
+
+  getGroupsByApiID(apiID:number):Observable<any>{
+    return this.httpclient.get<any>(this.APIURL+'/api_groups/'+ apiID,{headers: new HttpHeaders({ 
+      'Content-Type': 'application/json', 'access-token':this.token}
+      )}
+      );
+  }
+
+  addApiGroup(apiGroup:any){
+    return this.httpclient.post<any>(this.APIURL+'/group', apiGroup,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+    )}
+    );
+  }
+
+  getEndpointsByGroupID(groupID:number){
+    return this.httpclient.get<Endpoint[]>(this.APIURL+'/group/'+ groupID + '/endpoints',{headers: new HttpHeaders({ 
+      'Content-Type': 'application/json', 'access-token':this.token}
+      )}
+      );
+  }
+
+
 }
 
 

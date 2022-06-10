@@ -208,3 +208,14 @@ table.params {
   text-align: left;
   font-weight: lighter;
 }
+
+.requestBody {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.requestBodyItem {
+  font-family: monospace;
+  color: lightgray;
+}

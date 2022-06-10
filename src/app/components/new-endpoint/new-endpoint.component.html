@@ -15,11 +15,6 @@
       </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="outline">
-        <!-- <mat-label>Description</mat-label>
-                    <textarea matInput></textarea>
-                    <mat-error *ngIf="descFormControl.hasError('required')">
-                        Description is <strong>required</strong>
-                      </mat-error> -->
         <mat-label>Description</mat-label>
         <input type="text" matInput [formControl]="descFormControl" [errorStateMatcher]="matcher"
           placeholder="Describe your API">
@@ -47,7 +42,7 @@
         <input type="url" matInput [formControl]="urlFormControl" [errorStateMatcher]="matcher">
 
         <!--
-                      Lo que este error hace es marcar cunado se ingresa algo que no es un email 
+                      Lo que este error hace es marcar cunado se ingresa algo que no es un email
                       <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                   </mat-error> -->
         <!-- sale este error cuando no se pone nada en el input -->
@@ -65,7 +60,7 @@
       <form>
         <mat-form-field class="smallDropdown" appearance="outline">
           <mat-label>Parameters's Name</mat-label>
-          <input type="text" matInput [(ngModel)]="param.name" name="name{i}}">
+          <input type="text" matInput [(ngModel)]="param.name" name="name{{i}}">
           <mat-error *ngIf="nombreFormControl.hasError('required')">
             Name is <strong>required</strong>
           </mat-error>
@@ -73,16 +68,17 @@
 
         <mat-form-field class="smallDropdown" appearance="outline">
           <mat-label>Type</mat-label>
-          <mat-select>
+          <mat-select [(ngModel)]="param.type" name="type{{i}}">
             <mat-option *ngFor="let type of DROPDOWN_LIST2" [value]="type">
               {{type}}
             </mat-option>
           </mat-select>
+          
         </mat-form-field>
 
         <mat-form-field class="smallDesc" appearance="outline">
           <mat-label>Parameter's Description</mat-label>
-          <input type="url" matInput [(ngModel)]="param.desc" name="desc{i}}">
+          <input type="url" matInput [(ngModel)]="param.desc" name="desc{{i}}">
           <mat-error *ngIf="urlFormControl.hasError('required')">
             Description <strong>required</strong>
           </mat-error>
@@ -90,23 +86,29 @@
         <button mat-button id="rmButton" (click)="removevalue(i)">
           Remove</button>
       </form>
+
+
+
+      <!-- <input type="text" [(ngModel)]="param.name" #name="ngModel" name="value{{i}}"> -->
+
+      <button mat-button id="addButton" (click)="removevalue(i)">
+        Remove</button>
+
+      <!-- <button (click)="removevalue(i)">Remove</button> -->
     </div>
 
-    <button class="addButton" mat-icon-button (click)="addvalue()">
-      <mat-icon class="addButton">add_circle_outline</mat-icon>
+    <button mat-icon-button (click)="addvalue()">
+      <mat-icon>add_box</mat-icon>
     </button>
+    <!-- <button (click)="addvalue()">ADD</button> -->
 
-
-    <!-- <h1>Result</h1> -->
+    <h2>Result</h2>
+    <!-- Checa si se agrega todo -->
     <div *ngFor="let value of params;">
       {{ value.name }}
-      {{value.desc}}
+      {{ value.type }}
+      {{ value.desc }}
     </div>
-
-
-
-
-
 
     <div class="buttons">
       <a mat-button class="button button1" routerLink="addEndpoint">

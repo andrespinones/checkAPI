@@ -3,18 +3,35 @@ body {
   overflow-y: auto;
 }
 
-h1{
+h1 {
   font-weight: 750;
 }
+h2{
+  /* padding-left: 3.5em; */
+}
 
+.example-container {
+  padding-top: 3%;
+  width: 68%;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+}
+.directions{
+  padding-top: 0.5em;
+  padding-left: 2.5em;
+  font-weight: bolder;
+  font-size: larger;
+}
 .nombre {
   font-weight: 750;
   padding-left: 15%;
   padding-top: 1%;
 }
 
-.apiData{
-  font-weight:900;
+
+.apiData {
+  font-weight: 900;
   padding-top: 5%;
   margin-left: 10%;
 }
@@ -205,7 +222,7 @@ th:first-child {
   flex: 1 1 auto;
 }
 
-.noData{
+.noData {
   width: 80%;
   padding: 1rem;
   align-items: left;
@@ -214,8 +231,8 @@ th:first-child {
   box-sizing: border-box;
 
 }
- .overlay{
+
+.overlay {
   width: 50%;
   padding-left: 10%;
- }
-
+}
