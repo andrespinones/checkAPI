@@ -86,7 +86,6 @@ export class NewApiComponent implements OnInit {
         this.service.addApiCategoryRel(this.categoryApiRel).subscribe();
         this.apiAddEndpointRedirect(data.apiID);
       });
-      this.router.navigateByUrl('endpoints');
     }
-   }
+  }
 }

@@ -41,7 +41,6 @@ export class GroupsComponent implements OnInit {
   getGroups(){
     this.service.getGroupsByApiID(this.apiID).subscribe(resp=>{
       this.DROPDOWN_LIST=resp;
-      console.log(this.DROPDOWN_LIST);
     });
   }
 
@@ -51,7 +50,7 @@ export class GroupsComponent implements OnInit {
       name: this.group
     }
     console.log(this.apiGroup);
-    this.service.addApiGroup(this.apiGroup).subscribe()
+    this.service.addApiGroup(this.apiGroup).subscribe();
   }
   
 
@@ -62,7 +61,7 @@ export class GroupsComponent implements OnInit {
   update() {
     this.createGroup();
     this.groupForm.reset();
-    this.ngOnInit();//refresh de la sidebar para que ya salga el nuevo grupo 
+    this.getGroups();//refresh de la sidebar para que ya salga el nuevo grupo 
   }
 
   sendGroupID(group:any){

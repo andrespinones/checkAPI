@@ -129,7 +129,7 @@ export class ApiService {
     );
   }
 
-  getGroupsByApiID(apiID:number){
+  getGroupsByApiID(apiID:number):Observable<any>{
     return this.httpclient.get<any>(this.APIURL+'/api_groups/'+ apiID,{headers: new HttpHeaders({ 
       'Content-Type': 'application/json', 'access-token':this.token}
       )}
