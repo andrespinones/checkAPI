@@ -47,6 +47,7 @@ table.info tr th {
   text-align: left;
   /* font-weight: 370; */
   padding-left: 10px;
+  max-width: 3rem;
 }
 
 /* top-left border-radius */
@@ -218,4 +219,8 @@ table.params {
 .requestBodyItem {
   font-family: monospace;
   color: lightgray;
+}
+
+.mat-tab-group{
+  width: 100%;
 }
