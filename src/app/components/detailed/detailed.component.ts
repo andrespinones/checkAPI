@@ -36,9 +36,13 @@ export class DetailedComponent  implements OnInit{
   requestHeaders: any;
   endpointError: string;
   loadingState: boolean;
+    
+    text : string = "";  //works with the original enpoint path
+    actualText: string = this.text;
 
   queryParams: any = [] //to concatenete with endpoint path when fulfilled
-  // parameterTry = "";
+
+  
   constructor(private service:ApiService, private route: ActivatedRoute, private _mainService: Apitester) {
     this.endpoint = '';
     this.selectedRequestMethod = '';
@@ -69,12 +73,8 @@ export class DetailedComponent  implements OnInit{
     });
   }
 
-  // addQueryParam(queryParam: string){  //to push the string input
-  //   this.queryParams.push({input: queryParam});
-  // }
-
-  addQueryValue(){  //to push an empty item to be binded later on html input
-    this.queryParams.push({input: ''});
+  addQueryValue(paramName: string){  //to push an empty item to be binded later on html input
+    this.queryParams.push({[paramName]: ''});
   }
 
   printQueryParams(){
@@ -92,8 +92,8 @@ export class DetailedComponent  implements OnInit{
           if(this.queryParams.length > 0){  //makes sure the array is not empty for new endpoint
             this.queryParams = [];
           }
-          for(let i=0; i<this.receivedParams.length; i++){  //iterates to add empty inputs items
-            this.addQueryValue();
+          for(let receivedParam of this.receivedParams){  //iterates to add empty inputs items
+            this.addQueryValue(receivedParam.paramName);
           }
           // console.log(this.receivedParams);
           // console.log(this.queryParams);
@@ -104,6 +104,18 @@ export class DetailedComponent  implements OnInit{
   getOutputEndpointID(received:number){
     this.endpointID=received;
     this.getEndpointDetail(this.endpointID)
+  }
+
+  didBindParam(paramName: string){
+    console.log(paramName);
+    this.text = this.receivedEndpoint.path;
+    this.actualText = this.text;
+    for(let i = 0; i<=this.receivedParams.length; i ++){
+      this.actualText = document.getElementById("endPath")!.innerHTML = this.actualText.replace("{" + paramName + "}", this.queryParams[i][paramName]);
+      //actualText = document.getElementById("endPath")!.innerHTML = actualText.replace("{movie_id}", "adiós");
+      
+    }
+    document.getElementById("endPath")!.innerHTML = this.actualText; //to bring all replacements of multiple parameters
   }
 
   //fromSource
@@ -268,6 +280,8 @@ export class DetailedComponent  implements OnInit{
     this.endpointError = '';
   }
 }
+
+
 
 export class RespCode {
   num: Number | undefined;

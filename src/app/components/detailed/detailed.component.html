@@ -16,14 +16,14 @@
         <tr [ngClass]="{get2: receivedEndpoint.methodType == 'GET', post2: receivedEndpoint.methodType == 'POST', put2: receivedEndpoint.methodType == 'PUT', delete2: receivedEndpoint.methodType == 'DELETE'}">
           <th [ngClass]="{get: receivedEndpoint.methodType == 'GET', post: receivedEndpoint.methodType == 'POST', put: receivedEndpoint.methodType == 'PUT', delete: receivedEndpoint.methodType == 'DELETE'}">
             {{receivedEndpoint.methodType}}</th>
-          <th>{{receivedEndpoint.path}}</th>
+          <th id="endPath">{{receivedEndpoint.path}}</th>
           <th> Last response: {{receivedEndpoint.lastResp}}</th>
           <th>2 days ago</th>
         </tr>
       </table>
       <br>
       <p>{{receivedEndpoint.endpointDescription}}</p>
-      <div *ngIf="receivedParams.length!=0">
+      <div *ngIf="receivedParams.length!==0">
         <p class="separador">PARAMETERS</p>
         <table class="params">
           <tr>
@@ -40,7 +40,8 @@
             <td>
                 <input class="searchInput" type="text" 
                 placeholder={{param.paramName}}
-                [(ngModel)]="queryParams[i].input"
+                [(ngModel)]="queryParams[i][param.paramName]"
+                (ngModelChange)="didBindParam(param.paramName)"
                 aria-label="Search"> <!-- usar valor de aqui para concatenar en request  -->
             </td>
           </tr>
