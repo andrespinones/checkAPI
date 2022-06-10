@@ -1,5 +1,6 @@
 
 -- -- CREATE DATABASE checkAPI;
+-- -- DROP DATABASE checkAPI;
 
 -- CREATE TABLE Category (
 --   categoryID INT NOT NULL PRIMARY KEY IDENTITY(1,1),
@@ -173,7 +174,8 @@
 -- INSERT INTO Parameter (dataType, paramName, isRequired, paramDescription)
 --     VALUES
 --     ('integer', 'movie_id', 1, 'Pass an identifier for the movie'),
---     ('integer', 'id', 1, 'Identifier for this resource'),
+--     ('integer', 'fruit_id', 1, 'Identifier for this fruit resource'),
+--     ('integer', 'contest_id', 1, 'Identifier for this contest resource'),
 --     ('integer', 'appeal', 1, 'The base number of hearts'),
 --     ('integer', 'jam', 1, 'The base number of oponents'),
 --     ('integer', 'order', 1, 'A good value for sorting');
@@ -199,8 +201,8 @@
 -- 		(1, 1, 'GET', '/movie/latest', 'Get the most newly created movie.', 1),
 -- 		(1, 1, 'GET', '/movie/{movie_id}/release_dates', 'Get the release date along with the certification for a movie.', 1),
 -- 		(1, 2, 'GET', '/genre/movie/list', 'Get the list of official genres for movies.', 1),
--- 		(1, 3, 'GET', '/berry/{id or name}/', 'Berries are small fruits that can provide HP and status condition', 1),
--- 		(1, 4, 'GET', '/contest-type/{id or name}/', 'Contest types are categories judges used to weigh a Pokémon condition in Pokémon contests. ', 1);
+-- 		(1, 3, 'GET', '/berry/{fruit_id}/', 'Berries are small fruits that can provide HP and status condition', 1),
+-- 		(1, 4, 'GET', '/contest-type/{contest_it}/', 'Contest types are categories judges used to weigh a Pokémon condition in Pokémon contests. ', 1);
 
 -- INSERT INTO ParametersEndpoints (endpointID, paramID)
 --     VALUES
@@ -213,7 +215,7 @@
 --     (7, 1),
 --     (8, 1),
 --     (9, 2),
---     (10, 2);
+--     (10, 3);
 
 -- -- Insertar usuarios 
 -- INSERT INTO [dbo].[Users] (email, firstName, lastName, role)
