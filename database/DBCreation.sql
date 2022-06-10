@@ -174,8 +174,8 @@
 -- INSERT INTO Parameter (dataType, paramName, isRequired, paramDescription)
 --     VALUES
 --     ('integer', 'movie_id', 1, 'Pass an identifier for the movie'),
---     ('integer', 'fruit_id', 1, 'Identifier for this fruit resource'),
---     ('integer', 'contest_id', 1, 'Identifier for this contest resource'),
+--     ('integer', 'fruit_id', 1, 'Identifier for this resource'),
+--     ('integer', 'contest_id', 1, 'Identifier for this resource'),
 --     ('integer', 'appeal', 1, 'The base number of hearts'),
 --     ('integer', 'jam', 1, 'The base number of oponents'),
 --     ('integer', 'order', 1, 'A good value for sorting');
