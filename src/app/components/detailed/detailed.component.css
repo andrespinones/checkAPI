@@ -220,3 +220,7 @@ table.params {
   font-family: monospace;
   color: lightgray;
 }
+
+.mat-tab-group{
+  width: 100%;
+}

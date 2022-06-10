@@ -21,7 +21,7 @@ export class DetailedComponent  implements OnInit{
   receivedEndpoint!:Endpoint;
   receivedParams!:Parameter[];
   endpointID!:number;
-  apiData!:Api[];
+  api!:Api;
   apiID:any;
   //api testing
   endpoint: string;
@@ -69,7 +69,7 @@ export class DetailedComponent  implements OnInit{
   }
   getApi(){
     this.service.getApibyID(this.apiID).subscribe(resp=>{
-      this.apiData = resp;
+      this.api = resp[0];
     });
   }
 
@@ -86,6 +86,8 @@ export class DetailedComponent  implements OnInit{
   getEndpointDetail(endpointId:number){
         this.service.getEndpointbyID(endpointId).subscribe(resp=>{
           this.receivedEndpoint = resp[0];
+          this.selectedRequestMethod = this.receivedEndpoint.methodType;
+          //this.endpoint = getElementByID
         })
         this.service.getParamsbyEndpointID(endpointId).subscribe(resp=>{
           this.receivedParams = resp;
@@ -111,11 +113,17 @@ export class DetailedComponent  implements OnInit{
     this.text = this.receivedEndpoint.path;
     this.actualText = this.text;
     for(let i = 0; i<=this.receivedParams.length; i ++){
-      this.actualText = document.getElementById("endPath")!.innerHTML = this.actualText.replace("{" + paramName + "}", this.queryParams[i][paramName]);
-      //actualText = document.getElementById("endPath")!.innerHTML = actualText.replace("{movie_id}", "adiós");
-      
+      try{
+        this.actualText = document.getElementById("endPath")!.innerHTML = this.actualText.replace("{" + paramName + "}", this.queryParams[i][paramName]);
+      }
+      catch(error){
+        console.log("never gonna throw this error");
+      }
     }
     document.getElementById("endPath")!.innerHTML = this.actualText; //to bring all replacements of multiple parameters
+    console.log(this.actualText);
+    this.endpoint = this.api.baseUrl + this.actualText;
+    console.log(this.endpoint);
   }
 
   //fromSource
