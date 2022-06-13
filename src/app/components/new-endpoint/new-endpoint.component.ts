@@ -105,8 +105,8 @@ export class NewEndpointComponent implements OnInit {
           })
         });
       });
+      this.location.back()
     }
-    this.location.back()
   }
 }
 
