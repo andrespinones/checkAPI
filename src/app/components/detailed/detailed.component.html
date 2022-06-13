@@ -99,8 +99,8 @@
             <td>
                 <input class="searchInput" type="text"
                 placeholder={{param.paramName}}
-                [(ngModel)]="queryParams[i][param.paramName]"
-                (ngModelChange)="didBindParam(param.paramName)"
+                [ngModel]="paramMap.get(param.paramName)"
+                (ngModelChange)="paramMap.set(param.paramName, $event);didBindParam(param.paramName)"
                 aria-label="Search"> <!-- usar valor de aqui para concatenar en request  -->
                 <mat-error *ngIf="endpointError !== ''">{{ endpointError }}</mat-error>
             </td>

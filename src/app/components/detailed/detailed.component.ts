@@ -42,7 +42,7 @@ export class DetailedComponent  implements OnInit{
     actualText: string = this.text;
 
   queryParams: any = [] //to concatenete with endpoint path when fulfilled
-
+  paramMap = new Map<string, any>();
 
   constructor(private service:ApiService, private route: ActivatedRoute, private _mainService: Apitester) {
     this.endpoint = '';
@@ -76,6 +76,7 @@ export class DetailedComponent  implements OnInit{
 
   addQueryValue(paramName: string){  //to push an empty item to be binded later on html input
     this.queryParams.push({[paramName]: ''});
+    this.paramMap.set(paramName, ' ');
   }
 
   printQueryParams(){
@@ -96,6 +97,7 @@ export class DetailedComponent  implements OnInit{
           this.receivedParams = resp;
           if(this.queryParams.length > 0){  //makes sure the array is not empty for new endpoint
             this.queryParams = [];
+            this.paramMap.clear();
           }
           for(let receivedParam of this.receivedParams){  //iterates to add empty inputs items
             this.addQueryValue(receivedParam.paramName);
@@ -110,19 +112,21 @@ export class DetailedComponent  implements OnInit{
   }
 
   didBindParam(paramName: string){
-    console.log(paramName);
     this.text = this.receivedEndpoint.path;
     this.actualText = this.text;
-    for(let i = 0; i<=this.receivedParams.length; i ++){
-      try{
-        this.actualText = document.getElementById("endPath")!.innerHTML = this.actualText.replace("{" + paramName + "}", this.queryParams[i][paramName]);
-      }
-      catch(error){
-        console.log("never gonna throw this error");
-      }
+    for(const [key,value] of this.paramMap){
+      console.log(key)
+      this.actualText = this.actualText.replace("{"+ key + "}", value)
     }
+    // for(let i = 0; i<=this.paramMap.size; i ++){
+    //   try{
+    //     this.actualText = document.getElementById("endPath")!.innerHTML = this.actualText.replace("{" + this.paramMap. + "}", this.queryParams[i][paramName]);
+    //   }
+    //   catch(error){
+    //     console.log("never gonna throw this error");
+    //   }
+    // }
     document.getElementById("endPath")!.innerHTML = this.actualText; //to bring all replacements of multiple parameters
-    console.log(this.actualText);
     this.endpoint = this.api.baseUrl + this.actualText;
     console.log(this.endpoint);
   }
