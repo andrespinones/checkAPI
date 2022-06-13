@@ -62,7 +62,7 @@
     <h1 class="nombre" *ngIf="group">{{group.name}}</h1>
 
     <!-- lista de los endpoint que pertenecen al grupo -->
-    <table class="info" cdkOverlayOrigin #originOverlay="cdkOverlayOrigin">
+    <table class="info">
         <!-- falta ponerle color a la row dependiendo del tipo de metodo -->
         <tr *ngFor="let endpoint of DROPDOWN_LIST">
             <th

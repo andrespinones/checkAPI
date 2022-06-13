@@ -71,13 +71,15 @@
             Description <strong>required</strong>
           </mat-error>
         </mat-form-field>
-        <button mat-button id="rmButton" (click)="removevalue(i)">
-          Remove</button>
+        <button mat-button class="addButton" mat-icon-button (click)="removevalue(i)">
+          <!-- <mat-icon>remove_circle_outline</mat-icon> -->
+          <mat-icon>cancel</mat-icon>
+        </button>
       </form>
     </div>
 
-    <button mat-icon-button (click)="addvalue()">
-      <mat-icon>add_box</mat-icon>
+    <button class="addButton" mat-icon-button (click)="addvalue()">
+      <mat-icon class="addButton">add_circle_outline</mat-icon>
     </button>
 
     <h2>Result</h2>

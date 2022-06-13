@@ -110,7 +110,7 @@ body{
         width: 20%;
     }
     .smallDesc{
-        width: 35%;
+        width: 40.5%;
     }
     #rmButton{
       border-radius: 10px;
@@ -120,6 +120,10 @@ body{
     #rmButton:hover{
       background-color:rgba(158, 158, 158, 0.2); 
       color:#FF5C00;
+    }
+
+    .mat-icon{
+      transform: scale(1.2);
     }
 /* 
   .addButton{
