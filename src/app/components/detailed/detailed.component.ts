@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Api } from 'src/app/models/apis';
 import { Parameter } from 'src/app/models/parameter';
 import { Apitester } from 'src/app/services/apitester.service';
+import { RespCode } from 'src/app/models/respCode';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class DetailedComponent  implements OnInit{
 
   receivedEndpoint!:Endpoint;
   receivedParams!:Parameter[];
+  receivedRespCodes!:RespCode[];
   endpointID!:number;
   api!:Api;
   apiID:any;
@@ -100,6 +102,9 @@ export class DetailedComponent  implements OnInit{
           for(let receivedParam of this.receivedParams){  //iterates to add empty inputs items
             this.addQueryValue(receivedParam.paramName);
           }
+        })
+        this.service.getRespCodesbyEndpointID(endpointId).subscribe(resp=>{
+          this.receivedRespCodes = resp;
         })
         //try
 
@@ -290,10 +295,4 @@ export class DetailedComponent  implements OnInit{
   }
 }
 
-
-
-export class RespCode {
-  num: Number | undefined;
-  description!: string;
-}
 

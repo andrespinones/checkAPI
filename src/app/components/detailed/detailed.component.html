@@ -125,9 +125,9 @@
           <th></th>
         </tr>
         <br>
-        <tr>
-          <td>{{receivedEndpoint.number}}</td>
-          <td>{{receivedEndpoint.respDescription}}</td>
+        <tr *ngFor="let respCode of receivedRespCodes">
+          <td>{{respCode.number}}</td>
+          <td>{{respCode.respDescription}}</td>
           <td></td>
           <td></td>
         </tr>

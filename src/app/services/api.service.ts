@@ -10,6 +10,7 @@ import { User } from '../models/user.model';
 import { Parameter } from '../models/parameter';
 import { CategoryRel} from '../models/categoryRel';
 import { ApiId } from '@azure/msal-browser';
+import { RespCode } from '../models/respCode';
 
 @Injectable({
   providedIn: 'root'
@@ -173,6 +174,13 @@ export class ApiService {
       'Content-Type': 'application/json', 'access-token':this.token}
     )}
     );
+  }
+
+  getRespCodesbyEndpointID(endpointID:number){
+    return this.httpclient.get<RespCode[]>(this.APIURL+'/endpoint/respCodes/'+ endpointID,{headers: new HttpHeaders({ 
+      'Content-Type': 'application/json', 'access-token':this.token}
+      )}
+      );
   }
 
 
