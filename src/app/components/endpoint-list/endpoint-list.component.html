@@ -74,7 +74,7 @@
         </tr>
     </table>
     <div class="spacer"></div>
-    <a mat-button class="button button2" routerLink="/addEndpoint" *ngIf="group">
+    <a mat-button class="button button2" (click)="endpointGroupRedirect(group.groupID)" *ngIf="group">
         Add Endpoint
     </a>
 

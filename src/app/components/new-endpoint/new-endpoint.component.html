@@ -4,53 +4,41 @@
 
   <div class="example-container">
 
-    <form>
-
+    <form [formGroup]="addEndpointForm">
       <mat-form-field class="searchInput" appearance="outline">
         <mat-label>Endpoint's Name</mat-label>
-        <input type="text" matInput [formControl]="nombreFormControl" [errorStateMatcher]="matcher">
-        <mat-error *ngIf="nombreFormControl.hasError('required')">
+        <input type="text" name="name" matInput formControlName="name" [errorStateMatcher]="matcher">
+        <mat-error *ngIf="nameFormControl.hasError('required')">
           Name is <strong>required</strong>
         </mat-error>
       </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Description</mat-label>
-        <input type="text" matInput [formControl]="descFormControl" [errorStateMatcher]="matcher"
+        <input type="text" name="description" matInput formControlName="description" [errorStateMatcher]="matcher"
           placeholder="Describe your API">
         <mat-error *ngIf="descFormControl.hasError('required')">
           Description is <strong>required</strong>
         </mat-error>
       </mat-form-field>
-    </form>
-
     <br>
-
-    <form>
       <mat-form-field appearance="outline">
         <mat-label>Method</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let method of DROPDOWN_LIST" [value]="method.type">
-            {{method.type}}
+        <mat-select formControlName="method">
+          <mat-option *ngFor="let method of DROPDOWN_LIST" [value]="method">
+            {{method}}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
-      <!-- <form class="example-form"> -->
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Path</mat-label>
-        <input type="url" matInput [formControl]="urlFormControl" [errorStateMatcher]="matcher">
-
-        <!--
-                      Lo que este error hace es marcar cunado se ingresa algo que no es un email
-                      <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                  </mat-error> -->
+        <input type="text" name="path" matInput formControlName="path" [errorStateMatcher]="matcher">
         <!-- sale este error cuando no se pone nada en el input -->
-        <mat-error *ngIf="urlFormControl.hasError('required')">
+        <mat-error *ngIf="pathFormControl.hasError('required')">
           Path <strong>required</strong>
         </mat-error>
       </mat-form-field>
-      <!-- </form> -->
     </form>
 
     <br>
@@ -60,15 +48,15 @@
       <form>
         <mat-form-field class="smallDropdown" appearance="outline">
           <mat-label>Parameters's Name</mat-label>
-          <input type="text" matInput [(ngModel)]="param.name" name="name{{i}}">
-          <mat-error *ngIf="nombreFormControl.hasError('required')">
+          <input type="text" matInput [(ngModel)]="param.paramName" name="paramName{{i}}">
+          <mat-error *ngIf="paramNameFormControl.hasError('required')">
             Name is <strong>required</strong>
           </mat-error>
         </mat-form-field>
 
         <mat-form-field class="smallDropdown" appearance="outline">
           <mat-label>Type</mat-label>
-          <mat-select [(ngModel)]="param.type" name="type{{i}}">
+          <mat-select [(ngModel)]="param.dataType" name="dataType{{i}}">
             <mat-option *ngFor="let type of DROPDOWN_LIST2" [value]="type">
               {{type}}
             </mat-option>
@@ -78,29 +66,19 @@
 
         <mat-form-field class="smallDesc" appearance="outline">
           <mat-label>Parameter's Description</mat-label>
-          <input type="url" matInput [(ngModel)]="param.desc" name="desc{{i}}">
-          <mat-error *ngIf="urlFormControl.hasError('required')">
+          <input type="url" matInput [(ngModel)]="param.paramDescription" name="paramDescription{{i}}">
+          <mat-error *ngIf="paramDescFormControl.hasError('required')">
             Description <strong>required</strong>
           </mat-error>
         </mat-form-field>
         <button mat-button id="rmButton" (click)="removevalue(i)">
           Remove</button>
       </form>
-
-
-
-      <!-- <input type="text" [(ngModel)]="param.name" #name="ngModel" name="value{{i}}"> -->
-
-      <button mat-button id="addButton" (click)="removevalue(i)">
-        Remove</button>
-
-      <!-- <button (click)="removevalue(i)">Remove</button> -->
     </div>
 
     <button mat-icon-button (click)="addvalue()">
       <mat-icon>add_box</mat-icon>
     </button>
-    <!-- <button (click)="addvalue()">ADD</button> -->
 
     <h2>Result</h2>
     <!-- Checa si se agrega todo -->
@@ -114,7 +92,7 @@
       <a mat-button class="button button1" routerLink="addEndpoint">
         Cancel
       </a>
-      <a mat-button class="button button2" routerLink="addEndpoint">
+      <a mat-button class="button button2" routerLink="addEndpoint" (click)="createEndpoint()">
         Save
       </a>
 

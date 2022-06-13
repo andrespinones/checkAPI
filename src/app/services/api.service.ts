@@ -154,6 +154,27 @@ export class ApiService {
       );
   }
 
+  addEndpoint(endpoint:any){
+    return this.httpclient.post<any>(this.APIURL+'/endpoint', endpoint,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+    )}
+    );
+  }
+
+  addParameter(parameter:any){
+    return this.httpclient.post<any>(this.APIURL+'/parameter', parameter,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+    )}
+    );
+  }
+
+  addParameterEndpointRel(paramRel:any){
+    return this.httpclient.post<any>(this.APIURL+'/paramEndpoint', paramRel,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+    )}
+    );
+  }
+
 
 }
 

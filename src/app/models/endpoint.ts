@@ -1,13 +1,12 @@
-import { Parameter } from "./parameter";
-
 export interface Endpoint {
     name:                string;
     path:                string;
     endpointDescription: string;
+    groupID:             number;
     methodType:          string;
     lastResp:            null;
     status:              boolean;
-    //parameters:         Parameter[];
+    //revisar
     number:              number;
     respDescription:     string;
 }

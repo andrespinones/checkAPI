@@ -5,9 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { endpointSidebar } from 'src/app/models/endpointSidebar';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { CdkConnectedOverlay} from '@angular/cdk/overlay';
-import {map, filter, startWith, switchMap, delay, mapTo} from 'rxjs/operators';
-import { merge, Observable } from 'rxjs';
-// import { Endpoint } from 'src/app/models/endpoint';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-endpoint-list',
@@ -32,7 +31,7 @@ export class EndpointListComponent implements OnInit {
 
 
   @Output() outputToParent = new EventEmitter<Endpoint>();
-  constructor(private service:ApiService, private route: ActivatedRoute, private focusMonitor: FocusMonitor) { 
+  constructor(private service:ApiService, private route: ActivatedRoute, private focusMonitor: FocusMonitor, private router: Router) { 
     this.DROPDOWN_LIST = []
   }
 
@@ -60,6 +59,11 @@ export class EndpointListComponent implements OnInit {
     this.isPanelVisible = true;
     this.getApi();
     this.getOutputGroup;
+  }
+
+  endpointGroupRedirect(id: number) {
+    let route = '/addEndpoint';
+    this.router.navigate([route], { queryParams: { id: id } });
   }
 
   getApi(){

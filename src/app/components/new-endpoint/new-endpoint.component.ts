@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Endpoint } from 'src/app/models/endpoint';
+import { ApiService } from 'src/app/services/api.service';
+import {Location} from '@angular/common';
+import { end } from '@popperjs/core';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -14,66 +19,55 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './new-endpoint.component.html',
   styleUrls: ['./new-endpoint.component.css']
 })
-export class NewEndpointComponent {
+export class NewEndpointComponent implements OnInit {
 
   // required = no se puede ingresar un valor vacio, email - revisa que sea un email
   //se tiene que hacer un validator que revise qeu si exita la API
-  urlFormControl = new FormControl('', [Validators.required]);
-  nombreFormControl = new FormControl('', [Validators.required]);
+  nameFormControl = new FormControl('', [Validators.required]);
   descFormControl = new FormControl('', [Validators.required]);
+  methodFormControl = new FormControl('', [Validators.required]);
+  pathFormControl = new FormControl('', [Validators.required]);
+
+  paramNameFormControl = new FormControl('', [Validators.required]);
+  paramDescFormControl = new FormControl('', [Validators.required]);
+  paramDataTypeFormControl = new FormControl('', [Validators.required]);
+
 
   matcher = new MyErrorStateMatcher();
+  
+  addEndpointForm = this.formBuilder.group({
+    name: this.nameFormControl,
+    description: this.descFormControl,
+    method: this.methodFormControl,
+    path: this.pathFormControl
+  });
+
 
   params: any[] = [{
-    name: '',
-    type: '',
-    desc: ''
+    paramName: '',
+    dataType: '',
+    paramDescription: ''
   }];
 
   // values: string[] = [];
 
-  DROPDOWN_LIST: Method[];
-
+  DROPDOWN_LIST: string[];
   DROPDOWN_LIST2: string[];
   form: any;
+  endpoint: any;
+  endpointParamsRel:any;
+  endpointGroupID:any;
+  parameter: any;
 
-  constructor(private formBuilder: FormBuilder) {
-    this.DROPDOWN_LIST = [
-      {
-        type: "GET"
-      },
-      {
-        type: "POST"
-      },
-      {
-        type: "DELETE"
-      },
-      {
-        type: "PUT"
-      }
-    ]
-
+  constructor(private formBuilder: FormBuilder,private service:ApiService,private route: ActivatedRoute, private location: Location) {
+    this.DROPDOWN_LIST = ['GET','POST','DELETE','PUT']
     this.DROPDOWN_LIST2 = [
       "STRING", "INT64", "BOOLEAN", "INT32"
     ]
   }
-
-
-  get contacts(): FormArray {
-    return this.form.get('contacts') as FormArray;
-  }
-
-  buildContacts(contacts: {phoneNo: string; emailAddr: string;}[] = []) {
-    return this.formBuilder.array(contacts.map(contact => this.formBuilder.group(contact)));
-  }
-
-  addContactField() {
-    this.contacts.push(this.formBuilder.group({phoneNo: null, emailAddr: null}))
-  }
-
-  removeContactField(index: number): void {
-    if (this.contacts.length > 1) this.contacts.removeAt(index);
-    else this.contacts.patchValue([{phoneNo: null, emailAddr: null}]);
+  ngOnInit(): void {
+    const id = this.route.snapshot.queryParamMap.get('id');
+    this.endpointGroupID=id;
   }
 
   removevalue(i: number){
@@ -81,12 +75,39 @@ export class NewEndpointComponent {
   }
 
   addvalue(){
-    this.params.push({name: "", type: "", desc: ""});
+    this.params.push({paramName: "", dataType: "", paramDescription: ""});
   }
-}
 
-export class Method{
-    type: string | undefined;
+  createEndpoint(){
+    this.endpoint = {
+      name : this.addEndpointForm.value.name,
+      endpointDescription : this.addEndpointForm.value.description,
+      groupID: this.endpointGroupID,
+      methodType: this.addEndpointForm.value.method,
+      path: this.addEndpointForm.value.path
+    }
+    console.log(this.endpoint);
+    if(this.addEndpointForm.status == "INVALID"){
+      alert("Asegurate de que los campos esten llenados correctamente")
+    }
+    else{
+      //agregar servicio post para add endpoint, revisar multiples parametros.
+      this.service.addEndpoint(this.endpoint).subscribe(data=>{
+        //create endpoint and store new ID to use for next post(endpParams)
+        this.params.forEach(element => {
+          this.service.addParameter(element).subscribe(param=>{
+            this.endpointParamsRel = {
+              endpointID : data.endpointID,
+              paramID : param.paramID
+            }
+            //servicio de relacion param endpoint
+            this.service.addParameterEndpointRel(this.endpointParamsRel).subscribe()
+          })
+        });
+      });
+    }
+    this.location.back()
+  }
 }
 
 
