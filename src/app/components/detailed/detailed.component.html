@@ -25,7 +25,7 @@
       <p>{{receivedEndpoint.endpointDescription}}</p>
       <div *ngIf="receivedParams.length!==0">
         <p class="separador">HEADERS</p>
-        
+
         <div class="container-fluid" style="padding: 1rem;">
             <div class="row">
                 <div class="col-md-5">
@@ -82,7 +82,7 @@
         >
             <span>ADD ITEM</span>
         </button>
-            
+
         <p class="separador">PARAMETERS</p>
         <table class="params">
           <tr>
@@ -97,7 +97,7 @@
             <td>{{param.dataType}}</td>
             <td>{{param.paramDescription}}</td>
             <td>
-                <input class="searchInput" type="text" 
+                <input class="searchInput" type="text"
                 placeholder={{param.paramName}}
                 [(ngModel)]="queryParams[i][param.paramName]"
                 (ngModelChange)="didBindParam(param.paramName)"
@@ -111,7 +111,7 @@
       <button mat-flat-button [disabled]="!endpoint" color="primary" (click)="sendRequest()">
           Test
       </button>
-      
+
       <!-- CONSOLE LOG OUTP -->
           <!-- <div *ngFor="let queryParam of queryParams">
               {{ queryParam.input }}

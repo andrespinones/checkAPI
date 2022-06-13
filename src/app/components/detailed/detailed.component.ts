@@ -23,6 +23,7 @@ export class DetailedComponent  implements OnInit{
   endpointID!:number;
   api!:Api;
   apiID:any;
+  path:string = "";
   //api testing
   endpoint: string;
   selectedRequestMethod: string;
@@ -36,13 +37,13 @@ export class DetailedComponent  implements OnInit{
   requestHeaders: any;
   endpointError: string;
   loadingState: boolean;
-    
+
     text : string = "";  //works with the original enpoint path
     actualText: string = this.text;
 
   queryParams: any = [] //to concatenete with endpoint path when fulfilled
 
-  
+
   constructor(private service:ApiService, private route: ActivatedRoute, private _mainService: Apitester) {
     this.endpoint = '';
     this.selectedRequestMethod = '';
@@ -88,7 +89,8 @@ export class DetailedComponent  implements OnInit{
         this.service.getEndpointbyID(endpointId).subscribe(resp=>{
           this.receivedEndpoint = resp[0];
           this.selectedRequestMethod = this.receivedEndpoint.methodType;
-          //this.endpoint = getElementByID
+          this.path = this.receivedEndpoint.path;
+          document.getElementById("endPath")!.innerHTML = this.path;
         })
         this.service.getParamsbyEndpointID(endpointId).subscribe(resp=>{
           this.receivedParams = resp;
@@ -98,8 +100,6 @@ export class DetailedComponent  implements OnInit{
           for(let receivedParam of this.receivedParams){  //iterates to add empty inputs items
             this.addQueryValue(receivedParam.paramName);
           }
-          // console.log(this.receivedParams);
-          // console.log(this.queryParams);
         })
         //try
 
