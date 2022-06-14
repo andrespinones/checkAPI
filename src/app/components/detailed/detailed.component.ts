@@ -5,6 +5,16 @@ import { ActivatedRoute } from '@angular/router';
 import { Api } from 'src/app/models/apis';
 import { Parameter } from 'src/app/models/parameter';
 import { Apitester } from 'src/app/services/apitester.service';
+import {ErrorStateMatcher} from '@angular/material/core';
+import {FormControl, FormGroupDirective, NgForm, Validators, FormBuilder} from '@angular/forms';
+
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-detailed',
@@ -13,6 +23,9 @@ import { Apitester } from 'src/app/services/apitester.service';
 })
 
 export class DetailedComponent  implements OnInit{
+  stringFormControl = new FormControl('', [Validators.required]);
+  integerFormControl = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
+
   @Input() openIDBrequest: any;
   @Input() indexedDB: any;
   @Output() newRequest = new EventEmitter();
@@ -241,8 +254,7 @@ export class DetailedComponent  implements OnInit{
       case 'GET': {
         this._mainService.sendGetRequest(
           this.endpoint,
-          this.constructObject('Headers')
-        ).subscribe(
+          this.constructObject('Headers')).subscribe(
           data => {
             this.loadingState = false;
             const endTime = new Date().getTime();
@@ -250,6 +262,7 @@ export class DetailedComponent  implements OnInit{
             console.log(diff);
             this.responseTime = diff;
             this.responseData = JSON.stringify(data, undefined, 4);
+            console.log(data.status);
           },
           error => {
             this.loadingState = false;
