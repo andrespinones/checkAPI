@@ -27,6 +27,7 @@ export class NewEndpointComponent implements OnInit {
   descFormControl = new FormControl('', [Validators.required]);
   methodFormControl = new FormControl('', [Validators.required]);
   pathFormControl = new FormControl('', [Validators.required]);
+  respsFormControl = new FormControl('', [Validators.required]);
 
   paramNameFormControl = new FormControl('', [Validators.required]);
   paramDescFormControl = new FormControl('', [Validators.required]);
@@ -39,7 +40,8 @@ export class NewEndpointComponent implements OnInit {
     name: this.nameFormControl,
     description: this.descFormControl,
     method: this.methodFormControl,
-    path: this.pathFormControl
+    path: this.pathFormControl,
+    responses: this.respsFormControl
   });
 
 
@@ -53,6 +55,7 @@ export class NewEndpointComponent implements OnInit {
 
   DROPDOWN_LIST: string[];
   DROPDOWN_LIST2: string[];
+  respCodes: number[];
   form: any;
   endpoint: any;
   endpointParamsRel:any;
@@ -64,6 +67,8 @@ export class NewEndpointComponent implements OnInit {
     this.DROPDOWN_LIST2 = [
       "STRING", "INT64", "BOOLEAN", "INT32"
     ]
+    this.respCodes = [ 200, 400, 404, 505]
+
   }
   ngOnInit(): void {
     const id = this.route.snapshot.queryParamMap.get('id');
