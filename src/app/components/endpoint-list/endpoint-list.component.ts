@@ -45,8 +45,8 @@ export class EndpointListComponent implements OnInit {
   apiID: any;
   apiData:any;
   receivedGroupID!:number;
-  hasGroups: boolean = false;
-  hasEndpoints: boolean = false;
+  showF: boolean = true;
+  showL: boolean = false;
 
 
   toggleDropdown(){
@@ -76,20 +76,23 @@ export class EndpointListComponent implements OnInit {
     this.group = received;
     this.receivedGroupID=this.group.groupID;
     console.log(this.receivedGroupID);
-    this.getEndpoints(this.receivedGroupID)
-    this.hasGroups = false;
+    this.getEndpoints(this.receivedGroupID);
+    this.showF = false;
   }
 
   getEndpoints(groupID:any){
     this.service.getEndpointsByGroupID(groupID).subscribe(resp=>{
       this.DROPDOWN_LIST = resp;
+      if (this.DROPDOWN_LIST.length === 0){
+        this.showL = true;
+        this.showF = false;
+      }else{
+        this.showF = false;
+        this.showL = false;
+      }
       console.log(resp);
       console.log(this.DROPDOWN_LIST);
-      if (this.DROPDOWN_LIST.length == 0){
-        this.hasEndpoints = false;
-      }else{
-        this.hasEndpoints = true;
-      }
+
 
     })
   }
