@@ -36,7 +36,6 @@ export class NewEndpointComponent implements OnInit {
   paramDescFormControl = new FormControl('', [Validators.required]);
   paramDataTypeFormControl = new FormControl('', [Validators.required]);
 
-
   matcher = new MyErrorStateMatcher();
 
   addEndpointForm = this.formBuilder.group({
@@ -47,6 +46,11 @@ export class NewEndpointComponent implements OnInit {
     responses: this.respsFormControl
   });
 
+  addParameterForm = this.formBuilder.group({
+    paramName: this.paramNameFormControl,
+    dataType: this.paramDescFormControl,
+    paramDescription: this.paramDataTypeFormControl
+  })
 
   params: any[] = [{
     paramName: '',

@@ -5,14 +5,14 @@
   <div class="example-container">
 
     <form [formGroup]="addEndpointForm">
-      <mat-form-field class="searchInput" appearance="outline">
+      <mat-form-field class="example-form" appearance="outline">
         <mat-label>Endpoint's Name</mat-label>
         <input type="text" name="name" matInput formControlName="name" [errorStateMatcher]="matcher">
         <mat-error *ngIf="nameFormControl.hasError('required')">
           Name is <strong>required</strong>
         </mat-error>
       </mat-form-field>
-
+      <br>
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Description</mat-label>
         <input type="text" name="description" matInput formControlName="description" [errorStateMatcher]="matcher"
@@ -53,10 +53,10 @@
     <br>
     <p class="separador">PARAMETERS</p>
     <div *ngFor="let param of params; let i = index">
-      <form>
+      <form [formGroup]="addParameterForm">
         <mat-form-field class="smallDropdown" appearance="outline">
           <mat-label>Parameter's Name</mat-label>
-          <input type="text" matInput [(ngModel)]="param.paramName" name="paramName{{i}}">
+          <input type="text" matInput [(ngModel)]="param.paramName" name="paramName{{i}}" matInput formControlName="paramName" [errorStateMatcher]="matcher">
           <mat-error *ngIf="paramNameFormControl.hasError('required')">
             Name is <strong>required</strong>
           </mat-error>
@@ -64,17 +64,19 @@
 
         <mat-form-field class="smallDropdown" appearance="outline">
           <mat-label>Type</mat-label>
-          <mat-select [(ngModel)]="param.dataType" name="dataType{{i}}">
+          <mat-select [(ngModel)]="param.dataType" formControlName="dataType">
             <mat-option *ngFor="let type of DROPDOWN_LIST2" [value]="type">
               {{type}}
             </mat-option>
           </mat-select>
-
+          <mat-error *ngIf="paramDataTypeFormControl.hasError('required')">
+            Data type is <strong>required</strong>
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field class="smallDesc" appearance="outline">
           <mat-label>Parameter's Description</mat-label>
-          <input type="url" matInput [(ngModel)]="param.paramDescription" name="paramDescription{{i}}">
+          <input type="url" matInput [(ngModel)]="param.paramDescription" name="paramDescription{{i}}" matInput formControlName="paramDescription" [errorStateMatcher]="matcher">
           <mat-error *ngIf="paramDescFormControl.hasError('required')">
             Description <strong>required</strong>
           </mat-error>
@@ -103,7 +105,7 @@
       <a mat-button class="button button1" routerLink="addEndpoint">
         Cancel
       </a>
-      <a mat-button [disabled]="addEndpointForm.invalid" class="button button2" routerLink="addEndpoint" (click)="createEndpoint()">
+      <a mat-button [disabled]="addEndpointForm.invalid || addParameterForm.invalid" class="button button2" routerLink="addEndpoint" (click)="createEndpoint()">
         Save
       </a>
 
