@@ -42,8 +42,8 @@
 
       <mat-form-field class="smallDropdown" appearance="outline">
         <mat-label>Response Codes</mat-label>
-        <mat-select [formControl]="respsFormControl" formControlName="responses" multiple>
-          <mat-option *ngFor="let resp of respCodes" [value]="resp">{{resp}}</mat-option>
+        <mat-select formControlName="responses" multiple>
+          <mat-option *ngFor="let resp of respCodes" [value]="resp">{{resp.number}}</mat-option>
         </mat-select>
       </mat-form-field>
     </form>

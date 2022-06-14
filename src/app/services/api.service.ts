@@ -183,6 +183,21 @@ export class ApiService {
       );
   }
 
+  getAllRespCodes(){
+    return this.httpclient.get<RespCode[]>(this.APIURL+'/respCodes',{headers: new HttpHeaders({ 
+      'Content-Type': 'application/json', 'access-token':this.token}
+      )}
+      );
+  }
+
+  addEndpointRespCodes(respCodeRel:any){
+    return this.httpclient.post<any>(this.APIURL+'/endpoint/respCodes', respCodeRel,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+    )}
+    );
+  }
+
+
 
 }
 

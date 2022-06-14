@@ -7,6 +7,8 @@ import { Parameter } from 'src/app/models/parameter';
 import { Apitester } from 'src/app/services/apitester.service';
 import { RespCode } from 'src/app/models/respCode';
 import { User } from 'src/app/models/user.model';
+import { Router } from '@angular/router';
+
 
 
 
@@ -31,7 +33,7 @@ export class DetailedComponent  implements OnInit{
   //api testing
   endpoint: string;
   //traerse el user para saber si es admin o no 
-  isAdmin: boolean = true;
+  currentUser?: User;
 
   selectedRequestMethod: string;
   readonly requestMethods: Array<string>;
@@ -51,7 +53,7 @@ export class DetailedComponent  implements OnInit{
   queryParams: any = [] //to concatenete with endpoint path when fulfilled
 
 
-  constructor(private service:ApiService, private route: ActivatedRoute, private _mainService: Apitester) {
+  constructor(private service:ApiService, private route: ActivatedRoute, private _mainService: Apitester, private router:Router) {
     this.endpoint = '';
     this.selectedRequestMethod = '';
     this.requestMethods = [
@@ -70,16 +72,30 @@ export class DetailedComponent  implements OnInit{
     this.loadingState = false;
   }
   ngOnInit(): void {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     const id = this.route.snapshot.queryParamMap.get('id');
     this.apiID=id;
     this.getApi();
     this.getOutputEndpointID;
-
   }
+  isAdmin(): boolean {
+    if (this.currentUser?.role == "Admin") {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   getApi(){
     this.service.getApibyID(this.apiID).subscribe(resp=>{
       this.api = resp[0];
     });
+  }
+
+  editRedirect() {
+    let route = '/endpoints';
+    this.router.navigate([route], { queryParams: { id: this.apiID } });
   }
 
   addQueryValue(paramName: string){  //to push an empty item to be binded later on html input

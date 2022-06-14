@@ -6,6 +6,8 @@ import { Endpoint } from 'src/app/models/endpoint';
 import { ApiService } from 'src/app/services/api.service';
 import {Location} from '@angular/common';
 import { end } from '@popperjs/core';
+import { RespCode } from 'src/app/models/respCode';
+import { User } from 'src/app/models/user.model';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -55,10 +57,11 @@ export class NewEndpointComponent implements OnInit {
 
   DROPDOWN_LIST: string[];
   DROPDOWN_LIST2: string[];
-  respCodes: number[];
+  respCodes!: RespCode[];
   form: any;
   endpoint: any;
   endpointParamsRel:any;
+  endpointRespCode:any;
   endpointGroupID:any;
   parameter: any;
 
@@ -67,12 +70,11 @@ export class NewEndpointComponent implements OnInit {
     this.DROPDOWN_LIST2 = [
       "STRING", "INT64", "BOOLEAN", "INT32"
     ]
-    this.respCodes = [ 200, 400, 404, 505]
-
   }
   ngOnInit(): void {
     const id = this.route.snapshot.queryParamMap.get('id');
     this.endpointGroupID=id;
+    this.getAvailableRespCodes()
   }
 
   removevalue(i: number){
@@ -81,6 +83,13 @@ export class NewEndpointComponent implements OnInit {
 
   addvalue(){
     this.params.push({paramName: "", dataType: "", paramDescription: ""});
+    console.log(this.addEndpointForm.value.responses)
+  }
+
+  getAvailableRespCodes(){
+    this.service.getAllRespCodes().subscribe(data=>{
+      this.respCodes = data;
+    })
   }
 
   createEndpoint(){
@@ -109,6 +118,14 @@ export class NewEndpointComponent implements OnInit {
             this.service.addParameterEndpointRel(this.endpointParamsRel).subscribe()
           })
         });
+        for(let response of this.addEndpointForm.value.responses){
+          this.endpointRespCode = {
+            endpointID : data.endpointID,
+            respCodeID: response.respCodeID
+          }
+          console.log(this.endpointRespCode);
+          this.service.addEndpointRespCodes(this.endpointRespCode).subscribe()
+        }
       });
       this.location.back()
     }

@@ -6,7 +6,7 @@
   <div class="apiData">
       <h1>{{api.name}}</h1>
       <h3 id="baseURL">Base URL: {{api.baseUrl}}</h3>
-    <a mat-button id="addButton" *ngIf="isAdmin" [routerLink]="['/endpoints']">
+    <a mat-button id="addButton" *ngIf="isAdmin()" (click)="editRedirect()">
       Edit Endpoints <mat-icon>edit</mat-icon>
     </a>
   </div>
