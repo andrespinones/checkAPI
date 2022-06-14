@@ -6,6 +6,8 @@ import { Api } from 'src/app/models/apis';
 import { Parameter } from 'src/app/models/parameter';
 import { Apitester } from 'src/app/services/apitester.service';
 import { RespCode } from 'src/app/models/respCode';
+import { User } from 'src/app/models/user.model';
+
 
 
 @Component({
@@ -28,6 +30,9 @@ export class DetailedComponent  implements OnInit{
   path:string = "";
   //api testing
   endpoint: string;
+  //traerse el user para saber si es admin o no 
+  isAdmin: boolean = true;
+
   selectedRequestMethod: string;
   readonly requestMethods: Array<string>;
   responseData: any;
@@ -69,6 +74,7 @@ export class DetailedComponent  implements OnInit{
     this.apiID=id;
     this.getApi();
     this.getOutputEndpointID;
+
   }
   getApi(){
     this.service.getApibyID(this.apiID).subscribe(resp=>{
@@ -79,6 +85,7 @@ export class DetailedComponent  implements OnInit{
   addQueryValue(paramName: string){  //to push an empty item to be binded later on html input
     this.queryParams.push({[paramName]: ''});
   }
+
 
   printQueryParams(){
     // for(let i = 0; i<this.queryParams.length; i++){

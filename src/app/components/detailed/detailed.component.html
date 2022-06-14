@@ -4,10 +4,11 @@
     <app-endpoint-sidebar (outputToParent)="getOutputEndpointID($event)"></app-endpoint-sidebar>
   </div>
   <div class="apiData">
-    <span>
       <h1>{{api.name}}</h1>
       <h3 id="baseURL">Base URL: {{api.baseUrl}}</h3>
-    </span>
+    <a mat-button id="addButton" *ngIf="isAdmin" [routerLink]="['/endpoints']">
+      Edit Endpoints <mat-icon>edit</mat-icon>
+    </a>
   </div>
     <div class="detailContent" *ngIf="receivedEndpoint">
       <!-- <p><a href="{{baseURL}}">Base URL: {{baseURL}}</a></p> -->
