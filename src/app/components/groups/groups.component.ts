@@ -35,7 +35,6 @@ export class GroupsComponent implements OnInit {
     const id = this.route.snapshot.queryParamMap.get('id');
     this.apiID=id;
     this.getGroups();
-    throw new Error('Method not implemented.');
   }
 
   getGroups(){

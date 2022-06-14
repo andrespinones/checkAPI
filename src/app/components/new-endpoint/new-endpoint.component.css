@@ -112,6 +112,10 @@ body{
     .smallDesc{
         width: 40.5%;
     }
+
+    .midDesc{
+      width: 46.8%;
+  }
     #rmButton{
       border-radius: 10px;
       background-color: white;
@@ -125,8 +129,11 @@ body{
     .mat-icon{
       transform: scale(1.2);
     }
-/* 
-  .addButton{
-    font-size: x-large;
-    size: 50%;
-  } */
+
+    ::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+      color: unset;
+  }
+  
+  ::ng-deep .mat-option-pseudo-checkbox.mat-pseudo-checkbox-checked {
+      background-color: #FF7E36;
+  }

@@ -6,6 +6,9 @@ import { Endpoint } from 'src/app/models/endpoint';
 import { ApiService } from 'src/app/services/api.service';
 import {Location} from '@angular/common';
 import { end } from '@popperjs/core';
+import { RespCode } from 'src/app/models/respCode';
+import { User } from 'src/app/models/user.model';
+import { ValidatePath } from 'src/app/custom-validators/forbiddenBraces.directive';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -26,7 +29,8 @@ export class NewEndpointComponent implements OnInit {
   nameFormControl = new FormControl('', [Validators.required]);
   descFormControl = new FormControl('', [Validators.required]);
   methodFormControl = new FormControl('', [Validators.required]);
-  pathFormControl = new FormControl('', [Validators.required]);
+  pathFormControl = new FormControl('', [Validators.required, ValidatePath]);
+  respsFormControl = new FormControl('', [Validators.required]);
 
   paramNameFormControl = new FormControl('', [Validators.required]);
   paramDescFormControl = new FormControl('', [Validators.required]);
@@ -34,12 +38,13 @@ export class NewEndpointComponent implements OnInit {
 
 
   matcher = new MyErrorStateMatcher();
-  
+
   addEndpointForm = this.formBuilder.group({
     name: this.nameFormControl,
     description: this.descFormControl,
     method: this.methodFormControl,
-    path: this.pathFormControl
+    path: this.pathFormControl,
+    responses: this.respsFormControl
   });
 
 
@@ -53,9 +58,11 @@ export class NewEndpointComponent implements OnInit {
 
   DROPDOWN_LIST: string[];
   DROPDOWN_LIST2: string[];
+  respCodes!: RespCode[];
   form: any;
   endpoint: any;
   endpointParamsRel:any;
+  endpointRespCode:any;
   endpointGroupID:any;
   parameter: any;
 
@@ -68,6 +75,7 @@ export class NewEndpointComponent implements OnInit {
   ngOnInit(): void {
     const id = this.route.snapshot.queryParamMap.get('id');
     this.endpointGroupID=id;
+    this.getAvailableRespCodes()
   }
 
   removevalue(i: number){
@@ -76,6 +84,13 @@ export class NewEndpointComponent implements OnInit {
 
   addvalue(){
     this.params.push({paramName: "", dataType: "", paramDescription: ""});
+    console.log(this.addEndpointForm.value.responses)
+  }
+
+  getAvailableRespCodes(){
+    this.service.getAllRespCodes().subscribe(data=>{
+      this.respCodes = data;
+    })
   }
 
   createEndpoint(){
@@ -104,9 +119,17 @@ export class NewEndpointComponent implements OnInit {
             this.service.addParameterEndpointRel(this.endpointParamsRel).subscribe()
           })
         });
+        for(let response of this.addEndpointForm.value.responses){
+          this.endpointRespCode = {
+            endpointID : data.endpointID,
+            respCodeID: response.respCodeID
+          }
+          console.log(this.endpointRespCode);
+          this.service.addEndpointRespCodes(this.endpointRespCode).subscribe()
+        }
       });
+      this.location.back()
     }
-    this.location.back()
   }
 }
 

@@ -6,7 +6,4 @@ export interface Endpoint {
     methodType:          string;
     lastResp:            null;
     status:              boolean;
-    //revisar
-    number:              number;
-    respDescription:     string;
 }

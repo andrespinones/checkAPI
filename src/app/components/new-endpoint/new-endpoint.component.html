@@ -22,7 +22,7 @@
         </mat-error>
       </mat-form-field>
     <br>
-      <mat-form-field appearance="outline">
+      <mat-form-field class="smallDropdown" appearance="outline">
         <mat-label>Method</mat-label>
         <mat-select formControlName="method">
           <mat-option *ngFor="let method of DROPDOWN_LIST" [value]="method">
@@ -30,24 +30,32 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-
-      <mat-form-field class="example-full-width" appearance="outline">
+      <mat-form-field class="midDesc" appearance="outline">
         <mat-label>Path</mat-label>
         <input type="text" name="path" matInput formControlName="path" [errorStateMatcher]="matcher">
         <!-- sale este error cuando no se pone nada en el input -->
         <mat-error *ngIf="pathFormControl.hasError('required')">
           Path <strong>required</strong>
         </mat-error>
+        <mat-error *ngIf="pathFormControl.hasError">
+          Curly braces <strong>not enclosed</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="smallDropdown" appearance="outline">
+        <mat-label>Response Codes</mat-label>
+        <mat-select formControlName="responses" multiple>
+          <mat-option *ngFor="let resp of respCodes" [value]="resp">{{resp.number}}</mat-option>
+        </mat-select>
       </mat-form-field>
     </form>
-
+    <span id="instruction">*Parameters must be enclosed between <strong>curly braces</strong> in the path*</span>
+    <br>
     <br>
     <p class="separador">PARAMETERS</p>
-
     <div *ngFor="let param of params; let i = index">
       <form>
         <mat-form-field class="smallDropdown" appearance="outline">
-          <mat-label>Parameters's Name</mat-label>
+          <mat-label>Parameter's Name</mat-label>
           <input type="text" matInput [(ngModel)]="param.paramName" name="paramName{{i}}">
           <mat-error *ngIf="paramNameFormControl.hasError('required')">
             Name is <strong>required</strong>
@@ -61,7 +69,7 @@
               {{type}}
             </mat-option>
           </mat-select>
-          
+
         </mat-form-field>
 
         <mat-form-field class="smallDesc" appearance="outline">
@@ -82,19 +90,20 @@
       <mat-icon class="addButton">add_circle_outline</mat-icon>
     </button>
 
-    <h2>Result</h2>
+    <!-- <h2>Result</h2> -->
     <!-- Checa si se agrega todo -->
     <div *ngFor="let value of params;">
-      {{ value.name }}
-      {{ value.type }}
-      {{ value.desc }}
+      {{ value.paramName }}
+      {{ value.dataType }}
+      {{ value.paramDescription }}
+
     </div>
 
     <div class="buttons">
       <a mat-button class="button button1" routerLink="addEndpoint">
         Cancel
       </a>
-      <a mat-button class="button button2" routerLink="addEndpoint" (click)="createEndpoint()">
+      <a mat-button [disabled]="addEndpointForm.invalid" class="button button2" routerLink="addEndpoint" (click)="createEndpoint()">
         Save
       </a>
 

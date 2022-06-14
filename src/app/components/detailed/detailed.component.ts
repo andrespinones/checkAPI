@@ -1,13 +1,14 @@
 import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import { Endpoint } from 'src/app/models/endpoint';
 import { ApiService } from 'src/app/services/api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Api } from 'src/app/models/apis';
 import { Parameter } from 'src/app/models/parameter';
 import { Apitester } from 'src/app/services/apitester.service';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {FormControl, FormGroupDirective, NgForm, Validators, FormBuilder} from '@angular/forms';
-
+import { RespCode } from 'src/app/models/respCode';
+import { User } from 'src/app/models/user.model';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -39,12 +40,16 @@ export class DetailedComponent  implements OnInit{
   });
   receivedEndpoint!:Endpoint;
   receivedParams!:Parameter[];
+  receivedRespCodes!:RespCode[];
   endpointID!:number;
   api!:Api;
   apiID:any;
   path:string = "";
   //api testing
   endpoint: string;
+  //traerse el user para saber si es admin o no
+  currentUser?: User;
+
   selectedRequestMethod: string;
   readonly requestMethods: Array<string>;
   responseData: any;
@@ -64,7 +69,7 @@ export class DetailedComponent  implements OnInit{
   queryParams: any = [] //to concatenete with endpoint path when fulfilled
   paramMap = new Map<string, any>();
 
-  constructor(private service:ApiService, private route: ActivatedRoute, private _mainService: Apitester, private formBuilder:FormBuilder) {
+  constructor(private service:ApiService, private route: ActivatedRoute, private _mainService: Apitester, private formBuilder:FormBuilder,  private router:Router) {
     this.endpoint = '';
     this.selectedRequestMethod = '';
     this.requestMethods = [
@@ -83,22 +88,38 @@ export class DetailedComponent  implements OnInit{
     this.loadingState = false;
   }
   ngOnInit(): void {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     const id = this.route.snapshot.queryParamMap.get('id');
     this.apiID=id;
     this.getApi();
     this.getOutputEndpointID;
     this.responseTime = 0;
   }
+  isAdmin(): boolean {
+    if (this.currentUser?.role == "Admin") {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   getApi(){
     this.service.getApibyID(this.apiID).subscribe(resp=>{
       this.api = resp[0];
     });
   }
 
+  editRedirect() {
+    let route = '/endpoints';
+    this.router.navigate([route], { queryParams: { id: this.apiID } });
+  }
+
   addQueryValue(paramName: string){  //to push an empty item to be binded later on html input
     this.queryParams.push({[paramName]: ''});
     this.paramMap.set(paramName, '');
   }
+
 
   printQueryParams(){
     // for(let i = 0; i<this.queryParams.length; i++){
@@ -124,6 +145,10 @@ export class DetailedComponent  implements OnInit{
             this.addQueryValue(receivedParam.paramName);
           }
         })
+        this.service.getRespCodesbyEndpointID(endpointId).subscribe(resp=>{
+          this.receivedRespCodes = resp;
+        })
+        //try
   }
   getOutputEndpointID(received:number){
     this.endpointID=received;
@@ -316,10 +341,4 @@ export class DetailedComponent  implements OnInit{
   }
 }
 
-
-
-export class RespCode {
-  num: Number | undefined;
-  description!: string;
-}
 
