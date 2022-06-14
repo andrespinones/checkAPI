@@ -49,7 +49,7 @@ export class NewEndpointComponent implements OnInit {
   addParameterForm = this.formBuilder.group({
     paramName: this.paramNameFormControl,
     dataType: this.paramDescFormControl,
-    paramDescription: this.paramDataTypeFormControl
+    paramDescription: this.paramDataTypeFormControl,
   })
 
   params: any[] = [{

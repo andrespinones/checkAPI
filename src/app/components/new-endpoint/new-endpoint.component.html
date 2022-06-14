@@ -29,6 +29,9 @@
             {{method}}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="pathFormControl.hasError('required')">
+          Method <strong>required</strong>
+        </mat-error>
       </mat-form-field>
       <mat-form-field class="midDesc" appearance="outline">
         <mat-label>Path</mat-label>
@@ -46,8 +49,12 @@
         <mat-select formControlName="responses" multiple>
           <mat-option *ngFor="let resp of respCodes" [value]="resp">{{resp.number}}</mat-option>
         </mat-select>
+        <mat-error *ngIf="respsFormControl.hasError('required')">
+          At least one response code <strong>required</strong>
+        </mat-error>
       </mat-form-field>
     </form>
+    <br>
     <span id="instruction">*Parameters must be enclosed between <strong>curly braces</strong> in the path*</span>
     <br>
     <br>
