@@ -97,7 +97,7 @@
             <td>{{param.dataType}}</td>
             <td>{{param.paramDescription}}</td>
             <td>
-              <form [formGroup]="stringForm">
+              <form *ngIf="param.dataType == 'STRING'" [formGroup]="stringForm">
                 <mat-form-field>
                 <input class="searchInput" type="text"
                 placeholder={{param.paramName}}
@@ -109,15 +109,29 @@
                 </mat-error>
               </mat-form-field>
               </form>
+              <form *ngIf="param.dataType == 'integer'" [formGroup]="integerForm">
+                <mat-form-field>
+                <input class="searchInput" type="text"
+                placeholder={{param.paramName}}
+                [ngModel]="paramMap.get(param.paramName)"
+                (ngModelChange)="paramMap.set(param.paramName, $event);didBindParam(param.paramName)"
+                aria-label="Search" matInput formControlName="var" [errorStateMatcher]="matcher"> <!-- usar valor de aqui para concatenar en request  -->
+                <mat-error *ngIf="integerFormControl.hasError('required')">
+                  parameter is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="integerFormControl.hasError">
+                  parameter should be a <strong>number</strong>
+                </mat-error>
+              </mat-form-field>
+              </form>
             </td>
           </tr>
         </table>
-      </div>
-      <br>
-      <button mat-flat-button [disabled]="stringForm.invalid" color="primary" (click)="sendRequest()">
+        <button mat-flat-button [disabled]="stringForm.invalid && integerForm.invalid" color="primary" (click)="sendRequest()">
           Test
       </button>
-
+      </div>
+      <br>
       <!-- CONSOLE LOG OUTP -->
           <!-- <div *ngFor="let queryParam of queryParams">
               {{ queryParam.input }}

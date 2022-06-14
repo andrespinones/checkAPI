@@ -244,6 +244,10 @@ export class DetailedComponent  implements OnInit{
     return constructedObject;
   }
 
+  isFormValid(){
+    return (this.stringForm.valid || this.integerForm.valid)
+  }
+
   sendRequest() {
     this.endpointError = '';
     this.responseData = '';
@@ -299,7 +303,10 @@ export class DetailedComponent  implements OnInit{
 
     //this.saveRequest(this.selectedRequestMethod);
     this.newRequest.emit();
-
+    this.stringForm.reset();
+    this.integerForm.reset();
+    this.text = this.receivedEndpoint.path
+    document.getElementById("endPath")!.innerHTML = this.text;
     this.selectedRequestMethod = 'GET';
     this.endpoint = '';
     this.requestBody = [{ key: '', value: '' }];
