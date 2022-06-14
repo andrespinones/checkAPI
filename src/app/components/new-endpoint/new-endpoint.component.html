@@ -112,7 +112,7 @@
       <a mat-button class="button button1" routerLink="addEndpoint">
         Cancel
       </a>
-      <a mat-button [disabled]="addEndpointForm.invalid || addParameterForm.invalid" class="button button2" routerLink="addEndpoint" (click)="createEndpoint()">
+      <a mat-button [disabled]="addEndpointForm.invalid || isParamsInvalid()" class="button button2" routerLink="addEndpoint" (click)="createEndpoint()">
         Save
       </a>
 

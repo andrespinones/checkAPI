@@ -80,6 +80,8 @@ export class NewEndpointComponent implements OnInit {
     const id = this.route.snapshot.queryParamMap.get('id');
     this.endpointGroupID=id;
     this.getAvailableRespCodes()
+    console.log(this.addEndpointForm.valid)
+    console.log(this.addParameterForm.valid)
   }
 
   removevalue(i: number){
@@ -133,6 +135,14 @@ export class NewEndpointComponent implements OnInit {
         }
       });
       this.location.back()
+    }
+  }
+
+  isParamsInvalid(){
+    if(this.params.length == 0){
+      return false;
+    }else{
+      return this.addParameterForm.invalid;
     }
   }
 }
