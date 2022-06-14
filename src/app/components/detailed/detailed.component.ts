@@ -76,7 +76,7 @@ export class DetailedComponent  implements OnInit{
 
   addQueryValue(paramName: string){  //to push an empty item to be binded later on html input
     this.queryParams.push({[paramName]: ''});
-    this.paramMap.set(paramName, ' ');
+    this.paramMap.set(paramName, '');
   }
 
   printQueryParams(){
