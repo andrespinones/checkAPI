@@ -30,6 +30,13 @@ export class DetailedComponent  implements OnInit{
   @Input() indexedDB: any;
   @Output() newRequest = new EventEmitter();
 
+  matcher = new MyErrorStateMatcher();
+  stringForm = this.formBuilder.group({
+    var: this.stringFormControl
+  });
+  integerForm = this.formBuilder.group({
+    var: this.integerFormControl
+  });
   receivedEndpoint!:Endpoint;
   receivedParams!:Parameter[];
   endpointID!:number;
@@ -57,7 +64,7 @@ export class DetailedComponent  implements OnInit{
   queryParams: any = [] //to concatenete with endpoint path when fulfilled
   paramMap = new Map<string, any>();
 
-  constructor(private service:ApiService, private route: ActivatedRoute, private _mainService: Apitester) {
+  constructor(private service:ApiService, private route: ActivatedRoute, private _mainService: Apitester, private formBuilder:FormBuilder) {
     this.endpoint = '';
     this.selectedRequestMethod = '';
     this.requestMethods = [
@@ -241,7 +248,7 @@ export class DetailedComponent  implements OnInit{
     this.endpointError = '';
     this.responseData = '';
     this.responseError = '';
-
+    console.log(this.stringForm.value);
     this.requestBody.forEach((item: number, index: string | number) => {
       if (this.requestBodyDataTypes[index] === 'Number') {
         item = Number(item);

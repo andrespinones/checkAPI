@@ -97,17 +97,24 @@
             <td>{{param.dataType}}</td>
             <td>{{param.paramDescription}}</td>
             <td>
+              <form [formGroup]="stringForm">
+                <mat-form-field>
                 <input class="searchInput" type="text"
                 placeholder={{param.paramName}}
                 [ngModel]="paramMap.get(param.paramName)"
                 (ngModelChange)="paramMap.set(param.paramName, $event);didBindParam(param.paramName)"
-                aria-label="Search"> <!-- usar valor de aqui para concatenar en request  -->
+                aria-label="Search" matInput formControlName="var" [errorStateMatcher]="matcher"> <!-- usar valor de aqui para concatenar en request  -->
+                <mat-error *ngIf="stringFormControl.hasError('required')">
+                  parameter is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+              </form>
             </td>
           </tr>
         </table>
       </div>
       <br>
-      <button mat-flat-button [disabled]="!endpoint" color="primary" (click)="sendRequest()">
+      <button mat-flat-button [disabled]="stringForm.invalid" color="primary" (click)="sendRequest()">
           Test
       </button>
 
