@@ -14,6 +14,7 @@ body{
 }
 .nombre{
   font-weight: 750;
+  padding-top: 1rem;
 }
 .apiData{
   font-weight:900;
@@ -30,6 +31,7 @@ body{
   text-decoration: underline;
   letter-spacing: 2px;
   font-weight: 500;
+  padding-top: 1em;
 }
 
 table.info {
