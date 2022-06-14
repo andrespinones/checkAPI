@@ -6,7 +6,6 @@ import { Api } from 'src/app/models/apis';
 import { Parameter } from 'src/app/models/parameter';
 import { Apitester } from 'src/app/services/apitester.service';
 
-
 @Component({
   selector: 'app-detailed',
   templateUrl: './detailed.component.html',
@@ -30,6 +29,7 @@ export class DetailedComponent  implements OnInit{
   readonly requestMethods: Array<string>;
   responseData: any;
   responseError: any;
+  responseTime: any;
   savedRequestCount!: number;
   requestBody: any;
   requestBodyDataTypes: any;
@@ -67,6 +67,7 @@ export class DetailedComponent  implements OnInit{
     this.apiID=id;
     this.getApi();
     this.getOutputEndpointID;
+    this.responseTime = 0;
   }
   getApi(){
     this.service.getApibyID(this.apiID).subscribe(resp=>{
@@ -103,8 +104,6 @@ export class DetailedComponent  implements OnInit{
             this.addQueryValue(receivedParam.paramName);
           }
         })
-        //try
-
   }
   getOutputEndpointID(received:number){
     this.endpointID=received;
@@ -230,15 +229,6 @@ export class DetailedComponent  implements OnInit{
     this.responseData = '';
     this.responseError = '';
 
-    if (!this.endpoint) {
-      this.endpointError = 'Endpoint is a Required value';
-      return;
-    }
-    if (!this.validateUrl(this.endpoint)) {
-      this.endpointError = 'Please enter a valid URL';
-      return;
-    }
-
     this.requestBody.forEach((item: number, index: string | number) => {
       if (this.requestBodyDataTypes[index] === 'Number') {
         item = Number(item);
@@ -246,6 +236,7 @@ export class DetailedComponent  implements OnInit{
     });
 
     this.loadingState = true;
+    const startTime = new Date().getTime();
     switch (this.selectedRequestMethod) {
       case 'GET': {
         this._mainService.sendGetRequest(
@@ -254,6 +245,10 @@ export class DetailedComponent  implements OnInit{
         ).subscribe(
           data => {
             this.loadingState = false;
+            const endTime = new Date().getTime();
+            const diff = (endTime - startTime)/1000 + 'Seconds';
+            console.log(diff);
+            this.responseTime = diff;
             this.responseData = JSON.stringify(data, undefined, 4);
           },
           error => {

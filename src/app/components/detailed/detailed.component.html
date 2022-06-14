@@ -102,7 +102,6 @@
                 [ngModel]="paramMap.get(param.paramName)"
                 (ngModelChange)="paramMap.set(param.paramName, $event);didBindParam(param.paramName)"
                 aria-label="Search"> <!-- usar valor de aqui para concatenar en request  -->
-                <mat-error *ngIf="endpointError !== ''">{{ endpointError }}</mat-error>
             </td>
           </tr>
         </table>
@@ -121,7 +120,7 @@
         <tr>
           <th>Code</th>
           <th>Description</th>
-          <th></th>
+          <th>Response Time: {{responseTime}}</th>
           <th></th>
         </tr>
         <br>
