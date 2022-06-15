@@ -338,6 +338,10 @@ export class DetailedComponent  implements OnInit{
         ).subscribe(
           data => {
             this.loadingState = false;
+            const endTime = new Date().getTime();
+            const diff = (endTime - startTime)/1000 + 'Seconds';
+            console.log(diff);
+            this.responseTime = diff;
             this.responseData = JSON.stringify(data, undefined, 4);
           },
           error => {
