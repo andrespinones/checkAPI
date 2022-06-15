@@ -24,8 +24,7 @@
       </table>
       <br>
       <p>{{receivedEndpoint.endpointDescription}}</p>
-      <div *ngIf="receivedParams.length!==0">
-        <p class="separador">HEADERS</p>
+      <p class="separador">HEADERS</p>
 
         <div class="container-fluid" style="padding: 1rem;">
             <div class="row">
@@ -84,6 +83,7 @@
             <span>ADD ITEM</span>
         </button>
 
+      <div *ngIf="receivedParams.length!==0">
         <p class="separador">PARAMETERS</p>
         <table class="params">
           <tr>
@@ -110,7 +110,7 @@
                 </mat-error>
               </mat-form-field>
               </form>
-              <form *ngIf="param.dataType == 'INTEGER'" [formGroup]="integerForm">
+              <form *ngIf="param.dataType == 'INT'" [formGroup]="integerForm">
                 <mat-form-field>
                 <input class="searchInput" type="text"
                 placeholder={{param.paramName}}
@@ -128,10 +128,10 @@
             </td>
           </tr>
         </table>
-        <button mat-flat-button [disabled]="stringForm.invalid && integerForm.invalid" color="primary" (click)="sendRequest()">
-          Test
-      </button>
       </div>
+      <button mat-flat-button [disabled]="(stringForm.invalid && integerForm.invalid) && receivedParams.length!==0 " color="primary" (click)="sendRequest()">
+        Test
+    </button>
       <br>
       <!-- CONSOLE LOG OUTP -->
           <!-- <div *ngFor="let queryParam of queryParams">

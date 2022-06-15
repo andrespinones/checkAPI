@@ -118,7 +118,7 @@ export class DetailedComponent  implements OnInit{
 
   addQueryValue(paramName: string){  //to push an empty item to be binded later on html input
     this.queryParams.push({[paramName]: ''});
-    this.paramMap.set(paramName, null);
+    this.paramMap.set(paramName, '');
   }
 
 
@@ -160,12 +160,12 @@ export class DetailedComponent  implements OnInit{
     this.text = this.receivedEndpoint.path;
     this.actualText = this.text;
     for(const [key,value] of this.paramMap){
-      console.log(key)
-      if(value == null){
-        this.actualText = this.actualText.replace("{"+ key + "}", ("{"+ key + "}"))
-        break;
+      if(value == ''){
+        this.actualText = this.actualText.replace("{"+ key + "}", "{"+ key + "}")
+
+      }else{
+        this.actualText = this.actualText.replace("{"+ key + "}", value)
       }
-      this.actualText = this.actualText.replace("{"+ key + "}", value)
     }
     document.getElementById("endPath")!.innerHTML = this.actualText; //to bring all replacements of multiple parameters
     this.endpoint = this.api.baseUrl + this.actualText;
@@ -179,6 +179,7 @@ export class DetailedComponent  implements OnInit{
       context = this.requestBody;
     } else if (ctx === 'Headers') {
       context = this.requestHeaders;
+      console.log(this.requestHeaders)
     }
 
     context.push({ key: '', value: '' });

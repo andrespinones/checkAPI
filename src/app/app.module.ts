@@ -128,7 +128,7 @@ import { ApiParamsComponent } from './components/api-params/api-params.component
           cache:
           {
             cacheLocation:'localStorage',
-            storeAuthStateInCookie:false
+            storeAuthStateInCookie:true
           }
         }
       ),
@@ -143,7 +143,7 @@ import { ApiParamsComponent } from './components/api-params/api-params.component
         protectedResourceMap:new Map(
           [
             ['https://graph.microsoft.com/v1.0/me',['user.Read']],
-            ['localhost',['api://apiUri/api.scope']]
+            ['localhost',[]]
           ]
         )
       }
@@ -156,7 +156,7 @@ import { ApiParamsComponent } from './components/api-params/api-params.component
     useClass:MsalInterceptor,
     multi:true
 
-  },MsalGuard,AzureAdDemoService],
+  },AzureAdDemoService],
   bootstrap: [AppComponent,MsalRedirectComponent],
   entryComponents:[ConfirmDialogComponent]
 })

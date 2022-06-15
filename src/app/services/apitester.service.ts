@@ -9,10 +9,19 @@ export class Apitester {
 
   constructor(private _httpClient: HttpClient) {}
 
-  sendGetRequest(url: string, headers: any):Observable<any>{
-    headers = new HttpHeaders(headers);
-    return this._httpClient.get<any>(url, { headers });
+  sendGetRequest(url: string, headers: any){
+    if (headers.length == 0){
+      console.log('flag')
+      return this._httpClient.get<any>(url);
+    }else{
+      console.log(headers.length)
+      headers = new HttpHeaders(headers);
+      try{
+        return this._httpClient.get<any>(url, { headers });
+      }finally{
 
+      }
+    }
   }
 
   sendPostRequest(url: string, requestBody: any, headers: any) {
