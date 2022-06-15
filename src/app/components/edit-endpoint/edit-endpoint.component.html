@@ -1,0 +1,107 @@
+<body>
+    <app-navbar></app-navbar>
+    <h1 class="nombre">Edit Endpoint</h1>
+
+    <div class="example-container">
+
+        <form [formGroup]="addEndpointForm">
+
+            <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Description</mat-label>
+                <input type="text" name="description" [(ngModel)] = receivedEndpoint.endpointDescription matInput formControlName="description" 
+                [errorStateMatcher]="matcher"
+                placeholder="Describe your API">
+                <mat-error *ngIf="descFormControl.hasError('required')">
+                    Description is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+            <br>
+            <mat-form-field class="smallDropdown" appearance="outline">
+                <mat-label>Method</mat-label>
+                <mat-select [(value)] = "selectedRequestedMethod" formControlName="method">
+                    <mat-option *ngFor="let method of DROPDOWN_LIST" [value]="method">
+                        {{method}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field class="midDesc" appearance="outline">
+                <mat-label>Path</mat-label>
+                <input type="text" name="path" [(ngModel)] = "receivedEndpoint.path" matInput formControlName="path" [errorStateMatcher]="matcher">
+                <!-- sale este error cuando no se pone nada en el input -->
+                <mat-error *ngIf="pathFormControl.hasError('required')">
+                    Path <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="smallDropdown" appearance="outline">
+                <mat-label>Response Codes</mat-label>
+                <mat-select formControlName="responses" multiple>
+                    <mat-option *ngFor="let resp of respCodes" [value]="resp">{{resp.number}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+
+        <br>
+        <p class="separador">PARAMETERS</p>
+
+        <div *ngFor="let param of params; let i = index">
+            <form>
+                <mat-form-field class="smallDropdown" appearance="outline">
+                    <mat-label>Parameter's Name</mat-label>
+                    <input type="text" matInput [(ngModel)]="param.paramName" name="paramName{{i}}">
+                    <mat-error *ngIf="paramNameFormControl.hasError('required')">
+                        Name is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="smallDropdown" appearance="outline">
+                    <mat-label>Type</mat-label>
+                    <mat-select [(value)]="receivedParamsTypes[i]">
+                        <mat-option *ngFor="let type of DROPDOWN_LIST2" [value]="type">
+                        {{type}}
+                    </mat-option>
+                    </mat-select>
+
+                </mat-form-field>
+
+                <mat-form-field class="smallDesc" appearance="outline">
+                    <mat-label>Parameter's Description</mat-label>
+                    <input type="url" matInput [(ngModel)]="param.paramDescription" name="paramDescription{{i}}">
+                    <mat-error *ngIf="paramDescFormControl.hasError('required')">
+                        Description <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <button mat-button class="addButton" mat-icon-button (click)="removevalue(i)">
+                    <!-- <mat-icon>remove_circle_outline</mat-icon> -->
+                    <mat-icon>highlight_off</mat-icon>
+                </button>
+            </form>
+        </div>
+
+        <button class="addButton" mat-icon-button (click)="addvalue()">
+            <mat-icon class="addButton">add_circle_outline</mat-icon>
+        </button>
+
+        <!-- <h2>Result</h2> -->
+        <!-- Checa si se agrega todo -->
+        <div *ngFor="let value of params;">
+            {{ value.paramName }}
+            {{ value.dataType }}
+            {{ value.paramDescription }}
+
+        </div>
+
+        <div class="buttons">
+            <a mat-button class="button button1" routerLink="addEndpoint" (click)="cancel()">
+                Cancel
+            </a>
+            <a mat-button class="button button2" routerLink="addEndpoint" (click)="createEndpoint()">
+                Save
+            </a>
+
+        </div>
+
+    </div>
+
+</body>

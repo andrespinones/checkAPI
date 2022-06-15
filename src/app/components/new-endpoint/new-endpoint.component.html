@@ -5,14 +5,8 @@
   <div class="example-container">
 
     <form [formGroup]="addEndpointForm">
-      <mat-form-field class="example-form" appearance="outline">
-        <mat-label>Endpoint's Name</mat-label>
-        <input type="text" name="name" matInput formControlName="name" [errorStateMatcher]="matcher">
-        <mat-error *ngIf="nameFormControl.hasError('required')">
-          Name is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
       <br>
+
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Description</mat-label>
         <input type="text" name="description" matInput formControlName="description" [errorStateMatcher]="matcher"
@@ -90,7 +84,7 @@
         </mat-form-field>
         <button mat-button class="addButton" mat-icon-button (click)="removevalue(i)">
           <!-- <mat-icon>remove_circle_outline</mat-icon> -->
-          <mat-icon>cancel</mat-icon>
+          <mat-icon>highlight_off</mat-icon>
         </button>
       </form>
     </div>
