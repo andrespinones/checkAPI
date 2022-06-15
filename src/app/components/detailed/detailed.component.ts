@@ -78,6 +78,12 @@ export class DetailedComponent  implements OnInit{
     this.getApi();
     this.getOutputEndpointID;
   }
+
+  editEndpointRedirect(endpointID:number){
+    let route = '/editEndpoint';
+    this.router.navigate([route], { queryParams: { endpointID: endpointID} });
+  }
+  
   isAdmin(): boolean {
     if (this.currentUser?.role == "Admin") {
       return true;

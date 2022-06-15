@@ -21,7 +21,7 @@
           <th> Last response: {{receivedEndpoint.lastResp}}</th>
           <th>2 days ago</th>
           <td align="right">
-            <a mat-icon-button *ngIf="isAdmin()">
+            <a mat-icon-button *ngIf="isAdmin()" (click)="editEndpointRedirect(endpointID)">
               <mat-icon>edit</mat-icon>
             </a>
           </td>
