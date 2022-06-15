@@ -49,7 +49,7 @@ export class DetailedComponent  implements OnInit{
   endpoint: string;
   //traerse el user para saber si es admin o no
   currentUser?: User;
-  displayedJson:string = '';
+  displayedJson:string = 'string culero';
   selectedRequestMethod: string;
   readonly requestMethods: Array<string>;
   responseData: any;
@@ -145,6 +145,7 @@ export class DetailedComponent  implements OnInit{
           for(let receivedParam of this.receivedParams){  //iterates to add empty inputs items
             this.addQueryValue(receivedParam.paramName);
           }
+          this.displayedJson = JSON.stringify(Object.fromEntries(this.paramMap), undefined, 4);
         })
         this.service.getRespCodesbyEndpointID(endpointId).subscribe(resp=>{
           this.receivedRespCodes = resp;
@@ -169,6 +170,24 @@ export class DetailedComponent  implements OnInit{
     document.getElementById("endPath")!.innerHTML = this.actualText; //to bring all replacements of multiple parameters
     this.endpoint = this.api.baseUrl + this.actualText;
     console.log(this.endpoint);
+  }
+
+  jsonBind(){
+    let current = JSON.stringify(Object.fromEntries(this.paramMap), undefined, 4);
+    let isFilled = false;
+    for (const value of this.paramMap.values()) {
+      if (value == ""){
+      }
+      else{
+        isFilled = true;
+        break;
+      }
+    }
+    if(isFilled){
+      this.displayedJson = JSON.stringify(Object.fromEntries(this.paramMap), undefined, 4);
+    }else{
+      this.displayedJson = current;
+    }
   }
 
   //fromSource
@@ -309,7 +328,7 @@ export class DetailedComponent  implements OnInit{
         break;
       }
       case 'POST': {
-        let string = JSON.stringify(Object.fromEntries(this.paramMap));
+        let string = JSON.stringify(Object.fromEntries(this.paramMap), undefined, 4);
         this.endpoint = this.api.baseUrl + this.path
         this._mainService.sendPostRequest(
           this.endpoint,
