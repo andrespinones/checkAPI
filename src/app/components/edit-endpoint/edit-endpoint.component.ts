@@ -58,7 +58,7 @@ export class EditEndpointComponent implements OnInit {
 
   DROPDOWN_LIST: string[];
   DROPDOWN_LIST2: string[];
-  respCodes!: RespCode[];
+  allRespCodes!: RespCode[];
   form: any;
   endpoint: any;
   endpointParamsRel:any;
@@ -71,6 +71,8 @@ export class EditEndpointComponent implements OnInit {
   receivedRespCodes!:RespCode[];
   receivedParamsTypes: string[]
   selectedRequestedMethod: string;
+  selectedRespCodes: RespCode[];
+  selectedRespCodesID: number[];
 
   constructor(private formBuilder: FormBuilder,private service:ApiService,private route: ActivatedRoute, private location: Location) {
     this.DROPDOWN_LIST = ['GET','POST','DELETE','PUT']
@@ -79,14 +81,19 @@ export class EditEndpointComponent implements OnInit {
     ]
     this.selectedRequestedMethod = '';
     this.receivedParamsTypes = [];
+    this.selectedRespCodesID = [];
+    this.selectedRespCodes = [];
   }
   ngOnInit(): void {
-    const groupID = this.route.snapshot.queryParamMap.get('groupID');
-    this.endpointGroupID=groupID;
     const endpointID = this.route.snapshot.queryParamMap.get('endpointID');
     this.receivedEndpointID=endpointID
-    this.getAvailableRespCodes()
-    this.getEndpointDetail()
+    this.service.getRespCodesbyEndpointID(this.receivedEndpointID).subscribe(resp=>{
+      for(let item of resp){
+        this.selectedRespCodesID.push(item.respCodeID)
+      }
+      this.getEndpointDetail()
+      this.getAvailableRespCodes()
+    })
   }
 
   removevalue(i: number){
@@ -97,24 +104,19 @@ export class EditEndpointComponent implements OnInit {
     this.location.back()
   }
 
-  isEditing(){
-    return this.receivedEndpointID!=''
-  }
+  // isEditing(){
+  //   return this.receivedEndpointID!=''
+  // }
   getEndpointDetail(){
     this.service.getEndpointbyID(this.receivedEndpointID).subscribe(resp=>{
       this.receivedEndpoint = resp[0];
-      console.log("fallo y si se ejecuto")
       this.selectedRequestedMethod = this.receivedEndpoint.methodType;  //methodType assign to a local global variable for successful binding
+      
     })
     this.service.getParamsbyEndpointID(this.receivedEndpointID).subscribe(resp=>{
       this.receivedParams = resp;
-      if(this.isEditing()){
-        this.fillParamsWithReceivedParams();
-      }
+      this.fillParamsWithReceivedParams();
       console.log(this.receivedParams);
-    })
-    this.service.getRespCodesbyEndpointID(this.receivedEndpointID).subscribe(resp=>{
-      this.receivedRespCodes = resp;
     })
   }
 
@@ -124,9 +126,6 @@ export class EditEndpointComponent implements OnInit {
         this.params.push({paramName: element.paramName, dataType: element.dataType, paramDescription: element.paramDescription});
         this.receivedParamsTypes.push(element.dataType);
     })
-    console.log("Here it comes");
-    console.log(this.params);
-    console.log(this.receivedParamsTypes);
   }
 
 
@@ -137,7 +136,7 @@ export class EditEndpointComponent implements OnInit {
 
   getAvailableRespCodes(){
     this.service.getAllRespCodes().subscribe(data=>{
-      this.respCodes = data;
+      this.allRespCodes = data;
     })
   }
 
@@ -170,9 +169,8 @@ export class EditEndpointComponent implements OnInit {
         for(let response of this.addEndpointForm.value.responses){
           this.endpointRespCode = {
             endpointID : data.endpointID,
-            respCodeID: response.respCodeID
+            respCodeID: response
           }
-          console.log(this.endpointRespCode);
           this.service.addEndpointRespCodes(this.endpointRespCode).subscribe()
         }
       });

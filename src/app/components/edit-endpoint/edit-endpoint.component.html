@@ -4,13 +4,12 @@
 
     <div class="example-container">
 
-        <form [formGroup]="addEndpointForm">
+        <form *ngIf="receivedEndpoint" [formGroup]="addEndpointForm">
 
             <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Description</mat-label>
-                <input type="text" name="description" [(ngModel)] = receivedEndpoint.endpointDescription matInput formControlName="description" 
-                [errorStateMatcher]="matcher"
-                placeholder="Describe your API">
+                <input  type="text" name="description" [(ngModel)]=receivedEndpoint.endpointDescription matInput
+                    formControlName="description" [errorStateMatcher]="matcher" placeholder="Describe your API">
                 <mat-error *ngIf="descFormControl.hasError('required')">
                     Description is <strong>required</strong>
                 </mat-error>
@@ -18,16 +17,18 @@
             <br>
             <mat-form-field class="smallDropdown" appearance="outline">
                 <mat-label>Method</mat-label>
-                <mat-select [(value)] = "selectedRequestedMethod" formControlName="method">
+                <mat-select [(value)]="selectedRequestedMethod">
                     <mat-option *ngFor="let method of DROPDOWN_LIST" [value]="method">
                         {{method}}
                     </mat-option>
                 </mat-select>
+
             </mat-form-field>
 
             <mat-form-field class="midDesc" appearance="outline">
                 <mat-label>Path</mat-label>
-                <input type="text" name="path" [(ngModel)] = "receivedEndpoint.path" matInput formControlName="path" [errorStateMatcher]="matcher">
+                <input type="text" name="path" [(ngModel)]="receivedEndpoint.path" matInput formControlName="path"
+                    [errorStateMatcher]="matcher">
                 <!-- sale este error cuando no se pone nada en el input -->
                 <mat-error *ngIf="pathFormControl.hasError('required')">
                     Path <strong>required</strong>
@@ -36,8 +37,8 @@
 
             <mat-form-field class="smallDropdown" appearance="outline">
                 <mat-label>Response Codes</mat-label>
-                <mat-select formControlName="responses" multiple>
-                    <mat-option *ngFor="let resp of respCodes" [value]="resp">{{resp.number}}</mat-option>
+                <mat-select  formControlName="responses" multiple [(ngModel)]="selectedRespCodesID">
+                    <mat-option *ngFor="let resp of allRespCodes" [value]="resp.respCodeID">{{resp.number}}</mat-option>
                 </mat-select>
             </mat-form-field>
         </form>
@@ -59,8 +60,8 @@
                     <mat-label>Type</mat-label>
                     <mat-select [(value)]="receivedParamsTypes[i]">
                         <mat-option *ngFor="let type of DROPDOWN_LIST2" [value]="type">
-                        {{type}}
-                    </mat-option>
+                            {{type}}
+                        </mat-option>
                     </mat-select>
 
                 </mat-form-field>
