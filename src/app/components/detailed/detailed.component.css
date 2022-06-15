@@ -2,6 +2,13 @@ body{
   background-color: #F2EEE9;
   overflow-y: auto;
 }
+
+h1{
+  display: inline-flex;
+  padding-right: 0.5rem;
+  justify-content: flex-start;
+}
+
 .sidebar{
   width:15%;
   float:left;
@@ -11,6 +18,11 @@ body{
 .detailContent{
   margin-left:20%;
   width: 75%;
+}
+.firstBlock{
+  display: inline-block;
+  align-items: flex-end;
+  vertical-align:middle;
 }
 .nombre{
   font-weight: 750;
@@ -41,15 +53,21 @@ table.info {
 }
 table.info tr th,
 table.info tr td {
-    padding: 5px;
+    padding: 2px;
+    font-weight: bolder;
 }
 
 
 table.info tr th {
   text-align: left;
-  /* font-weight: 370; */
+  font-weight: 400;
   padding-left: 10px;
-  max-width: 3rem;
+  max-width: 10rem;
+  min-width: 3rem;
+}
+
+table.info th:last-child {
+  max-width: 30px;
 }
 
 /* top-left border-radius */
@@ -100,15 +118,10 @@ table.params {
   background-color: #EEEDED;
   padding-left: 15px;
 }
-.searchBar{
-    padding-left: 15px;
-}
-
 .searchInput::placeholder {
     font-family: 'myFont', Arial, Helvetica, sans-serif;  
     font-size:medium;
  }
-
  pre {
   background: #333333;
   width: 100%; 
@@ -127,9 +140,8 @@ table.params {
   padding-left: 1%;
   border-left: 1px solid ;
   text-transform: uppercase;
-  font-style: italic;
   letter-spacing: 2px;
-  font-weight: 700;
+  font-weight: bolder;
 }
 
 .post {
@@ -141,7 +153,6 @@ table.params {
   padding-left: 1%;
   border-left: 1px solid ;
   text-transform: uppercase;
-  font-style: italic;
   letter-spacing: 2px;
   font-weight: 700;
 }
@@ -155,7 +166,6 @@ table.params {
   padding-left: 1%;
   border-left: 1px solid ;
   text-transform: uppercase;
-  font-style: italic;
   letter-spacing: 2px;
   font-weight: 700;
 
@@ -170,7 +180,6 @@ table.params {
   padding-left: 1%;
   border-left: 1px solid ;
   text-transform: uppercase;
-  font-style: italic;
   letter-spacing: 2px;
   font-weight: 700;
 }
@@ -212,33 +221,47 @@ table.params {
   font-weight: lighter;
 }
 
-.requestBody {
+/* .requestBody {
   margin-top: 1rem;
   margin-bottom: 1rem;
   padding: 1rem;
-}
+} */
 
 .requestBodyItem {
   font-family: monospace;
   color: lightgray;
 }
+.icon-display {
+  position:relative;
+  right: 3%;
+  top: -0.35rem;
+  transform: scale(0.95);
 
-.mat-tab-group{
-  width: 100%;
 }
-
-.mat-icon{
+.mat-icon-button{
   transform: scale(0.8);
-  padding-left: 10px;
 }
-#addButton{
+
+.success{
+  color: #49CC90;
+  font-weight: bold;
+}
+
+.redirect{
+  color: #5765f2;
+  font-weight: bold;
+}
+
+.error{
+  color: #DC4349;
+  font-weight: bold;
+}
+
+#tButton{
   border-radius: 10px;
-  background-color: #FF7E36;
-  color: white;
-
-}
-
-#addButton:hover{
-  background-color:rgba(158, 158, 158, 0.2); 
-  color:#FF5C00;
+  background-color:#FF5C00;
+  position: relative;
+  left: 61rem;
+  top: 1rem;
+  
 }
