@@ -118,15 +118,10 @@ table.params {
   background-color: #EEEDED;
   padding-left: 15px;
 }
-.searchBar{
-    padding-left: 15px;
-}
-
 .searchInput::placeholder {
     font-family: 'myFont', Arial, Helvetica, sans-serif;  
     font-size:medium;
  }
-
  pre {
   background: #333333;
   width: 100%; 
@@ -226,21 +221,16 @@ table.params {
   font-weight: lighter;
 }
 
-.requestBody {
+/* .requestBody {
   margin-top: 1rem;
   margin-bottom: 1rem;
   padding: 1rem;
-}
+} */
 
 .requestBodyItem {
   font-family: monospace;
   color: lightgray;
 }
-
-.mat-tab-group{
-  width: 100%;
-}
-
 .icon-display {
   position:relative;
   right: 3%;
@@ -267,13 +257,6 @@ table.params {
   font-weight: bold;
 }
 
-#addButton{
-  border-radius: 10px;
-  background-color:#FF5C00;
-  color: white;
-  
-}
-
 #tButton{
   border-radius: 10px;
   background-color:#FF5C00;
@@ -282,9 +265,3 @@ table.params {
   top: 1rem;
   
 }
-
-#addButton:hover{
-  background-color:rgba(158, 158, 158, 0.2); 
-  color:#FF5C00;
-}
-
