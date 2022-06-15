@@ -49,7 +49,7 @@ export class DetailedComponent  implements OnInit{
   endpoint: string;
   //traerse el user para saber si es admin o no
   currentUser?: User;
-
+  displayedJson:string = '';
   selectedRequestMethod: string;
   readonly requestMethods: Array<string>;
   responseData: any;
@@ -63,8 +63,8 @@ export class DetailedComponent  implements OnInit{
   endpointError: string;
   loadingState: boolean;
 
-    text : string = "";  //works with the original enpoint path
-    actualText: string = this.text;
+  text : string = "";  //works with the original enpoint path
+  actualText: string = this.text;
 
   queryParams: any = [] //to concatenete with endpoint path when fulfilled
   paramMap = new Map<string, any>();
@@ -149,7 +149,6 @@ export class DetailedComponent  implements OnInit{
         this.service.getRespCodesbyEndpointID(endpointId).subscribe(resp=>{
           this.receivedRespCodes = resp;
         })
-        //try
   }
   getOutputEndpointID(received:number){
     this.endpointID=received;
@@ -275,7 +274,7 @@ export class DetailedComponent  implements OnInit{
     this.endpointError = '';
     this.responseData = '';
     this.responseError = '';
-    console.log(this.api.baseUrl)
+    console.log(this.api.baseUrl);
     console.log(this.path);
     //TODO: hacer algo que valide que si es post o si no tiene parametros que el endpoint sea el baseurl mas el path.
     this.requestBody.forEach((item: number, index: string | number) => {
