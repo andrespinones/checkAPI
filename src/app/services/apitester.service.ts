@@ -11,7 +11,6 @@ export class Apitester {
 
   sendGetRequest(url: string, headers: any){
     if (headers.length == 0){
-      console.log('flag')
       return this._httpClient.get<any>(url);
     }else{
       console.log(headers.length)
