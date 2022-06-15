@@ -167,14 +167,6 @@ export class DetailedComponent  implements OnInit{
       }
       this.actualText = this.actualText.replace("{"+ key + "}", value)
     }
-    // for(let i = 0; i<=this.paramMap.size; i ++){
-    //   try{
-    //     this.actualText = document.getElementById("endPath")!.innerHTML = this.actualText.replace("{" + this.paramMap. + "}", this.queryParams[i][paramName]);
-    //   }
-    //   catch(error){
-    //     console.log("never gonna throw this error");
-    //   }
-    // }
     document.getElementById("endPath")!.innerHTML = this.actualText; //to bring all replacements of multiple parameters
     this.endpoint = this.api.baseUrl + this.actualText;
     console.log(this.endpoint);
