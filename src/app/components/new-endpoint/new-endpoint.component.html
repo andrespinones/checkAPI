@@ -5,13 +5,6 @@
   <div class="example-container">
 
     <form [formGroup]="addEndpointForm">
-      <mat-form-field class="searchInput" appearance="outline">
-        <mat-label>Endpoint's Name</mat-label>
-        <input type="text" name="name" matInput formControlName="name" [errorStateMatcher]="matcher">
-        <mat-error *ngIf="nameFormControl.hasError('required')">
-          Name is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
 
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Description</mat-label>

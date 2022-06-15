@@ -65,6 +65,7 @@ import { ApiFormComponent } from './components/api-form/api-form.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { A11yModule } from '@angular/cdk/a11y';
 import { ApiParamsComponent } from './components/api-params/api-params.component';
+import { EditEndpointComponent } from './components/edit-endpoint/edit-endpoint.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { ApiParamsComponent } from './components/api-params/api-params.component
     ConfirmDialogComponent,
     ApiFormComponent,
     ApiParamsComponent,
+    EditEndpointComponent,
   ],
   imports: [
     BrowserModule,
