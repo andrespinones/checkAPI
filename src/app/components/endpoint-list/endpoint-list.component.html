@@ -1,20 +1,8 @@
 <body>
     <app-navbar></app-navbar>
     <div class="sidebar">
-        <!-- se tiene que agregar algo así para traer los endpoint de lista -->
-        <!-- (outputToParent)="getOutputEndpoint($event)" -->
         <app-groups (outputToParent)="getOutputGroup($event)"></app-groups>
     </div>
-
-
-    <!-- <ng-template class="overlay" cdkConnectedOverlay cdkConnectedOverlayHasBackdrop="true" [cdkConnectedOverlayOrigin]="originOverlay"
-        [cdkConnectedOverlayOpen]="showPanel$" (backdropClick)="toggleDropdown()">
-        <div>
-            <section class="noData mat-elevation-z1">
-                Please add or select a group to continue
-            </section>
-        </div>
-    </ng-template> -->
 
     <div class="apiData" *ngIf="apiData">
         <span>
@@ -24,58 +12,57 @@
     </div>
 
     <!-- when the api has groups - select a group to continue -->
-    <ng-container *ngIf="hasGroups;else second">
-        <div class="example-container">
-            <div>
-                <h2>Select a group to continue</h2>
-                <img src="./assets/images/choice.svg" height="280rem" class="directions">
+    <ng-container *ngIf="showF;else second ">
+        <ng-container>
+            <div class="example-container">
+                <div>
+                    <h2>Select or create a group to continue</h2>
+                    <img src="./assets/images/choice.svg" width="280rem" class="directions">
+                </div>
             </div>
-
-        </div>
-
+        </ng-container>
     </ng-container>
+
     <ng-template #second>
-        <ng-container *ngIf="!hasGroups && !hasEndpoints">
+        <ng-container *ngIf="showL; else third">
+            <h1 class="nombre" *ngIf="group">{{group.name}}</h1>
+            <a mat-button class="button button2" (click)="endpointGroupRedirect(group.groupID)" *ngIf="group">
+                Add Endpoint
+            </a>
             <div class="example-container">
                 <div>
-                    <h2>No data to display</h2>
-                    <img src="./assets/images/add.svg" height="220rem" class="directions">
-                    <h4>Add a group to continue</h4>
+                    <h2 class="smallTitle">No data to display</h2>
+                    <img src="./assets/images/add.svg" width="340rem" class="directions">
+                    <h4 class="smallTitle">Create an endpoint to continue</h4>
                 </div>
             </div>
-        </ng-container>
-    </ng-template>
-    <ng-template #third >
-        <ng-container *ngIf="hasGroups && !hasEndpoints;else third">
-            <div class="example-container">
-                <div>
-                    <h2>Create an endpoint to continue</h2>
-                    <img src="./assets/images/choice.svg" height="280rem" class="directions">
-                </div>
-    
-            </div>
+
         </ng-container>
     </ng-template>
 
+    <ng-template #third>
+        <h1 class="nombre" *ngIf="group">{{group.name}}</h1>
+        <a mat-button class="button button2" (click)="endpointGroupRedirect(group.groupID)" *ngIf="group">
+            Add Endpoint
+        </a>
 
-    <!-- nombre del grupo -->
-    <h1 class="nombre" *ngIf="group">{{group.name}}</h1>
 
-    <!-- lista de los endpoint que pertenecen al grupo -->
-    <table class="info">
-        <!-- falta ponerle color a la row dependiendo del tipo de metodo -->
-        <tr *ngFor="let endpoint of DROPDOWN_LIST">
-            <th
-                [ngClass]="{get: endpoint.methodType == 'GET', post: endpoint.methodType == 'POST', put: endpoint.methodType == 'PUT', delete: endpoint.methodType == 'DELETE'}">
-                {{endpoint.methodType}}</th>
-            <th
-                [ngClass]="{get2: endpoint.methodType == 'GET', post2: endpoint.methodType == 'POST', put2: endpoint.methodType == 'PUT', delete2: endpoint.methodType == 'DELETE'}">
-                {{endpoint.path}}</th>
-        </tr>
-    </table>
-    <div class="spacer"></div>
-    <a mat-button class="button button2" (click)="endpointGroupRedirect(group.groupID)" *ngIf="group">
-        Add Endpoint
-    </a>
+        <!-- nombre del grupo -->
+
+        <!-- lista de los endpoint que pertenecen al grupo -->
+        <table class="info">
+            <!-- falta ponerle color a la row dependiendo del tipo de metodo -->
+            <tr *ngFor="let endpoint of DROPDOWN_LIST">
+                <th
+                    [ngClass]="{get: endpoint.methodType == 'GET', post: endpoint.methodType == 'POST', put: endpoint.methodType == 'PUT', delete: endpoint.methodType == 'DELETE'}">
+                    {{endpoint.methodType}}</th>
+                <th
+                    [ngClass]="{get2: endpoint.methodType == 'GET', post2: endpoint.methodType == 'POST', put2: endpoint.methodType == 'PUT', delete2: endpoint.methodType == 'DELETE'}">
+                    {{endpoint.path}}</th>
+            </tr>
+        </table>
+        <div class="spacer"></div>
+    </ng-template>
+
 
 </body>
