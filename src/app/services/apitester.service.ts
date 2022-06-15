@@ -23,8 +23,10 @@ export class Apitester {
   }
 
   sendPostRequest(url: string, requestBody: any, headers: any) {
+    console.log('flag')
     console.log(url);
     console.log(requestBody);
+    console.log(headers)
     headers = new HttpHeaders(headers);
     return this._httpClient.post(url, requestBody,{ headers });
   }

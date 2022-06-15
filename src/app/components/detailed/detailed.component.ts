@@ -353,11 +353,10 @@ export class DetailedComponent  implements OnInit{
     this.integerForm.reset();
     this.text = this.receivedEndpoint.path
     document.getElementById("endPath")!.innerHTML = this.text;
-    this.selectedRequestMethod = 'GET';
     this.endpoint = '';
     this.requestBody = [{ key: '', value: '' }];
     this.requestBodyDataTypes = [''];
-    this.requestHeaders = [{ key: 'Content-Type', value: 'application/json' }];
+    this.requestHeaders = this.requestHeaders;
     this.endpointError = '';
   }
 }
