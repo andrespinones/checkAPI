@@ -61,9 +61,9 @@ export class EndpointListComponent implements OnInit {
     this.getOutputGroup;
   }
 
-  endpointGroupRedirect(groupID: number) {
+  addEndpointRedirect(groupID: number) {
     let route = '/addEndpoint';
-    this.router.navigate([route], { queryParams: { id: groupID } });
+    this.router.navigate([route], { queryParams: { groupID: groupID } });
   }
 
   editEndpointRedirect(endpointID:number){

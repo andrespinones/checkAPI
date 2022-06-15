@@ -25,7 +25,6 @@ export class NewEndpointComponent implements OnInit {
 
   // required = no se puede ingresar un valor vacio, email - revisa que sea un email
   //se tiene que hacer un validator que revise qeu si exita la API
-  nameFormControl = new FormControl('', [Validators.required]);
   descFormControl = new FormControl('', [Validators.required]);
   methodFormControl = new FormControl('', [Validators.required]);
   pathFormControl = new FormControl('', [Validators.required]);
@@ -39,7 +38,6 @@ export class NewEndpointComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   
   addEndpointForm = this.formBuilder.group({
-    name: this.nameFormControl,
     description: this.descFormControl,
     method: this.methodFormControl,
     path: this.pathFormControl,
@@ -68,12 +66,12 @@ export class NewEndpointComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private service:ApiService,private route: ActivatedRoute, private location: Location) {
     this.DROPDOWN_LIST = ['GET','POST','DELETE','PUT']
     this.DROPDOWN_LIST2 = [
-      "STRING", "INT64", "BOOLEAN", "INT32"
+      "string", "integer", "boolean"
     ]
   }
   ngOnInit(): void {
-    const id = this.route.snapshot.queryParamMap.get('id');
-    this.endpointGroupID=id;
+    const groupID = this.route.snapshot.queryParamMap.get('groupID');
+    this.endpointGroupID=groupID;
     this.getAvailableRespCodes()
   }
 
@@ -94,7 +92,6 @@ export class NewEndpointComponent implements OnInit {
 
   createEndpoint(){
     this.endpoint = {
-      name : this.addEndpointForm.value.name,
       endpointDescription : this.addEndpointForm.value.description,
       groupID: this.endpointGroupID,
       methodType: this.addEndpointForm.value.method,

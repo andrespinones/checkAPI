@@ -8,8 +8,9 @@
 
             <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Description</mat-label>
-                <input type="text" name="description" matInput formControlName="description"
-                    [errorStateMatcher]="matcher" placeholder="Describe your API">
+                <input type="text" name="description" [(ngModel)] = receivedEndpoint.endpointDescription matInput formControlName="description" 
+                [errorStateMatcher]="matcher"
+                placeholder="Describe your API">
                 <mat-error *ngIf="descFormControl.hasError('required')">
                     Description is <strong>required</strong>
                 </mat-error>
@@ -17,7 +18,7 @@
             <br>
             <mat-form-field class="smallDropdown" appearance="outline">
                 <mat-label>Method</mat-label>
-                <mat-select formControlName="method">
+                <mat-select [(value)] = "selectedRequestedMethod" formControlName="method">
                     <mat-option *ngFor="let method of DROPDOWN_LIST" [value]="method">
                         {{method}}
                     </mat-option>
@@ -26,7 +27,7 @@
 
             <mat-form-field class="midDesc" appearance="outline">
                 <mat-label>Path</mat-label>
-                <input type="text" name="path" matInput formControlName="path" [errorStateMatcher]="matcher">
+                <input type="text" name="path" [(ngModel)] = "receivedEndpoint.path" matInput formControlName="path" [errorStateMatcher]="matcher">
                 <!-- sale este error cuando no se pone nada en el input -->
                 <mat-error *ngIf="pathFormControl.hasError('required')">
                     Path <strong>required</strong>
@@ -56,10 +57,10 @@
 
                 <mat-form-field class="smallDropdown" appearance="outline">
                     <mat-label>Type</mat-label>
-                    <mat-select [(ngModel)]="param.dataType" name="dataType{{i}}">
+                    <mat-select [(value)]="receivedParamsTypes[i]">
                         <mat-option *ngFor="let type of DROPDOWN_LIST2" [value]="type">
-                            {{type}}
-                        </mat-option>
+                        {{type}}
+                    </mat-option>
                     </mat-select>
 
                 </mat-form-field>
@@ -92,7 +93,7 @@
         </div>
 
         <div class="buttons">
-            <a mat-button class="button button1" routerLink="addEndpoint">
+            <a mat-button class="button button1" routerLink="addEndpoint" (click)="cancel()">
                 Cancel
             </a>
             <a mat-button class="button button2" routerLink="addEndpoint" (click)="createEndpoint()">
