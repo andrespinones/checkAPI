@@ -26,9 +26,7 @@
     <ng-template #second>
         <ng-container *ngIf="showL; else third">
             <h1 class="nombre" *ngIf="group">{{group.name}}</h1>
-            <a mat-button class="button button2" (click)="addEndpointRedirect(group.groupID)" *ngIf="group">
-                Add Endpoint
-            </a>
+            <button mat-button class="nepButton" (click)="addEndpointRedirect(group.groupID)" *ngIf="group"> Add Endpoint </button>
             <div class="example-container">
                 <div>
                     <h2 class="smallTitle">No data to display</h2>
@@ -42,9 +40,8 @@
 
     <ng-template #third>
         <h1 class="nombre" *ngIf="group">{{group.name}}</h1>
-        <a mat-button class="button button2" (click)="addEndpointRedirect(group.groupID)" *ngIf="group">
-            Add Endpoint
-        </a>
+        <button mat-button class="nepButton" (click)="addEndpointRedirect(group.groupID)" *ngIf="group"> Add Endpoint </button>
+
 
 
         <!-- nombre del grupo -->

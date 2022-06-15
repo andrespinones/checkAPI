@@ -31,10 +31,17 @@ export class GroupsComponent implements OnInit {
   constructor(private service:ApiService, private formBuilder: FormBuilder, private route: ActivatedRoute) {
     this.DROPDOWN_LIST = []
   }
+  selectedIndex: number = -3; //used to know which listed item is selected
+
+  setIndex(index: number) {   //updates the selectedIndex given the index obtained from the (click) event
+    this.selectedIndex = index;
+  }
+
   ngOnInit(): void {
     const id = this.route.snapshot.queryParamMap.get('id');
     this.apiID=id;
     this.getGroups();
+    this.selectedIndex = -1;
   }
 
   getGroups(){
@@ -65,5 +72,12 @@ export class GroupsComponent implements OnInit {
 
   sendGroupID(group:any){
     this.outputToParent.emit(group);
+  }
+
+  calculateClasses(stateFlag: boolean){ //if the stateFlag is true activates the ~item-active class
+    return {
+      'list-group-item': true,
+      'list-group-item-active': stateFlag
+    };
   }
 }

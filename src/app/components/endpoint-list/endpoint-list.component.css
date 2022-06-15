@@ -224,6 +224,15 @@ th:first-child {
   background-color: #FF7E36;
 }
 
+.nepButton{
+  border-radius: 10px;
+  background-color:#FF5C00;
+  color: white;
+  /* position: relative;
+  left: 61rem;
+  top: 1rem; */
+}
+
 .spacer {
   flex: 1 1 auto;
 }
