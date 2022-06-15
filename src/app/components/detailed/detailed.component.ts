@@ -92,9 +92,8 @@ export class DetailedComponent  implements OnInit{
     const id = this.route.snapshot.queryParamMap.get('id');
     this.apiID=id;
     this.getApi();
-    this.getOutputEndpointID;
     this.responseTime = 0;
-    document.getElementById("endPath")!.innerHTML = this.receivedEndpoint.path;
+    // document.getElementById("endPath")!.innerHTML = this.receivedEndpoint.path;
   }
   isAdmin(): boolean {
     if (this.currentUser?.role == "Admin") {
@@ -108,6 +107,7 @@ export class DetailedComponent  implements OnInit{
   getApi(){
     this.service.getApibyID(this.apiID).subscribe(resp=>{
       this.api = resp[0];
+      console.log(this.api.name)
     });
   }
 
@@ -152,6 +152,7 @@ export class DetailedComponent  implements OnInit{
         })
   }
   getOutputEndpointID(received:number){
+    console.log(received)
     this.endpointID=received;
     this.getEndpointDetail(this.endpointID)
   }

@@ -3,7 +3,7 @@
   <div class="sidebar">
     <app-endpoint-sidebar (outputToParent)="getOutputEndpointID($event)"></app-endpoint-sidebar>
   </div>
-  <div class="apiData">
+  <div *ngIf="api" class="apiData">
     <div class="firstBlock">
       <h1>{{api.name}}</h1>
       <a mat-icon-button class=" icon-display" *ngIf="isAdmin()" (click)="editRedirect()"> <mat-icon>edit</mat-icon></a>
@@ -83,53 +83,55 @@
         (click)="addItem('Headers')">
           <mat-icon >add_circle_outline</mat-icon>
         </button>
-      <div *ngIf="receivedParams.length!==0">
-        <p class="separador">PARAMETERS</p>
-        <table class="params">
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th> Description</th>
-            <th></th>
-          </tr>
-          <br>
-          <tr *ngFor="let param of receivedParams; let i = index">
-            <td>{{param.paramName}}</td>
-            <td>{{param.dataType}}</td>
-            <td>{{param.paramDescription}}</td>
-            <td>
-              <form *ngIf="param.dataType == 'STRING'" [formGroup]="stringForm">
-                <mat-form-field>
-                <input class="searchInput" type="text"
-                placeholder={{param.paramName}}
-                [ngModel]="paramMap.get(param.paramName)"
-                (ngModelChange)="paramMap.set(param.paramName, $event);didBindParam(param.paramName);jsonBind()"
-                aria-label="Search" matInput formControlName="var" [errorStateMatcher]="matcher"> <!-- usar valor de aqui para concatenar en request  -->
-                <mat-error *ngIf="stringFormControl.hasError('required')">
-                  parameter is <strong>required</strong>
-                </mat-error>
-              </mat-form-field>
-              </form>
-              <form *ngIf="param.dataType == 'INT'" [formGroup]="integerForm">
-                <mat-form-field>
-                <input class="searchInput" type="text"
-                placeholder={{param.paramName}}
-                [ngModel]="paramMap.get(param.paramName)"
-                (ngModelChange)="paramMap.set(param.paramName, $event);didBindParam(param.paramName);jsonBind()"
-                aria-label="Search" matInput formControlName="var" [errorStateMatcher]="matcher"> <!-- usar valor de aqui para concatenar en request  -->
-                <mat-error *ngIf="integerFormControl.hasError('required')">
-                  parameter is <strong>required</strong>
-                </mat-error>
-                <mat-error *ngIf="integerFormControl.hasError">
-                  parameter should be a <strong>number</strong>
-                </mat-error>
-              </mat-form-field>
-              </form>
-            </td>
+    <div *ngIf="receivedParams">
+        <div *ngIf="receivedParams.length!==0">
+          <p class="separador">PARAMETERS</p>
+          <table class="params">
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th> Description</th>
+              <th></th>
+            </tr>
+            <br>
+            <tr *ngFor="let param of receivedParams; let i = index">
+              <td>{{param.paramName}}</td>
+              <td>{{param.dataType}}</td>
+              <td>{{param.paramDescription}}</td>
+              <td>
+                <form *ngIf="param.dataType == 'STRING'" [formGroup]="stringForm">
+                  <mat-form-field>
+                  <input class="searchInput" type="text"
+                  placeholder={{param.paramName}}
+                  [ngModel]="paramMap.get(param.paramName)"
+                  (ngModelChange)="paramMap.set(param.paramName, $event);didBindParam(param.paramName);jsonBind()"
+                  aria-label="Search" matInput formControlName="var" [errorStateMatcher]="matcher"> <!-- usar valor de aqui para concatenar en request  -->
+                  <mat-error *ngIf="stringFormControl.hasError('required')">
+                    parameter is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                </form>
+                <form *ngIf="param.dataType == 'INT'" [formGroup]="integerForm">
+                  <mat-form-field>
+                  <input class="searchInput" type="text"
+                  placeholder={{param.paramName}}
+                  [ngModel]="paramMap.get(param.paramName)"
+                  (ngModelChange)="paramMap.set(param.paramName, $event);didBindParam(param.paramName);jsonBind()"
+                  aria-label="Search" matInput formControlName="var" [errorStateMatcher]="matcher"> <!-- usar valor de aqui para concatenar en request  -->
+                  <mat-error *ngIf="integerFormControl.hasError('required')">
+                    parameter is <strong>required</strong>
+                  </mat-error>
+                  <mat-error *ngIf="integerFormControl.hasError">
+                    parameter should be a <strong>number</strong>
+                  </mat-error>
+                </mat-form-field>
+                </form>
+              </td>
 
-          </tr>
-          </table>
-      </div>
+            </tr>
+            </table>
+        </div>
+    </div>
       <button mat-flat-button id="tButton" [disabled]="!endpoint" color="primary" (click)="sendRequest()">
         <mat-icon>science</mat-icon> Test </button>
     <br>
