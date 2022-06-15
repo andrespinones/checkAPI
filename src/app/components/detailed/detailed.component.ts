@@ -275,6 +275,9 @@ export class DetailedComponent  implements OnInit{
     this.endpointError = '';
     this.responseData = '';
     this.responseError = '';
+    console.log(this.api.baseUrl)
+    console.log(this.path);
+    //TODO: hacer algo que valide que si es post o si no tiene parametros que el endpoint sea el baseurl mas el path.
     this.requestBody.forEach((item: number, index: string | number) => {
       if (this.requestBodyDataTypes[index] === 'Number') {
         item = Number(item);
@@ -285,6 +288,8 @@ export class DetailedComponent  implements OnInit{
     const startTime = new Date().getTime();
     switch (this.selectedRequestMethod) {
       case 'GET': {
+        console.log(JSON.stringify(Object.fromEntries(this.paramMap)));
+
         this._mainService.sendGetRequest(
           this.endpoint,
           this.constructObject('Headers')).subscribe(
@@ -305,9 +310,11 @@ export class DetailedComponent  implements OnInit{
         break;
       }
       case 'POST': {
+        let string = JSON.stringify(Object.fromEntries(this.paramMap));
+        this.endpoint = this.api.baseUrl + this.path
         this._mainService.sendPostRequest(
           this.endpoint,
-          this.constructObject('Body'),
+          string,
           this.constructObject('Headers')
         ).subscribe(
           data => {
@@ -322,8 +329,6 @@ export class DetailedComponent  implements OnInit{
         break;
       }
     }
-
-    //this.saveRequest(this.selectedRequestMethod);
     this.newRequest.emit();
     this.stringForm.reset();
     this.integerForm.reset();

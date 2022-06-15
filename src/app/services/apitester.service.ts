@@ -19,13 +19,14 @@ export class Apitester {
       try{
         return this._httpClient.get<any>(url, { headers });
       }finally{
-
       }
     }
   }
 
   sendPostRequest(url: string, requestBody: any, headers: any) {
+    console.log(url);
+    console.log(requestBody);
     headers = new HttpHeaders(headers);
-    return this._httpClient.post(url, requestBody, { headers });
+    return this._httpClient.post(url, requestBody,{ headers });
   }
 }
