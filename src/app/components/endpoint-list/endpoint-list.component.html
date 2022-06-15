@@ -71,6 +71,12 @@
             <th
                 [ngClass]="{get2: endpoint.methodType == 'GET', post2: endpoint.methodType == 'POST', put2: endpoint.methodType == 'PUT', delete2: endpoint.methodType == 'DELETE'}">
                 {{endpoint.path}}</th>
+            <td align="right"
+                [ngClass]="{get2: endpoint.methodType == 'GET', post2: endpoint.methodType == 'POST', put2: endpoint.methodType == 'PUT', delete2: endpoint.methodType == 'DELETE'}">
+                <button class="edit_button" mat-icon-button (click)="editEndpointRedirect(endpoint.endpointID)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
         </tr>
     </table>
     <div class="spacer"></div>

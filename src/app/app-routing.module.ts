@@ -58,6 +58,10 @@ const routes: Routes = [
   {
     path: 'apitester',
     component: ApiParamsComponent
+  },
+  {
+    path: 'editEndpoint',
+    component: EditEn
   }
 ];
 
