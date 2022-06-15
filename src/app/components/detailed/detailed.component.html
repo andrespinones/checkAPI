@@ -4,11 +4,11 @@
     <app-endpoint-sidebar (outputToParent)="getOutputEndpointID($event)"></app-endpoint-sidebar>
   </div>
   <div class="apiData">
+    <div class="firstBlock">
       <h1>{{api.name}}</h1>
+      <a mat-icon-button class=" icon-display" *ngIf="isAdmin()" (click)="editRedirect()"> <mat-icon>edit</mat-icon></a>
+    </div>
       <h3 id="baseURL">Base URL: {{api.baseUrl}}</h3>
-    <a mat-button id="addButton" *ngIf="isAdmin()" (click)="editRedirect()">
-      Edit Endpoints <mat-icon>edit</mat-icon>
-    </a>
   </div>
     <div class="detailContent" *ngIf="receivedEndpoint">
       <!-- <p><a href="{{baseURL}}">Base URL: {{baseURL}}</a></p> -->
@@ -20,6 +20,11 @@
           <th id="endPath">{{receivedEndpoint.path}}</th>
           <th> Last response: {{receivedEndpoint.lastResp}}</th>
           <th>2 days ago</th>
+          <th>
+            <a mat-icon-button *ngIf="isAdmin()">
+              <mat-icon>edit</mat-icon>
+            </a>
+          </th>
         </tr>
       </table>
       <br>
@@ -74,15 +79,12 @@
                 </div>
             </div>
         </div>
-        <button
-            mat-flat-button
-            color="accent"
-            [disabled]="isAddDisabled('Headers')"
-            style="outline: none;"
-            (click)="addItem('Headers')"
-        >
-            <span>ADD ITEM</span>
+        <button  mat-icon-button [disabled]="isAddDisabled('Headers')"
+        style="outline: none;"
+        (click)="addItem('Headers')">
+          <mat-icon >add_circle_outline</mat-icon>
         </button>
+
 
         <p class="separador">PARAMETERS</p>
         <table class="params">
@@ -105,13 +107,13 @@
                 aria-label="Search"> <!-- usar valor de aqui para concatenar en request  -->
                 <mat-error *ngIf="endpointError !== ''">{{ endpointError }}</mat-error>
             </td>
+
           </tr>
         </table>
+        <button mat-flat-button id="tButton" [disabled]="!endpoint" color="primary" (click)="sendRequest()"> 
+          <mat-icon>science</mat-icon> Test </button>
       </div>
       <br>
-      <button mat-flat-button [disabled]="!endpoint" color="primary" (click)="sendRequest()">
-          Test
-      </button>
 
       <!-- CONSOLE LOG OUTP -->
           <!-- <div *ngFor="let queryParam of queryParams">
@@ -127,7 +129,7 @@
         </tr>
         <br>
         <tr *ngFor="let respCode of receivedRespCodes">
-          <td>{{respCode.number}}</td>
+          <td> <span [ngClass]="{success: respCode.number<300, redirect: respCode.number<400 && respCode.number>=300, error: respCode.number>=400}">{{respCode.number}}</span></td>
           <td>{{respCode.respDescription}}</td>
           <td></td>
           <td></td>
