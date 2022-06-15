@@ -6,8 +6,13 @@ body {
 h1 {
   font-weight: 750;
 }
-h2{
-  /* padding-left: 3.5em; */
+
+.smallTitle{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 10%;
+  padding-top: 4%;
 }
 
 .example-container {
@@ -215,6 +220,7 @@ th:first-child {
 }
 
 .button2 {
+  color: white;
   background-color: #FF7E36;
 }
 
@@ -236,3 +242,4 @@ th:first-child {
   width: 50%;
   padding-left: 10%;
 }
+
