@@ -73,7 +73,7 @@ export class NewEndpointComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private service:ApiService,private route: ActivatedRoute, private location: Location) {
     this.DROPDOWN_LIST = ['GET','POST','DELETE','PUT']
     this.DROPDOWN_LIST2 = [
-      "STRING", "INT64", "BOOLEAN", "INT32"
+      "STRING", "INT", "BOOLEAN"
     ]
   }
   ngOnInit(): void {
@@ -89,8 +89,8 @@ export class NewEndpointComponent implements OnInit {
   }
 
   addvalue(){
-    this.params.push({paramName: "", dataType: "", paramDescription: ""});
-    console.log(this.addEndpointForm.value.responses)
+    this.params.push({paramName: null, dataType: null, paramDescription: null});
+    console.log(this.addParameterForm.value)
   }
 
   getAvailableRespCodes(){

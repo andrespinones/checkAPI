@@ -94,6 +94,7 @@ export class DetailedComponent  implements OnInit{
     this.getApi();
     this.getOutputEndpointID;
     this.responseTime = 0;
+    document.getElementById("endPath")!.innerHTML = this.receivedEndpoint.path;
   }
   isAdmin(): boolean {
     if (this.currentUser?.role == "Admin") {
@@ -117,7 +118,7 @@ export class DetailedComponent  implements OnInit{
 
   addQueryValue(paramName: string){  //to push an empty item to be binded later on html input
     this.queryParams.push({[paramName]: ''});
-    this.paramMap.set(paramName, '');
+    this.paramMap.set(paramName, null);
   }
 
 
@@ -160,6 +161,10 @@ export class DetailedComponent  implements OnInit{
     this.actualText = this.text;
     for(const [key,value] of this.paramMap){
       console.log(key)
+      if(value == null){
+        this.actualText = this.actualText.replace("{"+ key + "}", ("{"+ key + "}"))
+        break;
+      }
       this.actualText = this.actualText.replace("{"+ key + "}", value)
     }
     // for(let i = 0; i<=this.paramMap.size; i ++){
@@ -277,7 +282,6 @@ export class DetailedComponent  implements OnInit{
     this.endpointError = '';
     this.responseData = '';
     this.responseError = '';
-    console.log(this.stringForm.value);
     this.requestBody.forEach((item: number, index: string | number) => {
       if (this.requestBodyDataTypes[index] === 'Number') {
         item = Number(item);
