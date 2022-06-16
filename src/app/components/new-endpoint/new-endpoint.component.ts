@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { asNativeElements, Component, OnInit } from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -45,12 +45,6 @@ export class NewEndpointComponent implements OnInit {
     responses: this.respsFormControl
   });
 
-  addParameterForm = this.formBuilder.group({
-    paramName: this.paramNameFormControl,
-    dataType: this.paramDescFormControl,
-    paramDescription: this.paramDataTypeFormControl,
-  })
-
   params: any[] = [{
     paramName: '',
     dataType: '',
@@ -80,7 +74,6 @@ export class NewEndpointComponent implements OnInit {
     this.endpointGroupID=groupID;
     this.getAvailableRespCodes()
     console.log(this.addEndpointForm.valid)
-    console.log(this.addParameterForm.valid)
   }
 
   removevalue(i: number){
@@ -89,7 +82,6 @@ export class NewEndpointComponent implements OnInit {
 
   addvalue(){
     this.params.push({paramName: null, dataType: null, paramDescription: null});
-    console.log(this.addParameterForm.value)
   }
 
   getAvailableRespCodes(){
@@ -139,9 +131,19 @@ export class NewEndpointComponent implements OnInit {
   isParamsInvalid(){
     if(this.params.length == 0){
       return false;
-    }else{
-      return this.addParameterForm.invalid;
     }
+    let answer = false;
+    this.params.forEach(element=>{
+      element.forEach((value: any)=>{
+        if(value == null){
+          answer = true;
+
+        }else{
+          answer = false;
+        }
+      })
+    })
+    return answer;
   }
 }
 
