@@ -41,6 +41,7 @@ export class DetailedComponent  implements OnInit{
     var: this.integerFormControl
   });
   receivedEndpoint!:Endpoint;
+  respCode:string = "";
   receivedParams!:Parameter[];
   receivedRespCodes!:RespCode[];
   endpointID!:number;
@@ -328,11 +329,15 @@ export class DetailedComponent  implements OnInit{
             this.responseTime = diff;
             this.responseData = JSON.stringify(data, undefined, 4);
             console.log(data.status);
+            let x = data.status;
+            this.respCode = x.toString();
           },
           error => {
             this.loadingState = false;
             this.responseError = JSON.stringify(error, undefined, 4);
             console.log(error.status)
+            let x = error.status;
+            this.respCode = x.toString();
           }
         );
         break;
@@ -352,10 +357,16 @@ export class DetailedComponent  implements OnInit{
             console.log(diff);
             this.responseTime = diff;
             this.responseData = JSON.stringify(data, undefined, 4);
+            console.log(data.status)
+            let x = data.status;
+            this.respCode = x.toString();
           },
           error => {
             this.loadingState = false;
             this.responseError = JSON.stringify(error, undefined, 4);
+            console.log(error.status)
+            let x = error.status;
+            this.respCode = x.toString();
           }
         );
         break;
