@@ -142,38 +142,64 @@
         <pre *ngIf="displayedJson"
           style="color: #000000; white-space: pre-wrap;background-color: white;">{{ displayedJson}}</pre>
       </div>
-    </div>
-    <p class="separador">Responses</p>
-    <table *ngIf="responseCode" class="params">
-      <tr>
-        <th>Code</th>
-        <th>Description</th>
-        <th>Response Time</th>
-        <th></th>
-      </tr>
-      <br>
-      <tr *ngIf="responseCode.number < 300">
-        <td><span class="success"> {{responseCode.number}} </span>
-        <td>{{responseCode.respDescription}}</td>
-        <td>{{responseTime}}</td>
-      </tr>
-      <tr *ngIf="responseCode.number < 400 && responseCode.number >=300">
-        <td><span class="redirect"> {{responseCode.number}} </span>
-        <td>{{responseCode.respDescription}}</td>
-        <td>{{responseTime}}</td>
-      </tr>
-      <tr *ngIf="responseCode.number >=400">
-        <td><span class="error"> {{responseCode.number}} </span>
-        <td>{{responseCode.respDescription}}</td>
-        <td>{{responseTime}}</td>
-      </tr>
-    </table>
+      <p *ngIf="responseData || responseError" class="separador">Server Response</p>
+      <table *ngIf="responseCode" class="params">
+        <tr>
+          <th>Code</th>
+          <th>Description</th>
+          <th>Response Time</th>
+          <th></th>
+        </tr>
+        <br>
+        <tr *ngIf="responseCode.number < 300" >
+          <td><span class="success"> {{responseCode.number}} </span>
+            <td>{{responseCode.respDescription}}</td>
+            <td>{{responseTime}}</td>
+        </tr>
+        <tr *ngIf="responseCode.number < 400 && responseCode.number >=300">
+          <td><span class="redirect"> {{responseCode.number}} </span>
+            <td>{{responseCode.respDescription}}</td>
+            <td>{{responseTime}}</td>
+        </tr>
+        <tr *ngIf="responseCode.number >=400" >
+          <td><span class="error"> {{responseCode.number}} </span>
+            <td>{{responseCode.respDescription}}</td>
+            <td>{{responseTime}}</td>
+        </tr>
+      </table>
 
-    <div class="w-100" style="background-color: black; padding: 1rem; min-height: 5rem;">
-      <mat-progress-spinner *ngIf="loadingState" class="d-block mx-auto" color="accent" mode="indeterminate">
-      </mat-progress-spinner>
-      <pre *ngIf="responseData" style="color: #00ff40; white-space: pre-wrap;">{{ responseData }}</pre>
-      <pre *ngIf="responseError" style="color: rgb(255, 0, 0); white-space: pre-wrap;">{{ responseError }}</pre>
+      <div *ngIf="responseData || responseError" class="w-100" style="background-color: black; padding: 1rem; min-height: 5rem;">
+        <mat-progress-spinner
+            *ngIf="loadingState"
+            class="d-block mx-auto"
+            color="accent"
+            mode="indeterminate"
+        ></mat-progress-spinner>
+        <pre
+            *ngIf="responseData"
+            style="color: #00ff40; white-space: pre-wrap;"
+        >{{ responseData }}</pre>
+        <pre
+            *ngIf="responseError"
+            style="color: rgb(255, 0, 0); white-space: pre-wrap;"
+        >{{ responseError }}</pre>
+      </div>
+      <br>
+      <p class="separador">Responses</p>
+      <table class="params">
+        <tr>
+          <th>Code</th>
+          <th>Description</th>
+          <th></th>
+        </tr>
+        <br>
+        <tr *ngFor="let respCode of receivedRespCodes">
+          <td> <span [ngClass]="{success: respCode.number<300, redirect: respCode.number<400 && respCode.number>=300, error: respCode.number>=400}">{{respCode.number}}</span></td>
+          <td>{{respCode.respDescription}}</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
     </div>
   </div>
 </body>
