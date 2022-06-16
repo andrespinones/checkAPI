@@ -44,13 +44,14 @@
         </form>
 
         <br>
-        <p class="separador">PARAMETERS</p>
+        <p *ngIf="addEndpointForm.value.method == 'GET'" class="separador">PARAMETERS</p>
+        <p *ngIf="addEndpointForm.value.method == 'POST'" class="separador">VARIABLES</p>
 
         <div *ngFor="let param of params; let i = index">
             <form>
                 <mat-form-field class="smallDropdown" appearance="outline">
                     <mat-label>Parameter's Name</mat-label>
-                    <input type="text" matInput [(ngModel)]="param.paramName" name="paramName{{i}}" required>
+                    <input type="text" matInput [(ngModel)]="param.paramName" name="paramName{{i}}" (ngModelChange)="jsonBind()" required>
                     <mat-error *ngIf="paramNameFormControl.hasError('required')">
                         Name is <strong>required</strong>
                     </mat-error>
@@ -85,6 +86,16 @@
         <button class="addButton" mat-icon-button (click)="addvalue()">
             <mat-icon class="addButton">add_circle_outline</mat-icon>
         </button>
+
+        <p *ngIf="addEndpointForm.value.method == 'POST'" class="separador">JSON REQUEST BODY EXAMPLE</p>
+        <div *ngIf="addEndpointForm.value.method == 'POST'">
+          <div class="container-fluid">
+            <pre
+            *ngIf="displayedJson"
+            style="color: #000000; white-space: pre-wrap;background-color: white;padding: 1rem; min-height: 5rem"
+            >{{displayedJson}}</pre>
+          </div>
+        </div>
 
         <!-- <h2>Result</h2> -->
         <!-- Checa si se agrega todo -->

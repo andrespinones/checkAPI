@@ -38,7 +38,7 @@ export class EditEndpointComponent implements OnInit {
 
 
   matcher = new MyErrorStateMatcher();
-  
+
   addEndpointForm = this.formBuilder.group({
     description: this.descFormControl,
     method: this.methodFormControl,
@@ -72,6 +72,8 @@ export class EditEndpointComponent implements OnInit {
   selectedRequestedMethod: string;
   selectedRespCodes: RespCode[];
   selectedRespCodesID: number[];
+  paramMap = new Map<string, any>();
+  displayedJson:string = '{}';
 
   constructor(private formBuilder: FormBuilder,private service:ApiService,private route: ActivatedRoute, private location: Location) {
     this.DROPDOWN_LIST = ['GET','POST','DELETE','PUT']
@@ -97,6 +99,12 @@ export class EditEndpointComponent implements OnInit {
 
   removevalue(i: number){
     this.params.splice(i,1);
+    this.paramMap.clear();
+    for (let i = 0; i < this.params.length; i++) {
+      console.log(this.params[i].paramName);
+      this.paramMap.set(this.params[i].paramName, '');
+    }
+    this.displayedJson = JSON.stringify(Object.fromEntries(this.paramMap), undefined, 4)
   }
 
   cancel(){
@@ -124,6 +132,10 @@ export class EditEndpointComponent implements OnInit {
         this.params.push({paramName: element.paramName, dataType: element.dataType, paramDescription: element.paramDescription});
         this.receivedParamsTypes.push(element.dataType);
     })
+    for (let i = 0; i < this.params.length; i++) {
+      this.paramMap.set(this.params[i].paramName, '');
+    }
+    this.displayedJson = JSON.stringify(Object.fromEntries(this.paramMap), undefined, 4)
   }
 
 
@@ -151,13 +163,13 @@ export class EditEndpointComponent implements OnInit {
       //agregar servicio UPDATE para update/edit endpoint
       this.service.editEndpointData(this.receivedEndpointID,this.endpoint).subscribe()
         //delete all params for this endpoint to create new ones if added
-        //delete params relation 
+        //delete params relation
         for (let params of this.receivedParams){
           this.service.deleteParameter(params.paramID).subscribe();
         }
         //delete resp codes associated to this endpoint
         this.service.deleteRespCodesRel(this.receivedEndpointID).subscribe();
-        //create new params 
+        //create new params
         this.params.forEach(element => {
           this.service.addParameter(element).subscribe(param=>{
             this.endpointParamsRel = {
@@ -179,4 +191,13 @@ export class EditEndpointComponent implements OnInit {
       this.location.back()
     }
   }
+
+  jsonBind(){
+    this.paramMap.clear();
+    for (let i = 0; i < this.params.length; i++) {
+      this.paramMap.set(this.params[i].paramName, '');
+    }
+    this.displayedJson = JSON.stringify(Object.fromEntries(this.paramMap), undefined, 4)
+  }
+
 }
