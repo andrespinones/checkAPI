@@ -60,61 +60,9 @@ tr {
   height: 35px;
 }
 
-.mat-header-cell {
-  border-bottom: 0px;
-}
-
-td.mat-cell {
-  background-color: #ffffff;
-  border-bottom: 0px solid #ffffff;
-  border-top: 0px solid #ffffff;
-}
-
-.mat-row:hover .mat-cell {
-  background-color: rgb(179, 177, 173);
-  cursor: pointer;
-}
-
-td.mat-cell:first-child {
-  background-color: #ffffff;
-  /* border-left: 2px solid #ffffff; */
-  border-bottom-left-radius: 10px;
-  border-top-left-radius: 10px;
-}
-
-td.mat-cell:last-child {
-  /* background-color: #ffffff; */
-  /* border-right: 2px solid #ffffff; */
-  border-bottom-right-radius: 10px;
-  border-top-right-radius: 10px;
-}
-
 th:first-child {
   width: 0.5%;
 }
-
-.mat-column-name {
-  overflow: hidden;
-  white-space: nowrap;
-  /* Don't forget this one */
-  text-overflow: ellipsis;
-  padding-right: 25px;
-}
-
-.mat-column-isFavorite {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  padding-right: 25px;
-}
-
-.mat-column-Name {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  padding-right: 25px;
-}
-
 .true {
   color: #FF5C00;
 }
@@ -215,15 +163,6 @@ th:first-child {
 
 }
 
-.button1 {
-  background-color: #B3B3B3;
-}
-
-.button2 {
-  color: white;
-  background-color: #FF7E36;
-}
-
 .nepButton{
   border-radius: 10px;
   background-color:#FF5C00;
@@ -231,24 +170,5 @@ th:first-child {
   /* position: relative;
   left: 61rem;
   top: 1rem; */
-}
-
-.spacer {
-  flex: 1 1 auto;
-}
-
-.noData {
-  width: 80%;
-  padding: 1rem;
-  align-items: left;
-  font-size: large;
-  background-color: #F2EEE9;
-  box-sizing: border-box;
-
-}
-
-.overlay {
-  width: 50%;
-  padding-left: 10%;
 }
 

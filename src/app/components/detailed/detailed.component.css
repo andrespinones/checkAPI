@@ -74,6 +74,11 @@ table.info th:last-child {
   max-width: 30px;
 }
 
+table.info td:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
 /* top-left border-radius */
 table.info tr:first-child th:first-child {
 
@@ -213,7 +218,6 @@ table.params {
   letter-spacing: 2px;
   text-align: left;
   font-weight: lighter;
-
 }
 
 .put2 {
@@ -224,13 +228,6 @@ table.params {
   text-align: left;
   font-weight: lighter;
 }
-
-/* .requestBody {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  padding: 1rem;
-} */
-
 .requestBodyItem {
   font-family: monospace;
   color: rgb(0, 0, 0);
@@ -267,5 +264,12 @@ span.success{
   position: relative;
   left: 61rem;
   top: 1rem;
+}
 
+.example-container {
+  padding-top: 3%;
+  width: 68%;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
 }

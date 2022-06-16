@@ -11,7 +11,7 @@
         </span>
     </div>
 
-    <!-- when the api has groups - select a group to continue -->
+    <!-- select or create a group to continue - first show -->
     <ng-container *ngIf="showF;else second ">
         <ng-container>
             <div class="example-container">
@@ -22,7 +22,7 @@
             </div>
         </ng-container>
     </ng-container>
-
+    <!-- the selected group has no endpoints -->
     <ng-template #second>
         <ng-container *ngIf="showL; else third">
             <h1 class="nombre" *ngIf="group">{{group.name}}</h1>
@@ -38,17 +38,14 @@
         </ng-container>
     </ng-template>
 
+    <!-- the selected group has endpoints - shows them -->
     <ng-template #third>
+        <!-- grpup name -->
         <h1 class="nombre" *ngIf="group">{{group.name}}</h1>
         <button mat-button class="nepButton" (click)="addEndpointRedirect(group.groupID)" *ngIf="group"> Add Endpoint </button>
 
-
-
-        <!-- nombre del grupo -->
-
         <!-- lista de los endpoint que pertenecen al grupo -->
         <table class="info">
-            <!-- falta ponerle color a la row dependiendo del tipo de metodo -->
             <tr *ngFor="let endpoint of DROPDOWN_LIST">
                 <th
                     [ngClass]="{get: endpoint.methodType == 'GET', post: endpoint.methodType == 'POST', put: endpoint.methodType == 'PUT', delete: endpoint.methodType == 'DELETE'}">

@@ -24,9 +24,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class EditEndpointComponent implements OnInit {
 
-  // required = no se puede ingresar un valor vacio, email - revisa que sea un email
-  //se tiene que hacer un validator que revise qeu si exita la API
-  //nameFormControl = new FormControl('', [Validators.required]);
   descFormControl = new FormControl('', [Validators.required]);
   methodFormControl = new FormControl('', [Validators.required]);
   pathFormControl = new FormControl('', [Validators.required]);
@@ -52,8 +49,6 @@ export class EditEndpointComponent implements OnInit {
     dataType: '',
     paramDescription: ''
   }];
-
-  // values: string[] = [];
 
   DROPDOWN_LIST: string[];
   DROPDOWN_LIST2: string[];
@@ -103,9 +98,6 @@ export class EditEndpointComponent implements OnInit {
     this.location.back()
   }
 
-  // isEditing(){
-  //   return this.receivedEndpointID!=''
-  // }
   getEndpointDetail(){
     this.service.getEndpointbyID(this.receivedEndpointID).subscribe(resp=>{
       this.receivedEndpoint = resp[0];

@@ -20,18 +20,6 @@ body{
     justify-content: center;
   }
 
-  .searchInput {
-    margin-right: 30px;
-    width: 300px;
-    height: 40px;
-  }
-
-  .searchInput::placeholder {
-    font-family: 'myFont', Arial, Helvetica, sans-serif;  
-    font-size: 18px;
-    color: #C4C4C4;
- }
-
  .mat-form-field {
     width: 300px;
     padding-top: 10px;
@@ -53,13 +41,6 @@ body{
     /*change color of label*/
     color: #ed7934 !important;
    }
-   /* ::ng-deep .mat-select-label{    
-    color: #C4C4C4!important;  } */
-
-    .highlight{
-        font-weight: 500;
-    }
-
 
     ::ng-deep .mat-button-toggle-group{
         width: 300px;
@@ -88,12 +69,6 @@ body{
     .buttons{
         padding-top: 30px;
     }
-
-    .example-form {
-      min-width: 150px;
-      max-width: 500px;
-      width: 100%;
-    }
     
     .example-full-width {
       width: 60%;
@@ -112,20 +87,9 @@ body{
     .smallDesc{
         width: 40.5%;
     }
-
     .midDesc{
       width: 46.8%;
   }
-    #rmButton{
-      border-radius: 10px;
-      background-color: white;
-      /* padding-bottom: ; */
-    }
-    #rmButton:hover{
-      background-color:rgba(158, 158, 158, 0.2); 
-      color:#FF5C00;
-    }
-
     .mat-icon{
       transform: scale(1.2);
     }

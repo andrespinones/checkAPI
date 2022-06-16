@@ -15,7 +15,6 @@
 
 <form [formGroup]="groupForm">
 	<mat-form-field class="example-full-width" *ngIf="showForm" (keyup.enter)="update()">
-        <!-- <mat-icon matPrefix>add</mat-icon> -->
 		<input matInput  placeholder="New Group" formControlName="group" [(ngModel)]="group" >
         
   </mat-form-field>
