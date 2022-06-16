@@ -9,6 +9,7 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import {FormControl, FormGroupDirective, NgForm, Validators, FormBuilder} from '@angular/forms';
 import { RespCode } from 'src/app/models/respCode';
 import { User } from 'src/app/models/user.model';
+import { HttpService } from 'src/app/http.service';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -22,6 +23,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './detailed.component.html',
   styleUrls: ['./detailed.component.css']
 })
+
 
 export class DetailedComponent  implements OnInit{
   stringFormControl = new FormControl('', [Validators.required]);
@@ -68,8 +70,11 @@ export class DetailedComponent  implements OnInit{
 
   queryParams: any = [] //to concatenete with endpoint path when fulfilled
   paramMap = new Map<string, any>();
+  title = 'Article by Jeetendra';
+  posts : any;
 
-  constructor(private service:ApiService, private route: ActivatedRoute, private _mainService: Apitester, private formBuilder:FormBuilder,  private router:Router) {
+  constructor(private service:ApiService, private route: ActivatedRoute, private _mainService: Apitester, private formBuilder:FormBuilder,  private router:Router, private httpService: HttpService) {
+
     this.endpoint = '';
     this.selectedRequestMethod = '';
     this.requestMethods = [
@@ -88,6 +93,10 @@ export class DetailedComponent  implements OnInit{
     this.loadingState = false;
   }
   ngOnInit(): void {
+    const a = this.httpService.getPosts().subscribe(
+      (response) => { this.posts = response; console.log(response.status)},
+      (error) => { console.log(error.status); });
+
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     const id = this.route.snapshot.queryParamMap.get('id');
     this.apiID=id;
