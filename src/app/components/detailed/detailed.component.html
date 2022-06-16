@@ -145,7 +145,7 @@
             >{{ displayedJson}}</pre>
               </div>
       </div>
-      <p class="separador">Responses</p>
+      <p *ngIf="responseData || responseError" class="separador">Server Response</p>
       <table *ngIf="responseCode" class="params">
         <tr>
           <th>Code</th>
@@ -171,7 +171,7 @@
         </tr>
       </table>
 
-      <div class="w-100" style="background-color: black; padding: 1rem; min-height: 5rem;">
+      <div *ngIf="responseData || responseError" class="w-100" style="background-color: black; padding: 1rem; min-height: 5rem;">
         <mat-progress-spinner
             *ngIf="loadingState"
             class="d-block mx-auto"
@@ -186,6 +186,22 @@
             *ngIf="responseError"
             style="color: rgb(255, 0, 0); white-space: pre-wrap;"
         >{{ responseError }}</pre>
-    </div>
+      </div>
+      <br>
+      <p class="separador">Responses</p>
+      <table class="params">
+        <tr>
+          <th>Code</th>
+          <th>Description</th>
+          <th></th>
+        </tr>
+        <br>
+        <tr *ngFor="let respCode of receivedRespCodes">
+          <td> <span [ngClass]="{success: respCode.number<300, redirect: respCode.number<400 && respCode.number>=300, error: respCode.number>=400}">{{respCode.number}}</span></td>
+          <td>{{respCode.respDescription}}</td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
     </div>
 </body>
