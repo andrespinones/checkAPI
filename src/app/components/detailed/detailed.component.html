@@ -146,7 +146,7 @@
               </div>
       </div>
       <p class="separador">Responses</p>
-      <table class="params">
+      <table *ngIf="responseCode" class="params">
         <tr>
           <th>Code</th>
           <th>Description</th>
@@ -154,16 +154,20 @@
           <th></th>
         </tr>
         <br>
-        <!-- <tr *ngFor="let respCode of receivedRespCodes">
-          <td> <span [ngClass]="{success: respCode.number<300, redirect: respCode.number<400 && respCode.number>=300, error: respCode.number>=400}">{{respCode.number}}</span></td>
-          <td>{{respCode.respDescription}}</td>
-          <td></td>
-          <td></td>
-        </tr> -->
-        <tr *ngIf="responseCode" >
-          <td *ngIf="responseCode.number < 300"><span class="success"> {{responseCode.number}} </span></td>
-          <td>{{responseCode.respDescription}}</td>
-          <td>{{responseTime}}</td>
+        <tr *ngIf="responseCode.number < 300" >
+          <td><span class="success"> {{responseCode.number}} </span>
+            <td>{{responseCode.respDescription}}</td>
+            <td>{{responseTime}}</td>
+        </tr>
+        <tr *ngIf="responseCode.number < 400 && responseCode.number >=300">
+          <td><span class="redirect"> {{responseCode.number}} </span>
+            <td>{{responseCode.respDescription}}</td>
+            <td>{{responseTime}}</td>
+        </tr>
+        <tr *ngIf="responseCode.number >=400" >
+          <td><span class="error"> {{responseCode.number}} </span>
+            <td>{{responseCode.respDescription}}</td>
+            <td>{{responseTime}}</td>
         </tr>
       </table>
 
