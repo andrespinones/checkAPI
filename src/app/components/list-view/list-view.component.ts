@@ -46,14 +46,10 @@ export class ListViewComponent implements OnInit {
   }
 
   ngOnChanges() {
-    console.log("onChanges apiList: ");
-    console.log(this.ApiList);
     this.dataSource = new MatTableDataSource<Api>(this.ApiList);
   }
 
   refreshApis() {
-    console.log("child apiList: ");
-    console.log(this.ApiList);
     this.dataSource = new MatTableDataSource<Api>(this.ApiList);
   }
 
@@ -68,7 +64,6 @@ export class ListViewComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-    console.log(this.dataSource);
   }
 
   modifyFav(api: Api) {
