@@ -52,7 +52,8 @@
     <span id="instruction">*Parameters must be enclosed between <strong>curly braces</strong> in the path*</span>
     <br>
     <br>
-    <p class="separador">PARAMETERS</p>
+    <p *ngIf="addEndpointForm.value.method == 'GET'" class="separador">PARAMETERS</p>
+    <p *ngIf="addEndpointForm.value.method == 'POST'" class="separador">JSON REQUEST BODY</p>
     <div *ngFor="let param of params; let i = index">
       <form id="paramsForm">
         <mat-form-field class="smallDropdown" appearance="outline">

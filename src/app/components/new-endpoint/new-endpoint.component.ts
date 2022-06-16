@@ -62,6 +62,7 @@ export class NewEndpointComponent implements OnInit {
   endpointRespCode:any;
   endpointGroupID:any;
   parameter: any;
+  selected:string = 'GET';
 
   constructor(private formBuilder: FormBuilder,private service:ApiService,private route: ActivatedRoute, private location: Location) {
     this.DROPDOWN_LIST = ['GET','POST','DELETE','PUT']
@@ -73,7 +74,7 @@ export class NewEndpointComponent implements OnInit {
     const groupID = this.route.snapshot.queryParamMap.get('groupID');
     this.endpointGroupID=groupID;
     this.getAvailableRespCodes()
-    console.log(this.addEndpointForm.valid)
+    this.addEndpointForm.get("method")!.setValue('GET')!;
   }
 
   removevalue(i: number){
