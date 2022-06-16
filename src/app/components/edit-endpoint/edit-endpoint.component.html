@@ -17,7 +17,7 @@
             <br>
             <mat-form-field class="smallDropdown" appearance="outline">
                 <mat-label>Method</mat-label>
-                <mat-select [(value)]="selectedRequestedMethod">
+                <mat-select  formControlName="method">
                     <mat-option *ngFor="let method of DROPDOWN_LIST" [value]="method">
                         {{method}}
                     </mat-option>
@@ -58,12 +58,11 @@
 
                 <mat-form-field class="smallDropdown" appearance="outline">
                     <mat-label>Type</mat-label>
-                    <mat-select [(value)]="receivedParamsTypes[i]">
+                    <mat-select  [(ngModel)]="param.dataType" [(value)]="receivedParamsTypes[i]" name="dataType{{i}}">
                         <mat-option *ngFor="let type of DROPDOWN_LIST2" [value]="type">
                             {{type}}
                         </mat-option>
                     </mat-select>
-
                 </mat-form-field>
 
                 <mat-form-field class="smallDesc" appearance="outline">
@@ -97,7 +96,7 @@
             <a mat-button class="button button1" routerLink="addEndpoint" (click)="cancel()">
                 Cancel
             </a>
-            <a mat-button class="button button2" routerLink="addEndpoint" (click)="createEndpoint()">
+            <a mat-button class="button button2" routerLink="addEndpoint" (click)="updateEndpointData()">
                 Save
             </a>
 

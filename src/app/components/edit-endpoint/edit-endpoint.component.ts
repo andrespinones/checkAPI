@@ -40,7 +40,6 @@ export class EditEndpointComponent implements OnInit {
   matcher = new MyErrorStateMatcher();
   
   addEndpointForm = this.formBuilder.group({
-    //name: this.nameFormControl,
     description: this.descFormControl,
     method: this.methodFormControl,
     path: this.pathFormControl,
@@ -111,12 +110,11 @@ export class EditEndpointComponent implements OnInit {
     this.service.getEndpointbyID(this.receivedEndpointID).subscribe(resp=>{
       this.receivedEndpoint = resp[0];
       this.selectedRequestedMethod = this.receivedEndpoint.methodType;  //methodType assign to a local global variable for successful binding
-      
+      this.addEndpointForm.controls['method'].setValue(this.selectedRequestedMethod)
     })
     this.service.getParamsbyEndpointID(this.receivedEndpointID).subscribe(resp=>{
       this.receivedParams = resp;
       this.fillParamsWithReceivedParams();
-      console.log(this.receivedParams);
     })
   }
 
@@ -131,7 +129,6 @@ export class EditEndpointComponent implements OnInit {
 
   addvalue(){
     this.params.push({paramName: "", dataType: "", paramDescription: ""});
-    console.log(this.addEndpointForm.value.responses)
   }
 
   getAvailableRespCodes(){
@@ -140,11 +137,9 @@ export class EditEndpointComponent implements OnInit {
     })
   }
 
-  createEndpoint(){
+  updateEndpointData(){
     this.endpoint = {
-      name : this.addEndpointForm.value.name,
       endpointDescription : this.addEndpointForm.value.description,
-      groupID: this.endpointGroupID,
       methodType: this.addEndpointForm.value.method,
       path: this.addEndpointForm.value.path
     }
@@ -153,27 +148,34 @@ export class EditEndpointComponent implements OnInit {
       alert("Asegurate de que los campos esten llenados correctamente")
     }
     else{
-      //agregar servicio post para add endpoint, revisar multiples parametros.
-      this.service.addEndpoint(this.endpoint).subscribe(data=>{
-        //create endpoint and store new ID to use for next post(endpParams)
+      //agregar servicio UPDATE para update/edit endpoint
+      this.service.editEndpointData(this.receivedEndpointID,this.endpoint).subscribe()
+        //delete all params for this endpoint to create new ones if added
+        //delete params relation 
+        for (let params of this.receivedParams){
+          this.service.deleteParameter(params.paramID).subscribe();
+        }
+        //delete resp codes associated to this endpoint
+        this.service.deleteRespCodesRel(this.receivedEndpointID).subscribe();
+        //create new params 
         this.params.forEach(element => {
           this.service.addParameter(element).subscribe(param=>{
             this.endpointParamsRel = {
-              endpointID : data.endpointID,
+              endpointID : this.receivedEndpointID,
               paramID : param.paramID
             }
+            console.log(this.endpointParamsRel)
             //servicio de relacion param endpoint
             this.service.addParameterEndpointRel(this.endpointParamsRel).subscribe()
           })
         });
         for(let response of this.addEndpointForm.value.responses){
           this.endpointRespCode = {
-            endpointID : data.endpointID,
+            endpointID : this.receivedEndpointID,
             respCodeID: response
           }
           this.service.addEndpointRespCodes(this.endpointRespCode).subscribe()
         }
-      });
       this.location.back()
     }
   }
