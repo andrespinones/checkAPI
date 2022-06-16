@@ -58,7 +58,7 @@
       <form id="paramsForm">
         <mat-form-field class="smallDropdown" appearance="outline">
           <mat-label>Parameter's Name</mat-label>
-          <input type="text" matInput [(ngModel)]="param.paramName" name="paramName{{i}}" required>
+          <input type="text" matInput [(ngModel)]="param.paramName" name="paramName{{i}}" (ngModelChange)="jsonBind()" required>
           <mat-error *ngIf="paramNameFormControl.hasError('required')">
             Name is <strong>required</strong>
           </mat-error>
@@ -92,6 +92,15 @@
     <button class="addButton" mat-icon-button (click)="addvalue()">
       <mat-icon class="addButton">add_circle_outline</mat-icon>
     </button>
+
+    <div *ngIf="addEndpointForm.value.method == 'POST'">
+      <div class="container-fluid">
+        <pre
+        *ngIf="displayedJson"
+        style="color: #000000; white-space: pre-wrap;background-color: white;"
+        >{{displayedJson}}</pre>
+      </div>
+    </div>
 
     <!-- <h2>Result</h2> -->
     <!-- Checa si se agrega todo -->

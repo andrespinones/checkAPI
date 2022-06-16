@@ -53,7 +53,7 @@ export class DetailedComponent  implements OnInit{
   endpoint: string;
   //traerse el user para saber si es admin o no
   currentUser?: User;
-  displayedJson:string = 'string culero';
+  displayedJson:string = '';
   selectedRequestMethod: string;
   readonly requestMethods: Array<string>;
   responseData: any;

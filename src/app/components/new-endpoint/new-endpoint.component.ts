@@ -50,7 +50,6 @@ export class NewEndpointComponent implements OnInit {
     dataType: '',
     paramDescription: ''
   }];
-
   // values: string[] = [];
 
   DROPDOWN_LIST: string[];
@@ -62,7 +61,8 @@ export class NewEndpointComponent implements OnInit {
   endpointRespCode:any;
   endpointGroupID:any;
   parameter: any;
-  selected:string = 'GET';
+  paramMap = new Map<string, any>();
+  displayedJson:string = 'enter parameters to display JSON body';
 
   constructor(private formBuilder: FormBuilder,private service:ApiService,private route: ActivatedRoute, private location: Location) {
     this.DROPDOWN_LIST = ['GET','POST','DELETE','PUT']
@@ -79,6 +79,12 @@ export class NewEndpointComponent implements OnInit {
 
   removevalue(i: number){
     this.params.splice(i,1);
+    this.paramMap.clear();
+    for (let i = 0; i < this.params.length; i++) {
+      console.log(this.params[i].paramName);
+      this.paramMap.set(this.params[i].paramName, '');
+    }
+    this.displayedJson = JSON.stringify(Object.fromEntries(this.paramMap), undefined, 4)
   }
 
   addvalue(){
@@ -146,6 +152,17 @@ export class NewEndpointComponent implements OnInit {
     })
     return answer;
   }
+
+  jsonBind(){
+    console.log(JSON.stringify(this.params));
+    this.paramMap.clear();
+    for (let i = 0; i < this.params.length; i++) {
+      console.log(this.params[i].paramName);
+      this.paramMap.set(this.params[i].paramName, '');
+    }
+    this.displayedJson = JSON.stringify(Object.fromEntries(this.paramMap), undefined, 4)
+  }
+
 }
 
 
