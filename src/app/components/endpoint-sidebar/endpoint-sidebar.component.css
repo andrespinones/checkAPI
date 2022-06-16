@@ -35,3 +35,17 @@ p:hover{
     text-decoration-color: black;
     cursor: pointer;   
 }
+
+.list-group-item{
+    background-color: transparent;
+    border: none;
+}
+/* .list-group-item:not([disabled]):hover {
+    background-color: rgba(158, 158, 158, 0.2);
+    color: #de4e37;
+} */
+.list-group-item-active{ /* used in ngClass to highlight currently active item */
+    /* border-left: 0.5rem solid #de4e37; */
+    font-weight: 500;
+    text-decoration: underline;
+}

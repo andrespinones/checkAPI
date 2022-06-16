@@ -104,6 +104,12 @@ export class DetailedComponent  implements OnInit{
     this.responseTime = 0;
     // document.getElementById("endPath")!.innerHTML = this.receivedEndpoint.path;
   }
+
+  editEndpointRedirect(endpointID:number){
+    let route = '/editEndpoint';
+    this.router.navigate([route], { queryParams: { endpointID: endpointID} });
+  }
+  
   isAdmin(): boolean {
     if (this.currentUser?.role == "Admin") {
       return true;

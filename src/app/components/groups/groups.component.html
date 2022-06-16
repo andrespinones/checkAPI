@@ -7,7 +7,7 @@
 <ul class="list-group" *ngIf="DROPDOWN_LIST">
     <a md-button>
         <!-- pasa por todos los grupos de una api y los despliega como lista en la sidebar -->
-        <li *ngFor="let group of DROPDOWN_LIST" class="list-group-item list-group-item-action" (click)="sendGroupID(group)">
+        <li *ngFor="let group of DROPDOWN_LIST; let i = index" [ngClass] = "calculateClasses(selectedIndex === i)" (click)="sendGroupID(group); setIndex(i)">
             {{group.name}}
         </li>
     </a>

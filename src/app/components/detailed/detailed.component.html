@@ -21,7 +21,7 @@
           <th> Last response: {{receivedEndpoint.lastResp}}</th>
           <th>2 days ago</th>
           <td align="right">
-            <a mat-icon-button *ngIf="isAdmin()">
+            <a mat-icon-button *ngIf="isAdmin()" (click)="editEndpointRedirect(endpointID)">
               <mat-icon>edit</mat-icon>
             </a>
           </td>
@@ -99,7 +99,7 @@
               <td>{{param.dataType}}</td>
               <td>{{param.paramDescription}}</td>
               <td>
-                <form *ngIf="param.dataType == 'STRING'" [formGroup]="stringForm">
+                <form *ngIf="param.dataType == 'string'" [formGroup]="stringForm">
                   <mat-form-field>
                   <input class="searchInput" type="text"
                   placeholder={{param.paramName}}
@@ -111,7 +111,7 @@
                   </mat-error>
                 </mat-form-field>
                 </form>
-                <form *ngIf="param.dataType == 'INT'" [formGroup]="integerForm">
+                <form *ngIf="param.dataType == 'integer'" [formGroup]="integerForm">
                   <mat-form-field>
                   <input class="searchInput" type="text"
                   placeholder={{param.paramName}}

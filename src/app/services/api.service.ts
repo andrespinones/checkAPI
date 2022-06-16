@@ -196,6 +196,26 @@ export class ApiService {
     )}
     );
   }
+  editEndpointData(endpointID:number, data:any){
+    return this.httpclient.put<any>(this.APIURL+'/endpoint/' + endpointID, data,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+    )}
+    );
+  }
+
+  deleteParameter(paramID:number){
+    return this.httpclient.delete(this.APIURL+'/parameter/' + paramID, {headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+    )}
+    );
+  }
+  deleteRespCodesRel(endpointID:number){
+    return this.httpclient.delete(this.APIURL+'/respCodes/' + endpointID, {headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+    )}
+    );
+  }
+
 
 
 

@@ -25,14 +25,14 @@
     color: #4C4A48;
 }
 
-.list-group-item{
+/* .list-group-item{
     background-color: transparent;
     border: none;
 }
 .list-group-item:not([disabled]):hover {
     background-color: rgba(158, 158, 158, 0.2);
     color: #de4e37;
-}
+} */
 
 
 .button{
@@ -78,3 +78,17 @@
     /*change color of label*/
     color: #ed7934 !important;
    }
+
+   .list-group-item{
+    background-color: transparent;
+    border: none;
+}
+.list-group-item:not([disabled]):hover {
+    background-color: rgba(158, 158, 158, 0.2);
+    color: #de4e37;
+}
+.list-group-item-active{ /* used in ngClass to highlight currently active item */
+    border-left: 0.5rem solid #de4e37;
+    color: #de4e37;
+    font-weight: 550;
+}

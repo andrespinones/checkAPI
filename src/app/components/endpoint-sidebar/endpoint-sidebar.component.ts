@@ -12,6 +12,13 @@ import { endpointSidebar } from 'src/app/models/endpointSidebar';
 export class EndpointSidebarComponent implements OnInit {
   @Output() outputToParent = new EventEmitter<number>();
   constructor(private service:ApiService, private route: ActivatedRoute) { }
+
+  selectedIndex: number = -3; //used to know which listed item is selected
+
+  setIndex(index: number) {   //updates the selectedIndex given the index obtained from the (click) event
+    this.selectedIndex = index;
+  }
+
   testList:any[]=[];
   grouped: { [key: string]: endpointSidebar[] } = {};
   apiID: any;
@@ -39,5 +46,12 @@ export class EndpointSidebarComponent implements OnInit {
 
   getEndpointDetail(endpointId:number){
     this.outputToParent.emit(endpointId);
+  }
+
+  calculateClasses(stateFlag: boolean){ //if the stateFlag is true activates the ~item-active class
+    return {
+      'list-group-item': true,
+      'list-group-item-active': stateFlag
+    };
   }
 }
