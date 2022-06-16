@@ -42,6 +42,7 @@ export class DetailedComponent  implements OnInit{
   });
   receivedEndpoint!:Endpoint;
   respCode:string = "";
+  responseCode!: RespCode;
   receivedParams!:Parameter[];
   receivedRespCodes!:RespCode[];
   endpointID!:number;
@@ -94,22 +95,23 @@ export class DetailedComponent  implements OnInit{
     this.loadingState = false;
   }
   ngOnInit(): void {
-    // const a = this.httpService.getPosts().subscribe(
-    //   (response) => { this.posts = response; console.log(response.status)},
-    //   (error) => { console.log(error.status); });
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     const id = this.route.snapshot.queryParamMap.get('id');
     this.apiID=id;
     this.getApi();
     this.responseTime = 0;
-    // document.getElementById("endPath")!.innerHTML = this.receivedEndpoint.path;
+  }
+
+  getResponseCode(code:number){
+    var result = this.receivedRespCodes.find(respCode => respCode.number === code);
+    return result;
   }
 
   editEndpointRedirect(endpointID:number){
     let route = '/editEndpoint';
     this.router.navigate([route], { queryParams: { endpointID: endpointID} });
   }
-  
+
   isAdmin(): boolean {
     if (this.currentUser?.role == "Admin") {
       return true;
@@ -149,7 +151,6 @@ export class DetailedComponent  implements OnInit{
           this.receivedEndpoint = resp[0];
           this.selectedRequestMethod = this.receivedEndpoint.methodType;
           this.path = this.receivedEndpoint.path;
-          document.getElementById("endPath")!.innerHTML = this.path;
         })
         this.service.getParamsbyEndpointID(endpointId).subscribe(resp=>{
           this.receivedParams = resp;
@@ -337,6 +338,7 @@ export class DetailedComponent  implements OnInit{
             console.log(data.status);
             let x = data.status;
             this.respCode = x.toString();
+            this.responseCode = this.getResponseCode(x)!;
           },
           error => {
             this.loadingState = false;
@@ -344,6 +346,7 @@ export class DetailedComponent  implements OnInit{
             console.log(error.status)
             let x = error.status;
             this.respCode = x.toString();
+            this.responseCode = this.getResponseCode(x)!;
           }
         );
         break;
@@ -366,6 +369,7 @@ export class DetailedComponent  implements OnInit{
             console.log(data.status)
             let x = data.status;
             this.respCode = x.toString();
+            this.responseCode = this.getResponseCode(x)!;
           },
           error => {
             this.loadingState = false;
@@ -373,6 +377,7 @@ export class DetailedComponent  implements OnInit{
             console.log(error.status)
             let x = error.status;
             this.respCode = x.toString();
+            this.responseCode = this.getResponseCode(x)!;
           }
         );
         break;

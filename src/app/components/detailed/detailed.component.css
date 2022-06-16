@@ -246,7 +246,7 @@ table.params {
   transform: scale(0.8);
 }
 
-.success{
+span.success{
   color: #49CC90;
   font-weight: bold;
 }
