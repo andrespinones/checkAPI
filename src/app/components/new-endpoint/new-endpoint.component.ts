@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { asNativeElements, Component, OnInit } from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -8,6 +8,7 @@ import {Location} from '@angular/common';
 import { end } from '@popperjs/core';
 import { RespCode } from 'src/app/models/respCode';
 import { User } from 'src/app/models/user.model';
+import { ValidatePath } from 'src/app/custom-validators/forbiddenBraces.directive';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -25,18 +26,18 @@ export class NewEndpointComponent implements OnInit {
 
   // required = no se puede ingresar un valor vacio, email - revisa que sea un email
   //se tiene que hacer un validator que revise qeu si exita la API
+  nameFormControl = new FormControl('', [Validators.required]);
   descFormControl = new FormControl('', [Validators.required]);
   methodFormControl = new FormControl('', [Validators.required]);
-  pathFormControl = new FormControl('', [Validators.required]);
+  pathFormControl = new FormControl('', [Validators.required, ValidatePath]);
   respsFormControl = new FormControl('', [Validators.required]);
 
   paramNameFormControl = new FormControl('', [Validators.required]);
   paramDescFormControl = new FormControl('', [Validators.required]);
   paramDataTypeFormControl = new FormControl('', [Validators.required]);
 
-
   matcher = new MyErrorStateMatcher();
-  
+
   addEndpointForm = this.formBuilder.group({
     description: this.descFormControl,
     method: this.methodFormControl,
@@ -44,13 +45,11 @@ export class NewEndpointComponent implements OnInit {
     responses: this.respsFormControl
   });
 
-
   params: any[] = [{
     paramName: '',
     dataType: '',
     paramDescription: ''
   }];
-
   // values: string[] = [];
 
   DROPDOWN_LIST: string[];
@@ -62,6 +61,8 @@ export class NewEndpointComponent implements OnInit {
   endpointRespCode:any;
   endpointGroupID:any;
   parameter: any;
+  paramMap = new Map<string, any>();
+  displayedJson:string = '{}';
 
   constructor(private formBuilder: FormBuilder,private service:ApiService,private route: ActivatedRoute, private location: Location) {
     this.DROPDOWN_LIST = ['GET','POST','DELETE','PUT']
@@ -73,15 +74,21 @@ export class NewEndpointComponent implements OnInit {
     const groupID = this.route.snapshot.queryParamMap.get('groupID');
     this.endpointGroupID=groupID;
     this.getAvailableRespCodes()
+    this.addEndpointForm.get("method")!.setValue('GET')!;
   }
 
   removevalue(i: number){
     this.params.splice(i,1);
+    this.paramMap.clear();
+    for (let i = 0; i < this.params.length; i++) {
+      console.log(this.params[i].paramName);
+      this.paramMap.set(this.params[i].paramName, '');
+    }
+    this.displayedJson = JSON.stringify(Object.fromEntries(this.paramMap), undefined, 4)
   }
 
   addvalue(){
-    this.params.push({paramName: "", dataType: "", paramDescription: ""});
-    console.log(this.addEndpointForm.value.responses)
+    this.params.push({paramName: null, dataType: null, paramDescription: null});
   }
 
   getAvailableRespCodes(){
@@ -127,6 +134,35 @@ export class NewEndpointComponent implements OnInit {
       this.location.back()
     }
   }
+
+  isParamsInvalid(){
+    if(this.params.length == 0){
+      return false;
+    }
+    let answer = false;
+    this.params.forEach(element=>{
+      element.forEach((value: any)=>{
+        if(value == null){
+          answer = true;
+
+        }else{
+          answer = false;
+        }
+      })
+    })
+    return answer;
+  }
+
+  jsonBind(){
+    console.log(JSON.stringify(this.params));
+    this.paramMap.clear();
+    for (let i = 0; i < this.params.length; i++) {
+      console.log(this.params[i].paramName);
+      this.paramMap.set(this.params[i].paramName, '');
+    }
+    this.displayedJson = JSON.stringify(Object.fromEntries(this.paramMap), undefined, 4)
+  }
+
 }
 
 

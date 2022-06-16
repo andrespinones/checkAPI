@@ -50,7 +50,7 @@
             <form>
                 <mat-form-field class="smallDropdown" appearance="outline">
                     <mat-label>Parameter's Name</mat-label>
-                    <input type="text" matInput [(ngModel)]="param.paramName" name="paramName{{i}}">
+                    <input type="text" matInput [(ngModel)]="param.paramName" name="paramName{{i}}" required>
                     <mat-error *ngIf="paramNameFormControl.hasError('required')">
                         Name is <strong>required</strong>
                     </mat-error>
@@ -58,16 +58,19 @@
 
                 <mat-form-field class="smallDropdown" appearance="outline">
                     <mat-label>Type</mat-label>
-                    <mat-select  [(ngModel)]="param.dataType" [(value)]="receivedParamsTypes[i]" name="dataType{{i}}">
+                    <mat-select  [(ngModel)]="param.dataType" [(value)]="receivedParamsTypes[i]" name="dataType{{i}}" required>
                         <mat-option *ngFor="let type of DROPDOWN_LIST2" [value]="type">
                             {{type}}
                         </mat-option>
                     </mat-select>
+                    <mat-error *ngIf="paramDescFormControl.hasError('required')">
+                      Data type <strong>required</strong>
+                  </mat-error>
                 </mat-form-field>
 
                 <mat-form-field class="smallDesc" appearance="outline">
                     <mat-label>Parameter's Description</mat-label>
-                    <input type="url" matInput [(ngModel)]="param.paramDescription" name="paramDescription{{i}}">
+                    <input type="url" matInput [(ngModel)]="param.paramDescription" name="paramDescription{{i}}" required>
                     <mat-error *ngIf="paramDescFormControl.hasError('required')">
                         Description <strong>required</strong>
                     </mat-error>

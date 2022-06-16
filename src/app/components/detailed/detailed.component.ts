@@ -1,16 +1,22 @@
 import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import { Endpoint } from 'src/app/models/endpoint';
 import { ApiService } from 'src/app/services/api.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Api } from 'src/app/models/apis';
 import { Parameter } from 'src/app/models/parameter';
 import { Apitester } from 'src/app/services/apitester.service';
+import {ErrorStateMatcher} from '@angular/material/core';
+import {FormControl, FormGroupDirective, NgForm, Validators, FormBuilder} from '@angular/forms';
 import { RespCode } from 'src/app/models/respCode';
 import { User } from 'src/app/models/user.model';
-import { Router } from '@angular/router';
+import { HttpService } from 'src/app/http.service';
 
-
-
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+    const isSubmitted = form && form.submitted;
+    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+  }
+}
 
 @Component({
   selector: 'app-detailed',
@@ -18,12 +24,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./detailed.component.css']
 })
 
+
 export class DetailedComponent  implements OnInit{
+  stringFormControl = new FormControl('', [Validators.required]);
+  integerFormControl = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
+
   @Input() openIDBrequest: any;
   @Input() indexedDB: any;
   @Output() newRequest = new EventEmitter();
 
+  matcher = new MyErrorStateMatcher();
+  stringForm = this.formBuilder.group({
+    var: this.stringFormControl
+  });
+  integerForm = this.formBuilder.group({
+    var: this.integerFormControl
+  });
   receivedEndpoint!:Endpoint;
+  respCode:string = "";
+  responseCode!: RespCode;
   receivedParams!:Parameter[];
   receivedRespCodes!:RespCode[];
   endpointID!:number;
@@ -32,13 +51,14 @@ export class DetailedComponent  implements OnInit{
   path:string = "";
   //api testing
   endpoint: string;
-  //traerse el user para saber si es admin o no 
+  //traerse el user para saber si es admin o no
   currentUser?: User;
-
+  displayedJson:string = '';
   selectedRequestMethod: string;
   readonly requestMethods: Array<string>;
   responseData: any;
   responseError: any;
+  responseTime: any;
   savedRequestCount!: number;
   requestBody: any;
   requestBodyDataTypes: any;
@@ -47,13 +67,16 @@ export class DetailedComponent  implements OnInit{
   endpointError: string;
   loadingState: boolean;
 
-    text : string = "";  //works with the original enpoint path
-    actualText: string = this.text;
+  text : string = "";  //works with the original enpoint path
+  actualText: string = this.text;
 
   queryParams: any = [] //to concatenete with endpoint path when fulfilled
+  paramMap = new Map<string, any>();
+  title = 'Article by Jeetendra';
+  posts : any;
 
+  constructor(private service:ApiService, private route: ActivatedRoute, private _mainService: Apitester, private formBuilder:FormBuilder,  private router:Router, private httpService: HttpService) {
 
-  constructor(private service:ApiService, private route: ActivatedRoute, private _mainService: Apitester, private router:Router) {
     this.endpoint = '';
     this.selectedRequestMethod = '';
     this.requestMethods = [
@@ -76,14 +99,19 @@ export class DetailedComponent  implements OnInit{
     const id = this.route.snapshot.queryParamMap.get('id');
     this.apiID=id;
     this.getApi();
-    this.getOutputEndpointID;
+    this.responseTime = 0;
+  }
+
+  getResponseCode(code:number){
+    var result = this.receivedRespCodes.find(respCode => respCode.number === code);
+    return result;
   }
 
   editEndpointRedirect(endpointID:number){
     let route = '/editEndpoint';
     this.router.navigate([route], { queryParams: { endpointID: endpointID} });
   }
-  
+
   isAdmin(): boolean {
     if (this.currentUser?.role == "Admin") {
       return true;
@@ -96,6 +124,7 @@ export class DetailedComponent  implements OnInit{
   getApi(){
     this.service.getApibyID(this.apiID).subscribe(resp=>{
       this.api = resp[0];
+      console.log(this.api.name)
     });
   }
 
@@ -106,6 +135,7 @@ export class DetailedComponent  implements OnInit{
 
   addQueryValue(paramName: string){  //to push an empty item to be binded later on html input
     this.queryParams.push({[paramName]: ''});
+    this.paramMap.set(paramName, '');
   }
 
 
@@ -121,44 +151,60 @@ export class DetailedComponent  implements OnInit{
           this.receivedEndpoint = resp[0];
           this.selectedRequestMethod = this.receivedEndpoint.methodType;
           this.path = this.receivedEndpoint.path;
-          document.getElementById("endPath")!.innerHTML = this.path;
         })
         this.service.getParamsbyEndpointID(endpointId).subscribe(resp=>{
           this.receivedParams = resp;
           if(this.queryParams.length > 0){  //makes sure the array is not empty for new endpoint
             this.queryParams = [];
+            this.paramMap.clear();
           }
           for(let receivedParam of this.receivedParams){  //iterates to add empty inputs items
             this.addQueryValue(receivedParam.paramName);
           }
+          this.displayedJson = JSON.stringify(Object.fromEntries(this.paramMap), undefined, 4);
         })
         this.service.getRespCodesbyEndpointID(endpointId).subscribe(resp=>{
           this.receivedRespCodes = resp;
         })
-        //try
-
   }
   getOutputEndpointID(received:number){
+    console.log(received)
     this.endpointID=received;
     this.getEndpointDetail(this.endpointID)
   }
 
   didBindParam(paramName: string){
-    console.log(paramName);
     this.text = this.receivedEndpoint.path;
     this.actualText = this.text;
-    for(let i = 0; i<=this.receivedParams.length; i ++){
-      try{
-        this.actualText = document.getElementById("endPath")!.innerHTML = this.actualText.replace("{" + paramName + "}", this.queryParams[i][paramName]);
-      }
-      catch(error){
-        console.log("never gonna throw this error");
+    for(const [key,value] of this.paramMap){
+      if(value == ''){
+        this.actualText = this.actualText.replace("{"+ key + "}", "{"+ key + "}")
+
+      }else{
+        this.actualText = this.actualText.replace("{"+ key + "}", value)
       }
     }
     document.getElementById("endPath")!.innerHTML = this.actualText; //to bring all replacements of multiple parameters
-    console.log(this.actualText);
     this.endpoint = this.api.baseUrl + this.actualText;
     console.log(this.endpoint);
+  }
+
+  jsonBind(){
+    let current = JSON.stringify(Object.fromEntries(this.paramMap), undefined, 4);
+    let isFilled = false;
+    for (const value of this.paramMap.values()) {
+      if (value == ""){
+      }
+      else{
+        isFilled = true;
+        break;
+      }
+    }
+    if(isFilled){
+      this.displayedJson = JSON.stringify(Object.fromEntries(this.paramMap), undefined, 4);
+    }else{
+      this.displayedJson = current;
+    }
   }
 
   //fromSource
@@ -168,6 +214,7 @@ export class DetailedComponent  implements OnInit{
       context = this.requestBody;
     } else if (ctx === 'Headers') {
       context = this.requestHeaders;
+      console.log(this.requestHeaders)
     }
 
     context.push({ key: '', value: '' });
@@ -255,20 +302,17 @@ export class DetailedComponent  implements OnInit{
     return constructedObject;
   }
 
+  isFormValid(){
+    return (this.stringForm.valid || this.integerForm.valid)
+  }
+
   sendRequest() {
     this.endpointError = '';
     this.responseData = '';
     this.responseError = '';
-
-    if (!this.endpoint) {
-      this.endpointError = 'Endpoint is a Required value';
-      return;
-    }
-    if (!this.validateUrl(this.endpoint)) {
-      this.endpointError = 'Please enter a valid URL';
-      return;
-    }
-
+    console.log(this.api.baseUrl);
+    console.log(this.path);
+    //TODO: hacer algo que valide que si es post o si no tiene parametros que el endpoint sea el baseurl mas el path.
     this.requestBody.forEach((item: number, index: string | number) => {
       if (this.requestBodyDataTypes[index] === 'Number') {
         item = Number(item);
@@ -276,50 +320,78 @@ export class DetailedComponent  implements OnInit{
     });
 
     this.loadingState = true;
+    const startTime = new Date().getTime();
     switch (this.selectedRequestMethod) {
       case 'GET': {
+        console.log(JSON.stringify(Object.fromEntries(this.paramMap)));
+
         this._mainService.sendGetRequest(
           this.endpoint,
-          this.constructObject('Headers')
-        ).subscribe(
+          this.constructObject('Headers')).subscribe(
           data => {
             this.loadingState = false;
+            const endTime = new Date().getTime();
+            const diff = (endTime - startTime)/1000 + 'Seconds';
+            console.log(diff);
+            this.responseTime = diff;
             this.responseData = JSON.stringify(data, undefined, 4);
+            console.log(data.status);
+            let x = data.status;
+            this.respCode = x.toString();
+            this.responseCode = this.getResponseCode(x)!;
           },
           error => {
             this.loadingState = false;
             this.responseError = JSON.stringify(error, undefined, 4);
+            console.log(error.status)
+            let x = error.status;
+            this.respCode = x.toString();
+            this.responseCode = this.getResponseCode(x)!;
           }
         );
         break;
       }
       case 'POST': {
+        let string = JSON.stringify(Object.fromEntries(this.paramMap), undefined, 4);
+        this.endpoint = this.api.baseUrl + this.path
         this._mainService.sendPostRequest(
           this.endpoint,
-          this.constructObject('Body'),
+          string,
           this.constructObject('Headers')
         ).subscribe(
           data => {
             this.loadingState = false;
+            const endTime = new Date().getTime();
+            const diff = (endTime - startTime)/1000 + 'Seconds';
+            console.log(diff);
+            this.responseTime = diff;
             this.responseData = JSON.stringify(data, undefined, 4);
+            console.log(data.status)
+            let x = data.status;
+            this.respCode = x.toString();
+            this.responseCode = this.getResponseCode(x)!;
           },
           error => {
             this.loadingState = false;
             this.responseError = JSON.stringify(error, undefined, 4);
+            console.log(error.status)
+            let x = error.status;
+            this.respCode = x.toString();
+            this.responseCode = this.getResponseCode(x)!;
           }
         );
         break;
       }
     }
-
-    //this.saveRequest(this.selectedRequestMethod);
     this.newRequest.emit();
-
-    this.selectedRequestMethod = 'GET';
+    this.stringForm.reset();
+    this.integerForm.reset();
+    this.text = this.receivedEndpoint.path
+    document.getElementById("endPath")!.innerHTML = this.text;
     this.endpoint = '';
     this.requestBody = [{ key: '', value: '' }];
     this.requestBodyDataTypes = [''];
-    this.requestHeaders = [{ key: 'Content-Type', value: 'application/json' }];
+    this.requestHeaders = this.requestHeaders;
     this.endpointError = '';
   }
 }

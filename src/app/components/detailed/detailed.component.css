@@ -9,6 +9,10 @@ h1{
   justify-content: flex-start;
 }
 
+.w-100{
+  color:#333333
+}
+
 .sidebar{
   width:15%;
   float:left;
@@ -93,7 +97,7 @@ table.params tr:first-child{
     /* border-collapse: separate; */
     /* border-spacing: 1 15; */
     width: 100%;
- } 
+ }
 
  table.params tr th,
  table.params tr td {
@@ -119,15 +123,15 @@ table.params {
   padding-left: 15px;
 }
 .searchInput::placeholder {
-    font-family: 'myFont', Arial, Helvetica, sans-serif;  
+    font-family: 'myFont', Arial, Helvetica, sans-serif;
     font-size:medium;
  }
  pre {
   background: #333333;
-  width: 100%; 
-  outline: 1px solid #ccc; 
-  padding: 5px;  
-  margin-top: 15px; 
+  width: 100%;
+  outline: 1px solid #ccc;
+  padding: 5px;
+  margin-top: 15px;
   color: white;
 }
 
@@ -229,7 +233,7 @@ table.params {
 
 .requestBodyItem {
   font-family: monospace;
-  color: lightgray;
+  color: rgb(0, 0, 0);
 }
 .icon-display {
   position:relative;
@@ -242,7 +246,7 @@ table.params {
   transform: scale(0.8);
 }
 
-.success{
+span.success{
   color: #49CC90;
   font-weight: bold;
 }
@@ -263,4 +267,5 @@ table.params {
   position: relative;
   left: 61rem;
   top: 1rem;
+
 }

@@ -3,7 +3,7 @@
   <div class="sidebar">
     <app-endpoint-sidebar (outputToParent)="getOutputEndpointID($event)"></app-endpoint-sidebar>
   </div>
-  <div class="apiData">
+  <div *ngIf="api" class="apiData">
     <div class="firstBlock">
       <h1>{{api.name}}</h1>
       <a mat-icon-button class=" icon-display" *ngIf="isAdmin()" (click)="editRedirect()"> <mat-icon>edit</mat-icon></a>
@@ -29,8 +29,7 @@
       </table>
       <br>
       <p>{{receivedEndpoint.endpointDescription}}</p>
-      <div *ngIf="receivedParams.length!==0">
-        <p class="separador">HEADERS</p>
+      <p class="separador">HEADERS</p>
 
         <div class="container-fluid" style="padding: 1rem;">
             <div class="row">
@@ -84,57 +83,94 @@
         (click)="addItem('Headers')">
           <mat-icon >add_circle_outline</mat-icon>
         </button>
+    <div *ngIf="receivedParams">
+        <div *ngIf="receivedParams.length!==0">
+          <p class="separador">PARAMETERS</p>
+          <table class="params">
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th> Description</th>
+              <th></th>
+            </tr>
+            <br>
+            <tr *ngFor="let param of receivedParams; let i = index">
+              <td>{{param.paramName}}</td>
+              <td>{{param.dataType}}</td>
+              <td>{{param.paramDescription}}</td>
+              <td>
+                <form *ngIf="param.dataType == 'string'" [formGroup]="stringForm">
+                  <mat-form-field>
+                  <input class="searchInput" type="text"
+                  placeholder={{param.paramName}}
+                  [ngModel]="paramMap.get(param.paramName)"
+                  (ngModelChange)="paramMap.set(param.paramName, $event);didBindParam(param.paramName);jsonBind()"
+                  aria-label="Search" matInput formControlName="var" [errorStateMatcher]="matcher"> <!-- usar valor de aqui para concatenar en request  -->
+                  <mat-error *ngIf="stringFormControl.hasError('required')">
+                    parameter is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                </form>
+                <form *ngIf="param.dataType == 'integer'" [formGroup]="integerForm">
+                  <mat-form-field>
+                  <input class="searchInput" type="text"
+                  placeholder={{param.paramName}}
+                  [ngModel]="paramMap.get(param.paramName)"
+                  (ngModelChange)="paramMap.set(param.paramName, $event);didBindParam(param.paramName);jsonBind()"
+                  aria-label="Search" matInput formControlName="var" [errorStateMatcher]="matcher"> <!-- usar valor de aqui para concatenar en request  -->
+                  <mat-error *ngIf="integerFormControl.hasError('required')">
+                    parameter is <strong>required</strong>
+                  </mat-error>
+                  <mat-error *ngIf="integerFormControl.hasError">
+                    parameter should be a <strong>number</strong>
+                  </mat-error>
+                </mat-form-field>
+                </form>
+              </td>
 
-
-        <p class="separador">PARAMETERS</p>
-        <table class="params">
-          <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th> Description</th>
-            <th></th>
-          </tr>
-          <br>
-          <tr *ngFor="let param of receivedParams; let i = index">
-            <td>{{param.paramName}}</td>
-            <td>{{param.dataType}}</td>
-            <td>{{param.paramDescription}}</td>
-            <td>
-                <input class="searchInput" type="text"
-                placeholder={{param.paramName}}
-                [(ngModel)]="queryParams[i][param.paramName]"
-                (ngModelChange)="didBindParam(param.paramName)"
-                aria-label="Search"> <!-- usar valor de aqui para concatenar en request  -->
-                <mat-error *ngIf="endpointError !== ''">{{ endpointError }}</mat-error>
-            </td>
-
-          </tr>
-        </table>
-        <button mat-flat-button id="tButton" [disabled]="!endpoint" color="primary" (click)="sendRequest()"> 
-          <mat-icon>science</mat-icon> Test </button>
-      </div>
+            </tr>
+            </table>
+        </div>
+    </div>
+      <button mat-flat-button id="tButton" color="primary" (click)="sendRequest()">
+        <mat-icon>science</mat-icon> Test </button>
+    <br>
       <br>
-
-      <!-- CONSOLE LOG OUTP -->
-          <!-- <div *ngFor="let queryParam of queryParams">
-              {{ queryParam.input }}
-          </div> -->
+      <div *ngIf="receivedEndpoint.methodType == 'POST'">
+        <p class="separador">Body</p>
+        <div class="container-fluid">
+                <pre
+                *ngIf="displayedJson"
+                style="color: #000000; white-space: pre-wrap;background-color: white;"
+            >{{ displayedJson}}</pre>
+              </div>
+      </div>
       <p class="separador">Responses</p>
-      <table class="params">
+      <table *ngIf="responseCode" class="params">
         <tr>
           <th>Code</th>
           <th>Description</th>
-          <th></th>
+          <th>Response Time</th>
           <th></th>
         </tr>
         <br>
-        <tr *ngFor="let respCode of receivedRespCodes">
-          <td> <span [ngClass]="{success: respCode.number<300, redirect: respCode.number<400 && respCode.number>=300, error: respCode.number>=400}">{{respCode.number}}</span></td>
-          <td>{{respCode.respDescription}}</td>
-          <td></td>
-          <td></td>
+        <tr *ngIf="responseCode.number < 300" >
+          <td><span class="success"> {{responseCode.number}} </span>
+            <td>{{responseCode.respDescription}}</td>
+            <td>{{responseTime}}</td>
+        </tr>
+        <tr *ngIf="responseCode.number < 400 && responseCode.number >=300">
+          <td><span class="redirect"> {{responseCode.number}} </span>
+            <td>{{responseCode.respDescription}}</td>
+            <td>{{responseTime}}</td>
+        </tr>
+        <tr *ngIf="responseCode.number >=400" >
+          <td><span class="error"> {{responseCode.number}} </span>
+            <td>{{responseCode.respDescription}}</td>
+            <td>{{responseTime}}</td>
         </tr>
       </table>
+
       <div class="w-100" style="background-color: black; padding: 1rem; min-height: 5rem;">
         <mat-progress-spinner
             *ngIf="loadingState"
@@ -144,11 +180,11 @@
         ></mat-progress-spinner>
         <pre
             *ngIf="responseData"
-            style="color: #A2C3AA; white-space: pre-wrap;"
+            style="color: #00ff40; white-space: pre-wrap;"
         >{{ responseData }}</pre>
         <pre
             *ngIf="responseError"
-            style="color: rgb(255, 96, 96); white-space: pre-wrap;"
+            style="color: rgb(255, 0, 0); white-space: pre-wrap;"
         >{{ responseError }}</pre>
     </div>
     </div>

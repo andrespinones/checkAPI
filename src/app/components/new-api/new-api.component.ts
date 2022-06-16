@@ -42,7 +42,7 @@ export class NewApiComponent implements OnInit {
     url: this.urlFormControl,
     categoryID: this.categoryFormControl
   });
-  
+
   @Output() outputToParent = new EventEmitter<number>();
   constructor(private service:ApiService, private observer: BreakpointObserver, private formBuilder: FormBuilder, private router:Router) {}
 

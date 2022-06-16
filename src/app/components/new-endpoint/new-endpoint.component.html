@@ -5,6 +5,7 @@
   <div class="example-container">
 
     <form [formGroup]="addEndpointForm">
+      <br>
 
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Description</mat-label>
@@ -22,8 +23,10 @@
             {{method}}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="pathFormControl.hasError('required')">
+          Method <strong>required</strong>
+        </mat-error>
       </mat-form-field>
-
       <mat-form-field class="midDesc" appearance="outline">
         <mat-label>Path</mat-label>
         <input type="text" name="path" matInput formControlName="path" [errorStateMatcher]="matcher">
@@ -31,24 +34,31 @@
         <mat-error *ngIf="pathFormControl.hasError('required')">
           Path <strong>required</strong>
         </mat-error>
+        <mat-error *ngIf="pathFormControl.hasError">
+          Curly braces <strong>not enclosed</strong>
+        </mat-error>
       </mat-form-field>
-
       <mat-form-field class="smallDropdown" appearance="outline">
         <mat-label>Response Codes</mat-label>
         <mat-select formControlName="responses" multiple>
           <mat-option *ngFor="let resp of respCodes" [value]="resp">{{resp.number}}</mat-option>
         </mat-select>
+        <mat-error *ngIf="respsFormControl.hasError('required')">
+          At least one response code <strong>required</strong>
+        </mat-error>
       </mat-form-field>
     </form>
-
     <br>
-    <p class="separador">PARAMETERS</p>
-
+    <span id="instruction">*Parameters must be enclosed between <strong>curly braces</strong> in the path*</span>
+    <br>
+    <br>
+    <p *ngIf="addEndpointForm.value.method == 'GET'" class="separador">PARAMETERS</p>
+    <p *ngIf="addEndpointForm.value.method == 'POST'" class="separador">VARIABLES</p>
     <div *ngFor="let param of params; let i = index">
-      <form>
+      <form id="paramsForm">
         <mat-form-field class="smallDropdown" appearance="outline">
           <mat-label>Parameter's Name</mat-label>
-          <input type="text" matInput [(ngModel)]="param.paramName" name="paramName{{i}}">
+          <input type="text" matInput [(ngModel)]="param.paramName" name="paramName{{i}}" (ngModelChange)="jsonBind()" required>
           <mat-error *ngIf="paramNameFormControl.hasError('required')">
             Name is <strong>required</strong>
           </mat-error>
@@ -56,23 +66,24 @@
 
         <mat-form-field class="smallDropdown" appearance="outline">
           <mat-label>Type</mat-label>
-          <mat-select [(ngModel)]="param.dataType" name="dataType{{i}}">
+          <mat-select [(ngModel)]="param.dataType" matInput name="dataType{{i}}" required>
             <mat-option *ngFor="let type of DROPDOWN_LIST2" [value]="type">
               {{type}}
             </mat-option>
           </mat-select>
-          
+          <mat-error *ngIf="paramDataTypeFormControl.hasError('required')">
+            Data type is <strong>required</strong>
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field class="smallDesc" appearance="outline">
           <mat-label>Parameter's Description</mat-label>
-          <input type="url" matInput [(ngModel)]="param.paramDescription" name="paramDescription{{i}}">
+          <input type="text"  [(ngModel)]="param.paramDescription" matInput name="paramDescription{{i}}" required>
           <mat-error *ngIf="paramDescFormControl.hasError('required')">
             Description <strong>required</strong>
           </mat-error>
         </mat-form-field>
         <button mat-button class="addButton" mat-icon-button (click)="removevalue(i)">
-          <!-- <mat-icon>remove_circle_outline</mat-icon> -->
           <mat-icon>highlight_off</mat-icon>
         </button>
       </form>
@@ -81,6 +92,16 @@
     <button class="addButton" mat-icon-button (click)="addvalue()">
       <mat-icon class="addButton">add_circle_outline</mat-icon>
     </button>
+    <br>
+    <p *ngIf="addEndpointForm.value.method == 'POST'" class="separador">JSON REQUEST BODY EXAMPLE</p>
+    <div *ngIf="addEndpointForm.value.method == 'POST'">
+      <div class="container-fluid">
+        <pre
+        *ngIf="displayedJson"
+        style="color: #000000; white-space: pre-wrap;background-color: white;padding: 1rem; min-height: 5rem"
+        >{{displayedJson}}</pre>
+      </div>
+    </div>
 
     <!-- <h2>Result</h2> -->
     <!-- Checa si se agrega todo -->
@@ -95,7 +116,7 @@
       <a mat-button class="button button1" routerLink="addEndpoint">
         Cancel
       </a>
-      <a mat-button class="button button2" routerLink="addEndpoint" (click)="createEndpoint()">
+      <a mat-button class="button button2" routerLink="addEndpoint" (click)="createEndpoint()" type="Submit">
         Save
       </a>
 

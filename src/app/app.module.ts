@@ -130,7 +130,7 @@ import { EditEndpointComponent } from './components/edit-endpoint/edit-endpoint.
           cache:
           {
             cacheLocation:'localStorage',
-            storeAuthStateInCookie:false
+            storeAuthStateInCookie:true
           }
         }
       ),
@@ -145,7 +145,7 @@ import { EditEndpointComponent } from './components/edit-endpoint/edit-endpoint.
         protectedResourceMap:new Map(
           [
             ['https://graph.microsoft.com/v1.0/me',['user.Read']],
-            ['localhost',['api://apiUri/api.scope']]
+            ['localhost',[]]
           ]
         )
       }
@@ -158,7 +158,7 @@ import { EditEndpointComponent } from './components/edit-endpoint/edit-endpoint.
     useClass:MsalInterceptor,
     multi:true
 
-  },MsalGuard,AzureAdDemoService],
+  },AzureAdDemoService],
   bootstrap: [AppComponent,MsalRedirectComponent],
   entryComponents:[ConfirmDialogComponent]
 })
