@@ -93,10 +93,9 @@ export class DetailedComponent  implements OnInit{
     this.loadingState = false;
   }
   ngOnInit(): void {
-    const a = this.httpService.getPosts().subscribe(
-      (response) => { this.posts = response; console.log(response.status)},
-      (error) => { console.log(error.status); });
-
+    // const a = this.httpService.getPosts().subscribe(
+    //   (response) => { this.posts = response; console.log(response.status)},
+    //   (error) => { console.log(error.status); });
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
     const id = this.route.snapshot.queryParamMap.get('id');
     this.apiID=id;
@@ -333,6 +332,7 @@ export class DetailedComponent  implements OnInit{
           error => {
             this.loadingState = false;
             this.responseError = JSON.stringify(error, undefined, 4);
+            console.log(error.status)
           }
         );
         break;

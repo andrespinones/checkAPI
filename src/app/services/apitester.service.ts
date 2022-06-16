@@ -13,10 +13,9 @@ export class Apitester {
     if (headers.length == 0){
       return this._httpClient.get<any>(url);
     }else{
-      console.log(headers.length)
       headers = new HttpHeaders(headers);
       try{
-        return this._httpClient.get<any>(url, { headers });
+        return this._httpClient.get<any>(url, { headers, observe: 'response' });
       }finally{
       }
     }
@@ -28,6 +27,6 @@ export class Apitester {
     console.log(requestBody);
     console.log(headers)
     headers = new HttpHeaders(headers);
-    return this._httpClient.post(url, requestBody,{ headers });
+    return this._httpClient.post(url, requestBody,{ headers, observe: 'response'});
   }
 }
