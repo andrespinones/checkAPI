@@ -62,7 +62,7 @@ export class NewEndpointComponent implements OnInit {
   endpointGroupID:any;
   parameter: any;
   paramMap = new Map<string, any>();
-  displayedJson:string = 'enter parameters to display JSON body';
+  displayedJson:string = '{}';
 
   constructor(private formBuilder: FormBuilder,private service:ApiService,private route: ActivatedRoute, private location: Location) {
     this.DROPDOWN_LIST = ['GET','POST','DELETE','PUT']
