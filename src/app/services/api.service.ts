@@ -235,6 +235,13 @@ export class ApiService {
       );
   }
 
+  updateEndpointLastResp(endpointID:number, data:any){
+    return this.httpclient.put<any>(this.APIURL+'/lastResp/' + endpointID, data,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+    )}
+    );
+  }
+
 
 
 

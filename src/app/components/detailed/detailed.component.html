@@ -20,8 +20,13 @@
           <th [ngClass]="{get: receivedEndpoint.methodType == 'GET', post: receivedEndpoint.methodType == 'POST', put: receivedEndpoint.methodType == 'PUT', delete: receivedEndpoint.methodType == 'DELETE'}">
             {{receivedEndpoint.methodType}}</th>
           <th id="endPath">{{receivedEndpoint.path}}</th>
-          <th> Last response: {{receivedEndpoint.lastResp}}</th>
-          <th>2 days ago</th>
+          <th> Last response: 
+            <span [ngModel]=receivedEndpoint.lastRespCode 
+            [ngStyle]="{'color':(receivedEndpoint.lastRespCode==200)? '#49CC90':''}"> 
+            {{receivedEndpoint.lastRespCode}} 
+            </span>
+          </th>
+          <th>{{dateMonthAsWord}}</th>
           <td align="right">
             <a mat-icon-button *ngIf="isAdmin()" (click)="editEndpointRedirect(endpointID)">
               <mat-icon>edit</mat-icon>

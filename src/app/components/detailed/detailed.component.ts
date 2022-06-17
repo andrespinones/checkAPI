@@ -10,6 +10,7 @@ import {FormControl, FormGroupDirective, NgForm, Validators, FormBuilder} from '
 import { RespCode } from 'src/app/models/respCode';
 import { User } from 'src/app/models/user.model';
 import { HttpService } from 'src/app/http.service';
+import * as moment from 'moment';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -66,7 +67,7 @@ export class DetailedComponent  implements OnInit{
   requestHeaders: any;
   endpointError: string;
   loadingState: boolean;
-
+  auxData:any;
   text : string = "";  //works with the original enpoint path
   actualText: string = this.text;
 
@@ -74,6 +75,7 @@ export class DetailedComponent  implements OnInit{
   paramMap = new Map<string, any>();
   title = 'Article by Jeetendra';
   posts : any;
+  dateMonthAsWord = '';
 
   constructor(private service:ApiService, private route: ActivatedRoute, private _mainService: Apitester, private formBuilder:FormBuilder,  private router:Router, private httpService: HttpService) {
 
@@ -336,6 +338,12 @@ export class DetailedComponent  implements OnInit{
             let x = data.status;
             this.respCode = x.toString();
             this.responseCode = this.getResponseCode(x)!;
+            this.sendLastResp(x)
+            this.service.getEndpointbyID(this.endpointID).subscribe(resp=>{
+              this.receivedEndpoint = resp[0];
+              this.selectedRequestMethod = this.receivedEndpoint.methodType;
+              this.path = this.receivedEndpoint.path;
+            })
           },
           error => {
             this.loadingState = false;
@@ -344,6 +352,12 @@ export class DetailedComponent  implements OnInit{
             let x = error.status;
             this.respCode = x.toString();
             this.responseCode = this.getResponseCode(x)!;
+            this.sendLastResp(x)
+            this.service.getEndpointbyID(this.endpointID).subscribe(resp=>{
+              this.receivedEndpoint = resp[0];
+              this.selectedRequestMethod = this.receivedEndpoint.methodType;
+              this.path = this.receivedEndpoint.path;
+            })
           }
         );
         break;
@@ -367,6 +381,12 @@ export class DetailedComponent  implements OnInit{
             let x = data.status;
             this.respCode = x.toString();
             this.responseCode = this.getResponseCode(x)!;
+            this.sendLastResp(x)
+            this.service.getEndpointbyID(this.endpointID).subscribe(resp=>{
+              this.receivedEndpoint = resp[0];
+              this.selectedRequestMethod = this.receivedEndpoint.methodType;
+              this.path = this.receivedEndpoint.path;
+            })
           },
           error => {
             this.loadingState = false;
@@ -375,6 +395,12 @@ export class DetailedComponent  implements OnInit{
             let x = error.status;
             this.respCode = x.toString();
             this.responseCode = this.getResponseCode(x)!;
+            this.sendLastResp(x)
+            this.service.getEndpointbyID(this.endpointID).subscribe(resp=>{
+              this.receivedEndpoint = resp[0];
+              this.selectedRequestMethod = this.receivedEndpoint.methodType;
+              this.path = this.receivedEndpoint.path;
+            })
           }
         );
         break;
@@ -390,6 +416,18 @@ export class DetailedComponent  implements OnInit{
     this.requestBodyDataTypes = [''];
     this.requestHeaders = this.requestHeaders;
     this.endpointError = '';
+  }
+
+  sendLastResp(respCode:number){
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var dateTime = date;
+     this.dateMonthAsWord = moment(dateTime, "YYYY-MM-DD").fromNow();
+    const body = {
+      lastRespCode: respCode,
+      lastRespDate: dateTime
+    }
+    this.service.updateEndpointLastResp(this.endpointID,body).subscribe();
   }
 }
 

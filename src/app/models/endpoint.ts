@@ -5,6 +5,7 @@ export interface Endpoint {
     endpointDescription: string;
     groupID:             number;
     methodType:          string;
-    lastResp:            null;
+    lastRespCode:        number;
+    lastRespDate:        string;
     status:              boolean;
 }
