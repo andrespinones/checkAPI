@@ -4,7 +4,6 @@ import { ApiService } from 'src/app/services/api.service';
 import { ActivatedRoute } from '@angular/router';
 import { endpointSidebar } from 'src/app/models/endpointSidebar';
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { CdkConnectedOverlay} from '@angular/cdk/overlay';
 import { Router } from '@angular/router';
 
 
@@ -15,28 +14,16 @@ import { Router } from '@angular/router';
 })
 export class EndpointListComponent implements OnInit {
 
-  // prueba con lista local de tipo EP
+  // lista de los EP traidos del grupo seleccionado en la sb
   DROPDOWN_LIST: Endpoint[];
 
   apiname = "Petstore";
   apibaseUrl = "pestore.api"
 
-  showPanel$: boolean =true;
-  @ViewChild(CdkConnectedOverlay, {static: true})
-  private connectedOverlay = CdkConnectedOverlay;
-
-  isPanelVisible: boolean = false;
-  private isPanelHidden: boolean = false;
-  // private isPanelHidden$: Observable<boolean>;
-
-
   @Output() outputToParent = new EventEmitter<Endpoint>();
   constructor(private service:ApiService, private route: ActivatedRoute, private focusMonitor: FocusMonitor, private router: Router) { 
     this.DROPDOWN_LIST = []
   }
-
-
-  //función del overlay 
 
   group: any;
   endpoint:Endpoint = {} as Endpoint;
@@ -49,14 +36,9 @@ export class EndpointListComponent implements OnInit {
   showL: boolean = false;
 
 
-  toggleDropdown(){
-    this.showPanel$ = false;
-  }
-
   ngOnInit(): void {
     const id = this.route.snapshot.queryParamMap.get('id');
     this.apiID=id;
-    this.isPanelVisible = true;
     this.getApi();
     this.getOutputGroup;
   }

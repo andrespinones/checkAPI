@@ -6,16 +6,22 @@
   <div *ngIf="api" class="apiData">
     <div class="firstBlock">
       <h1>{{api.name}}</h1>
-      <a mat-icon-button class=" icon-display" *ngIf="isAdmin()" (click)="editRedirect()"> <mat-icon>edit</mat-icon></a>
+      <a mat-icon-button class=" icon-display" *ngIf="isAdmin()" (click)="editRedirect()">
+        <mat-icon>edit</mat-icon>
+      </a>
     </div>
-      <h3 id="baseURL">Base URL: {{api.baseUrl}}</h3>
+    <h3 id="baseURL">Base URL: {{api.baseUrl}}</h3>
   </div>
-    <div class="detailContent" *ngIf="receivedEndpoint">
+
+  <ng-container *ngIf="receivedEndpoint; else message">
+    <div class="detailContent">
       <!-- <p><a href="{{baseURL}}">Base URL: {{baseURL}}</a></p> -->
       <h2 class="nombre">{{receivedEndpoint.name}}</h2>
       <table class="info">
-        <tr [ngClass]="{get2: receivedEndpoint.methodType == 'GET', post2: receivedEndpoint.methodType == 'POST', put2: receivedEndpoint.methodType == 'PUT', delete2: receivedEndpoint.methodType == 'DELETE'}">
-          <th [ngClass]="{get: receivedEndpoint.methodType == 'GET', post: receivedEndpoint.methodType == 'POST', put: receivedEndpoint.methodType == 'PUT', delete: receivedEndpoint.methodType == 'DELETE'}">
+        <tr
+          [ngClass]="{get2: receivedEndpoint.methodType == 'GET', post2: receivedEndpoint.methodType == 'POST', put2: receivedEndpoint.methodType == 'PUT', delete2: receivedEndpoint.methodType == 'DELETE'}">
+          <th
+            [ngClass]="{get: receivedEndpoint.methodType == 'GET', post: receivedEndpoint.methodType == 'POST', put: receivedEndpoint.methodType == 'PUT', delete: receivedEndpoint.methodType == 'DELETE'}">
             {{receivedEndpoint.methodType}}</th>
           <th id="endPath">{{receivedEndpoint.path}}</th>
           <th> Last response: {{receivedEndpoint.lastResp}}</th>
@@ -30,60 +36,42 @@
       <br>
       <p>{{receivedEndpoint.endpointDescription}}</p>
       <p class="separador">HEADERS</p>
-
-        <div class="container-fluid" style="padding: 1rem;">
-            <div class="row">
-                <div class="col-md-5">
-                    <strong>Key</strong>
-                </div>
-                <div class="col-md-6">
-                    <strong>Value</strong>
-                </div>
-                <div class="col-md-1"></div>
-            </div>
+  
+      <div class="container-fluid" style="padding: 1rem;">
+        <div class="row">
+          <div class="col-md-5">
+            <strong>Key</strong>
+          </div>
+          <div class="col-md-6">
+            <strong>Value</strong>
+          </div>
+          <div class="col-md-1"></div>
         </div>
-        <div *ngFor="let item of requestHeaders; let index=index" class="container-fluid">
-            <div class="row">
-                <div class="col-md-5">
-                    <mat-form-field class="w-100">
-                        <input
-                            matInput
-                            [disabled]="item.key === 'Content-Type'"
-                            class="requestBodyItem"
-                            [(ngModel)]="item.key"
-                        >
-                    </mat-form-field>
-                </div>
-                <div class="col-md-6">
-                    <mat-form-field class="w-100">
-                        <input
-                            matInput
-                            [disabled]="item.key === 'Content-Type'"
-                            class="requestBodyItem"
-                            [(ngModel)]="item.value"
-                        >
-                    </mat-form-field>
-                </div>
-                <div class="col-md-1">
-                    <button
-                        mat-button
-                        [disabled]="item.key === 'Content-Type'"
-                        color="warn"
-                        class="d-block mx-auto"
-                        style="outline: none;"
-                        (click)="removeItem(index, 'Headers')"
-                    >
-                        <i class="material-icons">highlight_off</i>
-                    </button>
-                </div>
-            </div>
+      </div>
+      <div *ngFor="let item of requestHeaders; let index=index" class="container-fluid">
+        <div class="row">
+          <div class="col-md-5">
+            <mat-form-field class="w-100">
+              <input matInput [disabled]="item.key === 'Content-Type'" class="requestBodyItem" [(ngModel)]="item.key">
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="w-100">
+              <input matInput [disabled]="item.key === 'Content-Type'" class="requestBodyItem" [(ngModel)]="item.value">
+            </mat-form-field>
+          </div>
+          <div class="col-md-1">
+            <button mat-button [disabled]="item.key === 'Content-Type'" color="warn" class="d-block mx-auto"
+              style="outline: none;" (click)="removeItem(index, 'Headers')">
+              <i class="material-icons">highlight_off</i>
+            </button>
+          </div>
         </div>
-        <button  mat-icon-button [disabled]="isAddDisabled('Headers')"
-        style="outline: none;"
-        (click)="addItem('Headers')">
-          <mat-icon >add_circle_outline</mat-icon>
-        </button>
-    <div *ngIf="receivedParams">
+      </div>
+      <button mat-icon-button [disabled]="isAddDisabled('Headers')" style="outline: none;" (click)="addItem('Headers')">
+        <mat-icon>add_circle_outline</mat-icon>
+      </button>
+      <div *ngIf="receivedParams">
         <div *ngIf="receivedParams.length!==0">
           <p class="separador">PARAMETERS</p>
           <table class="params">
@@ -101,49 +89,48 @@
               <td>
                 <form *ngIf="param.dataType == 'string'" [formGroup]="stringForm">
                   <mat-form-field>
-                  <input class="searchInput" type="text"
-                  placeholder={{param.paramName}}
-                  [ngModel]="paramMap.get(param.paramName)"
-                  (ngModelChange)="paramMap.set(param.paramName, $event);didBindParam(param.paramName);jsonBind()"
-                  aria-label="Search" matInput formControlName="var" [errorStateMatcher]="matcher"> <!-- usar valor de aqui para concatenar en request  -->
-                  <mat-error *ngIf="stringFormControl.hasError('required')">
-                    parameter is <strong>required</strong>
-                  </mat-error>
-                </mat-form-field>
+                    <input class="searchInput" type="text" placeholder={{param.paramName}}
+                      [ngModel]="paramMap.get(param.paramName)"
+                      (ngModelChange)="paramMap.set(param.paramName, $event);didBindParam(param.paramName);jsonBind()"
+                      aria-label="Search" matInput formControlName="var" [errorStateMatcher]="matcher">
+                    <!-- usar valor de aqui para concatenar en request  -->
+                    <mat-error *ngIf="stringFormControl.hasError('required')">
+                      parameter is <strong>required</strong>
+                    </mat-error>
+                  </mat-form-field>
                 </form>
                 <form *ngIf="param.dataType == 'integer'" [formGroup]="integerForm">
                   <mat-form-field>
-                  <input class="searchInput" type="text"
-                  placeholder={{param.paramName}}
-                  [ngModel]="paramMap.get(param.paramName)"
-                  (ngModelChange)="paramMap.set(param.paramName, $event);didBindParam(param.paramName);jsonBind()"
-                  aria-label="Search" matInput formControlName="var" [errorStateMatcher]="matcher"> <!-- usar valor de aqui para concatenar en request  -->
-                  <mat-error *ngIf="integerFormControl.hasError('required')">
-                    parameter is <strong>required</strong>
-                  </mat-error>
-                  <mat-error *ngIf="integerFormControl.hasError">
-                    parameter should be a <strong>number</strong>
-                  </mat-error>
-                </mat-form-field>
+                    <input class="searchInput" type="text" placeholder={{param.paramName}}
+                      [ngModel]="paramMap.get(param.paramName)"
+                      (ngModelChange)="paramMap.set(param.paramName, $event);didBindParam(param.paramName);jsonBind()"
+                      aria-label="Search" matInput formControlName="var" [errorStateMatcher]="matcher">
+                    <!-- usar valor de aqui para concatenar en request  -->
+                    <mat-error *ngIf="integerFormControl.hasError('required')">
+                      parameter is <strong>required</strong>
+                    </mat-error>
+                    <mat-error *ngIf="integerFormControl.hasError">
+                      parameter should be a <strong>number</strong>
+                    </mat-error>
+                  </mat-form-field>
                 </form>
               </td>
-
+  
             </tr>
-            </table>
+          </table>
         </div>
-    </div>
+      </div>
       <button mat-flat-button id="tButton" color="primary" (click)="sendRequest()">
-        <mat-icon>science</mat-icon> Test </button>
-    <br>
+        <mat-icon>science</mat-icon> Test
+      </button>
+      <br>
       <br>
       <div *ngIf="receivedEndpoint.methodType == 'POST'">
         <p class="separador">Body</p>
         <div class="container-fluid">
-                <pre
-                *ngIf="displayedJson"
-                style="color: #000000; white-space: pre-wrap;background-color: white;"
-            >{{ displayedJson}}</pre>
-              </div>
+          <pre *ngIf="displayedJson"
+            style="color: #000000; white-space: pre-wrap;background-color: white;">{{ displayedJson}}</pre>
+        </div>
       </div>
       <p class="separador">Responses</p>
       <table *ngIf="responseCode" class="params">
@@ -154,38 +141,43 @@
           <th></th>
         </tr>
         <br>
-        <tr *ngIf="responseCode.number < 300" >
+        <tr *ngIf="responseCode.number < 300">
           <td><span class="success"> {{responseCode.number}} </span>
-            <td>{{responseCode.respDescription}}</td>
-            <td>{{responseTime}}</td>
+          <td>{{responseCode.respDescription}}</td>
+          <td>{{responseTime}}</td>
         </tr>
         <tr *ngIf="responseCode.number < 400 && responseCode.number >=300">
           <td><span class="redirect"> {{responseCode.number}} </span>
-            <td>{{responseCode.respDescription}}</td>
-            <td>{{responseTime}}</td>
+          <td>{{responseCode.respDescription}}</td>
+          <td>{{responseTime}}</td>
         </tr>
-        <tr *ngIf="responseCode.number >=400" >
+        <tr *ngIf="responseCode.number >=400">
           <td><span class="error"> {{responseCode.number}} </span>
-            <td>{{responseCode.respDescription}}</td>
-            <td>{{responseTime}}</td>
+          <td>{{responseCode.respDescription}}</td>
+          <td>{{responseTime}}</td>
         </tr>
       </table>
-
+  
       <div class="w-100" style="background-color: black; padding: 1rem; min-height: 5rem;">
-        <mat-progress-spinner
-            *ngIf="loadingState"
-            class="d-block mx-auto"
-            color="accent"
-            mode="indeterminate"
-        ></mat-progress-spinner>
-        <pre
-            *ngIf="responseData"
-            style="color: #00ff40; white-space: pre-wrap;"
-        >{{ responseData }}</pre>
-        <pre
-            *ngIf="responseError"
-            style="color: rgb(255, 0, 0); white-space: pre-wrap;"
-        >{{ responseError }}</pre>
+        <mat-progress-spinner *ngIf="loadingState" class="d-block mx-auto" color="accent" mode="indeterminate">
+        </mat-progress-spinner>
+        <pre *ngIf="responseData" style="color: #00ff40; white-space: pre-wrap;">{{ responseData }}</pre>
+        <pre *ngIf="responseError" style="color: rgb(255, 0, 0); white-space: pre-wrap;">{{ responseError }}</pre>
+      </div>
     </div>
+
+  </ng-container>
+
+
+    <!-- select an edpoint to continue - firstshow -->
+    <ng-template #message>
+      <div class="example-container">
+        <div>
+            <h2>Select an endpoint to continue</h2>
+            <img src="./assets/images/choice.svg" width="280rem" class="directions">
+        </div>
     </div>
+  
+    </ng-template>
+
 </body>

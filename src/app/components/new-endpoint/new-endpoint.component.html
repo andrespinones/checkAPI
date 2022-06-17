@@ -30,7 +30,6 @@
       <mat-form-field class="midDesc" appearance="outline">
         <mat-label>Path</mat-label>
         <input type="text" name="path" matInput formControlName="path" [errorStateMatcher]="matcher">
-        <!-- sale este error cuando no se pone nada en el input -->
         <mat-error *ngIf="pathFormControl.hasError('required')">
           Path <strong>required</strong>
         </mat-error>
@@ -89,8 +88,8 @@
       </form>
     </div>
 
-    <button class="addButton" mat-icon-button (click)="addvalue()">
-      <mat-icon class="addButton">add_circle_outline</mat-icon>
+    <button mat-icon-button (click)="addvalue()">
+      <mat-icon>add_circle_outline</mat-icon>
     </button>
     <br>
     <p *ngIf="addEndpointForm.value.method == 'POST'" class="separador">JSON REQUEST BODY EXAMPLE</p>
@@ -104,7 +103,6 @@
     </div>
 
     <!-- <h2>Result</h2> -->
-    <!-- Checa si se agrega todo -->
     <div *ngFor="let value of params;">
       {{ value.paramName }}
       {{ value.dataType }}

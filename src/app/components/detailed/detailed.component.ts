@@ -140,9 +140,6 @@ export class DetailedComponent  implements OnInit{
 
 
   printQueryParams(){
-    // for(let i = 0; i<this.queryParams.length; i++){
-    //   console.log(this.queryParams[i]);
-    // }
     console.log(this.queryParams);
   }
 

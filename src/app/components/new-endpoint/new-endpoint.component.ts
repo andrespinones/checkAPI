@@ -90,6 +90,10 @@ export class NewEndpointComponent implements OnInit {
   addvalue(){
     this.params.push({paramName: null, dataType: null, paramDescription: null});
   }
+  
+  cancel(){
+    this.location.back()
+  }
 
   getAvailableRespCodes(){
     this.service.getAllRespCodes().subscribe(data=>{
