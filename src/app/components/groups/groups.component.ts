@@ -5,7 +5,7 @@ import { Endpoint } from 'src/app/models/endpoint';
 import { endpointSidebar } from 'src/app/models/endpointSidebar';
 import { FormGroup } from '@angular/forms';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormBuilder } from '@angular/forms';
-
+import { DialogService } from 'src/app/services/dialog.service';
 
 
 @Component({
@@ -28,7 +28,8 @@ export class GroupsComponent implements OnInit {
     group: ''
   });
 
-  constructor(private service:ApiService, private formBuilder: FormBuilder, private route: ActivatedRoute) {
+  constructor(private service:ApiService, private formBuilder: FormBuilder, private route: ActivatedRoute, 
+    private popupService: DialogService) {
     this.DROPDOWN_LIST = []
   }
   selectedIndex: number = -3; //used to know which listed item is selected
@@ -82,5 +83,14 @@ export class GroupsComponent implements OnInit {
   deleteGroup(groupID:number, index:number){
     this.DROPDOWN_LIST.splice(index,1);
     this.service.deleteGroup(groupID).subscribe();
+  }
+
+  confirmDeleteGroup(groupID: number, index:number){
+    this.popupService.openConfirmaDialog("Are you sure you want to delete this group? \n Once deleted you can not undo this action.")
+    .afterClosed().subscribe(resp => {
+      if(resp){
+        this.deleteGroup(groupID,index);
+      }
+    })
   }
 }
