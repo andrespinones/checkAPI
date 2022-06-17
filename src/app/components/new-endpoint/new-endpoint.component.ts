@@ -163,6 +163,10 @@ export class NewEndpointComponent implements OnInit {
     this.displayedJson = JSON.stringify(Object.fromEntries(this.paramMap), undefined, 4)
   }
 
+  cancel(){
+    this.location.back()
+  }
+
 }
 
 

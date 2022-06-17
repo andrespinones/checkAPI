@@ -113,7 +113,7 @@
     </div>
 
     <div class="buttons">
-      <a mat-button class="button button1" routerLink="addEndpoint">
+      <a mat-button class="button button1" routerLink="addEndpoint" (click)="cancel()">
         Cancel
       </a>
       <a mat-button class="button button2" routerLink="addEndpoint" (click)="createEndpoint()" type="Submit">

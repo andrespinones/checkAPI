@@ -216,7 +216,18 @@ export class ApiService {
     );
   }
 
-
+  deleteEndpoint(endpointID:number){
+    return this.httpclient.delete(this.APIURL+'/endpoint/' + endpointID, {headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+    )}
+    );
+  }
+  deleteGroup(groupID:number){
+    return this.httpclient.delete(this.APIURL+'/group/' + groupID, {headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+    )}
+    );
+  }
 
 
 }

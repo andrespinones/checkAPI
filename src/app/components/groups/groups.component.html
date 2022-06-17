@@ -9,14 +9,15 @@
         <!-- pasa por todos los grupos de una api y los despliega como lista en la sidebar -->
         <li *ngFor="let group of DROPDOWN_LIST; let i = index" [ngClass] = "calculateClasses(selectedIndex === i)" (click)="sendGroupID(group); setIndex(i)">
             {{group.name}}
+            <button id="deleteBtn" mat-icon-button (click)="deleteGroup(group.groupID, i)">
+                <mat-icon>close</mat-icon>
+            </button>
         </li>
     </a>
 </ul>
 
 <form [formGroup]="groupForm">
 	<mat-form-field class="example-full-width" *ngIf="showForm" (keyup.enter)="update()">
-        <!-- <mat-icon matPrefix>add</mat-icon> -->
-		<input matInput  placeholder="New Group" formControlName="group" [(ngModel)]="group" >
-        
-  </mat-form-field>
+		<input matInput  placeholder="New Group" formControlName="group" [(ngModel)]="group" (keyup.enter)="update()">
+    </mat-form-field>
 </form>

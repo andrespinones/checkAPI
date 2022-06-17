@@ -49,7 +49,7 @@
         <!-- lista de los endpoint que pertenecen al grupo -->
         <table class="info">
             <!-- falta ponerle color a la row dependiendo del tipo de metodo -->
-            <tr *ngFor="let endpoint of DROPDOWN_LIST">
+            <tr *ngFor="let endpoint of DROPDOWN_LIST; let i = index">
                 <th
                     [ngClass]="{get: endpoint.methodType == 'GET', post: endpoint.methodType == 'POST', put: endpoint.methodType == 'PUT', delete: endpoint.methodType == 'DELETE'}">
                     {{endpoint.methodType}}</th>
@@ -61,7 +61,10 @@
                     <button class="edit_button" mat-icon-button (click)="editEndpointRedirect(endpoint.endpointID)">
                         <mat-icon>edit</mat-icon>
                     </button>
-            </td>
+                    <button id="deleteBtn" mat-icon-button (click)="deleteEndpoint(endpoint.endpointID, i)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
             </tr>
         </table>
 

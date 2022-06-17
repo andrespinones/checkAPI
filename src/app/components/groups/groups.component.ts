@@ -55,7 +55,6 @@ export class GroupsComponent implements OnInit {
       apiID: this.apiID,
       name: this.group
     }
-    console.log(this.apiGroup);
     this.service.addApiGroup(this.apiGroup).subscribe();
   }
   
@@ -67,7 +66,7 @@ export class GroupsComponent implements OnInit {
   update() {
     this.createGroup();
     this.groupForm.reset();
-    this.getGroups();//refresh de la sidebar para que ya salga el nuevo grupo 
+    this.ngOnInit();//refresh de la sidebar para que ya salga el nuevo grupo 
   }
 
   sendGroupID(group:any){
@@ -79,5 +78,9 @@ export class GroupsComponent implements OnInit {
       'list-group-item': true,
       'list-group-item-active': stateFlag
     };
+  }
+  deleteGroup(groupID:number, index:number){
+    this.DROPDOWN_LIST.splice(index,1);
+    this.service.deleteGroup(groupID).subscribe();
   }
 }

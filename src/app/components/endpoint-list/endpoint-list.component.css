@@ -252,3 +252,6 @@ th:first-child {
   padding-left: 10%;
 }
 
+#deleteBtn:hover{
+  color: red;
+}

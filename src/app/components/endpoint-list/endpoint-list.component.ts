@@ -95,11 +95,10 @@ export class EndpointListComponent implements OnInit {
         this.showF = false;
         this.showL = false;
       }
-      console.log(resp);
-      console.log(this.DROPDOWN_LIST);
-
-
     })
   }
-
+  deleteEndpoint(endpointID:number,index:number){
+    this.DROPDOWN_LIST.splice(index,1);
+    this.service.deleteEndpoint(endpointID).subscribe();
+  }
 }
