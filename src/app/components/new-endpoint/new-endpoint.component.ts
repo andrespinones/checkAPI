@@ -50,6 +50,11 @@ export class NewEndpointComponent implements OnInit {
     dataType: '',
     paramDescription: ''
   }];
+
+  fromToData : any = {
+    name: '', //groupName
+    apiName: ''
+  };
   // values: string[] = [];
 
   DROPDOWN_LIST: string[];
@@ -75,6 +80,7 @@ export class NewEndpointComponent implements OnInit {
     this.endpointGroupID=groupID;
     this.getAvailableRespCodes()
     this.addEndpointForm.get("method")!.setValue('GET')!;
+    this.getFromToData(Number(groupID));
   }
 
   removevalue(i: number){
@@ -166,6 +172,14 @@ export class NewEndpointComponent implements OnInit {
     }
     this.displayedJson = JSON.stringify(Object.fromEntries(this.paramMap), undefined, 4)
   }
+
+  getFromToData(groupID: number){  //returns group name and api name
+    this.service.getGroupApiNamesByGID(this.endpointGroupID).subscribe(resp=>{  //endpointGroupID = groupID
+      this.fromToData = resp[0];
+      console.log(this.fromToData);
+    });
+  }
+
 }
 
 

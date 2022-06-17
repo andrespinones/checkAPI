@@ -49,6 +49,10 @@ export class EditEndpointComponent implements OnInit {
     dataType: '',
     paramDescription: ''
   }];
+  fromToData : any = {
+    name: '', //groupName
+    apiName: ''
+  };
 
   DROPDOWN_LIST: string[];
   DROPDOWN_LIST2: string[];
@@ -89,6 +93,7 @@ export class EditEndpointComponent implements OnInit {
       }
       this.getEndpointDetail()
       this.getAvailableRespCodes()
+      this.getFromToData()
     })
   }
 
@@ -190,6 +195,13 @@ export class EditEndpointComponent implements OnInit {
       this.paramMap.set(this.params[i].paramName, '');
     }
     this.displayedJson = JSON.stringify(Object.fromEntries(this.paramMap), undefined, 4)
+  }
+  
+  getFromToData(groupID: number){  //returns group name and api name
+    this.service.getGroupApiNamesByGID(this.endpointGroupID).subscribe(resp=>{  //endpointGroupID = groupID
+      this.fromToData = resp[0];
+      console.log(this.fromToData);
+    });
   }
 
 }

@@ -1,109 +1,123 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 
-body{
-    background-color: #F2EEE9;
-    overflow-y: auto;
+body {
+  background-color: #F2EEE9;
+  overflow-y: auto;
 }
 
-.nombre{
-    font-weight: 750;
-    padding-left: 15%;
-    padding-top: 3%;
+.nombre {
+  font-weight: 750;
+  padding-left: 15%;
+  padding-top: 3%;
 }
 
-  .example-container  {
-      margin: 0 auto 20px auto;
-    padding-top: 2%;
-    width: 70%;
-    align-items: center;
-    justify-content: center;
-  }
- .mat-form-field {
-    width: 300px;
-    padding-top: 10px;
-    margin-right: 30px;
- }
+.example-container {
+  margin: 0 auto 20px auto;
+  padding-top: 2%;
+  width: 70%;
+  align-items: center;
+  justify-content: center;
+}
 
- ::ng-deep .mat-focused .mat-form-field-outline {
-    /*change color of label*/
-    color: #ed7934 !important;
-   } 
+.mat-form-field {
+  width: 300px;
+  padding-top: 10px;
+  margin-right: 30px;
+}
 
-  ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-    background-color: white;
-    border-radius: 10px;
-  }
+::ng-deep .mat-focused .mat-form-field-outline {
+  /*change color of label*/
+  color: #ed7934 !important;
+}
 
-  ::ng-deep .mat-focused .mat-form-field-label {
-    /*change color of label*/
-    color: #ed7934 !important;
-   }
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: white;
+  border-radius: 10px;
+}
 
-    ::ng-deep .mat-button-toggle-group{
-        width: 300px;
-    }
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #ed7934 !important;
+}
 
-    ::ng-deep .mat-button-toggle {
-        width: 100%;
-    }
-    
-    .button{
-        border: none;
-        color: white;
-        padding: 5px ;
-        font-weight: 500;
-        display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        border-radius: 10px;
-        width: 150px;
-        height: 40px;
-    }
+::ng-deep .mat-button-toggle-group {
+  width: 300px;
+}
 
-    .button1 {background-color: #B3B3B3;} /* Green */
-    .button2 {background-color: #FF7E36;}
+::ng-deep .mat-button-toggle {
+  width: 100%;
+}
 
-    .buttons{
-        padding-top: 30px;
-    }
+.button {
+  border: none;
+  color: white;
+  padding: 5px;
+  font-weight: 500;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 10px;
+  width: 150px;
+  height: 40px;
+}
 
-    .example-form {
-      min-width: 150px;
-      max-width: 500px;
-      width: 100%;
-    }
-    
-    .example-full-width {
-      width: 60%;
-    }
+.button1 {
+  background-color: #B3B3B3;
+}
 
-    .separador{
-        text-transform: uppercase;
-        text-decoration: underline;
-        letter-spacing: 2px;
-        font-weight: 500;
-      }
+/* Green */
+.button2 {
+  background-color: #FF7E36;
+}
 
-    .smallDropdown{
-        width: 20%;
-    }
-    .smallDesc{
-        width: 40.5%;
-    }
+.buttons {
+  padding-top: 30px;
+}
 
-    .midDesc{
-      width: 46.8%;
-  }
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
 
-    .mat-icon{
-      transform: scale(1.2);
-    }
+.example-full-width {
+  width: 60%;
+}
 
-    ::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
-      color: unset;
-  }
-  
-  ::ng-deep .mat-option-pseudo-checkbox.mat-pseudo-checkbox-checked {
-      background-color: #FF7E36;
-  }
+.separador {
+  text-transform: uppercase;
+  text-decoration: underline;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+.smallDropdown {
+  width: 20%;
+}
+
+.smallDesc {
+  width: 40.5%;
+}
+
+.midDesc {
+  width: 46.8%;
+}
+
+.mat-icon {
+  transform: scale(1.2);
+}
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: unset;
+}
+
+#fromTo{
+  color: gray;
+  font-weight: 100%;
+  font-size: 70%;
+}
+
+::ng-deep .mat-option-pseudo-checkbox.mat-pseudo-checkbox-checked {
+  background-color: #FF7E36;
+}

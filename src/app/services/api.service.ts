@@ -228,6 +228,14 @@ export class ApiService {
     )}
     );
   }
+  getGroupApiNamesByGID(groupID:number){
+    return this.httpclient.get<Endpoint[]>(this.APIURL+'/groupApi/'+ groupID,{headers: new HttpHeaders({ 
+      'Content-Type': 'application/json', 'access-token':this.token}
+      )}
+      );
+  }
+
+
 
 
 }

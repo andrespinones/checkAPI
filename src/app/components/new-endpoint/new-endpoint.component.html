@@ -1,6 +1,9 @@
 <body>
   <app-navbar></app-navbar>
-  <h1 class="nombre">Add Endpoint</h1>
+  <h1 class="nombre">
+    <span>Add Endpoint</span>
+    <span id="fromTo">    to {{fromToData.apiName}}/{{fromToData.name}}</span>
+  </h1>
 
   <div class="example-container">
 
@@ -10,7 +13,7 @@
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Description</mat-label>
         <input type="text" name="description" matInput formControlName="description" [errorStateMatcher]="matcher"
-          placeholder="Describe your API">
+          placeholder="Describe your endpoint">
         <mat-error *ngIf="descFormControl.hasError('required')">
           Description is <strong>required</strong>
         </mat-error>
