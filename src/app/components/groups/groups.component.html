@@ -9,7 +9,7 @@
         <!-- pasa por todos los grupos de una api y los despliega como lista en la sidebar -->
         <li *ngFor="let group of DROPDOWN_LIST; let i = index" [ngClass] = "calculateClasses(selectedIndex === i)" (click)="sendGroupID(group); setIndex(i)">
             {{group.name}}
-            <button id="deleteBtn" mat-icon-button (click)="confirmDeleteGroup(group.groupID, i)">
+            <button id="deleteBtn" mat-icon-button (click)="$event.stopPropagation(); confirmDeleteGroup(group.groupID, i)">
                 <mat-icon>close</mat-icon>
             </button>
         </li>

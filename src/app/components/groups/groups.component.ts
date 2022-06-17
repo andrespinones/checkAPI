@@ -83,6 +83,7 @@ export class GroupsComponent implements OnInit {
   deleteGroup(groupID:number, index:number){
     this.DROPDOWN_LIST.splice(index,1);
     this.service.deleteGroup(groupID).subscribe();
+    
   }
 
   confirmDeleteGroup(groupID: number, index:number){
