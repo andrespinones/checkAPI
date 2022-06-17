@@ -84,3 +84,12 @@ td.mat-cell:last-child {
   border-radius: 5px;
   padding: 5px;
 }
+
+.online{
+  color: rgb(144, 201, 58);
+}
+
+.offline{
+  color: red;
+}
+

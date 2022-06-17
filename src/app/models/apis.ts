@@ -5,4 +5,6 @@ export interface Api {
     description:    string;
     isFavorite:    boolean; //BY USER
     isEnabled:     boolean;
+    successAns: number;
+    errorAns: number;
 }

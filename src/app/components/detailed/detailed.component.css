@@ -285,3 +285,48 @@ span.success{
   padding-left: 1%;
   padding-top: 4%;
 }
+
+.sla{
+  position: absolute;
+  right: 10%;
+  top: 22%;
+  font-size: large;
+}
+.slaTitle{
+  position: absolute;
+  right: 8%;
+  top: 18%;
+}
+
+.slaTitle2{
+  width: 70px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 20%;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  background: rgb(255, 85, 85);
+  position: absolute;
+  right: 8.9%;
+  top: 28%;
+}
+
+.slaTitle3{
+  width: 70px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 20%;
+  font-size: 14px;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  background: rgb(58, 200, 19);
+  position: absolute;
+  right: 8.9%;
+  top: 28%;
+}
+
+#iconSLA{
+  position:fixed;
+  margin-left: 100px;
+}

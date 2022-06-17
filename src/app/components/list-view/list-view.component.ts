@@ -35,9 +35,11 @@ export class ListViewComponent implements OnInit {
     baseUrl: "",
     description: "",
     isFavorite: false,
-    isEnabled: true
+    isEnabled: true,
+    successAns: 0,
+    errorAns: 0,
   }
-  columnsToDisplay = ['isFavorite', 'Name', 'Description', 'Visible', 'Delete']
+  columnsToDisplay = ['isFavorite', 'Name', 'Description','Status', 'Visible', 'Delete']
 
   ngOnInit(): void {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
@@ -51,6 +53,16 @@ export class ListViewComponent implements OnInit {
 
   refreshApis() {
     this.dataSource = new MatTableDataSource<Api>(this.ApiList);
+  }
+
+  getStatus(successAns:number,errorAns:number){
+    const total = successAns+errorAns;
+    if ((successAns*100/total) > 60){
+      return 'Online';
+    }
+    else{
+      return 'Offline';
+    }
   }
 
   apiDetailRedirect(id: number) {

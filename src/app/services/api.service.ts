@@ -242,6 +242,13 @@ export class ApiService {
     );
   }
 
+  updateAPIinfoSLA(apiID:number, data:any){
+    return this.httpclient.put<any>(this.APIURL+'/api-sla/' + apiID, data,{headers: new HttpHeaders({
+      'Content-Type': 'application/json', 'access-token':this.token}
+    )}
+    );
+  }
+
 
 
 

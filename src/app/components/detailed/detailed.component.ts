@@ -76,6 +76,8 @@ export class DetailedComponent  implements OnInit{
   title = 'Article by Jeetendra';
   posts : any;
   dateMonthAsWord = '';
+  sla: any;
+  status: any;
 
   constructor(private service:ApiService, private route: ActivatedRoute, private _mainService: Apitester, private formBuilder:FormBuilder,  private router:Router, private httpService: HttpService) {
 
@@ -90,6 +92,7 @@ export class DetailedComponent  implements OnInit{
       'Number',
       'Boolean'
     ];
+
     this.requestBody = [{ key: '', value: '' }];
     this.requestBodyDataTypes = [''];
     this.requestHeaders = [{ key: 'Content-Type', value: 'application/json' }];
@@ -126,8 +129,24 @@ export class DetailedComponent  implements OnInit{
   getApi(){
     this.service.getApibyID(this.apiID).subscribe(resp=>{
       this.api = resp[0];
-      console.log(this.api.name)
+      this.sla = this.getSLA(this.api.successAns,this.api.errorAns);
+      this.status = this.getStatus();
     });
+  }
+
+  getStatus(){
+    const total = this.api.successAns+this.api.errorAns;
+    if ((this.api.successAns*100/total) > 60){
+      return 'Online';
+    }
+    else{
+      return 'Offline';
+    }
+  }
+
+  getSLA(successAns:number,errorAns:number){
+    const total = successAns+errorAns;
+    return (successAns*100/total).toPrecision(2)+'%';
   }
 
   editRedirect() {
@@ -343,6 +362,11 @@ export class DetailedComponent  implements OnInit{
               this.receivedEndpoint = resp[0];
               this.selectedRequestMethod = this.receivedEndpoint.methodType;
               this.path = this.receivedEndpoint.path;
+              if(x <= 210){
+                this.slaCalculator(1);
+              }else if(x >=500){
+                this.slaCalculator(0);
+              }
             })
           },
           error => {
@@ -357,6 +381,11 @@ export class DetailedComponent  implements OnInit{
               this.receivedEndpoint = resp[0];
               this.selectedRequestMethod = this.receivedEndpoint.methodType;
               this.path = this.receivedEndpoint.path;
+              if(x <= 210){
+                this.slaCalculator(1);
+              }else if(x >=500){
+                this.slaCalculator(0);
+              }
             })
           }
         );
@@ -386,6 +415,11 @@ export class DetailedComponent  implements OnInit{
               this.receivedEndpoint = resp[0];
               this.selectedRequestMethod = this.receivedEndpoint.methodType;
               this.path = this.receivedEndpoint.path;
+              if(x <= 210){
+                this.slaCalculator(1);
+              }else if(x >=500){
+                this.slaCalculator(0);
+              }
             })
           },
           error => {
@@ -400,6 +434,11 @@ export class DetailedComponent  implements OnInit{
               this.receivedEndpoint = resp[0];
               this.selectedRequestMethod = this.receivedEndpoint.methodType;
               this.path = this.receivedEndpoint.path;
+              if(x <= 210){
+                this.slaCalculator(1);
+              }else if(x >=500){
+                this.slaCalculator(0);
+              }
             })
           }
         );
@@ -428,6 +467,13 @@ export class DetailedComponent  implements OnInit{
       lastRespDate: dateTime
     }
     this.service.updateEndpointLastResp(this.endpointID,body).subscribe();
+  }
+
+  slaCalculator(bit:number){
+    const body ={
+      didSucceed: bit,
+    }
+    this.service.updateAPIinfoSLA(this.apiID, body).subscribe();
   }
 }
 
