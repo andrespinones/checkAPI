@@ -7,6 +7,7 @@ h1{
   display: inline-flex;
   padding-right: 0.5rem;
   justify-content: flex-start;
+  font-weight: 750;
 }
 
 .w-100{
