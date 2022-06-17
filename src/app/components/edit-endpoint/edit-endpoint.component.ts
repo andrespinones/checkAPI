@@ -93,7 +93,7 @@ export class EditEndpointComponent implements OnInit {
       }
       this.getEndpointDetail()
       this.getAvailableRespCodes()
-      this.getFromToData()
+      // this.getFromToData()
     })
   }
 

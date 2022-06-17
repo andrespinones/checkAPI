@@ -19,6 +19,7 @@ h1{
   float:left;
   margin-left: 2%;
   margin-top: 5%;
+  height: 100%;
 }
 .detailContent{
   margin-left:20%;
@@ -274,6 +275,13 @@ span.success{
   /* align-items: center; */
   justify-content: center;
   position:relative;
-  right: 1%;
+  right: 0.5%;
   top: 2rem;
+}
+.smallTitle{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1%;
+  padding-top: 4%;
 }
