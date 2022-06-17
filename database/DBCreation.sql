@@ -2,7 +2,7 @@
 -- CREATE DATABASE checkAPI;
 -- DROP DATABASE checkAPI;
 
-USE checkAPI;
+-- USE checkAPI;
 
 CREATE TABLE Category (
   categoryID INT NOT NULL PRIMARY KEY IDENTITY(1,1),
@@ -15,6 +15,8 @@ CREATE TABLE API (
     baseUrl VARCHAR(2048) NOT NULL,
     description VARCHAR(280) NOT NULL,
     status BIT NOT NULL, --BOOL = BIT
+    successAns INT NOT NULL,
+    errorAns INT NOT NULL,
     sla INT, --SERVICE LEVEL
     latency INT,
     isEnabled BIT NOT NULL
@@ -32,7 +34,8 @@ CREATE TABLE Endpoint (
     methodType VARCHAR(6) NOT NULL,
     path VARCHAR(64) NOT NULL,
     endpointDescription VARCHAR(280) NOT NULL,
-    lastResp INT,
+    lastRespCode INT,
+    lastRespDate VARCHAR(25),
     status BIT NOT NULL
 );
 
@@ -142,29 +145,29 @@ INSERT INTO Category (name)
   ('Traffic');
 
 
-INSERT INTO API (name, baseUrl, description, status, isEnabled)
+INSERT INTO API (name, baseUrl, description, status, successAns, errorAns, isEnabled)
     VALUES('Jokes One API', 'https://api.jokes.one',
     'Access joke of the day service. Use this to get the joke of the day in various categories. This is a free API that is available to public. You must credit Jokes One if you are using the free version.',
-    1, 1),
+    1, 0, 0, 1),
     ('Petstore', 'https://petstore.swagger.io/v2',
     'Sample server Petstore server from Swagger where you can manage data abot pets.',
-    1, 1),
+    1, 0, 0, 1),
     ('The Movie Database API', 'https://developers.themoviedb.org/3',
     'The API service is for those of you interested in using our movie, TV show or actor images and/or data in your application. Our API is a system we provide for you and your team to programmatically fetch and use our data and/or images.',
-    1, 1),
+    1, 0, 0, 1),
 	('Food API', 'https://foodApi/api/v1',
     'Api service for those interested in cooking',
-    1, 1),
+    1, 0, 0, 1),
 	('Forecast API', 'https://forecastApi/api/v3',
     'Api service for those interested in weather',
-    1, 1),
+    1, 0, 0, 1),
 	('School API', 'https://SchoolApi/api/v3',
     'Api service for those who love going to school, no one',
-    1, 1),
+    1, 0, 0, 1),
 	('Poke API', 'https://pokeapi.co/api/v2',
     'All the Pokémon data youll ever need in one place,
 easily accessible through a modern RESTful API.',
-    1, 1);
+    1, 0, 0, 1);
 
 
  INSERT INTO CategoryAPI (categoryID, apiID)
