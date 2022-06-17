@@ -21,9 +21,9 @@ h1 {
   display: flex;
   /* align-items: center; */
   justify-content: center;
-  position:absolute;
-  right: 15%;
-  top: 18rem;
+  position:relative;
+  right: 1%;
+  top: 2rem;
 }
 .directions{
   padding-top: 0.5em;
