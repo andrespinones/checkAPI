@@ -59,12 +59,10 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { GroupsComponent } from './components/groups/groups.component';
 import { NewEndpointComponent } from './components/new-endpoint/new-endpoint.component';
 import { EndpointListComponent } from './components/endpoint-list/endpoint-list.component';
-import { ApiFormComponent } from './components/api-form/api-form.component';
 
 //overlay for addapi
 import { OverlayModule } from '@angular/cdk/overlay';
 import { A11yModule } from '@angular/cdk/a11y';
-import { ApiParamsComponent } from './components/api-params/api-params.component';
 import { EditEndpointComponent } from './components/edit-endpoint/edit-endpoint.component';
 
 @NgModule({
@@ -83,8 +81,6 @@ import { EditEndpointComponent } from './components/edit-endpoint/edit-endpoint.
     NewEndpointComponent,
     EndpointListComponent,
     ConfirmDialogComponent,
-    ApiFormComponent,
-    ApiParamsComponent,
     EditEndpointComponent,
   ],
   imports: [

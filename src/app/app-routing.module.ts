@@ -10,8 +10,6 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { CategorySidebarComponent } from './components/shared/category-sidebar/category-sidebar.component';
 import { UserListComponent } from './components/user-list/user-list.component';
-import { ApiFormComponent } from './components/api-form/api-form.component';
-import { ApiParamsComponent} from './components/api-params/api-params.component'
 import { EditEndpointComponent } from './components/edit-endpoint/edit-endpoint.component';
 
 
@@ -55,10 +53,6 @@ const routes: Routes = [
   {
     path: 'admin-users',
     component: UserListComponent,
-  },
-  {
-    path: 'apitester',
-    component: ApiParamsComponent
   },
   {
     path: 'editEndpoint',
