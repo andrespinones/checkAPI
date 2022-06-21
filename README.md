@@ -2,6 +2,10 @@
 
 Project for Software Development course where we build a solution for API management using Angular, collaborating with the partner company Inflection Point Systems.
 
+<img width="1440" alt="Screen Shot 2022-06-21 at 9 55 13" src="https://user-images.githubusercontent.com/58577078/174852650-b5bdb1ee-cbe1-493f-ac81-9549380472fa.png">
+
+<img width="1440" alt="Screen Shot 2022-06-21 at 9 55 37" src="https://user-images.githubusercontent.com/58577078/174852623-8075eace-f63e-44d4-860f-7431327933f9.png">
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.1.
 
