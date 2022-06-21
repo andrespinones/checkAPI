@@ -1,0 +1,3 @@
+[submodule "checkapi_api"]
+	path = checkapi_api
+	url = https://github.com/pablocrramos/checkapi_api.git
